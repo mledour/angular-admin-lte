@@ -1,0 +1,16 @@
+.box.collapsed-box .box-body,
+.box.collapsed-box .box-footer {
+  display: inherit;
+}
+
+.box-solid {
+  border: 1px solid;
+}
+
+.box-body {
+  background-color: #fff;
+}
+
+.box.box-solid.bg-color > .box-header {
+  color: #fff;
+}

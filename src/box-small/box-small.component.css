@@ -1,0 +1,15 @@
+.small-box.bg-color {
+  color: #fff;
+}
+
+/deep/ .small-box-footer:hover {
+  cursor: pointer;
+}
+
+/deep/ .small-box-footer a {
+  color: rgba(255,255,255,0.8);
+}
+
+/deep/ .small-box-footer:hover a{
+  color: rgb(255,255,255);
+}

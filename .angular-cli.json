@@ -5,8 +5,8 @@
   },
   "apps": [
     {
-      "root": "src",
-      "outDir": "dist",
+      "root": "demo/src",
+      "outDir": "demo/dist",
       "assets": [
         "assets",
         "favicon.ico"
@@ -19,9 +19,19 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../../node_modules/font-awesome/css/font-awesome.css",
+        "../../node_modules/ionicons/css/ionicons.css",
+        "../../node_modules/morris.js/morris.css",
+        "../../node_modules/prismjs/themes/prism-tomorrow.css",
+        "../../node_modules/admin-lte/dist/css/AdminLTE.css",
+        "../../node_modules/admin-lte/dist/css/skins/_all-skins.css",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../../node_modules/prismjs/prism.js",
+        "../../node_modules/prismjs/components/prism-typescript.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
@@ -36,11 +46,11 @@
   },
   "lint": [
     {
-      "project": "src/tsconfig.app.json",
+      "project": "demo/src/tsconfig.app.json",
       "exclude": "**/node_modules/**"
     },
     {
-      "project": "src/tsconfig.spec.json",
+      "project": "demo/src/tsconfig.spec.json",
       "exclude": "**/node_modules/**"
     },
     {
@@ -55,6 +65,9 @@
   },
   "defaults": {
     "styleExt": "css",
-    "component": {}
+    "component": {},
+    "build": {
+      "preserveSymlinks": true
+    }
   }
 }

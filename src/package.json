@@ -1,0 +1,28 @@
+{
+  "name": "angular-admin-lte",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mika-el/angular-admin-lte"
+  },
+  "author": {
+    "name": "Mik@",
+    "email": "michael.ledour@gmail.com"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mika-el/angular-admin-lte/issues"
+  },
+  "main": "angular-admin-lte.umd.js",
+  "module": "angular-admin-lte.js",
+  "jsnext:main": "angular-admin-lte.js",
+  "typings": "angular-admin-lte.d.ts",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  }
+}

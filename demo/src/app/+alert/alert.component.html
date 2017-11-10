@@ -1,0 +1,203 @@
+<div class="row">
+  <div class="col-md-3 col-xs-12">
+    <mk-alert backgroundColor="rgb(232, 232, 232)" color="red" [isDismissible]="false">
+      <h4>
+        <i class="icon fa fa-ban"></i>
+        Alert!
+      </h4>
+      Danger alert preview. This alert is dismissable.
+    </mk-alert>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-alert backgroundColor="info">
+      <h4><i class="icon fa fa-info"></i>
+        Alert!
+      </h4>
+      Info alert preview. This alert is dismissable.
+    </mk-alert>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-alert backgroundColor="warning">
+      <h4>
+        <i class="icon fa fa-warning"></i>
+        Alert!
+      </h4>
+      Warning alert preview. This alert is dismissable.
+    </mk-alert>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-alert backgroundColor="success">
+      <h4>
+        <i class="icon fa fa-check"></i>
+        Alert!
+      </h4>
+      Success alert preview. This alert is dismissable.
+    </mk-alert>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3 col-xs-12">
+    <mk-alert [callout]="true" backgroundColor="danger">
+      <h4>
+        <i class="icon fa fa-ban"></i>
+        I am a danger callout!
+      </h4>
+      Danger callout preview. This callout is dismissable.
+    </mk-alert>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-alert [callout]="true" backgroundColor="info">
+      <h4><i class="icon fa fa-info"></i>
+        I am an info callout!
+      </h4>
+      Info callout preview. This callout is dismissable.
+    </mk-alert>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-alert [callout]="true" backgroundColor="warning">
+      <h4>
+        <i class="icon fa fa-warning"></i>
+        I am a warning callout!
+      </h4>
+      Warning callout preview. This callout is dismissable.
+    </mk-alert>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-alert [callout]="true" backgroundColor="success">
+      <h4>
+        <i class="icon fa fa-check"></i>
+        I am a success callout!
+      </h4>
+      Success callout preview. This callout is dismissable.
+    </mk-alert>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3 col-xs-12">
+    <mk-alert [dismissOnTimeout]="500" backgroundColor="danger">
+      <h4>
+        <i class="icon fa fa-ban"></i>
+        Alert!
+      </h4>
+      Danger alert preview. This alert is dismissable.
+    </mk-alert>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-alert [dismissOnTimeout]="1000" backgroundColor="info">
+      <h4><i class="icon fa fa-info"></i>
+        Alert!
+      </h4>
+      Info alert preview. This alert is dismissable.
+    </mk-alert>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-alert [dismissOnTimeout]="1500" backgroundColor="warning">
+      <h4>
+        <i class="icon fa fa-warning"></i>
+        Alert!
+      </h4>
+      Warning alert preview. This alert is dismissable.
+    </mk-alert>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-alert [dismissOnTimeout]="2000" backgroundColor="success">
+      <h4>
+        <i class="icon fa fa-check"></i>
+        Alert!
+      </h4>
+      Success alert preview. This alert is dismissable.
+    </mk-alert>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-xs-12">
+    <mk-box header="Alert" [isCollapsable]="false" [isRemovable]="false">
+      <pre><code class="language-html">&lt;mk-alert backgroundColor="info"&gt;
+  &lt;h4&gt;&lt;i class="icon fa fa-info"&gt;&lt;/i&gt; Alert!&lt;/h4&gt;
+  Info alert preview. This alert is dismissable.
+&lt;/mk-alert&gt;</code></pre>
+    </mk-box>
+  </div>
+  <div class="col-md-6 col-xs-12">
+    <mk-box header="Alert Automatically Dissmissed" [isCollapsable]="false" [isRemovable]="false">
+      <pre><code class="language-html">&lt;mk-alert backgroundColor="warning" [isDismissible]="false" [dismissOnTimeout]="3000"&gt;
+  &lt;h4&gt;&lt;i class="icon fa fa-info"&gt;&lt;/i&gt; Alert!&lt;/h4&gt;
+  Info alert preview. This alert is dismissable.
+&lt;/mk-alert&gt;</code></pre>
+    </mk-box>
+  </div>
+</div>
+
+<mk-box header="Properties" [isCollapsable]="true" [isRemovable]="false" contentClasses="table-responsive">
+  <table class="table table-bordered table-hover">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>backgroundColor</td>
+        <td>string (default | primary | success | info | warning | danger | rgb | rgba | hex)</td>
+        <td>danger</td>
+        <td>The alert background color.</td>
+      </tr>
+      <tr>
+        <td>callout</td>
+        <td>boolean</td>
+        <td>false</td>
+        <td>Defines if the alert style is callout style.</td>
+      </tr>
+      <tr>
+        <td>color</td>
+        <td>string (green | aqua | light-blue | red | yellow | mutted | rgb | rgba | hex)</td>
+        <td>null</td>
+        <td>The alert font color.</td>
+      </tr>
+      <tr>
+        <td>dismissOnTimeout</td>
+        <td>number</td>
+        <td>null</td>
+        <td>Time to display the alert in milliseconds before removing it.</td>
+      </tr>
+      <tr>
+        <td>isDismisible</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>Defines if the alert can be dissmised.</td>
+      </tr>
+      <tr>
+        <td>styleClass</td>
+        <td>number</td>
+        <td>null</td>
+        <td>The alert Style classes.</td>
+      </tr>
+    </tbody>
+  </table>
+</mk-box>
+
+<mk-box header="Events" [isCollapsable]="true" [isRemovable]="false" contentClasses="table-responsive">
+  <table class="table table-bordered table-hover">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Parameters</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>onCollapseStart</td>
+        <td>event: browser event</td>
+        <td>Callback to invoke before alert toggle</td>
+      </tr>
+      <tr>
+        <td>onCollapseDone</td>
+        <td>event: browser event</td>
+        <td>Callback to invoke after alert toggle</td>
+      </tr>
+    </tbody>
+  </table>
+</mk-box>

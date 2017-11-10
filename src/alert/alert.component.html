@@ -1,0 +1,6 @@
+<div *ngIf="!removed" [collapseAnimation]="remove" (collapseAnimation.start)="collapseStart($event)" (collapseAnimation.done)="collapseDone($event)">
+  <div [mkColor]="backgroundColor" mkColorProperty="background-color" [mkColorPrefix]="type" [mkFontColor]="color" [ngClass]="[styleClass, dismissibleClass, type]">
+    <button *ngIf="isDismissible" type="button" class="close" #removeButtonElement>&times;</button>
+    <ng-content></ng-content>
+  </div>
+</div>
