@@ -31,7 +31,6 @@ export class WrapperComponent implements OnInit {
    * @method ngOnInit
    */
   ngOnInit() {
-
     this.wrapperService.wrapperElementRef = this.elementRef;
 
     this.layoutStore.wrapperClasses.subscribe((value: string) => {

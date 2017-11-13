@@ -1,4 +1,4 @@
-import { Component, ContentChild, ViewChild, TemplateRef, ElementRef, OnInit, NgZone, Renderer2 } from '@angular/core';
+import { Component, ContentChild, Input, ViewChild, TemplateRef, ElementRef, OnInit, AfterViewInit, NgZone, Renderer2 } from '@angular/core';
 
 import { LayoutStore } from '../layout.store';
 
@@ -29,32 +29,65 @@ export class HeaderLogoMiniComponent {
  */
 @Component({
   selector: 'mk-layout-header',
-  templateUrl: './header.component.html'
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
   private isSidebarLeftCollapsed: boolean;
+  private isSidebarRightCollapsed: boolean;
+
+  @Input() isSidebarLeftToggle = true;
+  @Input() isSidebarRightToggle = true;
 
   @ContentChild(HeaderLogoComponent) public headerLogoComponent: HeaderLogoComponent;
   @ContentChild(HeaderLogoMiniComponent) public headerLogoMiniComponent: HeaderLogoMiniComponent;
 
-  @ViewChild('sidebarToggleElement') private sidebarToggleElement: ElementRef;
+  @ViewChild('sidebarLeftToggleElement') private sidebarLeftToggleElement: ElementRef;
+  @ViewChild('sidebarRightToggleElement') private sidebarRightToggleElement: ElementRef;
 
+  /**
+   * @method constructor
+   * @param  {LayoutStore} privatelayoutStore [description]
+   * @param  {NgZone}      privatengZone      [description]
+   * @param  {Renderer2}   privaterenderer2   [description]
+   */
   constructor(
     private layoutStore: LayoutStore,
     private ngZone: NgZone,
     private renderer2: Renderer2
   ) {}
 
+  /**
+   * @method ngOnInit
+   */
   ngOnInit() {
-    this.layoutStore.isSidebarLeftCollapsed.subscribe((value: boolean) => {
-      this.isSidebarLeftCollapsed = value;
-    });
-
-    this.ngZone.runOutsideAngular(() => {
-      this.renderer2.listen(this.sidebarToggleElement.nativeElement, 'click', (event: Event) => {
-        event.preventDefault();
-        this.layoutStore.sidebarLeftCollapsed(!this.isSidebarLeftCollapsed);
+    if(this.sidebarLeftToggleElement) {
+      this.layoutStore.isSidebarLeftCollapsed.subscribe((value: boolean) => {
+        this.isSidebarLeftCollapsed = value;
       });
-    });
+      this.ngZone.runOutsideAngular(() => {
+        this.renderer2.listen(this.sidebarLeftToggleElement.nativeElement, 'click', (event: Event) => {
+          event.preventDefault();
+          this.layoutStore.sidebarLeftCollapsed(!this.isSidebarLeftCollapsed);
+        });
+      });
+    }
+  }
+
+  /**
+   * @method ngAfterViewInit
+   */
+  ngAfterViewInit() {
+    if(this.sidebarRightToggleElement) {
+      this.layoutStore.isSidebarRightCollapsed.subscribe((value: boolean) => {
+        this.isSidebarRightCollapsed = value;
+      });
+      this.ngZone.runOutsideAngular(() => {
+        this.renderer2.listen(this.sidebarRightToggleElement.nativeElement, 'click', (event: Event) => {
+          event.preventDefault();
+          this.layoutStore.sidebarRightCollapsed(!this.isSidebarRightCollapsed);
+        });
+      });
+    }
   }
 }
