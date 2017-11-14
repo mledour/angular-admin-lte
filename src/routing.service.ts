@@ -28,7 +28,7 @@ export class RoutingService {
 
   /**
    * @method constructor
-   * @param  {Router}    privaterouter [description]
+   * @param  {Router}    private router [description]
    */
   constructor(
     private router: Router
@@ -50,6 +50,7 @@ export class RoutingService {
           rootRoot = true;
 
         while(route.children.length) {
+          console.log(route);
           route = route.firstChild;
           tmpUrl = `/${this.createUrl(route)}`;
 
@@ -64,8 +65,8 @@ export class RoutingService {
               if(route.data['title']) {
                 route.data['title'] = route.data['title'].replace(`:${key}`, route.params[key]);
               }
-              if(route.data['breadcrumb']) {
-                route.data['breadcrumb'] = route.data['breadcrumb'].replace(`:${key}`, route.params[key]);
+              if(route.data['breadcrumbs']) {
+                route.data['breadcrumbs'] = route.data['breadcrumbs'].replace(`:${key}`, route.params[key]);
               }
               if(route.data['description']) {
                 route.data['description'] = route.data['description'].replace(`:${key}`, route.params[key]);
@@ -96,7 +97,7 @@ export class RoutingService {
   private createBreadcrumb(route: ActivatedRouteSnapshot, url: string): Path {
     if(route.children.length !== 0 && route.firstChild.routeConfig.path) {
       var isUrl = true;
-      if(url !== '/' && !route.routeConfig.loadChildren && !route.routeConfig.component) {
+      if(url !== '/' && !route.routeConfig.loadChildren && !route.routeConfig.component && !this.isChildrenSelfRoute(route)) {
         isUrl = false;
       }
     }
@@ -105,6 +106,21 @@ export class RoutingService {
       data: route.data,
       params : route.params,
       url: isUrl ? url : null
+    }
+  }
+
+  /**
+   * [isChildrenSelfRoute description]
+   * @method isChildrenSelfRoute
+   * @param  {ActivatedRouteSnapshot} route [description]
+   * @return {boolean}                      [description]
+   */
+  private isChildrenSelfRoute(route: ActivatedRouteSnapshot): boolean {
+    let children = route.routeConfig.children;
+    for(let index in children) {
+      if(children[index].path === '' && (children[index].component || children[index].loadChildren)) {
+        return true;
+      }
     }
   }
 
