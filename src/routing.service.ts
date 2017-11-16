@@ -50,7 +50,6 @@ export class RoutingService {
           rootRoot = true;
 
         while(route.children.length) {
-          console.log(route);
           route = route.firstChild;
           tmpUrl = `/${this.createUrl(route)}`;
 
