@@ -17,8 +17,8 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
   private transitioning: boolean;
   private listener: Function;
 
-  @Input() public collapseAnimationDuration: number;
-  @Input() public collapseAnimationTiming: number;
+  @Input() public collapseAnimationDuration = 350;
+  @Input() public collapseAnimationTiming: string;
   @Input('collapseAnimation') public set _isCollapsed(value: boolean) {
     this.lastIsCollapsed = this.isCollapsed;
     this.isCollapsed = value;
@@ -52,7 +52,7 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
    * @method ngOnInit
    */
   ngOnInit() {
-    if(this.collapseAnimationDuration) {
+    if(this.collapseAnimationDuration && this.collapseAnimationDuration !== 350) {
       this.renderer2.setStyle(this.elementRef.nativeElement, 'transition-duration', `${this.collapseAnimationDuration}ms`);
     }
     if(this.collapseAnimationTiming) {
@@ -143,7 +143,7 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
       fromState: this.lastIsCollapsed === undefined ? 'void' : this.lastIsCollapsed ? '1': '0',
       phaseName: phaseName,
       toState: this.isCollapsed === undefined ? 'void' : this.isCollapsed ? '1': '0',
-      totalTime: this.collapseAnimationTiming,
+      totalTime: this.collapseAnimationDuration,
       triggerName: 'collapseAnimation'
     }
 
