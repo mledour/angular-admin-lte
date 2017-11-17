@@ -14,13 +14,15 @@ import { LayoutState } from './layout.state';
 import { layoutProvider } from './layout.provider';
 
 import { RoutingService } from '../routing.service';
-
 import { WrapperService } from './wrapper/wrapper.service';
+import { SidebarRightService } from './sidebar-right/sidebar-right.service';
+import { HeaderService } from './header/header.service';
+import { FooterService } from './footer/footer.service';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
   exports: [ContentModule, FooterModule, HeaderModule, SidebarLeftModule, SidebarRightModule, WrapperModule],
-  providers: [RoutingService, WrapperService]
+  providers: [RoutingService, WrapperService, SidebarRightService, HeaderService, FooterService]
 })
 export class LayoutModule {
 

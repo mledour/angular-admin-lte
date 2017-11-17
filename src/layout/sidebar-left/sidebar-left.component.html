@@ -1,5 +1,5 @@
 <aside class="main-sidebar">
-  <section class="sidebar" #sidebarElement [ngStyle]="sidebarStyles">
+  <section class="sidebar" #sidebarElement [style.height.px]="sidebarHeight" [style.overflow]="sidebarOverflow">
     <ng-content></ng-content>
   	<ul class="sidebar-menu">
       <ng-container *ngFor="let item of menu">

@@ -136,15 +136,6 @@ export class LayoutStore {
   }
 
   /**
-   * [sidebarRightElementHeight description]
-   * @method sidebarRightElementHeight
-   * @return {Observable<number>}      [description]
-   */
-  get sidebarRightElementHeight(): Observable<number> {
-    return <Observable<number>>this.layoutState.pluck('sidebarRightElementHeight').distinctUntilChanged();
-  }
-
-  /**
    * [layoutType description]
    * @method layoutType
    * @return {Observable<boolean>} [description]
@@ -256,17 +247,6 @@ export class LayoutStore {
   public sidebarRightOverContent(value?: boolean): void {
     this._layoutState.next(
       Object.assign(this._layoutState.value, {isSidebarRightOverContent: value})
-    );
-  }
-
-  /**
-   * [setSidebarRightElementHeight description]
-   * @method setSidebarRightElementHeight
-   * @param  {number}                     value [description]
-   */
-  public setSidebarRightElementHeight(value: number): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {sidebarRightElementHeight: value})
     );
   }
 

@@ -1,8 +1,10 @@
-import { Component, OnInit, AfterContentInit, Input, ViewChild, Renderer2, ElementRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ViewChild, Renderer2, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 
 import { WrapperService } from '../wrapper/wrapper.service';
 
 import { LayoutStore } from '../layout.store';
+
+import { SidebarRightService } from './sidebar-right.service';
 
 @Component({
   selector: 'mk-layout-sidebar-right',
@@ -11,21 +13,22 @@ import { LayoutStore } from '../layout.store';
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class SidebarRightComponent implements OnInit, AfterContentInit {
+export class SidebarRightComponent implements OnInit, AfterViewInit {
   public layout: string;
+  public sidebarHeight: number;
 
   private skin: string;
   private windowInnerHeight: number;
   private isSidebarRightOverContent: boolean;
   private isSidebarRightCollapsed: boolean;
 
-  @ViewChild('sidebarElement') public sidebarElement: Element;
+  @ViewChild('sidebarContentElement') public sidebarContentElement: ElementRef;
 
   constructor(
     private elementRef: ElementRef,
     private renderer2: Renderer2,
     private layoutStore: LayoutStore,
-    private NgZone: NgZone,
+    private sidebarRightService: SidebarRightService,
     private wrapperService: WrapperService
   ) {}
 
@@ -68,28 +71,12 @@ export class SidebarRightComponent implements OnInit, AfterContentInit {
       this.skin = value;
       this.renderer2.addClass(this.elementRef.nativeElement, `control-sidebar-${value}`);
     });
-
-    this.layoutStore.layout.subscribe(value => {
-      this.layout = value;
-    });
-
-    this.layoutStore.windowInnerHeight.subscribe((value: number) => {
-      this.windowInnerHeight = value;
-      if(this.layout === 'fixed') {
-        this.renderer2.setStyle(this.elementRef.nativeElement, 'height', `${value}px`);
-      }
-    });
   }
 
   /**
-   * [ngAfterViewInit description]
    * @method ngAfterViewInit
    */
-  ngAfterContentInit() {
-    this.NgZone.runOutsideAngular(() => {
-      setTimeout(() => {
-        this.layoutStore.setSidebarRightElementHeight(this.elementRef.nativeElement.offsetHeight);
-      });
-    });
+  ngAfterViewInit() {
+    this.sidebarRightService.elementRef = this.sidebarContentElement;
   }
 }

@@ -1,9 +1,15 @@
-import { Component, Input, OnInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { Router, NavigationStart, NavigationEnd, Event as RouterEvent } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { LayoutStore } from '../layout.store';
 
 import { RoutingService } from '../../routing.service';
+import { SidebarRightService } from '../sidebar-right/sidebar-right.service';
+import { HeaderService } from '../header/header.service';
+import { FooterService } from '../footer/footer.service';
+
+import { throttle } from '../../helpers';
 
 @Component({
   selector: 'mk-layout-content',
@@ -11,7 +17,7 @@ import { RoutingService } from '../../routing.service';
   styleUrls: ['./content.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ContentComponent implements OnInit, AfterViewInit {
+export class ContentComponent implements OnInit {
   public description: string;
   public header: string;
   public heightStyle: number;
@@ -21,6 +27,9 @@ export class ContentComponent implements OnInit, AfterViewInit {
 
   private layout: string;
   private titleTag: string;
+  private navigationEnd: boolean;
+
+  @ViewChild('contentInnerElement') private contentInnerElement: ElementRef;
 
   /**
    * @method constructor
@@ -33,7 +42,12 @@ export class ContentComponent implements OnInit, AfterViewInit {
     private layoutStore: LayoutStore,
     private routingService: RoutingService,
     private titleService: Title,
-    private changeDetectorRef: ChangeDetectorRef
+    private elementRef: ElementRef,
+    private changeDetectorRef: ChangeDetectorRef,
+    private sidebarRightService: SidebarRightService,
+    private headerService: HeaderService,
+    private footerService: FooterService,
+    private router: Router
   ) {}
 
   /**
@@ -50,31 +64,36 @@ export class ContentComponent implements OnInit, AfterViewInit {
       }
       this.changeDetectorRef.markForCheck();
     });
-  }
 
-  /**
-   * @method ngAfterViewInit
-   */
-  ngAfterViewInit() {
-    this.layoutStore.sidebarLeftElementHeight.subscribe((value: number) => {
-      this.sidebarLeftHeight = value;
-      this.setMinHeight();
+    this.router.events.subscribe((routeEvent: RouterEvent) => {
+      if(routeEvent instanceof NavigationStart) {
+        this.navigationEnd = false;
+      }
+      if(routeEvent instanceof NavigationEnd) {
+        this.navigationEnd = true;
+        this.setContentMinHeight();
+      }
     });
 
-    this.layoutStore.sidebarRightElementHeight.subscribe((value: number) => {
-      this.sidebarRightHeight = value;
-      this.setMinHeight();
+    this.layoutStore.sidebarLeftElementHeight.subscribe((value: number) => {
+      this.sidebarLeftHeight = value;
+      this.setContentMinHeight();
     });
 
     this.layoutStore.layout.subscribe((value: string) => {
       this.layout = value;
-      this.setMinHeight();
+      this.setContentMinHeight();
     });
 
     this.layoutStore.windowInnerHeight.subscribe((value: number) => {
       this.windowInnerHeight = value;
-      this.setMinHeight();
+      this.setContentMinHeight();
     });
+    this.heightStyle = this.windowInnerHeight;
+  }
+
+  public get scrollHeight(): number {
+    return this.contentInnerElement.nativeElement.scrollHeight;
   }
 
   /**
@@ -91,14 +110,24 @@ export class ContentComponent implements OnInit, AfterViewInit {
    * [setMinHeight description]
    * @method setMinHeight
    */
-  private setMinHeight(): void {
-    if(this.layout && this.sidebarLeftHeight) {
-      let sidebarRightHeight = this.layout === 'fixed' ? 0 : (this.sidebarRightHeight ? this.sidebarRightHeight : 0);
-      let windowInnerHeight = this.windowInnerHeight ? this.windowInnerHeight : window.innerHeight;
+  private setContentMinHeight(): void {
+    if(this.navigationEnd) {
+      let headerFooterOffsetHeight = this.headerService.offsetHeight + this.footerService.offsetHeight;
 
-      windowInnerHeight = this.layout === 'fixed' ? windowInnerHeight -51 : windowInnerHeight - 101;
-      this.heightStyle = Math.max(windowInnerHeight, this.sidebarLeftHeight - 50, sidebarRightHeight - 101);
-      this.changeDetectorRef.detectChanges();
+      if(this.layout === 'fixed') {
+        var heightStyle = this.windowInnerHeight - this.footerService.offsetHeight;
+      } else {
+        let sidebarRight = this.sidebarRightService.scrollHeight ? this.sidebarRightService.scrollHeight - this.headerService.offsetHeight: 0;
+        var heightStyle = Math.max(this.windowInnerHeight - headerFooterOffsetHeight, this.sidebarLeftHeight - this.headerService.offsetHeight, sidebarRight);
+      }
+
+      if(heightStyle && heightStyle !== this.heightStyle) {
+        if(this.scrollHeight > heightStyle) {
+          heightStyle = null;
+        }
+        this.heightStyle = heightStyle;
+        this.changeDetectorRef.detectChanges();
+      }
     }
   }
 }

@@ -1,4 +1,6 @@
-import { Component, ContentChild, ViewChild, TemplateRef } from '@angular/core';
+import { Component, ContentChild, OnInit, ViewChild, TemplateRef, ElementRef } from '@angular/core';
+
+import { FooterService } from './footer.service';
 
 /**
  * Footer Left
@@ -24,9 +26,19 @@ export class FooterRightComponent {
 
 @Component({
   selector: 'mk-layout-footer',
-  templateUrl: './footer.component.html'
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.css']
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
   @ContentChild(FooterLeftComponent) public footerLeftComponent: FooterLeftComponent;
   @ContentChild(FooterRightComponent) public footerRightComponent: FooterRightComponent;
+
+  constructor(
+    private elementRef: ElementRef,
+    private footerService: FooterService
+  ) {}
+
+  ngOnInit() {
+    this.footerService.elementRef = this.elementRef;
+  }
 }

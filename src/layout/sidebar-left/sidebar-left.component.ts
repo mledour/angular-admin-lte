@@ -3,6 +3,7 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, E
 import { NavigationStart, PRIMARY_OUTLET, Router, Event as RouterEvent } from '@angular/router';
 
 import { WrapperService } from '../wrapper/wrapper.service';
+import { HeaderService } from '../header/header.service';
 
 import { LayoutStore } from '../layout.store';
 
@@ -30,12 +31,15 @@ export type Items = Array<Item>;
 export class SidebarLeftComponent implements OnInit, AfterViewInit {
   public menu: Array<any>;
   public sidebarStyles: any;
+  public sidebarHeight: number;
+  public sidebarOverflow: string;
 
   private layout: string;
   private isSidebarLeftCollapsed: boolean;
   private isSidebarLeftExpandOnOver: boolean;
   private isSidebarLeftMouseOver: boolean;
   private windowInnerWidth: number;
+  private windowInnerHeight: number;
   private collapsedItems: Items = [];
   private activatedItems: Items = [];
   private toggleListeners: Array<Function>;
@@ -61,7 +65,8 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit {
     private ngZone: NgZone,
     private renderer2: Renderer2,
     private router: Router,
-    private wrapperService: WrapperService
+    private wrapperService: WrapperService,
+    private headerService: HeaderService
   ) {}
 
   /**
@@ -87,7 +92,12 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit {
   setSidebarListeners(): void {
     this.layoutStore.layout.subscribe((value: string) => {
       this.layout = value;
-      this.sidebarStyles = value === 'fixed' ? {'height': `${window.innerHeight}px`, 'overflow': 'auto'} : '';
+      this.setSidebarHeight();
+    });
+
+    this.layoutStore.windowInnerHeight.subscribe((value: number) => {
+      this.windowInnerHeight = value;
+      this.setSidebarHeight();
     });
 
     this.ngZone.runOutsideAngular(() => {
@@ -97,12 +107,6 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit {
       this.renderer2.listen(this.sidebarElement.nativeElement, 'mouseleave', (event: Event) => {
         this.layoutStore.sidebarLeftMouseOver(false);
       });
-    });
-
-    this.layoutStore.windowInnerHeight.subscribe((value: number) => {
-      if(value && this.layout === 'fixed') {
-        this.sidebarStyles.height = `${value}px`;
-      }
     });
 
     this.layoutStore.windowInnerWidth.subscribe((value: number) => {
@@ -362,6 +366,24 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit {
           this.layoutStore.setSidebarLeftElementHeight(this.sidebarElement.nativeElement.offsetHeight);
         });
       });
+    }
+  }
+
+  /**
+   * [setSidebarHeight description]
+   * @method setSidebarHeight
+   */
+  private setSidebarHeight(): void {
+    if(this.layout === 'fixed') {
+      let height = this.windowInnerHeight - this.headerService.offsetHeight;
+      if(height && height !== this.sidebarHeight) {
+        this.sidebarHeight = height;
+        this.sidebarOverflow = 'auto';
+        this.changeDetectorRef.detectChanges();
+      }
+    } else if(this.sidebarHeight) {
+      this.sidebarOverflow = this.sidebarHeight = null;
+      this.changeDetectorRef.detectChanges();
     }
   }
 }

@@ -1,3 +1,7 @@
+:host {
+  display: block;
+}
+
 .sidebar-right-toggle {
   float: right;
 }

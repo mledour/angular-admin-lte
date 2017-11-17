@@ -13,8 +13,6 @@ export class WrapperComponent implements OnInit {
   private skin: string;
   private layout: string;
   private sidebarLeftElementHeight: number;
-  private windowInnerHeight: number;
-  private windowInnerWidth: number;
 
   public classes: string;
 
@@ -31,6 +29,9 @@ export class WrapperComponent implements OnInit {
    * @method ngOnInit
    */
   ngOnInit() {
+    this.layoutStore.setWindowInnerHeight(window.innerHeight);
+    this.layoutStore.setWindowInnerWidth(window.innerWidth);
+
     this.wrapperService.wrapperElementRef = this.elementRef;
 
     this.layoutStore.wrapperClasses.subscribe((value: string) => {
@@ -39,17 +40,10 @@ export class WrapperComponent implements OnInit {
 
     this.ngZone.runOutsideAngular(() => {
       this.renderer2.listen('window', 'resize', throttle(() => {
-        if(this.windowInnerHeight !== window.innerHeight) {
-          this.windowInnerHeight = window.innerHeight;
-          this.layoutStore.setWindowInnerHeight(window.innerHeight);
-        }
-        if(this.windowInnerWidth !== window.innerWidth) {
-          this.windowInnerWidth = window.innerWidth;
-          this.layoutStore.setWindowInnerWidth(window.innerWidth);
-        }
+        this.layoutStore.setWindowInnerHeight(window.innerHeight);
+        this.layoutStore.setWindowInnerWidth(window.innerWidth);
       }, 250));
     });
-    this.layoutStore.setWindowInnerWidth(window.innerWidth);
 
     this.layoutStore.layout.subscribe((value: string) => {
       value === 'fixed' ? this.renderer2.addClass(this.elementRef.nativeElement, 'fixed') : this.renderer2.removeClass(this.elementRef.nativeElement, 'fixed');

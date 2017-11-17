@@ -1,6 +1,8 @@
-import { Component, ContentChild, Input, ViewChild, TemplateRef, ElementRef, AfterViewInit, NgZone, Renderer2 } from '@angular/core';
+import { Component, ContentChild, Input, ViewChild, TemplateRef, ElementRef, OnInit, AfterViewInit, NgZone, Renderer2 } from '@angular/core';
 
 import { LayoutStore } from '../layout.store';
+
+import { HeaderService } from './header.service';
 
 /**
  * Header Logo
@@ -32,7 +34,7 @@ export class HeaderLogoMiniComponent {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements AfterViewInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
   private isSidebarLeftCollapsed: boolean;
   private isSidebarRightCollapsed: boolean;
 
@@ -42,6 +44,7 @@ export class HeaderComponent implements AfterViewInit {
   @ContentChild(HeaderLogoComponent) public headerLogoComponent: HeaderLogoComponent;
   @ContentChild(HeaderLogoMiniComponent) public headerLogoMiniComponent: HeaderLogoMiniComponent;
 
+  @ViewChild('headerElement') private headerElement: ElementRef;
   @ViewChild('sidebarLeftToggleElement') private sidebarLeftToggleElement: ElementRef;
   @ViewChild('sidebarRightToggleElement') private sidebarRightToggleElement: ElementRef;
 
@@ -54,13 +57,21 @@ export class HeaderComponent implements AfterViewInit {
   constructor(
     private layoutStore: LayoutStore,
     private ngZone: NgZone,
-    private renderer2: Renderer2
+    private renderer2: Renderer2,
+    private elementRef: ElementRef,
+    private headerService: HeaderService
   ) {}
+
+  ngOnInit() {
+
+  }
 
   /**
    * @method ngAfterViewInit
    */
   ngAfterViewInit() {
+    this.headerService.elementRef = this.headerElement;
+    
     if(this.sidebarLeftToggleElement) {
       this.layoutStore.isSidebarLeftCollapsed.subscribe((value: boolean) => {
         this.isSidebarLeftCollapsed = value;
