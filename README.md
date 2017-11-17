@@ -19,7 +19,7 @@ $ npm install angular-loading-page --save
 
 ```bash
 $ git clone git://github.com/mika-el/angular-admin-lte.git
-$ cd angular-admin-lte.git
+$ cd angular-admin-lte
 $ ng serve
 ```
 ## Build demo
