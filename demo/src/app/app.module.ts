@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { adminLteConf } from './admin-lte.conf';
 
@@ -18,7 +17,6 @@ import { LoadingPageModule, MaterialBarModule } from 'angular-loading-page';
 @NgModule({
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
     LayoutModule.forRoot(adminLteConf),

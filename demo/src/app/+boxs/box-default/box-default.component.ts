@@ -13,6 +13,6 @@ export class BoxDefaultComponent implements AfterViewInit {
    * @method ngAfterViewInit
    */
   ngAfterViewInit() {
-    //Prism.highlightAll();
+    Prism.highlightAll();
   }
 }

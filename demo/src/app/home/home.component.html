@@ -11,7 +11,7 @@
 <mk-box header="Import" [isCollapsable]="false" [isRemovable]="false">
   <p>UI components are configured as modules, once Angular Admin LTE is downloaded and configured, modules and apis can be imported from 'angular-loading-page' shorthand in your application code.</p>
   <pre><code class="language-typescript">import &#123; LayoutModule &#125; from 'angular-admin-lte';    //Loading layout module
-import &#123; BoxModule &#125; from 'angular-admin-lte';         //Box component</code></pre>
+import &#123; BoxModule &#125; from 'angular-admin-lte';       //Box component</code></pre>
 </mk-box>
 
 <mk-box header="Dependencies" [isCollapsable]="false" [isRemovable]="false">
@@ -23,22 +23,4 @@ import &#123; BoxModule &#125; from 'angular-admin-lte';         //Box component
   "../../node_modules/admin-lte/dist/css/AdminLTE.css",
   "../../node_modules/admin-lte/dist/css/skins/_all-skins.css"
 ]</code></pre>
-</mk-box>
-
-
-<mk-box header="Animations with Angular 4+" [isCollapsable]="false" [isRemovable]="false">
-  <p>Various components utilize angular animations to improve the user experience, starting with Angular 4 animations have their own module so you need to import BrowserAnimationsModule to your application. If you prefer not to use NoopAnimationsModule instead.</p>
-  <br/><pre><code class="language-bash">npm install @angular/animations --save</code></pre><br/>
-  <pre><code class="language-typescript">import &#123; BrowserModule &#125; from '@angular/platform-browser';
-import &#123; BrowserAnimationsModule &#125; from '@angular/platform-browser/animations';
-
-@NgModule(&#123;
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        //...
-    ],
-    //...
-&#125;)
-export class AppModule &#123;&#125;</code></pre>
 </mk-box>

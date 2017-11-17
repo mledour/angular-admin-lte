@@ -26,6 +26,44 @@ const routes: Routes = [
         title: 'Alert',
       }
     }, {
+      path: 'layout',
+      data: {
+        title: 'Layout',
+      },
+      children: [
+        {
+          path: 'configuration',
+          loadChildren: 'app/+layout/configuration/configuration.module#ConfigurationModule',
+          data: {
+            title: 'Configuration'
+          }
+        }, {
+          path: 'content',
+          loadChildren: 'app/+layout/content/content.module#ContentModule',
+          data: {
+            title: 'Content'
+          }
+        }, {
+          path: 'header',
+          loadChildren: 'app/+layout/header/header.module#HeaderModule',
+          data: {
+            title: 'Header'
+          }
+        }, {
+          path: 'sidebar-left',
+          loadChildren: 'app/+layout/sidebar-left/sidebar-left.module#SidebarLeftModule',
+          data: {
+            title: 'Sidebar Left'
+          }
+        }, {
+          path: 'sidebar-right',
+          loadChildren: 'app/+layout/sidebar-right/sidebar-right.module#SidebarRightModule',
+          data: {
+            title: 'Sidebar Right'
+          }
+        },
+      ]
+    }, {
       path: 'boxs',
       data: {
         title: 'Boxs',
@@ -33,19 +71,19 @@ const routes: Routes = [
       children: [
         {
           path: 'box',
-          loadChildren: 'app/+box-default/box-default.module#BoxDefaultModule',
+          loadChildren: 'app/+boxs/box-default/box-default.module#BoxDefaultModule',
           data: {
             title: 'Box'
           }
         }, {
           path: 'info-box',
-          loadChildren: 'app/+box-info/box-info.module#BoxInfoModule',
+          loadChildren: 'app/+boxs/box-info/box-info.module#BoxInfoModule',
           data: {
             title: 'Info Box'
           }
         }, {
           path: 'small-box',
-          loadChildren: 'app/+box-small/box-small.module#BoxSmallModule',
+          loadChildren: 'app/+boxs/box-small/box-small.module#BoxSmallModule',
           data: {
             title: 'Small Box'
           }
