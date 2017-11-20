@@ -29,7 +29,7 @@ $ ng build --prod
 
 ## Build dist
 ```bash
-$ npm run packagr
+$ npm run build:lib
 ```
 
 ## Dependencies

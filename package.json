@@ -1,43 +1,47 @@
 {
   "name": "angular-admin-lte",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng serve",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "packagr": "ng-packagr -p ng-package.json"
+    "build:lib": "ng-packagr -p ng-packagr.json"
+  },
+  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+  "ngPackage": {
+    "src": "src",
+    "dest": "dist",
+    "workingDirectory": ".ng_build",
+    "lib": {
+      "entryFile": "index.ts"
+    }
   },
   "private": false,
-  "dependencies": {
+  "devDependencies": {
     "@angular/animations": "^5.0.0",
+    "@angular/cli": "^1.5.2",
     "@angular/common": "^5.0.0",
     "@angular/compiler": "^5.0.0",
+    "@angular/compiler-cli": "^5.0.0",
     "@angular/core": "^5.0.0",
     "@angular/forms": "^5.0.0",
     "@angular/http": "^5.0.0",
+    "@angular/language-service": "^5.0.0",
     "@angular/platform-browser": "^5.0.0",
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
-    "admin-lte": "^2.4.2",
-    "core-js": "^2.4.1",
-    "rxjs": "^5.5.2",
-    "save-dev": "^2.0.0",
-    "zone.js": "^0.8.14"
-  },
-  "devDependencies": {
-    "@angular/cli": "^1.5.2",
-    "@angular/compiler-cli": "^5.0.0",
-    "@angular/language-service": "^5.0.0",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
+    "admin-lte": "^2.4.2",
     "angular-loading-page": "^0.4.2",
     "bootstrap": "^3.3.7",
-    "codelyzer": "~3.2.0",
+    "codelyzer": "4.0.1",
+    "core-js": "^2.5.1",
     "font-awesome": "^4.7.0",
     "ionicons": "^2.0.1",
     "jasmine-core": "~2.6.2",
@@ -48,11 +52,13 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "ng-packagr": "^1.5.0",
+    "ng-packagr": "^1.6.0",
     "prismjs": "^1.8.4",
     "protractor": "~5.1.2",
+    "rxjs": "^5.5.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "~2.4.2"
+    "typescript": "~2.4.2",
+    "zone.js": "^0.8.14"
   }
 }
