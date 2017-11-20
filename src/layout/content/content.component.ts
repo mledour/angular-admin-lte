@@ -112,13 +112,14 @@ export class ContentComponent implements OnInit {
    */
   private setContentMinHeight(): void {
     if(this.navigationEnd) {
-      let headerFooterOffsetHeight = this.headerService.offsetHeight + this.footerService.offsetHeight;
+      let heightStyle,
+          headerFooterOffsetHeight = this.headerService.offsetHeight + this.footerService.offsetHeight;
 
       if(this.layout === 'fixed') {
-        var heightStyle = this.windowInnerHeight - this.footerService.offsetHeight;
+        heightStyle = this.windowInnerHeight - this.footerService.offsetHeight;
       } else {
         let sidebarRight = this.sidebarRightService.scrollHeight ? this.sidebarRightService.scrollHeight - this.headerService.offsetHeight: 0;
-        var heightStyle = Math.max(this.windowInnerHeight - headerFooterOffsetHeight, this.sidebarLeftHeight - this.headerService.offsetHeight, sidebarRight);
+        heightStyle = Math.max(this.windowInnerHeight - headerFooterOffsetHeight, this.sidebarLeftHeight - this.headerService.offsetHeight, sidebarRight);
       }
 
       if(heightStyle && heightStyle !== this.heightStyle) {
