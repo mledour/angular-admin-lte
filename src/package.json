@@ -17,7 +17,7 @@
     "url": "https://github.com/mika-el/angular-admin-lte/issues"
   },
   "peerDependencies": {
-    "@angular/core": "^4.0.0",
+    "@angular/core": ">=4.0.0",
     "admin-lte": "^2.4.2",
     "bootstrap": "^3.3.7"
   }
