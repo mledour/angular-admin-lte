@@ -1,7 +1,5 @@
 import { Directive, Input, Output, ElementRef, EventEmitter, Renderer2, NgZone, ChangeDetectorRef, AfterContentInit, OnInit, OnDestroy } from '@angular/core';
-
-import { AnimationEvent } from '@angular/animations';
-
+import { AnimationEvent } from './animations.interface';
 /*
  *
  */

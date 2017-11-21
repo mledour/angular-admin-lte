@@ -1,7 +1,6 @@
 import { Component, Input, AfterViewInit, EventEmitter, ElementRef, Output, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, ViewChild, ViewContainerRef, NgZone, Renderer2, ViewRef } from '@angular/core';
 
-import { collapseAnimation } from '../animations';
-import { AnimationEvent } from '@angular/animations';
+import { AnimationEvent } from '../animations/animations.interface';
 
 /*
  *
@@ -10,7 +9,6 @@ import { AnimationEvent } from '@angular/animations';
   selector: 'mk-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.css'],
-  animations: [collapseAnimation()],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertComponent implements AfterViewInit, OnDestroy {
@@ -72,7 +70,7 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
         }, this.dismissOnTimeout);
       }
       if(this.removeButtonElement) {
-        this.removeButtonListener = this.renderer2.listen(this.removeButtonElement.nativeElement, 'click', (event) => {
+        this.removeButtonListener = this.renderer2.listen(this.removeButtonElement.nativeElement, 'click', (event: Event) => {
           this.remove = true;
           this.changeDetectorRef.detectChanges();
         });

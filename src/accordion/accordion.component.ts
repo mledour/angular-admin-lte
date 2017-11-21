@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit, OnChanges, SimpleChanges, Input, ViewChild, ContentChild, ContentChildren, OnDestroy, QueryList, TemplateRef, EventEmitter, Output, ViewChildren, NgZone, Renderer2, ChangeDetectorRef } from '@angular/core';
-import { AnimationEvent } from '@angular/animations';
-import { collapseAnimation } from '../animations';
+
+import { AnimationEvent } from '../animations/animations.interface';
+
 import { AccordionToggleDirective } from './accordion.directive';
 
 /*

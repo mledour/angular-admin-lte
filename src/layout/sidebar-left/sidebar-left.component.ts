@@ -1,4 +1,3 @@
-import { AnimationEvent } from '@angular/animations';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, NgZone, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { NavigationStart, PRIMARY_OUTLET, Router, Event as RouterEvent } from '@angular/router';
 
@@ -6,6 +5,8 @@ import { WrapperService } from '../wrapper/wrapper.service';
 import { HeaderService } from '../header/header.service';
 
 import { LayoutStore } from '../layout.store';
+
+import { AnimationEvent } from '../../animations/animations.interface';
 
 import { SidebarLeftToggleDirective } from './sidebar-left.directive';
 

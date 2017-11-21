@@ -1,6 +1,6 @@
 import { Component, Input, ContentChild, Output, AfterViewInit, EventEmitter, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, NgZone, Renderer2 } from '@angular/core';
 
-//import { AnimationEvent, collapseAnimation } from '../animations';
+import { AnimationEvent } from '../animations/animations.interface';
 
 import { BoxContentDirective, BoxFooterDirective, BoxHeaderDirective, BoxToolsDirective } from './box.directive';
 
@@ -11,7 +11,6 @@ import { BoxContentDirective, BoxFooterDirective, BoxHeaderDirective, BoxToolsDi
   selector: 'mk-box',
   templateUrl: './box.component.html',
   styleUrls: ['./box.component.css'],
-  //animations: [collapseAnimation()],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoxComponent implements AfterViewInit, OnDestroy {
@@ -113,7 +112,7 @@ export class BoxComponent implements AfterViewInit, OnDestroy {
    * @method collapseStart
    * @param  {AnimationEvent} event [description]
    */
-  public collapseStart(event): void {
+  public collapseStart(event: AnimationEvent): void {
     if(event.fromState !== 'void') {
       this.isCollaping = true;
       this.onCollapseStart.emit(event);
@@ -125,7 +124,7 @@ export class BoxComponent implements AfterViewInit, OnDestroy {
    * @method collapseDone
    * @param  {AnimationEvent} event [description]
    */
-  public collapseDone(event): void {
+  public collapseDone(event: AnimationEvent): void {
     if(event.fromState !== 'void') {
       this.isCollaping = false;
       this.onCollapseDone.emit(event);
