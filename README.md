@@ -15,13 +15,18 @@ To install this library, run:
 ```bash
 $ npm install angular-loading-page --save
 ```
-## Run demo
-
+## Install demo
 ```bash
 $ git clone git://github.com/mika-el/angular-admin-lte
 $ cd angular-admin-lte
+$ npm install
+```
+
+## Run demo
+```bash
 $ ng serve
 ```
+
 ## Build demo
 ```bash
 $ ng build --prod
@@ -35,6 +40,7 @@ $ npm run build:lib
 ## Dependencies
 
 * admin-lte
+* bootstrap
 
 ## Todos
 
