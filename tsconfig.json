@@ -1,5 +1,9 @@
 {
   "compileOnSave": false,
+  "include": [
+    "src",
+    "demo/src"
+  ],
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
