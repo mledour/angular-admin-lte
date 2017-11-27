@@ -10,7 +10,11 @@
     "email": "michael.ledour@gmail.com"
   },
   "keywords": [
-    "angular"
+    "angular",
+    "angular 4",
+    "angular 5",
+    "typescript",
+    "admin-lte"
   ],
   "license": "MIT",
   "bugs": {

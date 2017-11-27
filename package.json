@@ -1,6 +1,13 @@
 {
   "name": "angular-admin-lte",
   "version": "0.2.1",
+  "keywords": [
+    "angular",
+    "angular 4",
+    "angular 5",
+    "typescript",
+    "admin-lte"
+  ],
   "license": "MIT",
   "scripts": {
     "ng": "ng",
