@@ -10,7 +10,7 @@ export class SidebarRightService {
    * @return {number}     [description]
    */
   get offsetHeight(): number {
-    return this.elementRef.nativeElement.offsetHeight;
+    return this.elementRef ? this.elementRef.nativeElement.offsetHeight: null;
   }
 
   /**
@@ -19,6 +19,6 @@ export class SidebarRightService {
    * @return {number}     [description]
    */
   get scrollHeight(): number {
-    return this.elementRef.nativeElement.scrollHeight;
+    return this.elementRef ? this.elementRef.nativeElement.scrollHeight: null;
   }
 }
