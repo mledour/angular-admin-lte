@@ -2,10 +2,7 @@
 
 Admin-lte implémentation for Angular 4+
 
-## Demo
-[https://mika-el.github.io/angular-admin-lte](https://mika-el.github.io/angular-admin-lte/)
-
-## Doc
+## Doc & Demo
 [https://mika-el.github.io/angular-admin-lte](https://mika-el.github.io/angular-admin-lte/)
 
 ## Installation
@@ -44,4 +41,4 @@ $ npm run build:lib
 
 ## Todos
 
-* Horizontal tabs
+* Vertical tabs
