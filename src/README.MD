@@ -10,8 +10,9 @@ Admin-lte implémentation for Angular 4+
 To install this library, run:
 
 ```bash
-$ npm install angular-loading-page --save
+$ npm install angular-admin-lte --save
 ```
+
 ## Install demo
 ```bash
 $ git clone git://github.com/mika-el/angular-admin-lte
@@ -41,4 +42,4 @@ $ npm run build:lib
 
 ## Todos
 
-* Horizontal tabs
+* Vertical tabs
