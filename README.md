@@ -13,7 +13,7 @@ Admin-lte implémentation for Angular 4+
 To install this library, run:
 
 ```bash
-$ npm install angular-loading-page --save
+$ npm install angular-admin-lte --save
 ```
 ## Install demo
 ```bash
