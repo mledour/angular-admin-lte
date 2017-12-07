@@ -1,4 +1,4 @@
-import { Component, Directive, ElementRef, TemplateRef, forwardRef, Input, NgZone, OnInit, Renderer2, ViewChild, ContentChild, ChangeDetectorRef } from '@angular/core';
+import { Component, Directive, ElementRef, TemplateRef, forwardRef, Input, OnInit, Renderer2, ViewChild, ContentChild, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { InputTextLabelDirective, InputTextAddonLeftDirective, InputTextAddonRightDirective } from './input-text.directive';
@@ -27,7 +27,7 @@ export class InputTextComponent implements ControlValueAccessor, OnInit {
   @Input() addonRight: string;
   @Input() id: string | number = new Date().valueOf();
   @Input() inputColor: string;
-  @Input() inputFontColor: string = 'red';
+  @Input() inputFontColor: string;
   @Input() isDisabled: boolean;
   @Input() label: string;
   @Input() placeholder: string;
@@ -43,19 +43,17 @@ export class InputTextComponent implements ControlValueAccessor, OnInit {
   /**
    * @method constructor
    * @param  {Renderer2} privaterenderer2 [description]
-   * @param  {NgZone}    privatengZone    [description]
    */
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private renderer2: Renderer2,
-    private ngZone: NgZone
+    private renderer2: Renderer2
   ) {}
 
   /**
    * @method ngOnInit
    */
   ngOnInit() {
-    //this.ngZone.runOutsideAngular(() => {
+    //this.ngZone.runOutsideAngular(() => { #BUG
       this.listener = this.renderer2.listen(this.inputElement.nativeElement, 'input', (event: Event) => {
         this.onChange((<HTMLInputElement>event.target).value);
         this.changeDetectorRef.detectChanges();
