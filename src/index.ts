@@ -7,4 +7,5 @@ export * from './box-info/box-info.module';
 export * from './box-small/box-small.module';
 export * from './breadcrumbs/breadcrumbs.module';
 export * from './dropdown/dropdown.module';
+export * from './form/input-text/input-text.module';
 export * from './tabs/tabs.module';
