@@ -1,5 +1,8 @@
 <div [ngClass]="wrapperClasses">
-  <label *ngIf="label" for="{{id}}">{{label}}</label>
+  <label *ngIf="addonLeft || inputTextLabelDirective" for="{{id}}">
+    {{label}}
+    <ng-content select="mk-input-text-label"></ng-content>
+  </label>
   <div class="input-group">
     <span *ngIf="addonLeft || inputTextAddonLeftDirective" class="input-group-addon">
       {{addonLeft}}

@@ -1,7 +1,7 @@
 import { Component, Directive, ElementRef, TemplateRef, forwardRef, Input, NgZone, OnInit, Renderer2, ViewChild, ContentChild, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { InputTextAddonLeftDirective, InputTextAddonRightDirective } from './input-text.directive';
+import { InputTextLabelDirective, InputTextAddonLeftDirective, InputTextAddonRightDirective } from './input-text.directive';
 
 /*
  *
@@ -36,6 +36,7 @@ export class InputTextComponent implements ControlValueAccessor, OnInit {
 
   @ViewChild('inputElement') inputElement: ElementRef;
 
+  @ContentChild(InputTextLabelDirective) public inputTextLabelDirective: InputTextLabelDirective;
   @ContentChild(InputTextAddonLeftDirective) public inputTextAddonLeftDirective: InputTextAddonLeftDirective;
   @ContentChild(InputTextAddonRightDirective) public inputTextAddonRightDirective: InputTextAddonRightDirective;
 

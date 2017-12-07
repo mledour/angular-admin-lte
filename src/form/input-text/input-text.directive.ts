@@ -1,4 +1,14 @@
 import { Directive } from '@angular/core';
+
+
+/*
+ *
+ */
+@Directive({
+  selector: 'mk-input-text-label'
+})
+export class InputTextLabelDirective {}
+
 /*
  *
  */
