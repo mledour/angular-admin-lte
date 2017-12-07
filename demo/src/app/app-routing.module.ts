@@ -102,6 +102,20 @@ const routes: Routes = [
         }
       }
     ]
+  }, {
+    path: 'form',
+    data: {
+      title: 'Form',
+    },
+    children: [
+      {
+        path: 'input-text',
+        loadChildren: 'app/+form/input-text/input-text.module#InputTextModule',
+        data: {
+          title: 'Input Text',
+        }
+      }
+    ]
   }
 ];
 
@@ -110,62 +124,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-
-/*{
-    path: '',
-    redirectTo: '/dashboards/v1',
-    pathMatch: 'full',
-    data: {
-      title: 'Dashboard',
-      description: 'Control panel',
-      breadcrumb: 'v1',
-      icon: '' // Needed if parent doesn't have a component
-    }
-  }, {
-    path: 'dashboards/v1',
-    component: DashboardComponent,
-    data: {
-      title: 'Dashboard',
-      description: 'Control panel',
-      breadcrumb: 'v1',
-      icon: '' // Needed if parent doesn't have a component
-    }
-  }, {
-    path: 'dashboards/v1/v2',
-    loadChildren: 'app/+dashboard2/dashboard2.module#Dashboard2Module',
-    data: {
-      title: 'Dashboard',
-      description: 'Version 2.0',
-      breadcrumb: 'v2',
-      icon: '' // Needed if parent doesn't have a component
-    }
-  }, {
-    path: 'widgets/:id',
-    loadChildren: 'app/+dashboard2/dashboard2.module#Dashboard2Module',
-    data: {
-      title: 'Dashboards',
-      icon: 'fa fa-home',
-    }
-  }
-
-
-
-  /*, {
-    path: 'number',
-    component: NumberComponent,
-    data: {
-      title: 'Number',
-      description: 'The number :toto component',
-      icon: 'fa fa-home'
-    },
-    children: [{
-      path: ':toto',
-      component: NumberComponent,
-      data: {
-        title: 'Number :toto',
-        breadcrumb: ':toto',
-        description: 'The number :toto component'
-      }
-    }]
-  }*/

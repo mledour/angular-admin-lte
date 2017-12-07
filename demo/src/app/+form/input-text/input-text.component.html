@@ -1,0 +1,21 @@
+<p>
+  Input {{test}}
+</p>
+
+<form>
+  <mk-input-text label="Text Input" name="name" [(ngModel)]="test" #name="ngModel" (ngModelChange)="onChange($event)" addonLeftIcon="fa fa-envelope" addonRight="$" #name="ngModel" minlength="4" maxlength="5" required size="large">
+    <mk-input-text-addon-left>$</mk-input-text-addon-left>
+  </mk-input-text>
+</form>
+
+<div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+  <div *ngIf="name.errors.required">
+    Name is required.
+  </div>
+  <div *ngIf="name.errors.minlength">
+    Name must be at least 4 characters long.
+  </div>
+  <div *ngIf="name.errors.maxlength">
+    Name must be less than 6 characters long.
+  </div>
+</div>
