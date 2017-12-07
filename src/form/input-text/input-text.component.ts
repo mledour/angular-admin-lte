@@ -17,17 +17,17 @@ import { InputTextLabelDirective, InputTextAddonLeftDirective, InputTextAddonRig
   }]
 })
 export class InputTextComponent implements ControlValueAccessor, OnInit {
-  @Input() value: number | string;
+  public value: any;
 
   private listener: Function;
   private onChange: Function;
   private onTouched: Function;
 
   @Input() addonLeft: string;
-  @Input() addonLeftIcon: string;
   @Input() addonRight: string;
-  @Input() addonRightIcon: string;
   @Input() id: string | number = new Date().valueOf();
+  @Input() inputColor: string;
+  @Input() inputFontColor: string = 'red';
   @Input() isDisabled: boolean;
   @Input() label: string;
   @Input() placeholder: string;
