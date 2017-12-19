@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { InputTextRoutingModule } from './input-text-routing.module';
 import { InputTextComponent } from './input-text.component';
 
-import { InputTextModule as mkInputTextModule } from '../../src';
+import { InputTextModule as mkInputTextModule } from '../../../../../src';
 
 @NgModule({
   imports: [

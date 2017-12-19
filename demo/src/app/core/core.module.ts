@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { DropdownModule } from '../src/dropdown/dropdown.module';
-import { TabsModule } from '../src/tabs/tabs.module';
-import { BoxModule } from '../src/box/box.module';
+import { BoxModule, TabsModule, DropdownModule } from '../../../../src';
 
 import { HeaderInnerComponent } from './header-inner/header-inner.component';
 import { SidebarLeftInnerComponent } from './sidebar-left-inner/sidebar-left-inner.component';

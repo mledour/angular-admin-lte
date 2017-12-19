@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderRoutingModule } from './header-routing.module';
 import { HeaderComponent } from './header.component';
 
-import { BoxModule } from '../../src';
+import { BoxModule } from '../../../../../src';
 
 @NgModule({
   imports: [

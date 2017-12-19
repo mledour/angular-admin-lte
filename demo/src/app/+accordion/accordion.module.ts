@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AccordionRoutingModule } from './accordion-routing.module';
 import { AccordionComponent } from './accordion.component';
 
-import { AccordionModule as MkAccordionModule, BoxModule } from '../src';
+import { AccordionModule as MkAccordionModule, BoxModule } from '../../../../src';
 
 
 @NgModule({

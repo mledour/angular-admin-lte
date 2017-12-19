@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
-import { LayoutStore } from '../../src/layout/layout.store';
+import { LayoutStore } from '../../../../../src/layout/layout.store';
 
 @Component({
   selector: 'app-sidebar-right-inner',

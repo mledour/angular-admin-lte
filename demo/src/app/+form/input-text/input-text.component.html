@@ -3,9 +3,12 @@
 </p>
 
 <form>
-  <mk-input-text label="Text Input" name="name" [(ngModel)]="test" #name="ngModel" (ngModelChange)="onChange($event)" addonLeftIcon="fa fa-envelope" addonRight="$" #name="ngModel" minlength="4" maxlength="5" required size="large">
-    <mk-input-text-addon-left>$</mk-input-text-addon-left>
-  </mk-input-text>
+  <div class="row">
+    <mk-input-text name="name" [(ngModel)]="test" #name="ngModel" (ngModelChange)="onChange($event)" addonLeftIcon="fa fa-envelope" addonRight="$" #name="ngModel" minlength="4" maxlength="5" required size="large" placeholder="toto" wrapperClasses="col-xs-3 form-group">
+      <mk-input-text-label><i class="fa fa-bell-o"></i> Input with warning</mk-input-text-label>
+      <mk-input-text-addon-left>$</mk-input-text-addon-left>
+    </mk-input-text>
+  </div>
 </form>
 
 <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
