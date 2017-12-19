@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit, OnDestroy, Input, ViewChild, ContentChild, OnChanges, SimpleChange, ContentChildren, ChangeDetectionStrategy, Output, EventEmitter, QueryList, TemplateRef, ViewChildren, Renderer2, NgZone, ChangeDetectorRef } from '@angular/core';
 
-import { Subscription } from 'Rxjs/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 
 import { TabToggleDirective } from './tabs.directive';
 
