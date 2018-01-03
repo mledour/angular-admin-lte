@@ -101,6 +101,10 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit {
       this.setSidebarHeight();
     });
 
+    this.layoutStore.sidebarLeftMenu.subscribe((value: Array<any>) => {
+      this.changeDetectorRef.detectChanges();
+    });
+
     this.ngZone.runOutsideAngular(() => {
       this.renderer2.listen(this.sidebarElement.nativeElement, 'mouseenter', (event: Event) => {
         this.layoutStore.sidebarLeftMouseOver(true);

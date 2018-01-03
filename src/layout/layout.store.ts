@@ -255,9 +255,9 @@ export class LayoutStore {
    * @method setSidebarLeftMenu
    * @param  {string}           value [description]
    */
-  public setSidebarLeftMenu(value: string): void {
+  public setSidebarLeftMenu(value: Array<any>): void {
     this._layoutState.next(
-      Object.assign(this._layoutState.value, {sSidebarLeftMenu: value})
+      Object.assign(this._layoutState.value, {sidebarLeftMenu: value})
     );
   }
 
