@@ -9,6 +9,7 @@ import { SidebarLeftModule } from './sidebar-left/sidebar-left.module';
 import { SidebarRightModule } from './sidebar-right/sidebar-right.module';
 import { WrapperModule } from './wrapper/wrapper.module';
 
+import { LayoutService } from './layout.service';
 import { LayoutStore } from './layout.store';
 import { LayoutState } from './layout.state';
 import { layoutProvider } from './layout.provider';
@@ -45,7 +46,7 @@ export class LayoutModule {
   static forRoot(layoutConfig: LayoutState): ModuleWithProviders {
     return {
       ngModule: LayoutModule,
-      providers: layoutProvider(layoutConfig)
+      providers: [...layoutProvider(layoutConfig), LayoutService]
     }
   }
 }
