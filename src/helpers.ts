@@ -1,3 +1,6 @@
+import { Subscriber } from 'rxjs/Subscriber';
+
+
 /**
  * [throttle description]
  * @method throttle
@@ -15,4 +18,33 @@ export function throttle(callback: Function, delay: number): (args: Array<any>) 
       }, delay);
     }
   }
+}
+
+
+/**
+ * [removeSubscriptions description]
+ * @method removeSubscriptions
+ */
+export function removeSubscriptions(subscriptions): Array<null> {
+  if(subscriptions) {
+    subscriptions.forEach((subscription: Subscriber<any>) => {
+      subscription.unsubscribe();
+      console.log(subscription);
+    });
+  }
+  return [];
+}
+
+/**
+ * [removeListeners description]
+ * @method removeListeners
+ */
+export function removeListeners(listeners): Array<null> {
+  if(listeners) {
+    listeners.forEach((listener: Function) => {
+      listener();
+      console.log(listener);
+    });
+  }
+  return [];
 }
