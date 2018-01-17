@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, NgZone, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, NgZone, OnInit, QueryList, Renderer2, ViewChild, ViewChildren, OnDestroy } from '@angular/core';
 import { NavigationStart, PRIMARY_OUTLET, Router, Event as RouterEvent } from '@angular/router';
 
 import { WrapperService } from '../wrapper/wrapper.service';
@@ -7,6 +7,7 @@ import { HeaderService } from '../header/header.service';
 import { LayoutStore } from '../layout.store';
 
 import { AnimationEvent } from '../../animations/animations.interface';
+import { removeSubscriptions, removeListeners } from '../../helpers';
 
 import { SidebarLeftToggleDirective } from './sidebar-left.directive';
 
@@ -29,7 +30,7 @@ export type Items = Array<Item>;
   styleUrls: ['./sidebar-left.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SidebarLeftComponent implements OnInit, AfterViewInit {
+export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
   public menu: Array<any>;
   public sidebarStyles: any;
   public sidebarHeight: number;
@@ -43,9 +44,11 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit {
   private windowInnerHeight: number;
   private collapsedItems: Items = [];
   private activatedItems: Items = [];
-  private toggleListeners: Array<Function>;
+  private toggleListeners: Array<Function> = [];
+  private listeners: Array<Function> = [];
   private itemsByIds: {[propKey: number]: Item} = {};
   private runningAnimations = 0;
+  private subscriptions = [];
 
   @ViewChild('sidebarElement') public sidebarElement: ElementRef;
 
@@ -87,57 +90,66 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit {
   }
 
   /**
+   * @method ngOnDestroy
+   */
+  ngOnDestroy() {
+    this.subscriptions = removeSubscriptions(this.subscriptions);
+    this.listeners = removeListeners(this.listeners);
+    this.toggleListeners = removeListeners(this.toggleListeners);
+  }
+
+  /**
    * [setSidebarListeners description]
    * @method setSidebarListeners
    */
   setSidebarListeners(): void {
-    this.layoutStore.layout.subscribe((value: string) => {
+    this.subscriptions.push(this.layoutStore.layout.subscribe((value: string) => {
       this.layout = value;
       this.setSidebarHeight();
-    });
+    }));
 
-    this.layoutStore.windowInnerHeight.subscribe((value: number) => {
+    this.subscriptions.push(this.layoutStore.windowInnerHeight.subscribe((value: number) => {
       this.windowInnerHeight = value;
       this.setSidebarHeight();
-    });
+    }));
 
-    this.layoutStore.sidebarLeftMenu.subscribe((value: Array<any>) => {
+    this.subscriptions.push(this.layoutStore.sidebarLeftMenu.subscribe((value: Array<any>) => {
       this.changeDetectorRef.detectChanges();
-    });
+    }));
 
     this.ngZone.runOutsideAngular(() => {
-      this.renderer2.listen(this.sidebarElement.nativeElement, 'mouseenter', (event: Event) => {
+      this.listeners.push(this.renderer2.listen(this.sidebarElement.nativeElement, 'mouseenter', (event: Event) => {
         this.layoutStore.sidebarLeftMouseOver(true);
-      });
-      this.renderer2.listen(this.sidebarElement.nativeElement, 'mouseleave', (event: Event) => {
+      }));
+      this.listeners.push(this.renderer2.listen(this.sidebarElement.nativeElement, 'mouseleave', (event: Event) => {
         this.layoutStore.sidebarLeftMouseOver(false);
-      });
+      }));
     });
 
-    this.layoutStore.windowInnerWidth.subscribe((value: number) => {
+    this.subscriptions.push(this.layoutStore.windowInnerWidth.subscribe((value: number) => {
       this.windowInnerWidth = value;
       if(!this.isSidebarLeftCollapsed && this.windowInnerWidth <= 767) {
         this.layoutStore.sidebarLeftCollapsed(true);
       } else if(this.windowInnerWidth > 767 && this.isSidebarLeftCollapsed && !this.isSidebarLeftExpandOnOver) {
         this.layoutStore.sidebarLeftCollapsed(false);
       }
-    });
+    }));
 
-    this.layoutStore.isSidebarLeftMouseOver.subscribe((value: boolean) => {
+    this.subscriptions.push(this.layoutStore.isSidebarLeftMouseOver.subscribe((value: boolean) => {
       this.isSidebarLeftMouseOver = value;
       if(this.isSidebarLeftExpandOnOver) {
         this.layoutStore.sidebarLeftCollapsed(!value);
       }
-    });
+    }));
 
-    this.layoutStore.isSidebarLeftExpandOnOver.subscribe((value: boolean) => {
+    this.subscriptions.push(this.layoutStore.isSidebarLeftExpandOnOver.subscribe((value: boolean) => {
       this.isSidebarLeftExpandOnOver = value;
       if(this.windowInnerWidth > 767) {
         this.layoutStore.sidebarLeftCollapsed(value);
       }
-    });
+    }));
 
-    this.layoutStore.isSidebarLeftCollapsed.subscribe((value: boolean) => {
+    this.subscriptions.push(this.layoutStore.isSidebarLeftCollapsed.subscribe((value: boolean) => {
       if(this.windowInnerWidth <= 767) {
         if(value) {
           this.renderer2.removeClass(this.wrapperService.wrapperElementRef.nativeElement, 'sidebar-open');
@@ -160,15 +172,15 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit {
           }
         }
       }
-    });
+    }));
 
-    this.layoutStore.isSidebarLeftMini.subscribe((value: boolean) => {
+    this.subscriptions.push(this.layoutStore.isSidebarLeftMini.subscribe((value: boolean) => {
       if(value) {
         this.renderer2.addClass(this.wrapperService.wrapperElementRef.nativeElement, 'sidebar-mini');
       } else {
         this.renderer2.removeClass(this.wrapperService.wrapperElementRef.nativeElement, 'sidebar-mini');
       }
-    });
+    }));
   }
 
   /**
@@ -177,7 +189,7 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit {
    * @return {[type]}         [description]
    */
   setMenuListeners() {
-    this.router.events.subscribe((event: RouterEvent) => {
+    this.subscriptions.push(this.router.events.subscribe((event: RouterEvent) => {
       if(event instanceof NavigationStart) {
         if(event.url === '/') {
           this.activeItems(event.url);
@@ -193,12 +205,12 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit {
           this.layoutStore.sidebarLeftCollapsed(true);
         }
       }
-    });
+    }));
 
-    this.layoutStore.sidebarLeftMenu.subscribe(value => {
+    this.subscriptions.push(this.layoutStore.sidebarLeftMenu.subscribe(value => {
       this.menu = value;
       this.monkeyPatchMenu(this.menu);
-    });
+    }));
   }
 
   /**
@@ -317,25 +329,12 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * [removeListeners description]
-   * @method removeListeners
-   */
-  private removeListeners(): void {
-    if(this.toggleListeners) {
-      this.toggleListeners.forEach((listener: Function) => {
-        listener();
-      });
-    }
-    this.toggleListeners = [];
-  }
-
-  /**
    * [setMenuTogglesListeners description]
    * @method setMenuTogglesListeners
    */
   private setMenuTogglesListeners(): void {
+    this.toggleListeners = removeListeners(this.toggleListeners);
     this.ngZone.runOutsideAngular(() => {
-      this.removeListeners();
       this.sidebarLeftToggleDirectives.forEach((menuToggle: SidebarLeftToggleDirective) => {
         this.toggleListeners.push(this.renderer2.listen(menuToggle.elementRef.nativeElement, 'click', (event) => {
           event.preventDefault();

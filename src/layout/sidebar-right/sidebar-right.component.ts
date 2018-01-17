@@ -1,10 +1,12 @@
-import { Component, OnInit, AfterViewInit, Input, ViewChild, Renderer2, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ViewChild, Renderer2, ElementRef, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 import { WrapperService } from '../wrapper/wrapper.service';
 
 import { LayoutStore } from '../layout.store';
 
 import { SidebarRightService } from './sidebar-right.service';
+
+import { removeSubscriptions, removeListeners } from '../../helpers';
 
 @Component({
   selector: 'mk-layout-sidebar-right',
@@ -13,7 +15,7 @@ import { SidebarRightService } from './sidebar-right.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class SidebarRightComponent implements OnInit, AfterViewInit {
+export class SidebarRightComponent implements OnInit, AfterViewInit, OnDestroy {
   public layout: string;
   public sidebarHeight: number;
 
@@ -21,6 +23,8 @@ export class SidebarRightComponent implements OnInit, AfterViewInit {
   private windowInnerHeight: number;
   private isSidebarRightOverContent: boolean;
   private isSidebarRightCollapsed: boolean;
+  private listeners = [];
+  private subscriptions = [];
 
   @ViewChild('sidebarContentElement') public sidebarContentElement: ElementRef;
 
@@ -38,7 +42,7 @@ export class SidebarRightComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.renderer2.addClass(this.elementRef.nativeElement, 'control-sidebar');
 
-    this.layoutStore.isSidebarRightCollapsed.subscribe(value => {
+    this.subscriptions.push(this.layoutStore.isSidebarRightCollapsed.subscribe(value => {
       this.isSidebarRightCollapsed = value;
       if(!value) {
         this.renderer2.addClass(this.elementRef.nativeElement, 'control-sidebar-open');
@@ -51,9 +55,9 @@ export class SidebarRightComponent implements OnInit, AfterViewInit {
           this.renderer2.removeClass(this.wrapperService.wrapperElementRef.nativeElement, 'control-sidebar-open');
         }
       }
-    });
+    }));
 
-    this.layoutStore.isSidebarRightOverContent.subscribe((value: boolean) => {
+    this.subscriptions.push(this.layoutStore.isSidebarRightOverContent.subscribe((value: boolean) => {
       this.isSidebarRightOverContent = value;
       if(!this.isSidebarRightCollapsed) {
         if(value) {
@@ -62,15 +66,15 @@ export class SidebarRightComponent implements OnInit, AfterViewInit {
           this.renderer2.addClass(this.wrapperService.wrapperElementRef.nativeElement, 'control-sidebar-open');
         }
       }
-    });
+    }));
 
-    this.layoutStore.sidebarRightSkin.subscribe((value: string) => {
+    this.subscriptions.push(this.layoutStore.sidebarRightSkin.subscribe((value: string) => {
       if(this.skin !== value) {
         this.renderer2.removeClass(this.elementRef.nativeElement, `control-sidebar-${this.skin}`);
       }
       this.skin = value;
       this.renderer2.addClass(this.elementRef.nativeElement, `control-sidebar-${value}`);
-    });
+    }));
   }
 
   /**
@@ -78,5 +82,13 @@ export class SidebarRightComponent implements OnInit, AfterViewInit {
    */
   ngAfterViewInit() {
     this.sidebarRightService.elementRef = this.sidebarContentElement;
+  }
+
+  /**
+   * @method ngOnDestroy
+   */
+  ngOnDestroy() {
+    this.listeners = removeListeners(this.listeners);
+    this.subscriptions = removeSubscriptions(this.subscriptions);
   }
 }

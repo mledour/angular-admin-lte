@@ -1,8 +1,10 @@
-import { Component, ContentChild, Input, ViewChild, TemplateRef, ElementRef, OnInit, AfterViewInit, NgZone, Renderer2 } from '@angular/core';
+import { Component, ContentChild, Input, ViewChild, TemplateRef, ElementRef, AfterViewInit, OnDestroy, NgZone, Renderer2 } from '@angular/core';
 
 import { LayoutStore } from '../layout.store';
 
 import { HeaderService } from './header.service';
+
+import { removeSubscriptions, removeListeners } from '../../helpers';
 
 /**
  * Header Logo
@@ -34,9 +36,11 @@ export class HeaderLogoMiniComponent {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, AfterViewInit {
+export class HeaderComponent implements AfterViewInit, OnDestroy {
   private isSidebarLeftCollapsed: boolean;
   private isSidebarRightCollapsed: boolean;
+  private listeners = [];
+  private subscriptions = [];
 
   @Input() isSidebarLeftToggle = true;
   @Input() isSidebarRightToggle = true;
@@ -62,25 +66,21 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private headerService: HeaderService
   ) {}
 
-  ngOnInit() {
-
-  }
-
   /**
    * @method ngAfterViewInit
    */
   ngAfterViewInit() {
     this.headerService.elementRef = this.headerElement;
-    
+
     if(this.sidebarLeftToggleElement) {
-      this.layoutStore.isSidebarLeftCollapsed.subscribe((value: boolean) => {
+      this.subscriptions.push(this.layoutStore.isSidebarLeftCollapsed.subscribe((value: boolean) => {
         this.isSidebarLeftCollapsed = value;
-      });
+      }));
       this.ngZone.runOutsideAngular(() => {
-        this.renderer2.listen(this.sidebarLeftToggleElement.nativeElement, 'click', (event: Event) => {
+        this.listeners.push(this.renderer2.listen(this.sidebarLeftToggleElement.nativeElement, 'click', (event: Event) => {
           event.preventDefault();
           this.layoutStore.sidebarLeftCollapsed(!this.isSidebarLeftCollapsed);
-        });
+        }));
       });
     }
     if(this.sidebarRightToggleElement) {
@@ -88,11 +88,19 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         this.isSidebarRightCollapsed = value;
       });
       this.ngZone.runOutsideAngular(() => {
-        this.renderer2.listen(this.sidebarRightToggleElement.nativeElement, 'click', (event: Event) => {
+        this.listeners.push(this.renderer2.listen(this.sidebarRightToggleElement.nativeElement, 'click', (event: Event) => {
           event.preventDefault();
           this.layoutStore.sidebarRightCollapsed(!this.isSidebarRightCollapsed);
-        });
+        }));
       });
     }
+  }
+
+  /**
+   * @method ngOnDestroy
+   */
+  ngOnDestroy() {
+    this.listeners = removeListeners(this.listeners);
+    this.subscriptions = removeSubscriptions(this.subscriptions);
   }
 }

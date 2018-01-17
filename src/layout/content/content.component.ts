@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, Event as RouterEvent } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
@@ -9,7 +9,7 @@ import { SidebarRightService } from '../sidebar-right/sidebar-right.service';
 import { HeaderService } from '../header/header.service';
 import { FooterService } from '../footer/footer.service';
 
-import { throttle } from '../../helpers';
+import { throttle, removeSubscriptions, removeListeners } from '../../helpers';
 
 @Component({
   selector: 'mk-layout-content',
@@ -28,6 +28,7 @@ export class ContentComponent implements OnInit {
   private layout: string;
   private titleTag: string;
   private navigationEnd: boolean;
+  private subscriptions = [];
 
   @ViewChild('contentInnerElement') private contentInnerElement: ElementRef;
 
@@ -56,16 +57,16 @@ export class ContentComponent implements OnInit {
   ngOnInit() {
     this.titleTag = this.titleService.getTitle();
 
-    this.routingService.onChange.subscribe((value: any) => {
+    this.subscriptions.push(this.routingService.onChange.subscribe((value: any) => {
       if(value && value[value.length - 1]) {
         this.titleService.setTitle(this.getTitle(value[value.length - 1].data['title']));
         this.header = value[value.length - 1].data['title'];
         this.description = value[value.length - 1].data['description'];
       }
       this.changeDetectorRef.markForCheck();
-    });
+    }));
 
-    this.router.events.subscribe((routeEvent: RouterEvent) => {
+    this.subscriptions.push(this.router.events.subscribe((routeEvent: RouterEvent) => {
       if(routeEvent instanceof NavigationStart) {
         this.navigationEnd = false;
       }
@@ -73,25 +74,37 @@ export class ContentComponent implements OnInit {
         this.navigationEnd = true;
         this.setContentMinHeight();
       }
-    });
+    }));
 
-    this.layoutStore.sidebarLeftElementHeight.subscribe((value: number) => {
+    this.subscriptions.push(this.layoutStore.sidebarLeftElementHeight.subscribe((value: number) => {
       this.sidebarLeftHeight = value;
       this.setContentMinHeight();
-    });
+    }));
 
-    this.layoutStore.layout.subscribe((value: string) => {
+    this.subscriptions.push(this.layoutStore.layout.subscribe((value: string) => {
       this.layout = value;
       this.setContentMinHeight();
-    });
+    }));
 
-    this.layoutStore.windowInnerHeight.subscribe((value: number) => {
+    this.subscriptions.push(this.layoutStore.windowInnerHeight.subscribe((value: number) => {
       this.windowInnerHeight = value;
       this.setContentMinHeight();
-    });
+    }));
     this.heightStyle = this.windowInnerHeight;
   }
 
+  /**
+   * @method ngOnDestroy
+   */
+  ngOnDestroy() {
+    this.subscriptions = removeSubscriptions(this.subscriptions);
+  }
+
+  /**
+   * [scrollHeight description]
+   * @method scrollHeight
+   * @return {number}     [description]
+   */
   public get scrollHeight(): number {
     return this.contentInnerElement.nativeElement.scrollHeight;
   }
