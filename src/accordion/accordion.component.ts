@@ -4,6 +4,8 @@ import { AnimationEvent } from '../animations/animations.interface';
 
 import { AccordionToggleDirective } from './accordion.directive';
 
+import { removeSubscriptions, removeListeners } from '../helpers';
+
 /*
  *
  */
@@ -83,7 +85,8 @@ export class AccordionComponent implements OnInit {
 })
 export class AccordionGroupComponent implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
   private activeIndex: any = [0];
-  private accordionsListeners: Array<Function>;
+  private listeners = [];
+  private subscriptions = [];
 
   @Input('activeIndex') set _activeIndex(value) {
     this.activeIndex = value instanceof Array ? value : [value];
@@ -117,9 +120,9 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
     this.setAccordionsIndex();
     this.updateAccordionIsCollapsed();
 
-    this.accordionComponents.changes.subscribe(changes => {
+    this.subscriptions.push(this.accordionComponents.changes.subscribe(changes => {
       this.setAccordionsIndex();
-    });
+    }));
   }
 
   /**
@@ -128,9 +131,9 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
   ngAfterViewInit() {
     this.setAccordionsToggle();
 
-    this.accordionToggleDirectives.changes.subscribe(changes => {
+    this.subscriptions.push(this.accordionToggleDirectives.changes.subscribe(changes => {
       this.setAccordionsToggle();
-    });
+    }));
   }
 
   /**
@@ -149,7 +152,8 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
    * @method ngOnDestroy
    */
   ngOnDestroy() {
-    this.removeListeners();
+    removeListeners(this.listeners);
+    removeSubscriptions(this.subscriptions);
   }
 
   /**
@@ -234,18 +238,19 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
    * @method setAccordionsToggle
    */
   private setAccordionsToggle(): void {
-    this.removeListeners();
+    this.listeners = removeListeners(this.listeners);
+
     this.ngZone.runOutsideAngular(() => {
       this.accordionToggleDirectives.forEach((accordionToggle: AccordionToggleDirective) => {
-        this.accordionsListeners.push(this.renderer2.listen(accordionToggle.elementRef.nativeElement, 'click', (event) => {
+        this.listeners.push(this.renderer2.listen(accordionToggle.elementRef.nativeElement, 'click', (event) => {
           this.toggleAccordion(event, accordionToggle.accordionComponent.index);
           this.changeDetectorRef.detectChanges();
         }));
-        this.accordionsListeners.push(this.renderer2.listen(accordionToggle.elementRef.nativeElement, 'mouseenter', (event) => {
+        this.listeners.push(this.renderer2.listen(accordionToggle.elementRef.nativeElement, 'mouseenter', (event) => {
           this.headerMouseEnter(accordionToggle.accordionComponent);
           this.changeDetectorRef.detectChanges();
         }));
-        this.accordionsListeners.push(this.renderer2.listen(accordionToggle.elementRef.nativeElement, 'mouseleave', (event) => {
+        this.listeners.push(this.renderer2.listen(accordionToggle.elementRef.nativeElement, 'mouseleave', (event) => {
           this.headerMouseLeave(accordionToggle.accordionComponent);
           this.changeDetectorRef.detectChanges();
         }));
@@ -265,18 +270,5 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
         accordion.isCollapsed = false;
       }
     });
-  }
-
-  /**
-   * [removeListeners description]
-   * @method removeListeners
-   */
-  private removeListeners(): void {
-    if(this.accordionsListeners) {
-      this.accordionsListeners.forEach((listener: Function) => {
-        listener();
-      });
-    }
-    this.accordionsListeners = [];
   }
 }

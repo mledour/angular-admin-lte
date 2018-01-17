@@ -2,6 +2,8 @@ import { Component, Input, AfterViewInit, EventEmitter, ElementRef, Output, Chan
 
 import { AnimationEvent } from '../animations/animations.interface';
 
+import { removeListeners } from '../helpers';
+
 /*
  *
  */
@@ -18,7 +20,7 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
   public removed: boolean;
   public type = 'alert';
 
-  private removeButtonListener: Function;
+  private listeners = [];
 
   @Input() public backgroundColor = 'danger';
   @Input() public set callout(value: boolean) {
@@ -70,10 +72,10 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
         }, this.dismissOnTimeout);
       }
       if(this.removeButtonElement) {
-        this.removeButtonListener = this.renderer2.listen(this.removeButtonElement.nativeElement, 'click', (event: Event) => {
+        this.listeners.push(this.renderer2.listen(this.removeButtonElement.nativeElement, 'click', (event: Event) => {
           this.remove = true;
           this.changeDetectorRef.detectChanges();
-        });
+        }));
       }
     });
   }
@@ -82,9 +84,7 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
    * @method ngOnDesroy
    */
   ngOnDestroy() {
-    if(this.removeButtonListener) {
-      this.removeButtonListener();
-    }
+    removeListeners(this.listeners);
   }
 
   /**
@@ -103,9 +103,7 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
    */
   public collapseDone(event: AnimationEvent): void {
     if(event.toState === '1') {
-      if(this.removeButtonListener) {
-        this.removeButtonListener();
-      }
+      this.listeners = removeListeners(this.listeners);
       this.removed = true;
       this.viewContainerRef.clear();
       this.changeDetectorRef.detectChanges();

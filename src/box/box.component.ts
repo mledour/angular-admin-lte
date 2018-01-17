@@ -4,6 +4,8 @@ import { AnimationEvent } from '../animations/animations.interface';
 
 import { BoxContentDirective, BoxFooterDirective, BoxHeaderDirective, BoxToolsDirective } from './box.directive';
 
+import { removeListeners } from '../helpers';
+
 /*
  *
  */
@@ -17,9 +19,7 @@ export class BoxComponent implements AfterViewInit, OnDestroy {
   public isCollaping: boolean;
   public remove = false;
   public removed: boolean;
-
-  private toggleButtonListener: Function;
-  private removeButtonListener: Function;
+  private listeners = [];
 
   @Input() public boxColor = 'default';
   @Input() public buttonsStyleClass = 'btn btn-box-tool';
@@ -70,16 +70,16 @@ export class BoxComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.ngZone.runOutsideAngular(() => {
       if(this.toggleButtonElement) {
-        this.toggleButtonListener = this.renderer2.listen(this.toggleButtonElement.nativeElement, 'click', (event: Event) => {
+        this.listeners.push(this.renderer2.listen(this.toggleButtonElement.nativeElement, 'click', (event: Event) => {
           this.isCollapsed = !this.isCollapsed;
           this.changeDetectorRef.detectChanges();
-        });
+        }));
       }
       if(this.removeButtonElement) {
-        this.removeButtonListener = this.renderer2.listen(this.removeButtonElement.nativeElement, 'click', (event: Event) => {
+        this.listeners.push(this.renderer2.listen(this.removeButtonElement.nativeElement, 'click', (event: Event) => {
           this.remove = true;
           this.changeDetectorRef.detectChanges();
-        });
+        }));
       }
     });
   }
@@ -88,12 +88,7 @@ export class BoxComponent implements AfterViewInit, OnDestroy {
    * @method ngOnDestroy
    */
   ngOnDestroy() {
-    if(this.toggleButtonListener) {
-      this.toggleButtonListener();
-    }
-    if(this.removeButtonListener) {
-      this.removeButtonListener();
-    }
+    removeListeners(this.listeners);
   }
 
   /**

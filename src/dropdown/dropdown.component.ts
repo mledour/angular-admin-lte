@@ -2,6 +2,8 @@ import { Component, Input, OnInit, AfterViewInit, ViewChild, ContentChildren, Re
 
 import { AnimationEvent } from '../animations/animations.interface';
 
+import { removeListeners } from '../helpers';
+
 /*
  *
  */
@@ -40,7 +42,7 @@ export class DropdownMenuComponent {
 })
 export class DropdownComponent implements AfterViewInit, OnDestroy {
   private documentClickListener: Function;
-  private toggleListener: Function;
+  private listeners = [];
 
   @Input() public buttonStyleClass = 'btn dropdown-toggle';
   @Input() public buttonBackgroudColor = 'default';
@@ -80,10 +82,10 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
           this.defaultToggleElement.nativeElement : null;
     if(toggleNativeElement) {
       this.ngZone.runOutsideAngular(() => {
-        this.toggleListener = this.renderer2.listen(toggleNativeElement, 'click', (event: Event) => {
+        this.listeners.push(this.renderer2.listen(toggleNativeElement, 'click', (event: Event) => {
           this.toggleDropdown(event);
           this.changeDetectorRef.detectChanges();
-        });
+        }));
       });
     }
   }
@@ -93,9 +95,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
    */
   ngOnDestroy() {
     this.unBindDocumentClickListener();
-    if(this.toggleListener) {
-      this.toggleListener();
-    }
+    removeListeners(this.listeners);
   }
 
   /**

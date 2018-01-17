@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit, OnDestroy, Input, ViewChild, ContentChild, OnChanges, SimpleChange, ContentChildren, ChangeDetectionStrategy, Output, EventEmitter, QueryList, TemplateRef, ViewChildren, Renderer2, NgZone, ChangeDetectorRef } from '@angular/core';
 
-import { Subscription } from 'rxjs/Subscription';
-
 import { TabToggleDirective } from './tabs.directive';
+
+import { removeListeners, removeSubscriptions } from '../helpers';
 
 /*
  *
@@ -87,8 +87,8 @@ export class TabsHeaderComponent {
 })
 export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges {
   private activatedTabIndex: number;
-  private toggleListeners: Array<Function> = [];
-  private subscription: Subscription;
+  private listeners = [];
+  private subscriptions = [];
 
   @Input() public set activeTabIndex(index: number) {
     this.activatedTabIndex = index;
@@ -132,9 +132,9 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
     this.setTabIndex();
 
     // Update tab index if tabs is updated.
-    this.subscription = this.tabs.changes.subscribe(changes => {
+    this.subscriptions.push(this.tabs.changes.subscribe(changes => {
       this.setTabIndex();
-    });
+    }));
 
     // Open tab on load.
     this.openTabIndex();
@@ -148,9 +148,9 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
     this.setTabsToggle();
 
     // Update tab toggles if tabs is updated.
-    this.tabToggleDirectives.changes.subscribe(changes => {
+    this.subscriptions.push(this.tabToggleDirectives.changes.subscribe(changes => {
       this.setTabsToggle();
-    });
+    }));
   }
 
   /**
@@ -167,8 +167,8 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
    * @method ngOnDestroy
    */
   ngOnDestroy() {
-    this.removeListeners();
-    this.subscription.unsubscribe();
+    removeListeners(this.listeners);
+    removeSubscriptions(this.subscriptions);
   }
 
   /**
@@ -227,27 +227,14 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
    * @method setTabsToggle
    */
   private setTabsToggle(): void {
-    this.removeListeners();
+    this.listeners = removeListeners(this.listeners);
     this.ngZone.runOutsideAngular(() => {
       this.tabToggleDirectives.forEach((tabToggle: TabToggleDirective) => {
-        this.toggleListeners.push(this.renderer2.listen(tabToggle.elementRef.nativeElement, 'click', (event) => {
+        this.listeners.push(this.renderer2.listen(tabToggle.elementRef.nativeElement, 'click', (event) => {
           this.openTab(event, tabToggle.tabComponent);
           this.changeDetectorRef.detectChanges();
         }));
       });
     });
-  }
-
-  /**
-   * [removeListeners description]
-   * @method removeListeners
-   */
-  private removeListeners(): void {
-    if(this.toggleListeners) {
-      this.toggleListeners.forEach((listener: Function) => {
-        listener();
-      });
-    }
-    this.toggleListeners = [];
   }
 }
