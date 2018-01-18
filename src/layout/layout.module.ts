@@ -20,6 +20,10 @@ import { SidebarRightService } from './sidebar-right/sidebar-right.service';
 import { HeaderService } from './header/header.service';
 import { FooterService } from './footer/footer.service';
 
+export * from './layout.service';
+export * from './layout.store';
+export * from './layout.state';
+
 @NgModule({
   imports: [CommonModule, RouterModule],
   exports: [ContentModule, FooterModule, HeaderModule, SidebarLeftModule, SidebarRightModule, WrapperModule],
