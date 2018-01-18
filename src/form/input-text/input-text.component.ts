@@ -1,7 +1,9 @@
-import { Component, Directive, ElementRef, TemplateRef, forwardRef, Input, OnInit, Renderer2, ViewChild, ContentChild, ChangeDetectorRef } from '@angular/core';
+import { Component, Directive, ElementRef, TemplateRef, forwardRef, Input, OnInit, Renderer2, ViewChild, ContentChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { InputTextLabelDirective, InputTextAddonLeftDirective, InputTextAddonRightDirective } from './input-text.directive';
+
+import { removeListeners } from '../../helpers';
 
 /*
  *
@@ -16,10 +18,10 @@ import { InputTextLabelDirective, InputTextAddonLeftDirective, InputTextAddonRig
     multi: true
   }]
 })
-export class InputTextComponent implements ControlValueAccessor, OnInit {
+export class InputTextComponent implements ControlValueAccessor, OnInit, OnDestroy {
   public value: any;
 
-  private listener: Function;
+  private listeners = [];
   private onChange: Function;
   private onTouched: Function;
 
@@ -54,14 +56,14 @@ export class InputTextComponent implements ControlValueAccessor, OnInit {
    */
   ngOnInit() {
     //this.ngZone.runOutsideAngular(() => { #BUG
-      this.listener = this.renderer2.listen(this.inputElement.nativeElement, 'input', (event: Event) => {
+      this.listeners.push(this.renderer2.listen(this.inputElement.nativeElement, 'input', (event: Event) => {
         this.onChange((<HTMLInputElement>event.target).value);
         this.changeDetectorRef.detectChanges();
-      });
-      this.renderer2.listen(this.inputElement.nativeElement, 'blur', (event: Event) => {
+      }));
+      this.listeners.push(this.renderer2.listen(this.inputElement.nativeElement, 'blur', (event: Event) => {
         this.onTouched();
         this.changeDetectorRef.detectChanges();
-      });
+      }));
     //});
   }
 
@@ -69,9 +71,7 @@ export class InputTextComponent implements ControlValueAccessor, OnInit {
    * @method ngOnDestroy
    */
   ngOnDestroy() {
-    if(this.listener) {
-      this.listener();
-    }
+    removeListeners(this.listeners)
   }
 
   /**

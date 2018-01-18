@@ -84,9 +84,9 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
       });
     }
     if(this.sidebarRightToggleElement) {
-      this.layoutStore.isSidebarRightCollapsed.subscribe((value: boolean) => {
+      this.subscriptions.push(this.layoutStore.isSidebarRightCollapsed.subscribe((value: boolean) => {
         this.isSidebarRightCollapsed = value;
-      });
+      }));
       this.ngZone.runOutsideAngular(() => {
         this.listeners.push(this.renderer2.listen(this.sidebarRightToggleElement.nativeElement, 'click', (event: Event) => {
           event.preventDefault();
