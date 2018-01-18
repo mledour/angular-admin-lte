@@ -29,7 +29,6 @@ export function removeSubscriptions(subscriptions): Array<null> {
   if(subscriptions) {
     subscriptions.forEach((subscription: Subscriber<any>) => {
       subscription.unsubscribe();
-      console.log(subscription);
     });
   }
   return [];
@@ -43,7 +42,6 @@ export function removeListeners(listeners): Array<null> {
   if(listeners) {
     listeners.forEach((listener: Function) => {
       listener();
-      console.log(listener);
     });
   }
   return [];
