@@ -1,17 +1,21 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 
-import { LayoutStore } from '../../../../../src/layout/layout.store';
+import { Subscriber } from 'rxjs/Subscriber';
+
+import { LayoutStore } from '../../../../../src';
 
 @Component({
   selector: 'app-sidebar-right-inner',
   templateUrl: './sidebar-right-inner.component.html'
 })
-export class SidebarRightInnerComponent implements OnInit {
+export class SidebarRightInnerComponent implements OnInit, OnDestroy {
 
   public layout: string;
   public isSidebarLeftCollapsed: boolean;
   public isSidebarLeftExpandOnOver: boolean;
   public isSidebarLeftMini: boolean;
+
+  private subscriptions = [];
 
   constructor(
     public layoutStore: LayoutStore,
@@ -23,19 +27,40 @@ export class SidebarRightInnerComponent implements OnInit {
    * @method ngOnInit
    */
   ngOnInit() {
-    this.layoutStore.isSidebarLeftCollapsed.subscribe((value: boolean) => {
+    this.subscriptions.push(this.layoutStore.isSidebarLeftCollapsed.subscribe((value: boolean) => {
       this.isSidebarLeftCollapsed = value;
       this.changeDetectorRef.detectChanges();
-    });
-    this.layoutStore.isSidebarLeftExpandOnOver.subscribe((value: boolean) => {
+    }));
+    this.subscriptions.push(this.layoutStore.isSidebarLeftExpandOnOver.subscribe((value: boolean) => {
       this.isSidebarLeftExpandOnOver = value;
       this.changeDetectorRef.detectChanges();
-    });
-    this.layoutStore.isSidebarLeftMini.subscribe((value: boolean) => {
+    }));
+    this.subscriptions.push(this.layoutStore.isSidebarLeftMini.subscribe((value: boolean) => {
       this.isSidebarLeftMini = value;
       this.changeDetectorRef.detectChanges();
-    });
+    }));
   }
+
+  /**
+   * @method ngOnDestroy
+   */
+  ngOnDestroy() {
+    this.removeSubscriptions();
+  }
+
+  /**
+   * [removeListeners description]
+   * @method removeListeners
+   */
+  private removeSubscriptions(): void {
+    if(this.subscriptions) {
+      this.subscriptions.forEach((subscription: Subscriber<any>) => {
+        subscription.unsubscribe();
+      });
+    }
+    this.subscriptions = [];
+  }
+
 
   /**
    * [onLayoutChange description]
