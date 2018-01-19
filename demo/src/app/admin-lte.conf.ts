@@ -13,6 +13,7 @@ export var adminLteConf = {
     {label: 'Get Started', route: '/', iconClasses: 'fa fa-road'},
     {label: 'Layout', iconClasses: 'fa fa-th-list', children: [
       {label: 'Configuration', route: 'layout/configuration'},
+      {label: 'Disable', route: 'layout/disable'},
       {label: 'Header', route: 'layout/header'},
       {label: 'Sidebar Left', route: 'layout/sidebar-left'},
       {label: 'Sidebar Right', route: 'layout/sidebar-right'},
@@ -30,6 +31,6 @@ export var adminLteConf = {
     {label: 'Form', iconClasses: 'fa fa-files-o', children: [
       {label: 'Input Text', route: 'form/input-text'}
     ]},
-    {label: 'Tabs', route: 'tabs', iconClasses: 'fa fa-th'},
+    {label: 'Tabs', route: 'tabs', iconClasses: 'fa fa-th'}
   ]
 };

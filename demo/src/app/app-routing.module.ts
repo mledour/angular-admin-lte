@@ -17,7 +17,7 @@ const routes: Routes = [
       path: 'accordion',
       loadChildren: 'app/+accordion/accordion.module#AccordionModule',
       data: {
-        title: 'Accordion',
+        title: 'Accordion'
       }
     }, {
       path: 'alert',
@@ -36,6 +36,13 @@ const routes: Routes = [
           loadChildren: 'app/+layout/configuration/configuration.module#ConfigurationModule',
           data: {
             title: 'Configuration'
+          }
+        }, {
+          path: 'disable',
+          loadChildren: 'app/+layout/disable/disable.module#DisableModule',
+          data: {
+            title: 'Disable Layout'
+            //disableLayout: true
           }
         }, {
           path: 'content',
@@ -116,7 +123,19 @@ const routes: Routes = [
         }
       }
     ]
-  }
+  }, {
+    path: 'login',
+    loadChildren: 'app/+login/login.module#LoginModule',
+    data: {
+      disableLayout: true
+    }
+  }, {
+    path: 'register',
+    loadChildren: 'app/+register/register.module#RegisterModule',
+    data: {
+      disableLayout: true
+    }
+  },
 ];
 
 @NgModule({
