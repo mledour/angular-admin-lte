@@ -1,5 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, NgZone, OnInit, QueryList, Renderer2, ViewChild, ViewChildren, OnDestroy } from '@angular/core';
-import { NavigationStart, PRIMARY_OUTLET, Router, Event as RouterEvent } from '@angular/router';
+import { NavigationStart, NavigationEnd, PRIMARY_OUTLET, Router, Event as RouterEvent } from '@angular/router';
+
+import { RoutingService } from '../../routing.service';
 
 import { WrapperService } from '../wrapper/wrapper.service';
 import { HeaderService } from '../header/header.service';
@@ -69,6 +71,7 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     private ngZone: NgZone,
     private renderer2: Renderer2,
     private router: Router,
+    private routingService: RoutingService,
     private wrapperService: WrapperService,
     private headerService: HeaderService
   ) {}
@@ -77,7 +80,16 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
    * @method ngOnInit
    */
   ngOnInit() {
-    this.setMenuListeners();
+    this.subscriptions.push(this.layoutStore.sidebarLeftMenu.subscribe(value => {
+      this.menu = value;
+      this.monkeyPatchMenu(this.menu);
+    }));
+    this.subscriptions.push(this.routingService.events.subscribe((event: RouterEvent) => {
+      if(event instanceof NavigationEnd) {
+        this.setMenuListeners(event.url);
+      }
+    }));
+
     this.setSidebarListeners();
   }
 
@@ -188,29 +200,20 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
    * @method setMenuListeners
    * @return {[type]}         [description]
    */
-  setMenuListeners() {
-    this.subscriptions.push(this.router.events.subscribe((event: RouterEvent) => {
-      if(event instanceof NavigationStart) {
-        if(event.url === '/') {
-          this.activeItems(event.url);
-          this.changeDetectorRef.detectChanges();
-        } else {
-          let primaryOutlet = this.router.parseUrl(event.url).root.children[PRIMARY_OUTLET];
-          if(primaryOutlet) {
-            this.activeItems(primaryOutlet.toString());
-            this.changeDetectorRef.detectChanges();
-          }
-        }
-        if(this.windowInnerWidth <= 767 || this.isSidebarLeftExpandOnOver) {
-          this.layoutStore.sidebarLeftCollapsed(true);
-        }
+  setMenuListeners(url) {
+    if(url === '/') {
+      this.activeItems(url);
+      this.changeDetectorRef.detectChanges();
+    } else {
+      let primaryOutlet = this.router.parseUrl(url).root.children[PRIMARY_OUTLET];
+      if(primaryOutlet) {
+        this.activeItems(primaryOutlet.toString());
+        this.changeDetectorRef.detectChanges();
       }
-    }));
-
-    this.subscriptions.push(this.layoutStore.sidebarLeftMenu.subscribe(value => {
-      this.menu = value;
-      this.monkeyPatchMenu(this.menu);
-    }));
+    }
+    if(this.windowInnerWidth <= 767 || this.isSidebarLeftExpandOnOver) {
+      this.layoutStore.sidebarLeftCollapsed(true);
+    }
   }
 
   /**
