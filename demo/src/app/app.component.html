@@ -1,7 +1,7 @@
-<ng-container *ngIf="isLayoutDisabled else layoutEnabled">
+<ng-container *ngIf="customLayout else noCustomLayout">
   <router-outlet></router-outlet>
 </ng-container>
-<ng-template #layoutEnabled>
+<ng-template #noCustomLayout>
   <mk-layout-wrapper>
     <mk-layout-header>
       <mk-layout-header-logo><b>Angular </b>AdminLTE</mk-layout-header-logo>

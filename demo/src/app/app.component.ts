@@ -6,15 +6,15 @@ import { LayoutService } from '../../../src';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  public isLayoutDisabled: boolean;
+  public customLayout: boolean;
 
   constructor(
     private layoutService: LayoutService
   ) {}
 
   ngOnInit() {
-    this.layoutService.isLayoutDisabled.subscribe((value: boolean) => {
-      this.isLayoutDisabled = value;
+    this.layoutService.isCustomLayout.subscribe((value: boolean) => {
+      this.customLayout = value;
     });
   }
 }

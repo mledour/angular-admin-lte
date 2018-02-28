@@ -38,8 +38,8 @@ const routes: Routes = [
             title: 'Configuration'
           }
         }, {
-          path: 'disable',
-          loadChildren: 'app/+layout/disable/disable.module#DisableModule',
+          path: 'custom',
+          loadChildren: 'app/+layout/custom/custom.module#CustomModule',
           data: {
             title: 'Disable Layout'
             //disableLayout: true
@@ -127,13 +127,13 @@ const routes: Routes = [
     path: 'login',
     loadChildren: 'app/+login/login.module#LoginModule',
     data: {
-      disableLayout: true
+      customLayout: true
     }
   }, {
     path: 'register',
     loadChildren: 'app/+register/register.module#RegisterModule',
     data: {
-      disableLayout: true
+      customLayout: true
     }
   },
 ];

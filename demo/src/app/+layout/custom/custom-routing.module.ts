@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { DisableComponent } from './disable.component';
+import { CustomComponent } from './custom.component';
 
 const routes: Routes = [{
   path: '',
-  component: DisableComponent
+  component: CustomComponent
 }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DisableRoutingModule { }
+export class CustomRoutingModule { }

@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { DisableRoutingModule } from './disable-routing.module';
-import { DisableComponent } from './disable.component';
+import { CustomRoutingModule } from './custom-routing.module';
+import { CustomComponent } from './custom.component';
 
 import { BoxModule } from '../../../../../src';
 
@@ -11,9 +11,9 @@ import { BoxModule } from '../../../../../src';
   imports: [
     CommonModule,
     RouterModule,
-    DisableRoutingModule,
+    CustomRoutingModule,
     BoxModule
   ],
-  declarations: [DisableComponent]
+  declarations: [CustomComponent]
 })
-export class DisableModule { }
+export class CustomModule { }

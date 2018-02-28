@@ -3,11 +3,10 @@ import { Component, AfterViewInit } from '@angular/core';
 declare var Prism;
 
 @Component({
-  selector: 'app-disable',
-  templateUrl: './disable.component.html',
-  styleUrls: ['./disable.component.css']
+  templateUrl: './custom.component.html',
+  styleUrls: ['./custom.component.css']
 })
-export class DisableComponent implements AfterViewInit {
+export class CustomComponent implements AfterViewInit {
   /**
    * @method ngAfterViewInit
    */
