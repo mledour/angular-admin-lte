@@ -5,9 +5,9 @@ import { RoutingService } from '../routing.service';
 
 @Injectable()
 export class LayoutService {
-  public isLayoutDisabled: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  public isCustomLayout: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
-  private layoutDisabled: boolean;
+  private customLayout: boolean;
 
 
   /**
@@ -28,10 +28,10 @@ export class LayoutService {
   private init() {
     this.routingService.onChange.subscribe((value) => {
       if(value && value[value.length - 1]) {
-        if(this.layoutDisabled === undefined || this.layoutDisabled !== value[value.length - 1].data['disableLayout']) {
-          this.isLayoutDisabled.next(!!value[value.length - 1].data['disableLayout']);
+        if(this.customLayout === undefined || this.customLayout !== value[value.length - 1].data['disableLayout']) {
+          this.isCustomLayout.next(!!value[value.length - 1].data['customLayout']);
         }
-        this.layoutDisabled = value[value.length - 1].data['disableLayout'];
+        this.customLayout = value[value.length - 1].data['customLayout'];
       }
     });
   }
