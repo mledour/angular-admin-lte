@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRouteSnapshot, ActivatedRoute, PRIMARY_OUTLET } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRouteSnapshot, ActivatedRoute, PRIMARY_OUTLET, Event as RouterEvent  } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
@@ -25,6 +25,7 @@ export interface Paths extends Array<Path>{};
 @Injectable()
 export class RoutingService {
   public onChange: BehaviorSubject<Paths> = new BehaviorSubject(undefined);
+  public events: BehaviorSubject<RouterEvent> = new BehaviorSubject(undefined);
 
   /**
    * @method constructor
@@ -42,6 +43,8 @@ export class RoutingService {
    */
   private init(): void {
     this.router.events.subscribe(routeEvent => {
+      // https://github.com/angular/angular/issues/17473: event not fired anymore on load for routed component.
+      this.events.next(routeEvent);
       if(routeEvent instanceof NavigationEnd) {
         let route = this.router.routerState.root.snapshot,
           tmpUrl= '',
