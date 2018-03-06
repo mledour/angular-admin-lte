@@ -1,26 +1,43 @@
-import { Directive } from '@angular/core';
+import { Directive, Input, Renderer2, ElementRef, OnInit } from '@angular/core';
+
+import { ColorService } from '../../color/color.service';
+
+//@TODO create a service for managing class and styles dynamically
+//@TODO onFocus Color
 
 
-/*
- *
- */
 @Directive({
-  selector: 'mk-input-text-label'
+  selector: '[mkInputText]',
+  providers: [ColorService]
 })
-export class InputTextLabelDirective {}
+export class InputTextDirective implements OnInit {
+  private className = 'form-control';
 
-/*
- *
- */
-@Directive({
-  selector: 'mk-input-text-addon-left'
-})
-export class InputTextAddonLeftDirective {}
+  @Input() set borderColor(color: string) {
+    this.colorService.setBackgroundColor(color, true, 'border-color', null);
+  }
+  @Input() set class(className: string) {
+    if(className === undefined) {
+      className = this.className;
+    }
+  }
+  @Input() set color(color: string) {
+    this.colorService.setFontColor(color);
+  }
+  @Input() value: any;
 
-/*
- *
- */
-@Directive({
-  selector: 'mk-input-text-addon-right'
-})
-export class InputTextAddonRightDirective {}
+  constructor(
+    public elementRef: ElementRef,
+    public renderer2: Renderer2,
+    private colorService: ColorService
+  ) {}
+
+
+  ngOnInit() {
+    this.applyClassName();
+  }
+
+  applyClassName() {
+    this.renderer2.addClass(this.elementRef.nativeElement, this.className);
+  }
+}
