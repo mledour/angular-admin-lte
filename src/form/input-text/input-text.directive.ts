@@ -1,6 +1,7 @@
 import { Directive, Input, Renderer2, ElementRef, OnInit } from '@angular/core';
 
 import { ColorService } from '../../color/color.service';
+import { ClassService } from '../../class.service';
 
 //@TODO create a service for managing class and styles dynamically
 //@TODO onFocus Color
@@ -8,18 +9,18 @@ import { ColorService } from '../../color/color.service';
 
 @Directive({
   selector: '[mkInputText]',
-  providers: [ColorService]
+  providers: [ColorService, ClassService]
 })
 export class InputTextDirective implements OnInit {
-  private className = 'form-control';
+  private defaultClass = 'form-control';
+  private isSetClass: boolean;
 
   @Input() set borderColor(color: string) {
     this.colorService.setBackgroundColor(color, true, 'border-color', null);
   }
   @Input() set class(className: string) {
-    if(className === undefined) {
-      className = this.className;
-    }
+    this.isSetClass = true;
+    this.classService.applyClasses(className);
   }
   @Input() set color(color: string) {
     this.colorService.setFontColor(color);
@@ -29,15 +30,13 @@ export class InputTextDirective implements OnInit {
   constructor(
     public elementRef: ElementRef,
     public renderer2: Renderer2,
-    private colorService: ColorService
+    private colorService: ColorService,
+    private classService: ClassService
   ) {}
 
-
   ngOnInit() {
-    this.applyClassName();
-  }
-
-  applyClassName() {
-    this.renderer2.addClass(this.elementRef.nativeElement, this.className);
+    if(!this.isSetClass) {
+      this.classService.applyClasses(this.defaultClass);
+    }
   }
 }
