@@ -6,12 +6,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InputTextComponent implements OnInit {
   public test: string = '';
+  public classes = 'gogo toto';
   constructor() { }
 
   ngOnInit() {
+
   }
 
   onChange($event) {
-    console.log($event);
+    //console.log($event);
   }
 }

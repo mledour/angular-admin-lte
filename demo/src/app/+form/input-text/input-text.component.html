@@ -1,16 +1,88 @@
-<p>
-  Input {{test}}
-</p>
-
-<form>
-  <div class="row">
-    <mk-input-text name="name" [(ngModel)]="test" #name="ngModel" (ngModelChange)="onChange($event)" addonLeftIcon="fa fa-envelope" addonRight="$" #name="ngModel" minlength="4" maxlength="5" required size="large" placeholder="toto" wrapperClasses="col-xs-3 form-group">
-      <mk-input-text-label><i class="fa fa-bell-o"></i> Input with warning</mk-input-text-label>
-      <mk-input-text-addon-left>$</mk-input-text-addon-left>
-    </mk-input-text>
+<mk-input-group>
+  <mk-input-group-label>Input icons</mk-input-group-label>
+  <mk-input-group-addon-left><i class="fa fa-warning"></i></mk-input-group-addon-left>
+  <mk-input-group-addon-right><i class="fa fa-check"></i></mk-input-group-addon-right>
+  <mk-input-group-content><input mkInputText value="toto" class="toto form-control"/></mk-input-group-content>
+</mk-input-group>
+<!--<div class="row">
+  <div class="col-md-4 col-xs-12">
+    <mk-box [isCollapsable]="false" [isRemovable]="false" header="Basic Input">
+      <mk-input-text name="input-name" [(ngModel)]="test" #name="ngModel" (ngModelChange)="onChange($event)" #name="ngModel" minlength="4" maxlength="5" required placeholder="placeholder">
+        <mk-input-text-label>Input label {{test}}</mk-input-text-label>
+      </mk-input-text>
+    </mk-box>
   </div>
-</form>
+  <div class="col-md-4 col-xs-12">
+    <mk-box [isCollapsable]="false" [isRemovable]="false" header="Input with addons">
+      <mk-input-text name="name" [(ngModel)]="test" #name="ngModel" (ngModelChange)="onChange($event)" addonLeft="@" addonRight="$" #name="ngModel" minlength="4" maxlength="5" required placeholder="toto">
+        <mk-input-text-label>Input addons</mk-input-text-label>
+      </mk-input-text>
+    </mk-box>
+  </div>
+  <div class="col-md-4 col-xs-12">
+    <mk-box [isCollapsable]="false" [isRemovable]="false" header="Input with icons">
+      <mk-input-text name="name" [(ngModel)]="test" #name="ngModel" (ngModelChange)="onChange($event)" #name="ngModel" minlength="4" maxlength="5" required placeholder="toto">
+        <mk-input-text-label>Input icons</mk-input-text-label>
+        <mk-input-text-addon-left><i class="fa fa-warning"></i></mk-input-text-addon-left>
+        <mk-input-text-addon-right><i class="fa fa-check"></i></mk-input-text-addon-right>
+      </mk-input-text>
+    </mk-box>
+  </div>
+</div>
 
+<div class="row">
+  <div class="col-md-12">
+    <mk-box [isCollapsable]="false" [isRemovable]="false" header="Input width">
+      <mk-input-text name="input-name" [(ngModel)]="test" #name="ngModel" (ngModelChange)="onChange($event)" #name="ngModel" minlength="4" maxlength="5" required wrapperClasses="col-xs-6 form-group" placeholder="placeholder">
+        <mk-input-text-label>Input label {{test}}</mk-input-text-label>
+      </mk-input-text>
+      <mk-input-text name="input-name" [(ngModel)]="test" #name="ngModel" (ngModelChange)="onChange($event)" #name="ngModel" minlength="4" maxlength="5" required wrapperClasses="col-xs-4 form-group" placeholder="placeholder">
+        <mk-input-text-label>Input label {{test}}</mk-input-text-label>
+        <mk-input-text-addon-left><i class="fa fa-warning"></i></mk-input-text-addon-left>
+      </mk-input-text>
+      <mk-input-text name="input-name" [(ngModel)]="test" #name="ngModel" (ngModelChange)="onChange($event)" #name="ngModel" minlength="4" maxlength="5" required wrapperClasses="col-xs-2 form-group" placeholder="placeholder">
+        <mk-input-text-label>Input label {{test}}</mk-input-text-label>
+      </mk-input-text>
+    </mk-box>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4 col-xs-12">
+    <mk-box [isCollapsable]="false" [isRemovable]="false" header="Basic Input">
+      <mk-input-text name="input-name" [(ngModel)]="test" #name="ngModel" (ngModelChange)="onChange($event)" #name="ngModel" minlength="4" maxlength="5" size="large" required placeholder="placeholder">
+        <mk-input-text-label>Large input {{test}}</mk-input-text-label>
+      </mk-input-text>
+    </mk-box>
+  </div>
+  <div class="col-md-4 col-xs-12">
+    <mk-box [isCollapsable]="false" [isRemovable]="false" header="Input with addons">
+      <mk-input-text name="input-name" [(ngModel)]="test" #name="ngModel" (ngModelChange)="onChange($event)" #name="ngModel" minlength="4" maxlength="5" required placeholder="placeholder">
+        <mk-input-text-label>Default input {{test}}</mk-input-text-label>
+        <mk-input-text-addon-left><i class="fa fa-warning"></i></mk-input-text-addon-left>
+      </mk-input-text>
+    </mk-box>
+  </div>
+  <div class="col-md-4 col-xs-12">
+    <mk-box [isCollapsable]="false" [isRemovable]="false" header="Input with icons">
+      <mk-input-text name="input-name" [(ngModel)]="test" #name="ngModel" (ngModelChange)="onChange($event)" #name="ngModel" minlength="4" maxlength="5" size="small" required placeholder="placeholder">
+        <mk-input-text-label>Small Input {{test}}</mk-input-text-label>
+      </mk-input-text>
+    </mk-box>
+  </div>
+</div>
+
+
+<mk-box>
+  <form>
+    <div class="row">
+      <mk-input-text name="name" [(ngModel)]="test" #name="ngModel" (ngModelChange)="onChange($event)" addonRight="$" #name="ngModel" minlength="4" maxlength="5" required size="large" placeholder="toto" wrapperClasses="col-xs-3 form-group">
+        <mk-input-text-label>Input with warning</mk-input-text-label>
+        <mk-input-text-addon-left><i class="fa fa-warning"></i></mk-input-text-addon-left>
+      </mk-input-text>
+    </div>
+  </form>
+</mk-box>
 <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
   <div *ngIf="name.errors.required">
     Name is required.
@@ -21,4 +93,4 @@
   <div *ngIf="name.errors.maxlength">
     Name must be less than 6 characters long.
   </div>
-</div>
+</div>-->
