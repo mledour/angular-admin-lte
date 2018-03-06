@@ -5,14 +5,16 @@ import { FormsModule } from '@angular/forms';
 import { InputTextRoutingModule } from './input-text-routing.module';
 import { InputTextComponent } from './input-text.component';
 
-import { InputTextModule as mkInputTextModule } from '../../../../../src';
+import { InputGroupModule, InputTextModule as mkInputTextModule, BoxModule } from '../../../../../src';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    BoxModule,
     InputTextRoutingModule,
-    mkInputTextModule
+    mkInputTextModule,
+    InputGroupModule
   ],
   declarations: [InputTextComponent]
 })
