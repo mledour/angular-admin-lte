@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRouteSnapshot, ActivatedRoute, PRIMARY_OUTLET, Event as RouterEvent  } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRouteSnapshot, ActivatedRoute, PRIMARY_OUTLET, Event as RouterEvent } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
