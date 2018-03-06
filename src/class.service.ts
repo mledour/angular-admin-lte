@@ -4,8 +4,8 @@ import { Injectable, Renderer2, ElementRef } from '@angular/core';
  *
  */
 @Injectable()
-export class StyleService {
-  private currentStyles = [];
+export class ClassService {
+  private currentClasses: Array<string> = [];
 
   constructor(
     private elementRef: ElementRef,
@@ -13,24 +13,28 @@ export class StyleService {
   ) {}
 
 
-  public applyClasses(styles: Array<any>): void {
-    styles.forEach(style => {
-      this.applyStyle(style.style, style.value);
-    });
-  }
-
-
-  public applyStyle(style: string, value: any): void {
-    if(style && value) {
-      this.resetStyles();
-      this.currentStyles.push(style);
-      this.renderer2.setStyle(this.elementRef.nativeElement, style, value);
+  public applyClasses(cssClasses: string | Array<string>): void {
+    if(typeof cssClasses === 'string') {
+      cssClasses = cssClasses.split(' ');
     }
-  }
 
-  public resetStyles(): void {
-    this.currentStyles.forEach(style => {
-      this.renderer2.removeStyle(this.elementRef, style);
+    // Remove only classes that are not in cssClasses
+    let classesToRemove = this.currentClasses.filter(x => !cssClasses.includes(x));
+    classesToRemove.forEach(cssClass => {
+      if(cssClass) {
+        this.renderer2.removeClass(this.elementRef.nativeElement, cssClass);
+      }
     });
+
+    // Add only classes that are not in currentClasses
+    let classesToAdd = cssClasses.filter(x => !this.currentClasses.includes(x));
+    classesToAdd.forEach(cssClass => {
+      if(cssClass) {
+        this.renderer2.addClass(this.elementRef.nativeElement, cssClass);
+      }
+    });
+
+    // Update current classes for futur updates
+    this.currentClasses = [... cssClasses];
   }
 }
