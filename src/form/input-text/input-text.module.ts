@@ -4,8 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { ColorModule } from '../../color/color.module';
 
-import { InputTextComponent } from './input-text.component';
-import { InputTextLabelDirective, InputTextAddonLeftDirective, InputTextAddonRightDirective } from './input-text.directive';
+import { InputTextDirective } from './input-text.directive';
 
 @NgModule({
   imports: [
@@ -13,7 +12,7 @@ import { InputTextLabelDirective, InputTextAddonLeftDirective, InputTextAddonRig
     ColorModule,
     FormsModule
   ],
-  exports: [InputTextComponent, InputTextLabelDirective, InputTextAddonLeftDirective, InputTextAddonRightDirective],
-  declarations: [InputTextComponent, InputTextLabelDirective, InputTextAddonLeftDirective, InputTextAddonRightDirective]
+  exports: [InputTextDirective],
+  declarations: [InputTextDirective]
 })
 export class InputTextModule {}
