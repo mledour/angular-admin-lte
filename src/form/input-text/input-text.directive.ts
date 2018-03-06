@@ -3,9 +3,7 @@ import { Directive, Input, Renderer2, ElementRef, OnInit } from '@angular/core';
 import { ColorService } from '../../color/color.service';
 import { ClassService } from '../../class.service';
 
-//@TODO create a service for managing class and styles dynamically
 //@TODO onFocus Color
-
 
 @Directive({
   selector: '[mkInputText]',
@@ -27,6 +25,13 @@ export class InputTextDirective implements OnInit {
   }
   @Input() value: any;
 
+  /**
+   * @method constructor
+   * @param  elementRef   [description]
+   * @param  renderer2    [description]
+   * @param  colorService [description]
+   * @param  classService [description]
+   */
   constructor(
     public elementRef: ElementRef,
     public renderer2: Renderer2,
@@ -34,6 +39,9 @@ export class InputTextDirective implements OnInit {
     private classService: ClassService
   ) {}
 
+  /**
+   * @method ngOnInit
+   */
   ngOnInit() {
     if(!this.isSetClass) {
       this.classService.applyClasses(this.defaultClass);
