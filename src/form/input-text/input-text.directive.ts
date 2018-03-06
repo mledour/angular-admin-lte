@@ -1,7 +1,7 @@
 import { Directive, Input, Renderer2, ElementRef, OnInit } from '@angular/core';
 
 import { ColorService } from '../../color/color.service';
-import { ClassService } from '../../class.service';
+import { ClassService } from '../../services/class.service';
 
 //@TODO onFocus Color
 

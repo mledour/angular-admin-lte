@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, NgZone, OnInit, QueryList, Renderer2, ViewChild, ViewChildren, OnDestroy } from '@angular/core';
 import { NavigationEnd, PRIMARY_OUTLET, Router, Event as RouterEvent } from '@angular/router';
 
-import { RoutingService } from '../../routing.service';
+import { RoutingService } from '../../services/routing.service';
 
 import { WrapperService } from '../wrapper/wrapper.service';
 import { HeaderService } from '../header/header.service';

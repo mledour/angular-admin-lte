@@ -4,7 +4,7 @@ import { Title } from '@angular/platform-browser';
 
 import { LayoutStore } from '../layout.store';
 
-import { RoutingService } from '../../routing.service';
+import { RoutingService } from '../../services/routing.service';
 import { SidebarRightService } from '../sidebar-right/sidebar-right.service';
 import { HeaderService } from '../header/header.service';
 import { FooterService } from '../footer/footer.service';
