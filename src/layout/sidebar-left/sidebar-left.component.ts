@@ -156,12 +156,13 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.subscriptions.push(this.layoutStore.isSidebarLeftExpandOnOver.subscribe((value: boolean) => {
       this.isSidebarLeftExpandOnOver = value;
-      if(this.windowInnerWidth > 767) {
+      if(this.windowInnerWidth > 767 && this.isSidebarLeftCollapsed !== undefined) {
         this.layoutStore.sidebarLeftCollapsed(value);
       }
     }));
 
     this.subscriptions.push(this.layoutStore.isSidebarLeftCollapsed.subscribe((value: boolean) => {
+      this.isSidebarLeftCollapsed = value;
       if(this.windowInnerWidth <= 767) {
         if(value) {
           this.renderer2.removeClass(this.wrapperService.wrapperElementRef.nativeElement, 'sidebar-open');
