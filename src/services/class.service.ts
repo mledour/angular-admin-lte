@@ -19,18 +19,18 @@ export class ClassService {
     }
 
     // Remove only classes that are not in cssClasses
-    let classesToRemove = this.currentClasses.filter(x => !cssClasses.includes(x));
-    classesToRemove.forEach(cssClass => {
-      if(cssClass) {
-        this.renderer2.removeClass(this.elementRef.nativeElement, cssClass);
+    let classesToRemove = this.currentClasses.filter(x => cssClasses.indexOf(x) === -1);
+    classesToRemove.forEach(cssClasses => {
+      if(cssClasses) {
+        this.renderer2.removeClass(this.elementRef.nativeElement, cssClasses);
       }
     });
 
     // Add only classes that are not in currentClasses
-    let classesToAdd = cssClasses.filter(x => !this.currentClasses.includes(x));
-    classesToAdd.forEach(cssClass => {
-      if(cssClass) {
-        this.renderer2.addClass(this.elementRef.nativeElement, cssClass);
+    let classesToAdd = cssClasses.filter(x => this.currentClasses.indexOf(x) === -1);
+    classesToAdd.forEach(cssClasses => {
+      if(cssClasses) {
+        this.renderer2.addClass(this.elementRef.nativeElement, cssClasses);
       }
     });
 
