@@ -257,6 +257,7 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
   private uncollapseItemParents(item: Item, isActive = false): void {
     if(isActive) {
       item.isActive = true;
+      this.activatedItems.push(item);
     }
     item.isCollapsed = false;
     this.collapsedItems.push(item);
