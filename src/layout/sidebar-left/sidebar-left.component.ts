@@ -22,6 +22,7 @@ export interface Item {
   children?: Array<Item>;
   isActive?: boolean;
   isCollapsed?: boolean;
+  disableCollapse?: boolean;
 }
 
 export type Items = Array<Item>;
@@ -322,7 +323,9 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
       if(parentId) {
         item.parentId = parentId;
       }
-      item.isCollapsed = true;
+      if(!item.disableCollapse) {
+        item.isCollapsed = true;
+      }
       item.isActive = false;
       if(parentId || item.children) {
         this.itemsByIds[item.id] = item;
@@ -345,7 +348,9 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
           event.preventDefault();
           if(menuToggle.item.isCollapsed) {
             this.collapsedItems.forEach((item: Item) => {
-              item.isCollapsed = true;
+              if(!item.disableCollapse) {
+                item.isCollapsed = true;
+              }
             });
             this.collapsedItems = [];
             this.uncollapseItemParents(menuToggle.item);
