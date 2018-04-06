@@ -85,6 +85,9 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
       this.menu = value;
       this.monkeyPatchMenu(this.menu);
     }));
+    this.subscriptions.push(this.layoutStore.sidebarLeftMenuActiveUrl.subscribe(value => {
+      this.setMenuListeners(value);
+    }));
     this.subscriptions.push(this.routingService.events.subscribe((event: RouterEvent) => {
       if(event instanceof NavigationEnd) {
         this.setMenuListeners(event.url);

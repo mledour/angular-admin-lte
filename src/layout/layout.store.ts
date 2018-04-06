@@ -23,6 +23,7 @@ export class LayoutStore {
     isSidebarRightOverContent: true,
     layout: 'normal',
     sidebarLeftMenu: [],
+    sidebarLeftMenuActiveUrl: '',
     skin: 'blue',
   };
 
@@ -124,6 +125,15 @@ export class LayoutStore {
    */
   get sidebarLeftMenu(): Observable<Array<any>> {
     return <Observable<Array<any>>>this.layoutState.pluck('sidebarLeftMenu').distinctUntilChanged();
+  }
+
+  /**
+   * [sidebarLeftMenuActiveUrl description]
+   * @method sidebarLeftMenuActiveUrl
+   * @return {Observable}    [description]
+   */
+  get sidebarLeftMenuActiveUrl(): Observable<string> {
+    return <Observable<string>>this.layoutState.pluck('sidebarLeftMenuActiveUrl').distinctUntilChanged();
   }
 
   /**
@@ -253,11 +263,22 @@ export class LayoutStore {
   /**
    * [setSidebarLeftMenu description]
    * @method setSidebarLeftMenu
-   * @param  {string}           value [description]
+   * @param  {Array<any>}           value [description]
    */
   public setSidebarLeftMenu(value: Array<any>): void {
     this._layoutState.next(
       Object.assign(this._layoutState.value, {sidebarLeftMenu: value})
+    );
+  }
+
+  /**
+   * [setSidebarLeftMenuActiveUrl description]
+   * @method setSidebarLeftMenuActiveUrl
+   * @param  {string}           value [description]
+   */
+  public setSidebarLeftMenuActiveUrl(value: string): void {
+    this._layoutState.next(
+      Object.assign(this._layoutState.value, {sidebarLeftMenuActiveUrl: value})
     );
   }
 
