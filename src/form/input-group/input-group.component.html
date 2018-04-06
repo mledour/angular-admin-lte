@@ -1,0 +1,18 @@
+<div [ngClass]="wrapperClasses" [mkColor]="inputColor" mkColorPrefix="has">
+  <label *ngIf="label || inputGroupLabelDirective" for="{{id}}">
+    {{label}}
+    <ng-content select="mk-input-group-label"></ng-content>
+  </label>
+  <div *ngIf="addonLeft || inputGroupAddonLeftDirective || addonRight || inputGroupAddonRightDirective else noAddon" class="input-group">
+    <span *ngIf="addonLeft || inputGroupAddonLeftDirective" class="input-group-addon" [mkColor]="inputColor" mkColorProperty="border-color">
+      {{addonLeft}}
+      <ng-content select="mk-input-group-addon-left"></ng-content>
+    </span>
+    <ng-content select="mk-input-group-content"></ng-content>
+    <span *ngIf="addonRight || inputGroupAddonRightDirective" class="input-group-addon" [mkColor]="inputColor" mkColorProperty="border-color">
+      {{addonRight}}
+      <ng-content select="mk-input-group-addon-right"></ng-content>
+    </span>
+  </div>
+  <ng-template #noAddon><ng-content select="mk-input-group-content"></ng-content></ng-template>
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef } from "@angular/core";
 import { Subscription } from 'rxjs/Subscription';
 
-import { RoutingService } from '../routing.service';
+import { RoutingService } from '../services/routing.service';
 
 /*
  *

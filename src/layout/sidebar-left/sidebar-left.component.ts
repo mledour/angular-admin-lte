@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, NgZone, OnInit, QueryList, Renderer2, ViewChild, ViewChildren, OnDestroy } from '@angular/core';
 import { NavigationEnd, PRIMARY_OUTLET, Router, Event as RouterEvent } from '@angular/router';
 
-import { RoutingService } from '../../routing.service';
+import { RoutingService } from '../../services/routing.service';
 
 import { WrapperService } from '../wrapper/wrapper.service';
 import { HeaderService } from '../header/header.service';
@@ -22,6 +22,7 @@ export interface Item {
   children?: Array<Item>;
   isActive?: boolean;
   isCollapsed?: boolean;
+  disableCollapse?: boolean;
 }
 
 export type Items = Array<Item>;
@@ -83,6 +84,9 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptions.push(this.layoutStore.sidebarLeftMenu.subscribe(value => {
       this.menu = value;
       this.monkeyPatchMenu(this.menu);
+    }));
+    this.subscriptions.push(this.layoutStore.sidebarLeftMenuActiveUrl.subscribe(value => {
+      this.setMenuListeners(value);
     }));
     this.subscriptions.push(this.routingService.events.subscribe((event: RouterEvent) => {
       if(event instanceof NavigationEnd) {
@@ -257,6 +261,7 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
   private uncollapseItemParents(item: Item, isActive = false): void {
     if(isActive) {
       item.isActive = true;
+      this.activatedItems.push(item);
     }
     item.isCollapsed = false;
     this.collapsedItems.push(item);
@@ -321,7 +326,9 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
       if(parentId) {
         item.parentId = parentId;
       }
-      item.isCollapsed = true;
+      if(!item.disableCollapse) {
+        item.isCollapsed = true;
+      }
       item.isActive = false;
       if(parentId || item.children) {
         this.itemsByIds[item.id] = item;
@@ -344,7 +351,9 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
           event.preventDefault();
           if(menuToggle.item.isCollapsed) {
             this.collapsedItems.forEach((item: Item) => {
-              item.isCollapsed = true;
+              if(!item.disableCollapse) {
+                item.isCollapsed = true;
+              }
             });
             this.collapsedItems = [];
             this.uncollapseItemParents(menuToggle.item);

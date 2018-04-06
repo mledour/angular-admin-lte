@@ -14,7 +14,7 @@ import { LayoutStore } from './layout.store';
 import { LayoutState } from './layout.state';
 import { layoutProvider } from './layout.provider';
 
-import { RoutingService } from '../routing.service';
+import { RoutingService } from '../services/routing.service';
 import { WrapperService } from './wrapper/wrapper.service';
 import { SidebarRightService } from './sidebar-right/sidebar-right.service';
 import { HeaderService } from './header/header.service';

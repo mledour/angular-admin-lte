@@ -1,6 +1,6 @@
 {
   "name": "angular-admin-lte",
-  "version": "0.3.8",
+  "version": "0.4.0",
   "keywords": [
     "angular",
     "angular 4",
@@ -16,20 +16,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:lib": "ng-packagr -p ng-packagr.json"
+    "build:lib": "ng-packagr -p ng-package.json"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/mika-el/angular-admin-lte.git"
-  },
-  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
-  "ngPackage": {
-    "src": "src",
-    "dest": "dist",
-    "workingDirectory": ".ng_build",
-    "lib": {
-      "entryFile": "index.ts"
-    }
   },
   "private": false,
   "dependencies": {
@@ -69,7 +60,7 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "ng-packagr": "^1.6.0",
+    "ng-packagr": "^1.5.2",
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",

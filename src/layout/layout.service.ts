@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { RoutingService } from '../routing.service';
+import { RoutingService } from '../services/routing.service';
 
 @Injectable()
 export class LayoutService {

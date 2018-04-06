@@ -28,9 +28,9 @@ export var adminLteConf = {
       {label: 'Small Box', route: 'boxs/small-box'}
     ]},
     {label: 'Dropdown', route: 'dropdown', iconClasses: 'fa fa-arrows-v'},
-    //{label: 'Form', iconClasses: 'fa fa-files-o', children: [
-      //{label: 'Input Text', route: 'form/input-text'}
-    //]},
+    {label: 'Form', iconClasses: 'fa fa-files-o', children: [
+      {label: 'Input Text', route: 'form/input-text'}
+    ]},
     {label: 'Tabs', route: 'tabs', iconClasses: 'fa fa-th'}
   ]
 };
