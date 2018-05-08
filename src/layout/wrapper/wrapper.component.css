@@ -6,6 +6,10 @@
   color: #fff;
 }
 
+:host.sidebar-mini.sidebar-collapse /deep/ .treeview-menu.collapsing {
+  height: auto !important;
+}
+
 :host /deep/ .sidebar-right-toggle > a:hover {
   background: rgba(0, 0, 0, 0.1);
 }
