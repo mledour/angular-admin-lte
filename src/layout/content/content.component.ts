@@ -23,7 +23,7 @@ export class ContentComponent implements OnInit {
   public heightStyle: number;
   public sidebarLeftHeight: number;
   public sidebarRightHeight: number;
-  public windowInnerHeight: number
+  public windowInnerHeight: number;
 
   private layout: string;
   private titleTag: string;

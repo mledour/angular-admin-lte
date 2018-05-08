@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 
-import { Subscriber } from 'rxjs/Subscriber';
+import {Subscriber} from 'rxjs/Subscriber';
 
-import { LayoutStore } from '../../../../../src';
+import {LayoutStore} from '../../../../../src';
 
 @Component({
   selector: 'app-sidebar-right-inner',
@@ -95,5 +95,4 @@ export class SidebarRightInnerComponent implements OnInit, OnDestroy {
       this.layoutStore.setSidebarRightSkin('dark');
     }
   }
-
 }
