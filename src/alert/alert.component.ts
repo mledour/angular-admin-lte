@@ -46,10 +46,10 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
 
   /**
    * @method constructor
-   * @param  {ChangeDetectorRef} privatechangeDetectorRef [description]
-   * @param  {NgZone}            privatengZone            [description]
-   * @param  {Renderer2}         privaterenderer2         [description]
-   * @param  {ViewContainerRef}  privateviewContainer     [description]
+   * @param  private changeDetectorRef [description]
+   * @param  private ngZone            [description]
+   * @param  private renderer2         [description]
+   * @param  private viewContainer     [description]
    */
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -90,7 +90,7 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
   /**
    * [collapseStart description]
    * @method collapseStart
-   * @param  {AnimationEvent} event [description]
+   * @param event [description]
    */
   public collapseStart(event: AnimationEvent): void {
     this.onCollapseStart.emit(event);
@@ -99,7 +99,7 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
   /**
    * [collapseDone description]
    * @method collapseDone
-   * @param  {AnimationEvent} event [description]
+   * @param event [description]
    */
   public collapseDone(event: AnimationEvent): void {
     if(event.toState === '1') {

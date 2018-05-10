@@ -7,7 +7,7 @@ export class SidebarRightService {
   /**
    * [offsetHeight description]
    * @method offsetHeight
-   * @return {number}     [description]
+   * @return [description]
    */
   get offsetHeight(): number {
     return this.elementRef ? this.elementRef.nativeElement.offsetHeight: null;
@@ -16,7 +16,7 @@ export class SidebarRightService {
   /**
    * [scrollHeight description]
    * @method scrollHeight
-   * @return {number}     [description]
+   * @return [description]
    */
   get scrollHeight(): number {
     return this.elementRef ? this.elementRef.nativeElement.scrollHeight: null;

@@ -1,11 +1,8 @@
 import { Component, OnInit, AfterViewInit, Input, ViewChild, Renderer2, ElementRef, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 import { WrapperService } from '../wrapper/wrapper.service';
-
 import { LayoutStore } from '../layout.store';
-
 import { SidebarRightService } from './sidebar-right.service';
-
 import { removeSubscriptions, removeListeners } from '../../helpers';
 
 @Component({
@@ -20,7 +17,6 @@ export class SidebarRightComponent implements OnInit, AfterViewInit, OnDestroy {
   public sidebarHeight: number;
 
   private skin: string;
-  private windowInnerHeight: number;
   private isSidebarRightOverContent: boolean;
   private isSidebarRightCollapsed: boolean;
   private listeners = [];
@@ -44,14 +40,14 @@ export class SidebarRightComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.subscriptions.push(this.layoutStore.isSidebarRightCollapsed.subscribe(value => {
       this.isSidebarRightCollapsed = value;
-      if(!value) {
+      if (!value) {
         this.renderer2.addClass(this.elementRef.nativeElement, 'control-sidebar-open');
-        if(!this.isSidebarRightOverContent) {
+        if (!this.isSidebarRightOverContent) {
           this.renderer2.addClass(this.wrapperService.wrapperElementRef.nativeElement, 'control-sidebar-open');
         }
       } else {
         this.renderer2.removeClass(this.elementRef.nativeElement, 'control-sidebar-open');
-        if(!this.isSidebarRightOverContent) {
+        if (!this.isSidebarRightOverContent) {
           this.renderer2.removeClass(this.wrapperService.wrapperElementRef.nativeElement, 'control-sidebar-open');
         }
       }
@@ -59,8 +55,8 @@ export class SidebarRightComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.subscriptions.push(this.layoutStore.isSidebarRightOverContent.subscribe((value: boolean) => {
       this.isSidebarRightOverContent = value;
-      if(!this.isSidebarRightCollapsed) {
-        if(value) {
+      if (!this.isSidebarRightCollapsed) {
+        if (value) {
           this.renderer2.removeClass(this.wrapperService.wrapperElementRef.nativeElement, 'control-sidebar-open');
         } else {
           this.renderer2.addClass(this.wrapperService.wrapperElementRef.nativeElement, 'control-sidebar-open');
@@ -69,7 +65,7 @@ export class SidebarRightComponent implements OnInit, AfterViewInit, OnDestroy {
     }));
 
     this.subscriptions.push(this.layoutStore.sidebarRightSkin.subscribe((value: string) => {
-      if(this.skin !== value) {
+      if (this.skin !== value) {
         this.renderer2.removeClass(this.elementRef.nativeElement, `control-sidebar-${this.skin}`);
       }
       this.skin = value;

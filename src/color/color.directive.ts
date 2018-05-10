@@ -10,9 +10,9 @@ import { ColorService } from './color.service';
 export class BackgroundColorDirective {
   /**
    * @method constructor
-   * @param  elementRef   [description]
-   * @param  renderer2    [description]
-   * @param  colorService [description]
+   * @param private elementRef   [description]
+   * @param private renderer2    [description]
+   * @param private colorService [description]
    */
   constructor(
     private elementRef: ElementRef,
@@ -35,9 +35,9 @@ export class BackgroundColorDirective {
 export class ColorDirective {
   /**
    * @method constructor
-   * @param  elementRef   [description]
-   * @param  renderer2    [description]
-   * @param  colorService [description]
+   * @param private elementRef   [description]
+   * @param private renderer2    [description]
+   * @param private colorService [description]
    */
   constructor(
     private elementRef: ElementRef,

@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 
-import {Subscriber} from 'rxjs/Subscriber';
+import {Subscriber} from 'rxjs';
 
 import {LayoutStore} from '../../../../../src';
 

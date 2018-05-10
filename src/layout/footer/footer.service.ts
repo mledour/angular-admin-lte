@@ -7,7 +7,7 @@ export class FooterService {
   /**
    * [offsetHeight description]
    * @method offsetHeight
-   * @return {number}     [description]
+   * @return [description]
    */
   public get offsetHeight(): number {
     return this.elementRef.nativeElement.offsetHeight;

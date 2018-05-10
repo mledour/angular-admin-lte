@@ -59,12 +59,12 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /**
    * @method constructor
-   * @param  {ChangeDetectorRef} privatechangeDetectorRef [description]
-   * @param  {LayoutStore}       privatelayoutStore       [description]
-   * @param  {LayoutService}     privatelayoutService     [description]
-   * @param  {NgZone}            privatengZone            [description]
-   * @param  {Renderer2}         privaterenderer2         [description]
-   * @param  {Router}            privaterouter            [description]
+   * @param  private changeDetectorRef [description]
+   * @param  private layoutStore       [description]
+   * @param  private layoutService     [description]
+   * @param  private ngZone            [description]
+   * @param  private renderer2         [description]
+   * @param  private router            [description]
    */
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -89,7 +89,7 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
       this.setMenuListeners(value);
     }));
     this.subscriptions.push(this.routingService.events.subscribe((event: RouterEvent) => {
-      if(event instanceof NavigationEnd) {
+      if (event instanceof NavigationEnd) {
         this.setMenuListeners(event.url);
       }
     }));
@@ -144,47 +144,47 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.subscriptions.push(this.layoutStore.windowInnerWidth.subscribe((value: number) => {
       this.windowInnerWidth = value;
-      if(!this.isSidebarLeftCollapsed && this.windowInnerWidth <= 767) {
+      if (!this.isSidebarLeftCollapsed && this.windowInnerWidth <= 767) {
         this.layoutStore.sidebarLeftCollapsed(true);
-      } else if(this.windowInnerWidth > 767 && this.isSidebarLeftCollapsed && !this.isSidebarLeftExpandOnOver) {
+      } else if (this.windowInnerWidth > 767 && this.isSidebarLeftCollapsed && !this.isSidebarLeftExpandOnOver) {
         this.layoutStore.sidebarLeftCollapsed(false);
       }
     }));
 
     this.subscriptions.push(this.layoutStore.isSidebarLeftMouseOver.subscribe((value: boolean) => {
       this.isSidebarLeftMouseOver = value;
-      if(this.isSidebarLeftExpandOnOver) {
+      if (this.isSidebarLeftExpandOnOver) {
         this.layoutStore.sidebarLeftCollapsed(!value);
       }
     }));
 
     this.subscriptions.push(this.layoutStore.isSidebarLeftExpandOnOver.subscribe((value: boolean) => {
       this.isSidebarLeftExpandOnOver = value;
-      if(this.windowInnerWidth > 767 && this.isSidebarLeftCollapsed !== undefined) {
+      if (this.windowInnerWidth > 767 && this.isSidebarLeftCollapsed !== undefined) {
         this.layoutStore.sidebarLeftCollapsed(value);
       }
     }));
 
     this.subscriptions.push(this.layoutStore.isSidebarLeftCollapsed.subscribe((value: boolean) => {
       this.isSidebarLeftCollapsed = value;
-      if(this.windowInnerWidth <= 767) {
-        if(value) {
+      if (this.windowInnerWidth <= 767) {
+        if (value) {
           this.renderer2.removeClass(this.wrapperService.wrapperElementRef.nativeElement, 'sidebar-open');
         } else {
           this.renderer2.addClass(this.wrapperService.wrapperElementRef.nativeElement, 'sidebar-open');
         }
       } else {
-        if(this.isSidebarLeftExpandOnOver && !this.isSidebarLeftMouseOver && !value) {
+        if (this.isSidebarLeftExpandOnOver && !this.isSidebarLeftMouseOver && !value) {
           this.layoutStore.sidebarLeftExpandOnOver(false);
         }
-        if(value) {
+        if (value) {
           this.renderer2.addClass(this.wrapperService.wrapperElementRef.nativeElement, 'sidebar-collapse');
-          if(this.isSidebarLeftExpandOnOver) {
+          if (this.isSidebarLeftExpandOnOver) {
             this.renderer2.removeClass(this.wrapperService.wrapperElementRef.nativeElement, 'sidebar-expanded-on-hover');
           }
         } else {
           this.renderer2.removeClass(this.wrapperService.wrapperElementRef.nativeElement, 'sidebar-collapse');
-          if(this.isSidebarLeftExpandOnOver) {
+          if (this.isSidebarLeftExpandOnOver) {
             this.renderer2.addClass(this.wrapperService.wrapperElementRef.nativeElement, 'sidebar-expanded-on-hover');
           }
         }
@@ -192,7 +192,7 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     }));
 
     this.subscriptions.push(this.layoutStore.isSidebarLeftMini.subscribe((value: boolean) => {
-      if(value) {
+      if (value) {
         this.renderer2.addClass(this.wrapperService.wrapperElementRef.nativeElement, 'sidebar-mini');
       } else {
         this.renderer2.removeClass(this.wrapperService.wrapperElementRef.nativeElement, 'sidebar-mini');
@@ -203,20 +203,19 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * [setMenuListeners description]
    * @method setMenuListeners
-   * @return {[type]}         [description]
    */
-  setMenuListeners(url) {
-    if(url === '/') {
+  setMenuListeners(url): void {
+    if (url === '/') {
       this.activeItems(url);
       this.changeDetectorRef.detectChanges();
     } else {
-      let primaryOutlet = this.router.parseUrl(url).root.children[PRIMARY_OUTLET];
-      if(primaryOutlet) {
+      const primaryOutlet = this.router.parseUrl(url).root.children[PRIMARY_OUTLET];
+      if (primaryOutlet) {
         this.activeItems(primaryOutlet.toString());
         this.changeDetectorRef.detectChanges();
       }
     }
-    if(this.windowInnerWidth <= 767 || this.isSidebarLeftExpandOnOver) {
+    if (this.windowInnerWidth <= 767 || this.isSidebarLeftExpandOnOver) {
       this.layoutStore.sidebarLeftCollapsed(true);
     }
   }
@@ -224,11 +223,11 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * [getIconClasses description]
    * @method getIconClasses
-   * @param  {[type]}       item [description]
-   * @return {string}            [description]
+   * @param item [description]
+   * @return [description]
    */
   public getIconClasses(item: Item): string {
-    if(item.iconClasses || item.iconClasses === '') {
+    if (item.iconClasses || item.iconClasses === '') {
       return item.iconClasses;
     } else {
       return 'fa fa-circle-o';
@@ -238,14 +237,14 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * [visibilityStateStart description]
    * @method visibilityStateStart
-   * @param  {AnimationEvent}     event [description]
+   * @param event [description]
    */
   public visibilityStateStart(event: AnimationEvent): void {
     this.runningAnimations ++;
     this.ngZone.runOutsideAngular(() => {
       setTimeout(() => {
         this.runningAnimations --;
-        if(!this.runningAnimations) {
+        if (!this.runningAnimations) {
           this.layoutStore.setSidebarLeftElementHeight(this.sidebarElement.nativeElement.offsetHeight);
         }
       }, event.totalTime);
@@ -255,17 +254,17 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * [uncollapseItemParents description]
    * @method uncollapseItemParents
-   * @param  {Item}                item           [description]
-   * @param  {Boolean}             isActive       [description]
+   * @param item           [description]
+   * @param isActive       [description]
    */
   private uncollapseItemParents(item: Item, isActive = false): void {
-    if(isActive) {
+    if (isActive) {
       item.isActive = true;
       this.activatedItems.push(item);
     }
     item.isCollapsed = false;
     this.collapsedItems.push(item);
-    if(item.parentId) {
+    if (item.parentId) {
       this.uncollapseItemParents(this.itemsByIds[item.parentId], isActive);
     }
   }
@@ -273,17 +272,17 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * [findItemsByUrl description]
    * @method findItemsByUrl
-   * @param  {string}         url   [description]
-   * @param  {Items}          items [description]
-   * @param  {Items}          returnItems [description]
-   * @return {Items}          [description]
+   * @param url   [description]
+   * @param items [description]
+   * @param returnItems [description]
+   * @return [description]
    */
   private findItemsByUrl(url: string, items: Items, returnItems: Items = []): Items {
     items.forEach((item: Item) => {
-      if(item.route === url) {
+      if (item.route === url) {
         returnItems.push(item);
       } else if (item.children) {
-        this.findItemsByUrl(url, item.children, returnItems)
+        this.findItemsByUrl(url, item.children, returnItems);
       }
     });
     return returnItems;
@@ -292,7 +291,7 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * [activeItems description]
    * @method activeItems
-   * @param  {string}    url [description]
+   * @param url [description]
    */
   private activeItems(url: string): void {
     this.activatedItems.forEach((item: Item) => {
@@ -306,7 +305,7 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.collapsedItems = [];
 
-    let items = this.findItemsByUrl(url, this.menu);
+    const items = this.findItemsByUrl(url, this.menu);
     items.forEach(item => {
       item.isActive = true;
       this.uncollapseItemParents(item, true);
@@ -317,23 +316,23 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * [monkeyPatchMenu description]
    * @method monkeyPatchMenu
-   * @param  {Items}         items    [description]
-   * @param  {number}        parentId [description]
+   * @param items    [description]
+   * @param parentId [description]
    */
   private monkeyPatchMenu(items: Items, parentId?: number): void {
     items.forEach((item: Item, index: number) => {
       item.id = parentId ? Number(parentId + '' + index) : index;
-      if(parentId) {
+      if (parentId) {
         item.parentId = parentId;
       }
-      if(!item.disableCollapse) {
+      if (!item.disableCollapse) {
         item.isCollapsed = true;
       }
       item.isActive = false;
-      if(parentId || item.children) {
+      if (parentId || item.children) {
         this.itemsByIds[item.id] = item;
       }
-      if(item.children) {
+      if (item.children) {
         this.monkeyPatchMenu(item.children, item.id);
       }
     });
@@ -349,9 +348,9 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
       this.sidebarLeftToggleDirectives.forEach((menuToggle: SidebarLeftToggleDirective) => {
         this.toggleListeners.push(this.renderer2.listen(menuToggle.elementRef.nativeElement, 'click', (event) => {
           event.preventDefault();
-          if(menuToggle.item.isCollapsed) {
+          if (menuToggle.item.isCollapsed) {
             this.collapsedItems.forEach((item: Item) => {
-              if(!item.disableCollapse) {
+              if (!item.disableCollapse) {
                 item.isCollapsed = true;
               }
             });
@@ -373,11 +372,11 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
   private checkMenuWithoutChildren(): void {
     let menuHaveChildren;
     this.menu.forEach((item: Item) => {
-      if(item.children) {
+      if (item.children) {
         return menuHaveChildren = true;
       }
     });
-    if(!menuHaveChildren) {
+    if (!menuHaveChildren) {
       this.ngZone.runOutsideAngular(() => {
         setTimeout(() => {
           this.layoutStore.setSidebarLeftElementHeight(this.sidebarElement.nativeElement.offsetHeight);
@@ -392,13 +391,13 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private setSidebarHeight(): void {
     if(this.layout === 'fixed') {
-      let height = this.windowInnerHeight - this.headerService.offsetHeight;
-      if(height && height !== this.sidebarHeight) {
+      const height = this.windowInnerHeight - this.headerService.offsetHeight;
+      if (height && height !== this.sidebarHeight) {
         this.sidebarHeight = height;
         this.sidebarOverflow = 'auto';
         this.changeDetectorRef.detectChanges();
       }
-    } else if(this.sidebarHeight) {
+    } else if (this.sidebarHeight) {
       this.sidebarOverflow = this.sidebarHeight = null;
       this.changeDetectorRef.detectChanges();
     }

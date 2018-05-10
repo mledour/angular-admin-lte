@@ -1,5 +1,5 @@
-import { Injectable, EventEmitter, Output } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { RoutingService } from '../services/routing.service';
 
@@ -12,7 +12,7 @@ export class LayoutService {
 
   /**
    * @method constructor
-   * @param  {RoutingService} private routingService [description]
+   * @param private routingService [description]
    */
   constructor(
     private routingService: RoutingService
@@ -23,7 +23,7 @@ export class LayoutService {
   /**
    * [init description]
    * @method init
-   * @return {[type]} [description]
+   * @return [description]
    */
   private init() {
     this.routingService.onChange.subscribe((value) => {

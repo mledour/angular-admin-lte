@@ -54,9 +54,9 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
 
   /**
    * @method constructor
-   * @param  {LayoutStore} privatelayoutStore [description]
-   * @param  {NgZone}      privatengZone      [description]
-   * @param  {Renderer2}   privaterenderer2   [description]
+   * @param private layoutStore [description]
+   * @param private ngZone      [description]
+   * @param private renderer2   [description]
    */
   constructor(
     private layoutStore: LayoutStore,

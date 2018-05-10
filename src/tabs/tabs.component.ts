@@ -114,9 +114,9 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
 
   /**
    * @method constructor
-   * @param  {ChangeDetectorRef} private changeDetectorRef [description]
-   * @param  {NgZone}            private ngZone            [description]
-   * @param  {Renderer2}         private renderer2         [description]
+   * @param private changeDetectorRef [description]
+   * @param private ngZone            [description]
+   * @param private renderer2         [description]
    */
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -155,7 +155,7 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
 
   /**
    * @method ngOnChanges
-   * @param  {SimpleChange}} changes [description]
+   * @param changes [description]
    */
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
     if(changes.activeTabIndex) {
@@ -174,8 +174,8 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
   /**
    * [toggleTab description]
    * @method toggleTab
-   * @param  {Event}        event [description]
-   * @param  {TabComponent} tab   [description]
+   * @param event [description]
+   * @param tab   [description]
    */
   public openTabIndex(): void {
     if(this.tabs) {
@@ -196,8 +196,8 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
   /**
    * [openTab description]
    * @method openTab
-   * @param  {Event}        event     [description]
-   * @param  {TabComponent} tabToOpen [description]
+   * @param event     [description]
+   * @param tabToOpen [description]
    */
   public openTab(event: Event, tabToOpen: TabComponent): void {
     event.preventDefault();

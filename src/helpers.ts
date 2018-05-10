@@ -1,12 +1,12 @@
-import { Subscriber } from 'rxjs/Subscriber';
+import { Subscriber } from 'rxjs';
 
 
 /**
  * [throttle description]
  * @method throttle
- * @param  {Function} callback [description]
- * @param  {number}   delay    [description]
- * @return {Function}          [description]
+ * @param callback [description]
+ * @param delay    [description]
+ * @return [description]
  */
 export function throttle(callback: Function, delay: number): (args: Array<any>) => void {
   let timeout = null;
