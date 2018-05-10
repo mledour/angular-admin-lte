@@ -11,7 +11,7 @@ export class AccordionToggleDirective {
 
   /**
    * @method constructor
-   * @param  {ElementRef} elementRef [description]
+   * @param elementRef [description]
    */
   constructor(
     public elementRef: ElementRef

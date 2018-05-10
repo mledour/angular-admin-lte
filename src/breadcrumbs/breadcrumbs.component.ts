@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef } from "@angular/core";
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { RoutingService } from '../services/routing.service';
 
@@ -20,7 +20,7 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
 
   /**
    * @method constructor
-   * @param  {RoutingService} private routingService [description]
+   * @param  private routingService [description]
    */
   constructor(
     private routingService: RoutingService,

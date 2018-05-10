@@ -103,9 +103,9 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
 
   /**
    * @method constructor
-   * @param  {ChangeDetectorRef} changeDetectorRef [description]
-   * @param  {NgZone}            ngZone            [description]
-   * @param  {Renderer2}         renderer2         [description]
+   * @param changeDetectorRef [description]
+   * @param ngZone            [description]
+   * @param renderer2         [description]
    */
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -139,8 +139,8 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
   /**
    * [ngOnChanges description]
    * @method ngOnChanges
-   * @param  {[type]}    changes [description]
-   * @return {[type]}            [description]
+   * @param changes [description]
+   * @return [description]
    */
   ngOnChanges(changes: SimpleChanges) {
     if(changes._activeIndex.firstChange === false) {
@@ -159,7 +159,7 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
   /**
    * [headerMouseEnter description]
    * @method headerMouseEnter
-   * @param  {AccordionComponent} accordion [description]
+   * @param accordion [description]
    */
   public headerMouseEnter(accordion: AccordionComponent): void {
     if(accordion.headerColorHover) {
@@ -170,7 +170,7 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
   /**
    * [headerMouseLeave description]
    * @method headerMouseLeave
-   * @param  {AccordionComponent} accordion [description]
+   * @param accordion [description]
    */
   public headerMouseLeave(accordion: AccordionComponent): void {
     accordion.headerStyleColor = accordion.headerColor;
@@ -179,8 +179,8 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
   /**
    * [toggleAccordion description]
    * @method toggleAccordion
-   * @param  {Event}         event       [description]
-   * @param  {number}        toggleIndex [description]
+   * @param event       [description]
+   * @param toggleIndex [description]
    */
   public toggleAccordion(event: Event, toggleIndex: number): void {
     event.preventDefault();
@@ -205,8 +205,8 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
   /**
    * [collapseStart description]
    * @method collapseStart
-   * @param  {AnimationEvent} event [description]
-   * @param  {[type]}         index [description]
+   * @param event [description]
+   * @param index [description]
    */
   public collapseStart(event: AnimationEvent, accordion: AccordionComponent): void {
     accordion.isCollapsing = true;
@@ -216,7 +216,7 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
   /**
    * [collapseDone description]
    * @method collapseDone
-   * @param  {AnimationEvent} event [description]
+   * @param event [description]
    */
   public collapseDone(event: AnimationEvent, accordion: AccordionComponent): void {
     accordion.isCollapsing = false;

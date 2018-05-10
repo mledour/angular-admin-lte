@@ -14,7 +14,7 @@ export class ColorService {
 
   /**
    * @method constructor
-   * @param  {Router}    private router [description]
+   * @param private router [description]
    */
   constructor(
     private renderer2: Renderer2,

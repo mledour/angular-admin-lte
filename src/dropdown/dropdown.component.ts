@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit, ViewChild, ContentChildren, Renderer2, ContentChild, ElementRef, OnDestroy, TemplateRef, Output, EventEmitter, NgZone, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, AfterViewInit, ViewChild, Renderer2, ContentChild, ElementRef, OnDestroy, TemplateRef, Output, EventEmitter, NgZone, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 
 import { AnimationEvent } from '../animations/animations.interface';
 
@@ -63,7 +63,10 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
 
   /**
    * @method constructor
-   * @param  {ElementRef} private elementRef [description]
+   * @param private changeDetectorRef [description]
+   * @param private elementRef [description]
+   * @param private ngZone [description]
+   * @param private renderer2 [description]
    */
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -76,11 +79,11 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
    * @method ngAfterViewInit
    */
   ngAfterViewInit() {
-    let toggleNativeElement = this.dropdownToggleComponent && this.dropdownToggleComponent.toggleElement ?
+    const toggleNativeElement = this.dropdownToggleComponent && this.dropdownToggleComponent.toggleElement ?
       this.dropdownToggleComponent.toggleElement.nativeElement : this.toggleElement ?
         this.toggleElement : this.defaultToggleElement ?
           this.defaultToggleElement.nativeElement : null;
-    if(toggleNativeElement) {
+    if (toggleNativeElement) {
       this.ngZone.runOutsideAngular(() => {
         this.listeners.push(this.renderer2.listen(toggleNativeElement, 'click', (event: Event) => {
           this.toggleDropdown(event);
@@ -101,12 +104,12 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
   /**
    * [toggle description]
    * @method toggle
-   * @param  {Event} event [description]
+   * @param event [description]
    */
   public toggleDropdown(event: Event): void {
     event.preventDefault();
     this.isCollapsed = !this.isCollapsed;
-    if(!this.isCollapsed) {
+    if (!this.isCollapsed) {
       this.ngZone.runOutsideAngular(() => {
         setTimeout (() => {
           this.bindDocumentClickListener();
@@ -120,7 +123,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
   /**
    * [collapseStart description]
    * @method collapseStart
-   * @param  {AnimationEvent} event [description]
+   * @param event [description]
    */
   public collapseStart(event: AnimationEvent): void {
     this.onCollapseStart.emit(event);
@@ -129,7 +132,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
   /**
    * [collapseDone description]
    * @method collapseDone
-   * @param  {AnimationEvent} event [description]
+   * @param event [description]
    */
   public collapseDone(event: AnimationEvent): void {
     this.onCollapseStart.emit(event);
@@ -141,8 +144,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
    */
   private bindDocumentClickListener(): void {
     this.ngZone.runOutsideAngular(() => {
-      this.documentClickListener = this.renderer2.listen('document', 'click', (event: Event) => {
-        if(!this.isCollapsed) {
+      this.documentClickListener = this.renderer2.listen('document', 'click', () => {
+        if (!this.isCollapsed) {
           this.isCollapsed = true;
           this.unBindDocumentClickListener();
           this.changeDetectorRef.detectChanges();
@@ -156,7 +159,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
    * @method unBindDocumentClickListener
    */
   private unBindDocumentClickListener(): void {
-    if(this.documentClickListener) {
+    if (this.documentClickListener) {
       this.documentClickListener();
     }
   }

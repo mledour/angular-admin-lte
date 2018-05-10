@@ -23,7 +23,7 @@ export class ContentComponent implements OnInit {
   public heightStyle: number;
   public sidebarLeftHeight: number;
   public sidebarRightHeight: number;
-  public windowInnerHeight: number
+  public windowInnerHeight: number;
 
   private layout: string;
   private titleTag: string;
@@ -34,10 +34,10 @@ export class ContentComponent implements OnInit {
 
   /**
    * @method constructor
-   * @param  {LayoutStore}    privatelayoutStore    [description]
-   * @param  {LayoutService}  privatelayoutService  [description]
-   * @param  {RoutingService} privateroutingService [description]
-   * @param  {Title}          privatetitleService   [description]
+   * @param private layoutStore    [description]
+   * @param private layoutService  [description]
+   * @param private routingService [description]
+   * @param private titleService   [description]
    */
   constructor(
     private layoutStore: LayoutStore,
@@ -103,7 +103,7 @@ export class ContentComponent implements OnInit {
   /**
    * [scrollHeight description]
    * @method scrollHeight
-   * @return {number}     [description]
+   * @return [description]
    */
   public get scrollHeight(): number {
     return this.contentInnerElement.nativeElement.scrollHeight;
@@ -112,8 +112,8 @@ export class ContentComponent implements OnInit {
   /**
    * [getTitle description]
    * @method getTitle
-   * @param  {string} title [description]
-   * @return {string}       [description]
+   * @param title [description]
+   * @return [description]
    */
   private getTitle(title: string): string {
     return title ? `${title} - ${this.titleTag}` : this.titleTag;

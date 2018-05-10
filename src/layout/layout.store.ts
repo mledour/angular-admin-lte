@@ -1,8 +1,9 @@
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
 
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/pluck';
+import {distinctUntilChanged, pluck} from 'rxjs/operators';
+import { BehaviorSubject ,  Observable } from 'rxjs';
+
+
+
 
 import { LayoutState } from './layout.state';
 
@@ -29,7 +30,7 @@ export class LayoutStore {
 
   /**
    * @method constructor
-   * @param  {LayoutState} layoutConfig [description]
+   * @param layoutConfig [description]
    */
   constructor(layoutConfig: LayoutState) {
     if(layoutConfig) {
@@ -42,140 +43,140 @@ export class LayoutStore {
   /**
    * [windowInnerHeight description]
    * @method windowInnerHeight
-   * @return {Observable<number>} [description]
+   * @return [description]
    */
   get windowInnerHeight(): Observable<number>{
-    return <Observable<number>>this.layoutState.pluck('windowInnerHeight').distinctUntilChanged();
+    return <Observable<number>>this.layoutState.pipe(pluck('windowInnerHeight'),distinctUntilChanged(),);
   }
 
   /**
    * [windowInnerWidth description]
    * @method windowInnerWidth
-   * @return {Observable<number>} [description]
+   * @return [description]
    */
   get windowInnerWidth(): Observable<number>{
-    return <Observable<number>>this.layoutState.pluck('windowInnerWidth').distinctUntilChanged();
+    return <Observable<number>>this.layoutState.pipe(pluck('windowInnerWidth'),distinctUntilChanged(),);
   }
 
   /**
    * [isSidebarLeftCollapsed description]
-   * @return {Observable<boolean>} [description]
+   * @return [description]
    */
   get isSidebarLeftCollapsed(): Observable<boolean> {
-    return <Observable<boolean>>this.layoutState.pluck('isSidebarLeftCollapsed').distinctUntilChanged();
+    return <Observable<boolean>>this.layoutState.pipe(pluck('isSidebarLeftCollapsed'),distinctUntilChanged(),);
   }
 
   /**
    * [isSidebarLeftExpandOnOver description]
    * @method isSidebarLeftExpandOnOver
-   * @return {Observable<boolean>}     [description]
+   * @return [description]
    */
   get isSidebarLeftExpandOnOver(): Observable<boolean> {
-    return <Observable<boolean>>this.layoutState.pluck('isSidebarLeftExpandOnOver').distinctUntilChanged();
+    return <Observable<boolean>>this.layoutState.pipe(pluck('isSidebarLeftExpandOnOver'),distinctUntilChanged(),);
   }
 
   /**
    * [isSidebarLeftMouseOver description]
    * @method isSidebarLeftMouseOver
-   * @return {Observable<boolean>}  [description]
+   * @return [description]
    */
   get isSidebarLeftMouseOver(): Observable<boolean> {
-    return <Observable<boolean>>this.layoutState.pluck('isSidebarLeftMouseOver').distinctUntilChanged();
+    return <Observable<boolean>>this.layoutState.pipe(pluck('isSidebarLeftMouseOver'),distinctUntilChanged(),);
   }
 
   /**
    * [isSidebarLeftMini description]
    * @method isSidebarLeftMini
-   * @return {Observable<boolean>} [description]
+   * @return [description]
    */
   get isSidebarLeftMini(): Observable<boolean> {
-    return <Observable<boolean>>this.layoutState.pluck('isSidebarLeftMini').distinctUntilChanged();
+    return <Observable<boolean>>this.layoutState.pipe(pluck('isSidebarLeftMini'),distinctUntilChanged(),);
   }
 
   /**
    * [sidebarRightSkin description]
    * @method sidebarRightSkin
-   * @return {Observable<string>} [description]
+   * @return [description]
    */
   get sidebarRightSkin(): Observable<string> {
-    return <Observable<string>>this.layoutState.pluck('sidebarRightSkin').distinctUntilChanged();
+    return <Observable<string>>this.layoutState.pipe(pluck('sidebarRightSkin'),distinctUntilChanged(),);
   }
 
   /**
    * [isSidebarRightCollapsed description]
-   * @return {Observable<boolean>} [description]
+   * @return [description]
    */
   get isSidebarRightCollapsed(): Observable<boolean> {
-    return <Observable<boolean>>this.layoutState.pluck('isSidebarRightCollapsed').distinctUntilChanged();
+    return <Observable<boolean>>this.layoutState.pipe(pluck('isSidebarRightCollapsed'),distinctUntilChanged(),);
   }
 
   /**
    * [isSidebarRightOverContent description]
    * @method isSidebarRightOverContent
-   * @return {Observable<boolean>}     [description]
+   * @return [description]
    */
   get isSidebarRightOverContent(): Observable<boolean> {
-    return <Observable<boolean>>this.layoutState.pluck('isSidebarRightOverContent').distinctUntilChanged();
+    return <Observable<boolean>>this.layoutState.pipe(pluck('isSidebarRightOverContent'),distinctUntilChanged(),);
   }
 
   /**
    * [sidebarLeftMenu description]
    * @method sidebarLeftMenu
-   * @return {Observable}    [description]
+   * @return [description]
    */
   get sidebarLeftMenu(): Observable<Array<any>> {
-    return <Observable<Array<any>>>this.layoutState.pluck('sidebarLeftMenu').distinctUntilChanged();
+    return <Observable<Array<any>>>this.layoutState.pipe(pluck('sidebarLeftMenu'),distinctUntilChanged(),);
   }
 
   /**
    * [sidebarLeftMenuActiveUrl description]
    * @method sidebarLeftMenuActiveUrl
-   * @return {Observable}    [description]
+   * @return [description]
    */
   get sidebarLeftMenuActiveUrl(): Observable<string> {
-    return <Observable<string>>this.layoutState.pluck('sidebarLeftMenuActiveUrl').distinctUntilChanged();
+    return <Observable<string>>this.layoutState.pipe(pluck('sidebarLeftMenuActiveUrl'),distinctUntilChanged(),);
   }
 
   /**
    * [sidebarLeftElementHeight description]
    * @method sidebarLeftElementHeight
-   * @return {Observable<boolean>}    [description]
+   * @return [description]
    */
   get sidebarLeftElementHeight(): Observable<number> {
-    return <Observable<number>>this.layoutState.pluck('sidebarLeftElementHeight').distinctUntilChanged();
+    return <Observable<number>>this.layoutState.pipe(pluck('sidebarLeftElementHeight'),distinctUntilChanged(),);
   }
 
   /**
    * [layoutType description]
    * @method layoutType
-   * @return {Observable<boolean>} [description]
+   * @return [description]
    */
   get layout(): Observable<string> {
-    return <Observable<string>>this.layoutState.pluck('layout').distinctUntilChanged();
+    return <Observable<string>>this.layoutState.pipe(pluck('layout'),distinctUntilChanged(),);
   }
 
   /**
    * [skin description]
    * @method skin
-   * @return {Observable<boolean>} [description]
+   * @return [description]
    */
   get skin(): Observable<string> {
-    return <Observable<string>>this.layoutState.pluck('skin').distinctUntilChanged();
+    return <Observable<string>>this.layoutState.pipe(pluck('skin'),distinctUntilChanged(),);
   }
 
   /**
    * [wrapperClasses description]
    * @method wrapperClasses
-   * @return {Observable<string>} [description]
+   * @return [description]
    */
   get wrapperClasses(): Observable<string> {
-    return <Observable<string>>this.layoutState.pluck('wrapperClasses').distinctUntilChanged();
+    return <Observable<string>>this.layoutState.pipe(pluck('wrapperClasses'),distinctUntilChanged(),);
   }
 
   /**
    * [sidebarLeftCollapsed description]
    * @method sidebarLeftCollapsed
-   * @param  {boolean}            value [description]
+   * @param value [description]
    */
   public sidebarLeftCollapsed(value?: boolean): void {
     this._layoutState.next(
@@ -186,7 +187,7 @@ export class LayoutStore {
   /**
    * [sidebarLeftExpandOnOver description]
    * @method sidebarLeftExpandOnOver
-   * @param  {boolean}               value [description]
+   * @param value [description]
    */
   public sidebarLeftExpandOnOver(value?: boolean): void {
     this._layoutState.next(
@@ -197,7 +198,7 @@ export class LayoutStore {
   /**
    * [setSidebarLeftElementHeight description]
    * @method setSidebarLeftElementHeight
-   * @param  {number}                    value [description]
+   * @param value [description]
    */
   public setSidebarLeftElementHeight(value: number): void {
     this._layoutState.next(
@@ -208,7 +209,7 @@ export class LayoutStore {
   /**
    * [setSidebarRightSkin description]
    * @method setSidebarRightSkin
-   * @param  {string}            value [description]
+   * @param value [description]
    */
   public setSidebarRightSkin(value?: string): void {
     this._layoutState.next(
@@ -219,7 +220,7 @@ export class LayoutStore {
   /**
    * [sidebarLeftMouseOver description]
    * @method sidebarLeftMouseOver
-   * @param  {boolean}            value [description]
+   * @param value [description]
    */
   public sidebarLeftMouseOver(value?: boolean): void {
     this._layoutState.next(
@@ -230,7 +231,7 @@ export class LayoutStore {
   /**
    * [sidebarLeftMini description]
    * @method sidebarLeftMini
-   * @param  {boolean}       value [description]
+   * @param value [description]
    */
   public sidebarLeftMini(value?: boolean): void {
     this._layoutState.next(
@@ -241,7 +242,7 @@ export class LayoutStore {
   /**
    * [sidebarRightCollapsed description]
    * @method sidebarRightCollapsed
-   * @param  {boolean}             value [description]
+   * @param value [description]
    */
   public sidebarRightCollapsed(value?: boolean): void {
     this._layoutState.next(
@@ -252,7 +253,7 @@ export class LayoutStore {
   /**
    * [sidebarRightOverContent description]
    * @method sidebarRightOverContent
-   * @param  {boolean}               value [description]
+   * @param value [description]
    */
   public sidebarRightOverContent(value?: boolean): void {
     this._layoutState.next(
@@ -263,7 +264,7 @@ export class LayoutStore {
   /**
    * [setSidebarLeftMenu description]
    * @method setSidebarLeftMenu
-   * @param  {Array<any>}           value [description]
+   * @param value [description]
    */
   public setSidebarLeftMenu(value: Array<any>): void {
     this._layoutState.next(
@@ -274,7 +275,7 @@ export class LayoutStore {
   /**
    * [setSidebarLeftMenuActiveUrl description]
    * @method setSidebarLeftMenuActiveUrl
-   * @param  {string}           value [description]
+   * @param value [description]
    */
   public setSidebarLeftMenuActiveUrl(value: string): void {
     this._layoutState.next(
@@ -285,7 +286,7 @@ export class LayoutStore {
   /**
    * [setLayout description]
    * @method setLayout
-   * @param  {string}  value [description]
+   * @param value [description]
    */
   public setLayout(value: string): void {
     this._layoutState.next(
@@ -296,7 +297,7 @@ export class LayoutStore {
   /**
    * [setSkin description]
    * @method setSkin
-   * @param  {string} value [description]
+   * @param value [description]
    */
   public setSkin(value: string): void {
     this._layoutState.next(
@@ -307,7 +308,7 @@ export class LayoutStore {
   /**
    * [setWrapperClasses description]
    * @method setWrapperClasses
-   * @param  {string}          value [description]
+   * @param value [description]
    */
   public setWrapperClasses(value: string): void {
     this._layoutState.next(
@@ -318,7 +319,7 @@ export class LayoutStore {
   /**
    * [setWindowInnerHeight description]
    * @method setWindowInnerHeight
-   * @param  {number}             value [description]
+   * @param value [description]
    */
   public setWindowInnerHeight(value: number): void {
     this._layoutState.next(
@@ -329,7 +330,7 @@ export class LayoutStore {
   /**
    * [setWindowInnerWidth description]
    * @method setWindowInnerWidth
-   * @param  {number}            value [description]
+   * @param value [description]
    */
   public setWindowInnerWidth(value: number): void {
     this._layoutState.next(

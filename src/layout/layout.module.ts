@@ -10,7 +10,6 @@ import { SidebarRightModule } from './sidebar-right/sidebar-right.module';
 import { WrapperModule } from './wrapper/wrapper.module';
 
 import { LayoutService } from './layout.service';
-import { LayoutStore } from './layout.store';
 import { LayoutState } from './layout.state';
 import { layoutProvider } from './layout.provider';
 
@@ -33,10 +32,10 @@ export class LayoutModule {
 
   /**
    * @method constructor
-   * @param  {[type]}    @Optional( [description]
+   * @param parentModule [description]
    */
   constructor(@Optional() @SkipSelf() parentModule: LayoutModule) {
-    if(parentModule) {
+    if (parentModule) {
       throw new Error('LayoutModule is already loaded. Import it in the AppModule only!');
     }
   }
@@ -44,13 +43,13 @@ export class LayoutModule {
   /**
    * [forRoot description]
    * @method forRoot
-   * @param  {LayoutState}         layoutConfig [description]
-   * @return {ModuleWithProviders}              [description]
+   * @param  layoutConfig [description]
+   * @return [description]
    */
   static forRoot(layoutConfig: LayoutState): ModuleWithProviders {
     return {
       ngModule: LayoutModule,
       providers: [...layoutProvider(layoutConfig), LayoutService]
-    }
+    };
   }
 }

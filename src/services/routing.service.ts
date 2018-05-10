@@ -1,8 +1,7 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot, ActivatedRoute, PRIMARY_OUTLET, Event as RouterEvent } from '@angular/router';
 
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject ,  Observable } from 'rxjs';
 
 /*
  *
@@ -29,7 +28,7 @@ export class RoutingService {
 
   /**
    * @method constructor
-   * @param  {Router}    private router [description]
+   * @param  private router [description]
    */
   constructor(
     private router: Router
@@ -92,9 +91,9 @@ export class RoutingService {
   /**
    * [createBreadcrumb description]
    * @method createBreadcrumb
-   * @param  {ActivatedRouteSnapshot} route [description]
-   * @param  {string}                 url   [description]
-   * @return {Breadcrumb}                   [description]
+   * @param route [description]
+   * @param url   [description]
+   * @return [description]
    */
   private createBreadcrumb(route: ActivatedRouteSnapshot, url: string): Path {
     if(route.children.length !== 0 && route.firstChild.routeConfig.path) {
@@ -114,8 +113,8 @@ export class RoutingService {
   /**
    * [isChildrenSelfRoute description]
    * @method isChildrenSelfRoute
-   * @param  {ActivatedRouteSnapshot} route [description]
-   * @return {boolean}                      [description]
+   * @param route [description]
+   * @return [description]
    */
   private isChildrenSelfRoute(route: ActivatedRouteSnapshot): boolean {
     let children = route.routeConfig.children;
@@ -129,8 +128,8 @@ export class RoutingService {
   /**
    * [createUrl description]
    * @method createUrl
-   * @param  {ActivatedRouteSnapshot} route [description]
-   * @return {string}                       [description]
+   * @param route [description]
+   * @return [description]
    */
   private createUrl(route: ActivatedRouteSnapshot): string {
     return route.url.map(urlSegment => urlSegment.toString()).join('/');

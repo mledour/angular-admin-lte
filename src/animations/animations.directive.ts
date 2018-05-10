@@ -36,9 +36,9 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
 
   /**
    * @method constructor
-   * @param  {ElementRef} privateelementRef [description]
-   * @param  {NgZone}     privatengZone     [description]
-   * @param  {Renderer2}  privaterenderer2  [description]
+   * @param privateelementRef [description]
+   * @param privatengZone     [description]
+   * @param privaterenderer2  [description]
    */
   constructor(
     private elementRef: ElementRef,
@@ -76,7 +76,7 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
   /**
    * [ngOnDestroy description]
    * @method ngOnDestroy
-   * @return {[type]}    [description]
+   * @return [description]
    */
   ngOnDestroy() {
     if(this.listener) {
