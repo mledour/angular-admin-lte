@@ -41,7 +41,7 @@ export class ColorService {
         this.renderer2.setStyle(this.elementRef.nativeElement, property, colors[color]);
       } else {
         this.renderer2.removeClass(this.elementRef.nativeElement, 'bg-color');
-        if(color.startsWith('#') || color.startsWith('rgb')) {
+        if(color.indexOf('#') === 0 || color.indexOf('rgb') === 0) {
           this.currentBackgroundStyle = {property: property, color: color};
           this.renderer2.setStyle(this.elementRef.nativeElement, property, color);
         } else if(colorsAliases.indexOf(color) !== -1) {
