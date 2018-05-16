@@ -21,13 +21,12 @@
               { "glob": "favicon.ico", "input": "demo/src", "output": "/" },
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/bootstrap-css-only/css/bootstrap.min.css",
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/ionicons/css/ionicons.css",
-              "node_modules/morris.js/morris.css",
               "node_modules/prismjs/themes/prism-tomorrow.css",
-              "node_modules/admin-lte/dist/css/AdminLTE.css",
-              "node_modules/admin-lte/dist/css/skins/_all-skins.css",
+              "node_modules/admin-lte-css/dist/css/AdminLTE.css",
+              "node_modules/admin-lte-css/dist/css/skins/_all-skins.css",
               "demo/src/styles.css"
             ],
             "scripts": [
