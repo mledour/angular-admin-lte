@@ -36,8 +36,7 @@ $ npm run build:lib
 
 ## Dependencies
 
-* admin-lte css
-* bootstrap css
+* admin-lte-css
 
 ## Todos
 
