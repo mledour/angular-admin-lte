@@ -7,6 +7,9 @@ declare var Prism;
   styleUrls: ['./tabs.component.css']
 })
 export class TabsComponent implements AfterViewInit {
+  public toggleDropdown = true;
+  public toggleDropdown2 = true;
+
   /**
    * @method ngAfterViewInit
    */
