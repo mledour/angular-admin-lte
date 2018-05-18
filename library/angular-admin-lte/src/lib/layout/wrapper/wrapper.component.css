@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+
+:host /deep/ .sidebar-right-toggle > a {
+  color: #fff;
+}
+
+:host.sidebar-mini.sidebar-collapse /deep/ .treeview-menu.collapsing {
+  height: auto !important;
+}
+
+:host /deep/ .sidebar-right-toggle > a:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+:host.skin-black /deep/ .sidebar-right-toggle > a,
+:host.skin-black-light /deep/ .sidebar-right-toggle > a {
+  color: #333;
+  border-right-width: 0;
+}
+
+:host.skin-black /deep/ .sidebar-right-toggle > a:hover,
+:host.skin-black-light /deep/ .sidebar-right-toggle > a:hover {
+  background-color: #fff;
+  color: #999;
+}
+
+:host.skin-black /deep/ .sidebar-right-toggle > a {
+  border-left: 1px solid #eee;
+}
+
+:host.skin-black-light /deep/ .sidebar-right-toggle > a {
+  border-left: 1px solid #d2d6de;
+}

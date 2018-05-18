@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "library",
   "projects": {
     "angular-admin-lte-demo": {
       "root": "",
@@ -110,6 +110,46 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "angular-admin-lte": {
+      "root": "library/angular-admin-lte",
+      "sourceRoot": "library/angular-admin-lte/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "library/angular-admin-lte/tsconfig.lib.json",
+            "project": "library/angular-admin-lte/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "library/angular-admin-lte/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "library/angular-admin-lte/src/test.ts",
+            "tsConfig": "library/angular-admin-lte/tsconfig.spec.json",
+            "karmaConfig": "library/angular-admin-lte/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "library/angular-admin-lte/tsconfig.lib.json",
+              "library/angular-admin-lte/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]

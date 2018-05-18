@@ -1,0 +1,210 @@
+<div class="row">
+  <div class="col-md-6 col-xs-12">
+    <mk-tabs tabsColor="#3c763d" [activeTabIndex]="1">
+      <mk-tab header="Text Header" tabColor="#dd4b39">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      </mk-tab>
+      <mk-tab header="Text Header 2">
+        The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators. To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words. If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages.
+      </mk-tab>
+      <mk-tab [isDisabled]="true">
+        <mk-tab-header>
+          <a class="dropdown-toggle" (click)="toggleDropdown = !toggleDropdown">Dropdown <span class="caret"></span></a>
+          <mk-dropdown [isCollapsed]="toggleDropdown">
+            <mk-dropdown-menu>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+            </mk-dropdown-menu>
+          </mk-dropdown>
+        </mk-tab-header>
+      </mk-tab>
+    </mk-tabs>
+  </div>
+  <div class="col-md-6 col-xs-12">
+    <mk-tabs>
+      <mk-tabs-header><i class="fa fa-th"></i> Custom Tabs</mk-tabs-header>
+      <mk-tab>
+        <mk-tab-header>HTML Header</mk-tab-header>
+        <mk-tab-content>
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </mk-tab-content>
+      </mk-tab>
+      <mk-tab>
+        <mk-tab-header>HTML Header 2</mk-tab-header>
+        <mk-tab-content>
+          The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators. To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words. If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages.
+        </mk-tab-content>
+      </mk-tab>
+      <mk-tab [isDisabled]="true">
+        <mk-tab-header>
+          <a class="dropdown-toggle" (click)="toggleDropdown2 = !toggleDropdown2">Dropdown <span class="caret"></span></a>
+          <mk-dropdown [isCollapsed]="toggleDropdown2">
+            <mk-dropdown-menu>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+            </mk-dropdown-menu>
+          </mk-dropdown>
+        </mk-tab-header>
+      </mk-tab>
+    </mk-tabs>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-xs-12">
+    <mk-box header="Tabs with text header & footer" [isCollapsable]="false" [isRemovable]="false">
+      <pre><code class="language-html">&lt;mk-tabs header="Tabs text header"&gt;
+  &lt;mk-tab header="Text Header"&gt;
+    Tab content.
+  &lt;/mk-tab&gt;
+  &lt;mk-tab header="Text Header 2"&gt;
+    Tab content 2.
+  &lt;/mk-tab&gt;
+&lt;/mk-tabs&gt;</code></pre>
+    </mk-box>
+  </div>
+  <div class="col-md-6 col-xs-12">
+    <mk-box header="Tabs with HTML header" [isCollapsable]="false" [isRemovable]="false">
+      <pre><code class="language-html">&lt;mk-tabs&gt;
+  &lt;mk-tabs-header&gt;Tabs HTML header&lt;/mk-tabs-header&gt;
+  &lt;mk-tab&gt;
+    &lt;mk-tab-header&gt;HTML header&lt;/mk-tab-header&gt;
+    &lt;mk-tab-content&gt;Content&lt;/mk-tab-content&gt;
+  &lt;/mk-tab&gt;
+  &lt;mk-tab&gt;
+    &lt;mk-tab-header&gt;HTML header 2&lt;/mk-tab-header&gt;
+    &lt;mk-tab-content&gt;Content 2&lt;/mk-tab-content&gt;
+  &lt;/mk-tab&gt;
+&lt;/mk-tabs&gt;</code></pre>
+    </mk-box>
+  </div>
+</div>
+
+<mk-box header="Tabs Properties" [isCollapsable]="true" [isRemovable]="false" contentClasses="table-responsive">
+  <table class="table table-bordered table-hover">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>activatedTabIndex</td>
+        <td>number</td>
+        <td>0</td>
+        <td>Defines if the tab index to be activated on load.</td>
+      </tr>
+      <tr>
+        <td>header</td>
+        <td>string</td>
+        <td>null</td>
+        <td>
+          Header text of the tabs.<br/>
+          <em>
+            Note: You can use &lt;mk-tabs-header&gt; for HTML header.
+          </em>
+        </td>
+      </tr>
+      <tr>
+        <td>headerStyleClass</td>
+        <td>string</td>
+        <td>header pull-left</td>
+        <td>Style class of the the header.</td>
+      </tr>
+      <tr>
+        <td>navStyleClass</td>
+        <td>string</td>
+        <td>nav nav-tabs</td>
+        <td>Style class of the navigation bar.</td>
+      </tr>
+      <tr>
+        <td>contentStyleClass</td>
+        <td>string</td>
+        <td>tab-content</td>
+        <td>Style class of the content.</td>
+      </tr>
+      <tr>
+        <td>styleClass</td>
+        <td>string</td>
+        <td>nav-tabs-custom</td>
+        <td>Style class of the component.</td>
+      </tr>
+      <tr>
+        <td>tabsColor</td>
+        <td>string</td>
+        <td>null</td>
+        <td>Defines the tabs menu color.</td>
+      </tr>
+    </tbody>
+  </table>
+</mk-box>
+
+<mk-box header="Tabs Events" [isCollapsable]="true" [isRemovable]="false" contentClasses="table-responsive">
+  <table class="table table-bordered table-hover">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Parameters</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>onClose</td>
+        <td>event.browserEvent: browser event<br/>event.index: The index of the closed tab.</td>
+        <td>Callback to invoke when tab close.</td>
+      </tr>
+      <tr>
+        <td>onOpen</td>
+        <td>event.browserEvent: browser event<br/>event.index: The index of the opened tab.</td>
+        <td>Callback to invoke when tab open.</td>
+      </tr>
+    </tbody>
+  </table>
+</mk-box>
+
+<mk-box header="Tab Properties" [isCollapsable]="true" [isRemovable]="false" contentClasses="table-responsive">
+  <table class="table table-bordered table-hover">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>header</td>
+        <td>string</td>
+        <td>null</td>
+        <td>
+          Header text of the tabs.<br/>
+          <em>
+            Note: You can use &lt;mk-tab-header&gt; for HTML header.
+          </em>
+        </td>
+      </tr>
+      <tr>
+        <td>isDisabled</td>
+        <td>string</td>
+        <td>false</td>
+        <td>
+          Defines if the tab content is openable.
+          <em>
+            Note: Useful with dropdown for example.
+          </em>
+        </td>
+      </tr>
+      <tr>
+        <td>tabColor</td>
+        <td>string</td>
+        <td>null</td>
+        <td>Defines the tab menu color.</td>
+      </tr>
+    </tbody>
+  </table>
+</mk-box>

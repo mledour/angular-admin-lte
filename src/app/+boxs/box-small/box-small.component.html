@@ -1,0 +1,144 @@
+<div class="row">
+  <div class="col-md-3 col-xs-12">
+    <mk-box-small header="150" backgroundColor="aqua" iconStyleClass="fa fa-shopping-cart">
+      <mk-box-small-content>41,410</mk-box-small-content>
+      <mk-box-small-footer>
+        <a routerLink="/">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </mk-box-small-footer>
+    </mk-box-small>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-box-small header="53%" backgroundColor="green" iconStyleClass="ion ion-stats-bars">
+      <mk-box-small-content>Bounce Rate</mk-box-small-content>
+      <mk-box-small-footer>
+        <a routerLink="/">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </mk-box-small-footer>
+    </mk-box-small>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-box-small header="44" backgroundColor="yellow" iconStyleClass="ion ion-person-add">
+      <mk-box-small-content>User Registrations</mk-box-small-content>
+      <mk-box-small-footer>
+        <a routerLink="/">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </mk-box-small-footer>
+    </mk-box-small>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-box-small header="65" backgroundColor="red" iconStyleClass="ion ion-pie-graph">
+      <mk-box-small-content>Unique Visitors</mk-box-small-content>
+      <mk-box-small-footer>
+        <a routerLink="/">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </mk-box-small-footer>
+    </mk-box-small>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-xs-12">
+    <mk-box header="Small Box with text header & footer" [isRemovable]="false">
+      <pre><code class="language-html">&lt;mk-box-small header="Header text" footer="Footer text" backgroundColor="yellow" iconStyleClass="ion ion-pie-graph"&gt;
+  Content text
+&lt;/mk-box-small&gt;</code></pre>
+    </mk-box>
+  </div>
+  <div class="col-md-6 col-xs-12">
+    <mk-box header="Small Box with HTML header & footer" [isRemovable]="false">
+      <pre><code class="language-html">&lt;mk-box-small backgroundColor="yellow" iconStyleClass="ion ion-pie-graph"&gt;
+  &lt;mk-box-small-header&gt;Header HTML&lt;/mk-box-small-header&gt;
+  &lt;mk-box-small-content&gt;Content HTML&lt;/mk-box-small-content&gt;
+  &lt;mk-box-small-footer&gt;Footer HTML&lt;/mk-box-small-footer&gt;
+&lt;/mk-box-small&gt;</code></pre>
+    </mk-box>
+  </div>
+</div>
+
+<mk-box header="Properties" [isRemovable]="false" contentClasses="table-responsive">
+  <table class="table table-bordered table-hover">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>backgroundColor</td>
+        <td>string (green | aqua | light-blue | red | yellow | mutted | rgb | rgba | hex)</td>
+        <td>null</td>
+        <td>The box background color.</td>
+      </tr>
+      <tr>
+        <td>contentColor</td>
+        <td>string (green | aqua | light-blue | red | yellow | mutted | rgb | rgba | hex)</td>
+        <td>#fff</td>
+        <td>The  box content font color.</td>
+      </tr>
+      <tr>
+        <td>contentStyleClass</td>
+        <td>string</td>
+        <td>small-box-content</td>
+        <td>The box footer css classes.</td>
+      </tr>
+      <tr>
+        <td>footer</td>
+        <td>string</td>
+        <td>null</td>
+        <td>
+          Footer text of the panel.<br/>
+          <em>Note: You can use &lt;mk-box-small-footer&gt; for HTML footer.</em>
+        </td>
+      </tr>
+      <tr>
+        <td>footerColor</td>
+        <td>string (green | aqua | light-blue | red | yellow | mutted | rgb | rgba | hex)</td>
+        <td>#fff</td>
+        <td>The box footer font color.</td>
+      </tr>
+      <tr>
+        <td>footerStyleClass</td>
+        <td>string</td>
+        <td>small-box-footer</td>
+        <td>The box footer css classes.</td>
+      </tr>
+      <tr>
+        <td>header</td>
+        <td>string</td>
+        <td>null</td>
+        <td>
+          Header text of the panel.<br/>
+          <em>Note: You can use &lt;mk-box-small-header&gt; for HTML header.</em>
+        </td>
+      </tr>
+      <tr>
+        <td>headerColor</td>
+        <td>string (green | aqua | light-blue | red | yellow | mutted | rgb | rgba | hex)</td>
+        <td>#fff</td>
+        <td>The box header font color.</td>
+      </tr>
+      <tr>
+        <td>headerStyleClass</td>
+        <td>string</td>
+        <td>small-box-header</td>
+        <td>The box header css classes.</td>
+      </tr>
+      <tr>
+        <td>iconStyleClass</td>
+        <td>string</td>
+        <td>ion ion-bag</td>
+        <td>The box icon classes.</td>
+      </tr>
+      <tr>
+        <td>iconColor</td>
+        <td>string (green | aqua | light-blue | red | yellow | mutted | rgb | rgba | hex)</td>
+        <td>null</td>
+        <td>The box icon font color.</td>
+      </tr>
+      <tr>
+        <td>styleClass</td>
+        <td>string</td>
+        <td>small-box</td>
+        <td>Defines the box css classes.</td>
+      </tr>
+    </tbody>
+  </table>
+</mk-box>

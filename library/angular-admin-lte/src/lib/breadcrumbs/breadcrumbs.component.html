@@ -1,0 +1,14 @@
+<ol class="breadcrumb">
+  <li *ngFor="let breadcrumb of breadcrumbs; let first = first; let last = last" [class.active]="last || !breadcrumb.url">
+    <a *ngIf="breadcrumb.url" [routerLink]="breadcrumb.url">
+      <i *ngIf="first" ngClass="{{homeIcon}}"></i>
+      <ng-template [ngIf]="breadcrumb.data.breadcrumbs">{{breadcrumb.data.breadcrumbs}}</ng-template>
+      <ng-template [ngIf]="!breadcrumb.data.breadcrumbs">{{breadcrumb.data.title}}</ng-template>
+    </a>
+    <ng-template [ngIf]="!breadcrumb.url">
+      <i *ngIf="first" ngClass="{{homeIcon}}"></i>
+      <ng-template [ngIf]="breadcrumb.data.breadcrumbs">{{breadcrumb.data.breadcrumbs}}</ng-template>
+      <ng-template [ngIf]="!breadcrumb.data.breadcrumbs">{{breadcrumb.data.title}}</ng-template>
+    </ng-template>
+  </li>
+</ol>

@@ -1,0 +1,12 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.control-sidebar-bg {
+  z-index: -1;
+}
+
+/deep/ .tab-content {
+  padding: 10px 15px;
+}
