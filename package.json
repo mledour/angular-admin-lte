@@ -22,6 +22,10 @@
     "type": "git",
     "url": "git://github.com/mika-el/angular-admin-lte.git"
   },
+  "author": {
+    "name": "Mik@",
+    "email": "michael.ledour@gmail.com"
+  },
   "license": "MIT",
   "private": false,
   "dependencies": {
