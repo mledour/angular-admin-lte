@@ -42,7 +42,7 @@ const routes: Routes = [
           loadChildren: 'app/+layout/custom/custom.module#CustomModule',
           data: {
             title: 'Disable Layout'
-            //disableLayout: true
+            // disableLayout: true
           }
         }, {
           path: 'content',

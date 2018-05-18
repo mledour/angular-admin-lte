@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { BoxDefaultRoutingModule } from './box-default-routing.module';
 import { BoxDefaultComponent } from './box-default.component';
 
-import { BoxModule } from '../../../../../lib';
+import { BoxModule } from 'angular-admin-lte';
 
 @NgModule({
   imports: [

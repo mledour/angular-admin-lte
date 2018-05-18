@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ConfigurationRoutingModule } from './configuration-routing.module';
 import { ConfigurationComponent } from './configuration.component';
 
-import { BoxModule } from '../../../../../lib';
+import { BoxModule } from 'angular-admin-lte';
 
 @NgModule({
   imports: [

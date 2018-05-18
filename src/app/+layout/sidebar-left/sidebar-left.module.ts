@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SidebarLeftRoutingModule } from './sidebar-left-routing.module';
 import { SidebarLeftComponent } from './sidebar-left.component';
 
-import { BoxModule } from '../../../../../lib';
+import { BoxModule } from 'angular-admin-lte';
 
 @NgModule({
   imports: [

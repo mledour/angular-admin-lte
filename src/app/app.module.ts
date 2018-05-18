@@ -6,7 +6,7 @@ import { adminLteConf } from './admin-lte.conf';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 
-import { LayoutModule } from '../../../lib';
+import { LayoutModule } from 'angular-admin-lte';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';

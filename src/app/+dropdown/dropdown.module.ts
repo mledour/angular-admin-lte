@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DropdownRoutingModule } from './dropdown-routing.module';
 import { DropdownComponent } from './dropdown.component';
 
-import { BoxModule, DropdownModule as mkDropdownModule } from '../../../../lib';
+import { BoxModule, DropdownModule as mkDropdownModule } from 'angular-admin-lte';
 
 @NgModule({
   imports: [

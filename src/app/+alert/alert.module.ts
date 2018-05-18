@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AlertRoutingModule } from './alert-routing.module';
 import { AlertComponent } from './alert.component';
 
-import { AlertModule as MkAlertModule, BoxModule } from '../../../../lib';
+import { AlertModule as MkAlertModule, BoxModule } from 'angular-admin-lte';
 
 @NgModule({
   imports: [

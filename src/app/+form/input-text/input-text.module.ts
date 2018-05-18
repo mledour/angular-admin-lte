@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { InputTextRoutingModule } from './input-text-routing.module';
 import { InputTextComponent } from './input-text.component';
 
-import { InputGroupModule, InputTextModule as mkInputTextModule, BoxModule } from '../../../../../lib';
+import { InputGroupModule, InputTextModule as mkInputTextModule, BoxModule } from 'angular-admin-lte';
 
 @NgModule({
   imports: [

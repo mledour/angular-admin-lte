@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CustomRoutingModule } from './custom-routing.module';
 import { CustomComponent } from './custom.component';
 
-import { BoxModule } from '../../../../../lib';
+import { BoxModule } from 'angular-admin-lte';
 
 @NgModule({
   imports: [
