@@ -1,0 +1,43 @@
+<mk-box header="About content component" [isCollapsable]="false" [isRemovable]="false">
+  <p>The content component is used for displaying router outlet, page title, page description and breadcrumbs.<br/>
+  Page title, page description and breadcrumbs can be configured in app routing module via the data property of routes.<br/>
+  Page title use title property, page description use description property and breadcrumbs use breadcrumbs property or title property if breadcrumbs is not defined.</p>
+</mk-box>
+
+<mk-box header="Routing module example" [isCollapsable]="false" [isRemovable]="false">
+  <pre><code class="language-typescript">const routes: Routes = [&#123;
+  path: '',
+  data: &#123;
+    title: 'Home'
+  &#125;, children: [&#123;
+    path: '',
+    component: HomeComponent
+  &#125;, &#123;
+    path: 'page',
+    loadChildren: 'app/+page/page.module#PageModule',
+    data: &#123;
+      title: 'Accordion',
+    &#125;
+  &#125;, &#123;
+    path: 'posts',
+    data: &#123;
+      title: 'Posts',
+      description: 'All the posts',
+      breadcrumbs: 'Posts'
+    &#125;,
+    children: [&#123;
+      path: '',
+      loadChildren: 'app/posts/posts.module#PostsModule',
+    &#125;, &#123;
+      path: ':id',
+      loadChildren: 'app/post/post.module#PostModule',
+      data: &#123;
+        title: 'Post :id',
+        description: 'Post N°:id description',
+        breadcrumbs: 'Post :id'
+      &#125;
+    &#125;]
+  &#125;
+&#125;]
+</code></pre>
+</mk-box>

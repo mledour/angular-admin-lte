@@ -1,0 +1,240 @@
+<mk-box header="Configuring Layout" [isCollapsable]="false" [isRemovable]="false">
+  <p>If can use the layout components or just use the presentation components of angular-admin-lte.</p>
+  <p> If you chose to use the layout you will need to:</p>
+  <ol>
+    <li>Create a layout configuration file.</li>
+    <li>Import the layout module and provide the layout configuration in your main app module.</li>
+    <li>Update the main app view.</li>
+  </ol>
+</mk-box>
+
+
+<mk-box header="Configuration File" [isCollapsable]="false" [isRemovable]="false">
+  <pre><code class="language-typescript" ngNonBindable>export var adminLteConf = &#123;
+  skin: 'blue',
+  ...
+  sidebarLeftMenu: [
+    &#123;label: 'Start', route: '/', iconClasses: 'fa fa-th'&#125;,
+    ...
+  ]
+&#125;;
+</code></pre>
+</mk-box>
+
+<mk-box header="Import Conf And Module" [isCollapsable]="false" [isRemovable]="false">
+  <pre><code class="language-typescript">import &#123; adminLteConf &#125; from './admin-lte.conf';   //Import the layout configuration.
+import &#123; LayoutModule &#125; from 'angular-admin-lte';   //Import the layout module.
+
+@NgModule(&#123;
+  imports: [
+    ...
+    LayoutModule.forRoot(adminLteConf),   //Provide the configuration to the layout module.
+  ],
+  ...
+&#125;)
+export class AppModule &#123;&#125;
+</code></pre>
+</mk-box>
+
+<mk-box header="App view HTML" [isCollapsable]="false" [isRemovable]="false">
+  <pre><code class="language-html">&lt;mk-layout-wrapper&gt;
+  &lt;mk-layout-sidebar-right&gt;
+    Sidebar right HTML
+  &lt;/mk-layout-sidebar-right&gt;
+  &lt;mk-layout-header&gt;
+    &lt;mk-layout-header-logo&gt;Logo HTML&lt;/mk-layout-header-logo&gt;
+    &lt;mk-layout-header-logo-mini&gt;Logo Mini HTML&lt;/mk-layout-header-logo-mini&gt;
+    Header HTML
+  &lt;/mk-layout-header&gt;
+  &lt;mk-layout-sidebar-left&gt;
+    Sidebar left HTML (just above menu)
+  &lt;/mk-layout-sidebar-left&gt;
+  &lt;mk-layout-content&gt;
+    &lt;router-outlet&gt;&lt;/router-outlet&gt;
+  &lt;/mk-layout-content&gt;
+  &lt;mk-layout-footer&gt;
+    &lt;mk-layout-footer-left&gt;
+      Footer left HTML
+    &lt;/mk-layout-footer-left&gt;
+    &lt;mk-layout-footer-right&gt;
+      Footer right HTML
+    &lt;/mk-layout-footer-right&gt;
+  &lt;/mk-layout-footer&gt;
+&lt;/mk-layout-wrapper&gt;
+</code></pre>
+</mk-box>
+
+<mk-box header="Configuration properties" [isCollapsable]="true" [isRemovable]="false" contentStyleClasses="table-responsive">
+  <table class="table table-bordered table-hover">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>skin</td>
+        <td>string ('blue' | 'black' | 'purple' | 'green' | 'red' | 'yellow' | 'blue-light' | 'black-light' | 'purple-light' | 'green-light' | 'red-light' | 'yellow-light')</td>
+        <td>'blue'</td>
+        <td>Set the theme skin.</td>
+      </tr>
+      <tr>
+        <td>isSidebarLeftCollapsed</td>
+        <td>boolean</td>
+        <td>false</td>
+        <td>Defines if the sidebar left is collapsed.</td>
+      </tr>
+      <tr>
+        <td>isSidebarLeftExpandOnOver</td>
+        <td>boolean</td>
+        <td>false</td>
+        <td>Define if sidebar left expand on mouse over.</td>
+      </tr>
+      <tr>
+        <td>isSidebarLeftMini</td>
+        <td>boolean</td>
+        <td>false</td>
+        <td>Define if sidebar left minified is visible.</td>
+      </tr>
+      <tr>
+        <td>sidebarRightSkin</td>
+        <td>string ('dark' | 'light')</td>
+        <td>'dark'</td>
+        <td>Set the sidebar right skin.</td>
+      </tr>
+      <tr>
+        <td>isSidebarRightCollapsed</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>Defines if the sidebar right is collapsed.</td>
+      </tr>
+      <tr>
+        <td>isSidebarRightOverContent</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>Defines if sidebar right slide over content.</td>
+      </tr>
+      <tr>
+        <td>layout</td>
+        <td>string ('normal' | 'boxed' | 'fixed')</td>
+        <td>'normal'</td>
+        <td>Define the layout style.</td>
+      </tr>
+    </tbody>
+  </table>
+</mk-box>
+
+<mk-box header="Layout setters" [isCollapsable]="false" [isRemovable]="false">
+  <table class="table table-bordered table-hover">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Parameters</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>sidebarLeftCollapsed()</td>
+        <td>boolean</td>
+        <td>Programmatically set if sidebar left is collapsed.</td>
+      </tr>
+      <tr>
+        <td>sidebarLeftExpandOnOver()</td>
+        <td>boolean</td>
+        <td>Programmatically set if sidebar left expand on over.</td>
+      </tr>
+      <tr>
+        <td>sidebarLeftExpandOnOver()</td>
+        <td>boolean</td>
+        <td>Programmatically set if sidebar left expand on over.</td>
+      </tr>
+      <tr>
+        <td>setSidebarRightSkin()</td>
+        <td>'dark' | 'light'</td>
+        <td>Programmatically defines sidebar right skin.</td>
+      </tr>
+      <tr>
+        <td>sidebarLeftMini()</td>
+        <td>boolean</td>
+        <td>Programmatically set if sidebar left collapsed is visible.</td>
+      </tr>
+      <tr>
+        <td>sidebarRightCollapsed()</td>
+        <td>boolean</td>
+        <td>Programmatically set if sidebar right is collapsed.</td>
+      </tr>
+      <tr>
+        <td>sidebarRightOverContent()</td>
+        <td>boolean</td>
+        <td>Programmatically set if sidebar right slide over content.</td>
+      </tr>
+      <tr>
+        <td>setSidebarLeftMenu()</td>
+        <td>Array</td>
+        <td>Update sidebar right menu.</td>
+      </tr>
+      <tr>
+        <td>setLayout()</td>
+        <td>string</td>
+        <td>Update layout style.</td>
+      </tr>
+      <tr>
+        <td>setSkin()</td>
+        <td>string</td>
+        <td>Update theme skin.</td>
+      </tr>
+    </tbody>
+  </table>
+</mk-box>
+
+<mk-box header="Layout subscriptions" [isCollapsable]="false" [isRemovable]="false">
+  <table class="table table-bordered table-hover">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Parameters</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>isSidebarLeftCollapsed</td>
+        <td>Observable&lt;boolean&gt;</td>
+        <td>Subscribe to sidebar left collapse status.</td>
+      </tr>
+      <tr>
+        <td>isSidebarLeftExpandOnOver</td>
+        <td>Observable&lt;boolean&gt;</td>
+        <td>Subscribe to sidebar left expand on over status.</td>
+      </tr>
+      <tr>
+        <td>isSidebarLeftMini</td>
+        <td>Observable&lt;boolean&gt;</td>
+        <td>Subscribe to sidebar left mini status.</td>
+      </tr>
+      <tr>
+        <td>sidebarRightSkin</td>
+        <td>Observable&lt;string&gt;</td>
+        <td>Subscribe to sidebar right skin.</td>
+      </tr>
+      <tr>
+        <td>isSidebarRightCollapsed</td>
+        <td>Observable&lt;boolean&gt;</td>
+        <td>Subscribe to sidebar right collapsed status.</td>
+      </tr>
+      <tr>
+        <td>isSidebarRightOverContent</td>
+        <td>Observable&lt;Array&gt;</td>
+        <td>Subscribe to sidebar right over content status.</td>
+      </tr>
+      <tr>
+        <td>layout</td>
+        <td>Observable&lt;string&gt;</td>
+        <td>Subscribe to layout style changes.</td>
+      </tr>
+      <tr>
+        <td>skin</td>
+        <td>Observable&lt;string&gt;</td>
+        <td>Subscribe to theme skin changes.</td>
+      </tr>
+    </tbody>
+  </table>
+</mk-box>

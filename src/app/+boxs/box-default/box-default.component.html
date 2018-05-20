@@ -1,0 +1,201 @@
+<div class="row">
+  <div class="col-md-3 col-xs-12">
+    <mk-box header="Expandable Box Default" [isRemovable]="false" [isCollapsed]="true">
+      The body of the box
+    </mk-box>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-box header="Collapsable Box Success" boxColor="green" [isRemovable]="false">
+      The body of the box
+    </mk-box>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-box header="isRemovable Box Warning" boxColor="warning" [isCollapsable]="false">
+      The body of the box
+    </mk-box>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-box header="isLoading Box Danger" boxColor="danger" [isCollapsable]="false" [isLoading]="true" [isRemovable]="false">
+      The body of the box
+    </mk-box>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3 col-xs-12">
+    <mk-box header="Expandable Solid Box Primary" [isRemovable]="false" [isCollapsed]="true" [isSolid]="true">
+      The body of the box
+    </mk-box>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-box header="Collapsable Solid Box Success" boxColor="success" [isRemovable]="false" [isSolid]="true">
+      The body of the box
+    </mk-box>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-box header="isRemovable Solid Box Warning" boxColor="purple" [isCollapsable]="false" [isSolid]="true">
+      The body of the box
+    </mk-box>
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <mk-box header="isLoading Solid Box Danger" boxColor="danger" [isCollapsable]="false" [isRemovable]="false" [isLoading]="true" loadingColor="red" [isSolid]="true">
+      The body of the box
+    </mk-box>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-xs-12">
+    <mk-box header="Box with Text header & footer" [isCollapsable]="false" [isRemovable]="false">
+      <pre><code class="language-html">&lt;mk-box header="Box header" footer="Box footer"&gt;
+  Box content
+&lt;/mk-box&gt;</code></pre>
+    </mk-box>
+  </div>
+  <div class="col-md-6 col-xs-12">
+    <mk-box header="Box with HTML header & footer" [isCollapsable]="false" [isRemovable]="false">
+      <pre><code class="language-html">&lt;mk-box&gt;
+  &lt;mk-box-header&gt;HTML Box header&lt;/mk-box-header&gt;
+  &lt;mk-box-tools&gt;&lt;button&gt;Additionnal Box Buttons&lt;/button&gt;&lt;/mk-box-tools&gt;
+  &lt;mk-box-content&gt;HTML Box content&lt;/mk-box-content&gt;
+  &lt;mk-box-footer&gt;HTML Box footer&lt;/mk-box-footer&gt;
+&lt;/mk-box&gt;</code></pre>
+    </mk-box>
+  </div>
+</div>
+
+<mk-box header="Properties" [isCollapsable]="true" [isRemovable]="false" contentStyleClass="table-responsive">
+  <table class="table table-bordered table-hover">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>boxColor</td>
+        <td>string (default | primary | success | info | warning | danger | rgb | rgba | hex)</td>
+        <td>box-default</td>
+        <td>The box color.</td>
+      </tr>
+      <tr>
+        <td>buttonsStyleClass</td>
+        <td>string</td>
+        <td>null</td>
+        <td>The box collapse & remove buttons style classes.</td>
+      </tr>
+      <tr>
+        <td>contentStyleClass</td>
+        <td>string</td>
+        <td>box-content-wrapper</td>
+        <td>The box content style classes.</td>
+      </tr>
+      <tr>
+        <td>footer</td>
+        <td>string</td>
+        <td>null</td>
+        <td>
+          Footer text of the box.<br/>
+          <em>Note: You can use &lt;mk-box-footer&gt; for HTML footer.</em>
+        </td>
+      </tr>
+      <tr>
+        <td>footerStyleClass</td>
+        <td>string</td>
+        <td>box-footer</td>
+        <td>The box footer style classes.</td>
+      </tr>
+      <tr>
+        <td>header</td>
+        <td>string</td>
+        <td>null</td>
+        <td>
+          Header text of the box.<br/>
+          <em>Note: You can use &lt;mk-box-content&gt; for HTML header.</em>
+        </td>
+      </tr>
+      <tr>
+        <td>headerBorder</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>Defines if header and content is separated with a border.</td>
+      </tr>
+      <tr>
+        <td>headerStyleClass</td>
+        <td>string</td>
+        <td>box-header</td>
+        <td>The box header style classes.</td>
+      </tr>
+      <tr>
+        <td>isCollapsable</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>Defines if box content can be expanded and collapsed.</td>
+      </tr>
+      <tr>
+        <td>isCollapsed</td>
+        <td>boolean</td>
+        <td>false</td>
+        <td>Defines if box content is collapsed.</td>
+      </tr>
+      <tr>
+        <td>isLoading</td>
+        <td>boolean</td>
+        <td>false</td>
+        <td>Show a loading animation.</td>
+      </tr>
+      <tr>
+        <td>isRemovable</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>Defines if box can be removed.</td>
+      </tr>
+      <tr>
+        <td>isSolid</td>
+        <td>boolean</td>
+        <td>false</td>
+        <td>If false the box have border top color, if true the box have filled header and borders.</td>
+      </tr>
+      <tr>
+        <td>loadingColor</td>
+        <td>string</td>
+        <td>null</td>
+        <td>The box loading icon font color.</td>
+      </tr>
+      <tr>
+        <td>loadingStyleClass</td>
+        <td>string</td>
+        <td>fa fa-refresh fa-spin</td>
+        <td>The box loading icon style classes.</td>
+      </tr>
+      <tr>
+        <td>styleClass</td>
+        <td>string</td>
+        <td>box</td>
+        <td>The box style classes.</td>
+      </tr>
+    </tbody>
+  </table>
+</mk-box>
+
+<mk-box header="Events" [isCollapsable]="true" [isRemovable]="false" contentStyleClass="table-responsive">
+  <table class="table table-bordered table-hover">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Parameters</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>onCollapseStart</td>
+        <td>event: browser event</td>
+        <td>Callback to invoke before content toggle</td>
+      </tr>
+      <tr>
+        <td>onCollapseDone</td>
+        <td>event: browser event</td>
+        <td>Callback to invoke after content toggle</td>
+      </tr>
+    </tbody>
+  </table>
+</mk-box>

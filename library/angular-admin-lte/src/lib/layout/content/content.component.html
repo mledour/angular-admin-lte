@@ -1,0 +1,16 @@
+<div class="content-wrapper" [style.min-height.px]="heightStyle">
+  <div #contentInnerElement class="content-inner">
+    <ng-content select="[mk-layout-content-before-header]"></ng-content>
+    <section *ngIf="header || description" class="content-header">
+      <h1>
+        {{header}}
+        <small *ngIf="description">{{description}}</small>
+      </h1>
+      <mk-breadcrumbs></mk-breadcrumbs>
+    </section>
+    <ng-content select="[mk-layout-content-after-header]"></ng-content>
+    <section class="content">
+      <ng-content></ng-content>
+    </section>
+  </div>
+</div>

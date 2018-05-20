@@ -1,0 +1,22 @@
+.callout-dismissable,
+.callout-dismissible {
+  padding-right: 35px;
+}
+
+.callout-dismissable .close,
+.callout-dismissible .close {
+    position: relative;
+    top: -2px;
+    right: -21px;
+    color: inherit;
+}
+
+.callout .close {
+  color: #000;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
+
+.callout .icon {
+  margin-right: 10px;
+}

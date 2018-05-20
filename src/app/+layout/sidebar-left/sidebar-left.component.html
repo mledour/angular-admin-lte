@@ -1,0 +1,85 @@
+<mk-box header="About sidebar left component" [isCollapsable]="false" [isRemovable]="false">
+  <p>The sidebar left component is used for displaying the menu of the layout configuraton (see <a routerLink="/layout/configuration">layout configuration</a>).<br/> Yon can also add any HTML elements which will be displayed above the menu.</p>
+</mk-box>
+
+<mk-box header="HTML" [isCollapsable]="false" [isRemovable]="false">
+  <pre><code class="language-html">&lt;mk-layout-sidebar-left&gt;
+&lt;div class=&quot;user-panel&quot;&gt;
+  &lt;div class=&quot;pull-left image&quot;&gt;
+    &lt;img src=&quot;assets/img/user2-160x160.jpg&quot; class=&quot;img-circle&quot; alt=&quot;User Image&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;pull-left info&quot;&gt;
+    &lt;p&gt;Alexander Pierce&lt;/p&gt;
+    &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-circle text-success&quot;&gt;&lt;/i&gt; Online&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;form action=&quot;#&quot; method=&quot;get&quot; class=&quot;sidebar-form&quot;&gt;
+  &lt;div class=&quot;input-group&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;q&quot; class=&quot;form-control&quot; placeholder=&quot;Search...&quot;&gt;
+    &lt;span class=&quot;input-group-btn&quot;&gt;
+      &lt;button type=&quot;submit&quot; name=&quot;search&quot; id=&quot;search-btn&quot; class=&quot;btn btn-flat&quot;&gt;&lt;i class=&quot;fa fa-search&quot;&gt;&lt;/i&gt;
+      &lt;/button&gt;
+    &lt;/span&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+&lt;/mk-layout-sidebar-left&gt;
+</code></pre>
+</mk-box>
+
+<mk-box header="sidebar left menu configuration" [isCollapsable]="true" [isRemovable]="false" contentStyleClasses="table-responsive">
+  <pre><code class="language-typescript">sidebarLeftMenu: [
+  &#123;label: 'MAIN NAVIGATION', separator: true&#125;,
+  &#123;label: 'Start', route: '/', iconClasses: 'fa fa-th'&#125;,
+  &#123;label: 'Parent', iconClasses: 'fa fa-files-o', children: [
+    &#123;label: 'Children', route: 'parent/children'&#125;,
+    &#123;label: 'Parent 2', children: [
+      &#123;label: 'Children 2', route: 'parent/parent2/children2'&#125;
+    ]&#125;
+    ...
+  ]&#125;
+]
+  </code></pre>
+</mk-box>
+
+<mk-box header="sidebar left menu item properties" [isCollapsable]="true" [isRemovable]="false" contentStyleClasses="table-responsive">
+  <table class="table table-bordered table-hover">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Label</td>
+        <td>string</td>
+        <td>null</td>
+        <td>Set the menu item label.</td>
+      </tr>
+      <tr>
+        <td>iconClasses</td>
+        <td>string</td>
+        <td>'fa fa-circle-o'</td>
+        <td>Set the menu item iclon classes.</td>
+      </tr>
+      <tr>
+        <td>separator</td>
+        <td>boolean</td>
+        <td>false</td>
+        <td>Defines if the menu item is a separator.</td>
+      </tr>
+      <tr>
+        <td>route</td>
+        <td>string</td>
+        <td>null</td>
+        <td>Set the menu item route.</td>
+      </tr>
+      <tr>
+        <td>children</td>
+        <td>Array&lt;Item&gt;</td>
+        <td>null</td>
+        <td>Defines the item children.</td>
+      </tr>
+    </tbody>
+  </table>
+</mk-box>
