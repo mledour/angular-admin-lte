@@ -14,7 +14,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:lib": "ng build angular-admin-lte",
+    "build:demo": "ng build angular-admin-lte-demo",
     "test": "ng test",
+    "test:demo": "ng test angular-admin-lte-demo",
+    "test:lib": "ng test angular-admin-lte",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
