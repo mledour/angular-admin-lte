@@ -20,7 +20,8 @@
     "test:demo": "ng test angular-admin-lte-demo",
     "test:lib": "ng test angular-admin-lte",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "publish:lib": "npm publish dist/angular-admin-lte"
   },
   "repository": {
     "type": "git",
