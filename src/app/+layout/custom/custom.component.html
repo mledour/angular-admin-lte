@@ -1,0 +1,52 @@
+<mk-box header="About custom layout" [isCollapsable]="false" [isRemovable]="false">
+  <p>You can completely disable layout components to create custom page layout like <a routerLink="/login">Login</a> and <a routerLink="/register">Register</a> pages.</p>
+</mk-box>
+
+<mk-box header="Configuration" [isCollapsable]="false" [isRemovable]="false">
+  <p>First you will need to import LayoutService and subscribe to isCustomLayout in the main app component:</p>
+  <pre><code class="language-typescript">import &#123; Component, OnInit } from '@angular/core';
+import &#123; LayoutService } from '../../../src';
+
+@Component(&#123;
+  selector: 'app-root',
+  templateUrl: './app.component.html'
+&#125;)
+export class AppComponent implements OnInit &#123;
+  public isCustomLayout: boolean;
+
+  constructor(
+    private layoutService: LayoutService
+  ) &#123;&#125;
+
+  ngOnInit() &#123;
+    this.layoutService.isCustomLayout.subscribe((value: boolean) => &#123;
+      this.isCustomLayout = value;
+    &#125;);
+  }
+}</code></pre>
+
+  <br/>
+  <p>Wrap the main component html like so:</p>
+  <pre><code class="language-html">&lt;ng-container *ngIf="isCustomLayout else noCustomLayout"&gt;
+  &lt;router-outlet&gt;&lt;/router-outlet&gt;
+&lt;/ng-container&gt;
+&lt;ng-template #layoutEnabled&gt;
+  &lt;mk-layout-wrapper&gt;
+    ...
+  &lt;/mk-layout-wrapper&gt;
+&lt;ng-template&gt;</code></pre>
+
+<br/>
+<p>Configure the router:</p>
+<pre><code class="language-typescript">
+  ...
+  , &#123;
+    path: 'login',
+    loadChildren: 'app/login/login.module#LoginModule',
+    data: &#123;
+      customLayout: true
+    &#125;
+  &#125;,
+  ...
+</code></pre>
+</mk-box>

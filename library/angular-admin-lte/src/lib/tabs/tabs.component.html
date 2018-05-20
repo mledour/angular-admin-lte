@@ -1,0 +1,23 @@
+<div [ngClass]="styleClass">
+  <ul [ngClass]="navStyleClass" [class.pull-right]="header || tabsHeaderComponent">
+    <li *ngFor="let tab of tabs" [class.active]="tab.isActive" [mkColor]="tab.tabColor || tabsColor" mkColorProperty="border-top-color">
+      <a *ngIf="!tab.isDisabled" [mkTabToggle]="tab" href="#">
+        {{tab.header}}
+        <ng-template *ngIf="!tab.header" [ngTemplateOutlet]="tab.tabHeaderComponent?.templateRef"></ng-template>
+      </a>
+      <ng-template [ngIf]="tab.isDisabled">
+        {{tab.header}}
+        <ng-template *ngIf="!tab.header" [ngTemplateOutlet]="tab.tabHeaderComponent.templateRef"></ng-template>
+      </ng-template>
+    </li>
+    <li *ngIf="tabsHeaderComponent || header" [ngClass]="headerStyleClass">
+      {{header}}
+      <ng-template *ngIf="!header" [ngTemplateOutlet]="tabsHeaderComponent.templateRef"></ng-template>
+    </li>
+  </ul>
+  <div [ngClass]="contentStyleClass">
+    <div *ngFor="let tab of tabs" class="tab-pane" [class.active]="tab.isActive">
+      <ng-template [ngTemplateOutlet]="tab.contentTemplateRef"></ng-template>
+    </div>
+  </div>
+</div>

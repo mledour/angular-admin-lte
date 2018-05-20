@@ -1,42 +1,40 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "library",
   "projects": {
-    "angular-admin-lte": {
+    "angular-admin-lte-demo": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "demo/dist",
-            "index": "demo/src/index.html",
-            "main": "demo/src/main.ts",
-            "tsConfig": "demo/src/tsconfig.app.json",
-            "polyfills": "demo/src/polyfills.ts",
+            "outputPath": "dist/angular-admin-lte-demo",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              { "glob": "**/*", "input": "demo/src/assets/", "output": "/assets/" },
-              { "glob": "favicon.ico", "input": "demo/src", "output": "/" },
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/font-awesome/css/font-awesome.css",
-              "node_modules/ionicons/css/ionicons.css",
-              "node_modules/morris.js/morris.css",
-              "node_modules/prismjs/themes/prism-tomorrow.css",
-              "node_modules/admin-lte/dist/css/AdminLTE.css",
-              "node_modules/admin-lte/dist/css/skins/_all-skins.css",
-              "demo/src/styles.css"
+              "src/styles.css"
             ],
-            "scripts": [
-              "node_modules/prismjs/prism.js",
-              "node_modules/prismjs/components/prism-typescript.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -45,57 +43,41 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
-              "fileReplacements": [
-                {
-                  "replace": "demo/src/environments/environment.ts",
-                  "with": "demo/src/environments/environment.prod.ts"
-                }
-              ]
+              "buildOptimizer": true
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-admin-lte:build"
+            "browserTarget": "angular-admin-lte-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-admin-lte:build:production"
+              "browserTarget": "angular-admin-lte-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-admin-lte:build"
+            "browserTarget": "angular-admin-lte-demo:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "demo/src/test.ts",
-            "karmaConfig": "./karma.conf.js",
-            "polyfills": "demo/src/polyfills.ts",
-            "tsConfig": "demo/src/tsconfig.spec.json",
-            "scripts": [
-              "node_modules/prismjs/prism.js",
-              "node_modules/prismjs/components/prism-typescript.js"
-            ],
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/font-awesome/css/font-awesome.css",
-              "node_modules/ionicons/css/ionicons.css",
-              "node_modules/morris.js/morris.css",
-              "node_modules/prismjs/themes/prism-tomorrow.css",
-              "node_modules/admin-lte/dist/css/AdminLTE.css",
-              "node_modules/admin-lte/dist/css/skins/_all-skins.css",
-              "demo/src/styles.css"
+              "styles.css"
             ],
+            "scripts": [],
             "assets": [
-              "demo/src/assets",
-              "demo/src/favicon.ico"
+              "src/favicon.ico",
+              "src/assets"
             ]
           }
         },
@@ -103,8 +85,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "demo/src/tsconfig.app.json",
-              "demo/src/tsconfig.spec.json"
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -113,23 +95,60 @@
         }
       }
     },
-    "angular-admin-lte-e2e": {
-      "root": "",
-      "sourceRoot": "",
+    "angular-admin-lte-demo-e2e": {
+      "root": "e2e/",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "angular-admin-lte:serve"
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "angular-admin-lte-demo:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "angular-admin-lte": {
+      "root": "library/angular-admin-lte",
+      "sourceRoot": "library/angular-admin-lte/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "library/angular-admin-lte/tsconfig.lib.json",
+            "project": "library/angular-admin-lte/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "library/angular-admin-lte/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "library/angular-admin-lte/src/test.ts",
+            "tsConfig": "library/angular-admin-lte/tsconfig.spec.json",
+            "karmaConfig": "library/angular-admin-lte/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "e2e/tsconfig.e2e.json"
+              "library/angular-admin-lte/tsconfig.lib.json",
+              "library/angular-admin-lte/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -139,14 +158,5 @@
       }
     }
   },
-  "defaultProject": "angular-admin-lte",
-  "schematics": {
-    "@schematics/angular:component": {
-      "prefix": "app",
-      "styleext": "css"
-    },
-    "@schematics/angular:directive": {
-      "prefix": "app"
-    }
-  }
+  "defaultProject": "angular-admin-lte-demo"
 }
