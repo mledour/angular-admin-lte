@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 
-declare var Prism;
+import * as Prism from 'prismjs';
 
 @Component({
   templateUrl: './tabs.component.html',

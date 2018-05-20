@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 
-declare var Prism;
+import * as Prism from 'prismjs';
 
 @Component({
   selector: 'app-sidebar-right',

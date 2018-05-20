@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BoxInfoComponent } from './box-info.component';
 
-import { BoxModule, BoxInfoModule } from '../../../../../lib';
+import { BoxModule, BoxInfoModule } from 'angular-admin-lte';
 
 describe('BoxInfoComponent', () => {
   let component: BoxInfoComponent;

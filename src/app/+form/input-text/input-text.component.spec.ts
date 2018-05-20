@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InputTextComponent } from './input-text.component';
 
-import { BoxModule, InputGroupModule, InputTextModule } from '../../../../../lib';
+import { BoxModule, InputGroupModule, InputTextModule } from 'angular-admin-lte';
 
 describe('InputTextComponent', () => {
   let component: InputTextComponent;

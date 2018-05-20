@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlertComponent } from './alert.component';
 
-import { AlertModule, BoxModule } from '../../../../lib';
+import { AlertModule, BoxModule } from 'angular-admin-lte';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;

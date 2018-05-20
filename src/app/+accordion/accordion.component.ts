@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, NgZone, ChangeDetectorRef } from '@angular/core';
 
-declare var Prism;
+import * as Prism from 'prismjs';
 
 @Component({
   selector: 'app-accordion',
