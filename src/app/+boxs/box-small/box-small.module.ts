@@ -15,4 +15,4 @@ import { BoxModule, BoxSmallModule as MkBoxSmallModule  } from 'angular-admin-lt
   ],
   declarations: [BoxSmallComponent]
 })
-export class BoxSmallModule { }
+export class BoxSmallModule {}
