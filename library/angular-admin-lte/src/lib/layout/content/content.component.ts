@@ -9,7 +9,7 @@ import { SidebarRightService } from '../sidebar-right/sidebar-right.service';
 import { HeaderService } from '../header/header.service';
 import { FooterService } from '../footer/footer.service';
 
-import { throttle, removeSubscriptions, removeListeners } from '../../helpers';
+import { removeSubscriptions } from '../../helpers';
 
 @Component({
   selector: 'mk-layout-content',
