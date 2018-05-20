@@ -14,14 +14,15 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:lib": "ng build angular-admin-lte --prod",
+    "libCopyFiles": "cp README.md LICENSE dist/angular-admin-lte",
+    "build:lib": "ng build angular-admin-lte --prod && npm run libCopyFiles",
+    "publish:lib": "npm publish dist/angular-admin-lte",
     "build:demo": "ng build angular-admin-lte-demo --prod",
     "test": "ng test",
     "test:demo": "ng test angular-admin-lte-demo",
     "test:lib": "ng test angular-admin-lte",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "publish:lib": "npm publish dist/angular-admin-lte"
+    "e2e": "ng e2e"
   },
   "repository": {
     "type": "git",
