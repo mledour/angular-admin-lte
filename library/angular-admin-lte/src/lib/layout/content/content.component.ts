@@ -22,7 +22,6 @@ export class ContentComponent implements OnInit, OnDestroy {
   public header: string;
   public heightStyle: number;
   public sidebarLeftHeight: number;
-  public sidebarRightHeight: number;
   public windowInnerHeight: number;
 
   private layout: string;
@@ -34,10 +33,15 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   /**
    * @method constructor
-   * @param private layoutStore    [description]
-   * @param private layoutService  [description]
-   * @param private routingService [description]
-   * @param private titleService   [description]
+   * @param layoutStore
+   * @param routingService
+   * @param titleService
+   * @param elementRef
+   * @param changeDetectorRef
+   * @param sidebarRightService
+   * @param headerService
+   * @param footerService
+   * @param router
    */
   constructor(
     private layoutStore: LayoutStore,
@@ -58,7 +62,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.titleTag = this.titleService.getTitle();
 
     this.subscriptions.push(this.routingService.onChange.subscribe((value: any) => {
-      if(value && value[value.length - 1]) {
+      if (value && value[value.length - 1]) {
         this.titleService.setTitle(this.getTitle(value[value.length - 1].data['title']));
         this.header = value[value.length - 1].data['title'];
         this.description = value[value.length - 1].data['description'];
@@ -67,10 +71,10 @@ export class ContentComponent implements OnInit, OnDestroy {
     }));
 
     this.subscriptions.push(this.router.events.subscribe((routeEvent: RouterEvent) => {
-      if(routeEvent instanceof NavigationStart) {
+      if (routeEvent instanceof NavigationStart) {
         this.navigationEnd = false;
       }
-      if(routeEvent instanceof NavigationEnd) {
+      if (routeEvent instanceof NavigationEnd) {
         this.navigationEnd = true;
         this.setContentMinHeight();
       }
@@ -124,19 +128,27 @@ export class ContentComponent implements OnInit, OnDestroy {
    * @method setMinHeight
    */
   private setContentMinHeight(): void {
-    if(this.navigationEnd) {
-      let heightStyle,
-          headerFooterOffsetHeight = this.headerService.offsetHeight + this.footerService.offsetHeight;
+    if (this.navigationEnd) {
+      let heightStyle;
 
-      if(this.layout === 'fixed') {
+      const headerFooterOffsetHeight = this.headerService.offsetHeight + this.footerService.offsetHeight;
+
+      if (this.layout === 'fixed') {
         heightStyle = this.windowInnerHeight - this.footerService.offsetHeight;
       } else {
-        let sidebarRight = this.sidebarRightService.scrollHeight ? this.sidebarRightService.scrollHeight - this.headerService.offsetHeight: 0;
-        heightStyle = Math.max(this.windowInnerHeight - headerFooterOffsetHeight, this.sidebarLeftHeight - this.headerService.offsetHeight, sidebarRight);
+        const sidebarRight =
+          this.sidebarRightService.scrollHeight ?
+            this.sidebarRightService.scrollHeight - this.headerService.offsetHeight : 0;
+
+        heightStyle = Math.max(
+          this.windowInnerHeight - headerFooterOffsetHeight,
+          this.sidebarLeftHeight - this.headerService.offsetHeight,
+          sidebarRight
+        );
       }
 
-      if(heightStyle && heightStyle !== this.heightStyle) {
-        if(this.scrollHeight > heightStyle) {
+      if (heightStyle && heightStyle !== this.heightStyle) {
+        if (this.scrollHeight > heightStyle) {
           heightStyle = null;
         }
         this.heightStyle = heightStyle;
