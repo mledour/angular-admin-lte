@@ -1,6 +1,6 @@
 {
   "name": "angular-admin-lte-demo",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "keywords": [
     "angular",
     "angular 2",
@@ -14,8 +14,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:lib": "ng build angular-admin-lte",
-    "build:demo": "ng build angular-admin-lte-demo",
+    "build:lib": "ng build angular-admin-lte --prod",
+    "build:demo": "ng build angular-admin-lte-demo --prod",
     "test": "ng test",
     "test:demo": "ng test angular-admin-lte-demo",
     "test:lib": "ng test angular-admin-lte",
