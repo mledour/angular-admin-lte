@@ -64,7 +64,7 @@ export class AccordionComponent implements OnInit {
     this.headerStyleColor = this.headerColor;
 
     if(!this.header && !this.accordionHeaderComponent) {
-      throw new Error('Attribute "header" OR Component "mk-accordion-header" is required for component "mk-accordion"');
+      throw new Error('Attribute "header" OR Component "mk-+accordion-header" is required for component "mk-+accordion"');
     }
 
     if(this.accordionContentComponent) {

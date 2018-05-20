@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SidebarRightInnerComponent } from './sidebar-right-inner.component';
-import { TabsModule, LayoutModule } from '../../../../../lib';
+import { TabsModule, LayoutModule } from 'angular-admin-lte';
 
 describe('SidebarRightInnerComponent', () => {
   let component: SidebarRightInnerComponent;

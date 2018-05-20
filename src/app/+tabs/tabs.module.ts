@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TabsRoutingModule } from './tabs-routing.module';
 import { TabsComponent } from './tabs.component';
 
-import { TabsModule as MkTabsModule, BoxModule, DropdownModule } from '../../../../lib';
+import { TabsModule as MkTabsModule, BoxModule, DropdownModule } from 'angular-admin-lte';
 
 @NgModule({
   imports: [

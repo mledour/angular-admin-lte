@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LayoutService } from '../../../lib';
+import { LayoutService } from 'angular-admin-lte';
 
 @Component({
   selector: 'app-root',

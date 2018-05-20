@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TabsComponent } from './tabs.component';
 
-import { BoxModule, TabsModule, DropdownModule } from '../../../../lib';
+import { BoxModule, TabsModule, DropdownModule } from 'angular-admin-lte';
 
 describe('TabsComponent', () => {
   let component: TabsComponent;

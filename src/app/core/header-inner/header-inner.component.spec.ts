@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderInnerComponent } from './header-inner.component';
 
-import { DropdownModule } from '../../../../../lib';
+import { DropdownModule } from 'angular-admin-lte';
 
 describe('HeaderInnerComponent', () => {
   let component: HeaderInnerComponent;

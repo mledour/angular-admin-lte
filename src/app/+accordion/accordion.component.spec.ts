@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccordionComponent } from './accordion.component';
 
-import { AccordionModule, BoxModule } from '../../../../lib';
+import { AccordionModule, BoxModule } from 'angular-admin-lte';
 
 describe('AccordionComponent', () => {
   let component: AccordionComponent;

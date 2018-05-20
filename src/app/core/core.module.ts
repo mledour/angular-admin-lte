@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { BoxModule, TabsModule, DropdownModule } from '../../../../lib';
+import { BoxModule, TabsModule, DropdownModule } from 'angular-admin-lte';
 
 import { HeaderInnerComponent } from './header-inner/header-inner.component';
 import { SidebarLeftInnerComponent } from './sidebar-left-inner/sidebar-left-inner.component';

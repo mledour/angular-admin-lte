@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SidebarLeftComponent } from './sidebar-left.component';
 
-import { BoxModule } from '../../../../../lib';
+import { BoxModule } from 'angular-admin-lte';
 
 describe('SidebarLeftComponent', () => {
   let component: SidebarLeftComponent;

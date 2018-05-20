@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BoxSmallComponent } from './box-small.component';
 
-import { BoxModule, BoxSmallModule } from '../../../../../lib';
+import { BoxModule, BoxSmallModule as MkBoxSmallModule  } from 'angular-admin-lte';
 
 describe('BoxSmallComponent', () => {
   let component: BoxSmallComponent;
@@ -12,7 +12,7 @@ describe('BoxSmallComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BoxModule,
-        BoxSmallModule
+        MkBoxSmallModule
       ],
       declarations: [ BoxSmallComponent ]
     })

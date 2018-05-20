@@ -18,7 +18,7 @@
     ],
     "paths": {
       "angular-admin-lte": [
-        "dist/angular-admin-lte"
+        "library/angular-admin-lte/src"
       ]
     }
   }

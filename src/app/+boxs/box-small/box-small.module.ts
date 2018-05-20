@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { BoxSmallRoutingModule } from './box-small-routing.module';
 import { BoxSmallComponent } from './box-small.component';
 
-import { BoxModule, BoxSmallModule as MkBoxSmallModule  } from '../../../../../lib';
+import { BoxModule, BoxSmallModule as MkBoxSmallModule  } from 'angular-admin-lte';
 
 @NgModule({
   imports: [
@@ -15,4 +15,4 @@ import { BoxModule, BoxSmallModule as MkBoxSmallModule  } from '../../../../../l
   ],
   declarations: [BoxSmallComponent]
 })
-export class BoxSmallModule { }
+export class BoxSmallModule {}

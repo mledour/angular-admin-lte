@@ -1,6 +1,6 @@
-import { Component, AfterViewInit, NgZone, ChangeDetectorRef } from '@angular/core';
+import {Component, AfterViewInit, NgZone, ChangeDetectorRef, ViewRef} from '@angular/core';
 
-declare var Prism;
+import * as Prism from 'prismjs';
 
 @Component({
   selector: 'app-accordion',
@@ -10,6 +10,11 @@ declare var Prism;
 export class AccordionComponent implements AfterViewInit {
   public activeIndex: any = 0;
 
+  /**
+   *
+   * @param {NgZone} ngZone
+   * @param {ChangeDetectorRef} changeDetectorRef
+   */
   constructor(
     private ngZone: NgZone,
     private changeDetectorRef: ChangeDetectorRef
@@ -23,8 +28,10 @@ export class AccordionComponent implements AfterViewInit {
 
     this.ngZone.runOutsideAngular(() => {
       setTimeout(() => {
-        this.activeIndex = [1,2,3];
-        this.changeDetectorRef.detectChanges();
+        this.activeIndex = [1, 2, 3];
+        if (! (this.changeDetectorRef as ViewRef).destroyed) {
+          this.changeDetectorRef.detectChanges();
+        }
       }, 500);
     });
 

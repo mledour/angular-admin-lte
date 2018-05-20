@@ -1,7 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-declare var Prism;
+import * as Prism from 'prismjs';
 
 @Component({
   selector: 'app-sidebar-left',
