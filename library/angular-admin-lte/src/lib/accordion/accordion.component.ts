@@ -1,10 +1,30 @@
-import { Component, OnInit, AfterContentInit, AfterViewInit, OnChanges, SimpleChanges, Input, ViewChild, ContentChild, ContentChildren, OnDestroy, QueryList, TemplateRef, EventEmitter, Output, ViewChildren, NgZone, Renderer2, ChangeDetectorRef } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ContentChild,
+  ContentChildren,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  QueryList,
+  Renderer2,
+  SimpleChanges,
+  TemplateRef,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 
-import { AnimationEvent } from '../animations/animations.interface';
+import {AnimationEvent} from '../animations/animations.interface';
 
-import { AccordionToggleDirective } from './accordion.directive';
+import {AccordionToggleDirective} from './accordion.directive';
 
-import { removeSubscriptions, removeListeners } from '../helpers';
+import {removeListeners, removeSubscriptions} from '../helpers';
 
 /*
  *
@@ -63,11 +83,11 @@ export class AccordionComponent implements OnInit {
   ngOnInit() {
     this.headerStyleColor = this.headerColor;
 
-    if(!this.header && !this.accordionHeaderComponent) {
+    if (!this.header && !this.accordionHeaderComponent) {
       throw new Error('Attribute "header" OR Component "mk-+accordion-header" is required for component "mk-+accordion"');
     }
 
-    if(this.accordionContentComponent) {
+    if (this.accordionContentComponent) {
       this.contentTemplateRef = this.accordionContentComponent.templateRef;
     } else {
       this.contentTemplateRef = this.templateRef;
@@ -92,7 +112,7 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
     this.activeIndex = value instanceof Array ? value : [value];
   }
   @Input() public isMultiple: boolean;
-  @Input() public styleClass = 'box-group'
+  @Input() public styleClass = 'box-group';
 
   @Output() public onCollapseStart = new EventEmitter();
   @Output() public onCollapseDone = new EventEmitter();
@@ -114,13 +134,33 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
   ) {}
 
   /**
+   * [headerMouseLeave description]
+   * @method headerMouseLeave
+   * @param accordion [description]
+   */
+  public static headerMouseLeave(accordion: AccordionComponent): void {
+    accordion.headerStyleColor = accordion.headerColor;
+  }
+
+  /**
+   * [headerMouseEnter description]
+   * @method headerMouseEnter
+   * @param accordion [description]
+   */
+  public static headerMouseEnter(accordion: AccordionComponent): void {
+    if (accordion.headerColorHover) {
+      accordion.headerStyleColor = accordion.headerColorHover;
+    }
+  }
+
+  /**
    * @method ngAfterViewInit
    */
   ngAfterContentInit() {
     this.setAccordionsIndex();
     this.updateAccordionIsCollapsed();
 
-    this.subscriptions.push(this.accordionComponents.changes.subscribe(changes => {
+    this.subscriptions.push(this.accordionComponents.changes.subscribe(() => {
       this.setAccordionsIndex();
     }));
   }
@@ -131,7 +171,7 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
   ngAfterViewInit() {
     this.setAccordionsToggle();
 
-    this.subscriptions.push(this.accordionToggleDirectives.changes.subscribe(changes => {
+    this.subscriptions.push(this.accordionToggleDirectives.changes.subscribe(() => {
       this.setAccordionsToggle();
     }));
   }
@@ -143,7 +183,7 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
    * @return [description]
    */
   ngOnChanges(changes: SimpleChanges) {
-    if(changes._activeIndex.firstChange === false) {
+    if (changes._activeIndex.firstChange === false) {
       this.updateAccordionIsCollapsed();
     }
   }
@@ -157,26 +197,6 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
   }
 
   /**
-   * [headerMouseEnter description]
-   * @method headerMouseEnter
-   * @param accordion [description]
-   */
-  public headerMouseEnter(accordion: AccordionComponent): void {
-    if(accordion.headerColorHover) {
-      accordion.headerStyleColor = accordion.headerColorHover;
-    }
-  }
-
-  /**
-   * [headerMouseLeave description]
-   * @method headerMouseLeave
-   * @param accordion [description]
-   */
-  public headerMouseLeave(accordion: AccordionComponent): void {
-    accordion.headerStyleColor = accordion.headerColor;
-  }
-
-  /**
    * [toggleAccordion description]
    * @method toggleAccordion
    * @param event       [description]
@@ -185,15 +205,15 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
   public toggleAccordion(event: Event, toggleIndex: number): void {
     event.preventDefault();
 
-    let indexOf = this.activeIndex['indexOf'](toggleIndex);
-    if(indexOf === -1) {
-      if(this.isMultiple) {
+    const indexOf = this.activeIndex['indexOf'](toggleIndex);
+    if (indexOf === -1) {
+      if (this.isMultiple) {
         this.activeIndex.push(toggleIndex);
       } else {
         this.activeIndex = [toggleIndex];
       }
     } else {
-      if(this.isMultiple) {
+      if (this.isMultiple) {
         this.activeIndex.splice(indexOf, 1);
       } else {
         this.activeIndex = [];
@@ -206,7 +226,7 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
    * [collapseStart description]
    * @method collapseStart
    * @param event [description]
-   * @param index [description]
+   * @param accordion [description]
    */
   public collapseStart(event: AnimationEvent, accordion: AccordionComponent): void {
     accordion.isCollapsing = true;
@@ -217,6 +237,7 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
    * [collapseDone description]
    * @method collapseDone
    * @param event [description]
+   * @param accordion [description]
    */
   public collapseDone(event: AnimationEvent, accordion: AccordionComponent): void {
     accordion.isCollapsing = false;
@@ -246,12 +267,12 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
           this.toggleAccordion(event, accordionToggle.accordionComponent.index);
           this.changeDetectorRef.detectChanges();
         }));
-        this.listeners.push(this.renderer2.listen(accordionToggle.elementRef.nativeElement, 'mouseenter', (event) => {
-          this.headerMouseEnter(accordionToggle.accordionComponent);
+        this.listeners.push(this.renderer2.listen(accordionToggle.elementRef.nativeElement, 'mouseenter', () => {
+          AccordionGroupComponent.headerMouseEnter(accordionToggle.accordionComponent);
           this.changeDetectorRef.detectChanges();
         }));
-        this.listeners.push(this.renderer2.listen(accordionToggle.elementRef.nativeElement, 'mouseleave', (event) => {
-          this.headerMouseLeave(accordionToggle.accordionComponent);
+        this.listeners.push(this.renderer2.listen(accordionToggle.elementRef.nativeElement, 'mouseleave', () => {
+          AccordionGroupComponent.headerMouseLeave(accordionToggle.accordionComponent);
           this.changeDetectorRef.detectChanges();
         }));
       });
@@ -264,7 +285,7 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
    */
   private updateAccordionIsCollapsed(): void {
     this.accordionComponents.forEach((accordion: AccordionComponent, index: number) => {
-      if(this.activeIndex.indexOf(index) === -1) {
+      if (this.activeIndex.indexOf(index) === -1) {
         accordion.isCollapsed = true;
       } else {
         accordion.isCollapsed = false;

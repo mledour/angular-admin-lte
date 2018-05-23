@@ -96,9 +96,9 @@ export class RoutingService {
    * @return [description]
    */
   private createBreadcrumb(route: ActivatedRouteSnapshot, url: string): Path {
-    if(route.children.length !== 0 && route.firstChild.routeConfig.path) {
+    if (route.children.length !== 0 && route.firstChild.routeConfig.path) {
       var isUrl = true;
-      if(url !== '/' && !route.routeConfig.loadChildren && !route.routeConfig.component && !this.isChildrenSelfRoute(route)) {
+      if (url !== '/' && !route.routeConfig.loadChildren && !route.routeConfig.component && !this.isChildrenSelfRoute(route)) {
         isUrl = false;
       }
     }
@@ -117,9 +117,9 @@ export class RoutingService {
    * @return [description]
    */
   private isChildrenSelfRoute(route: ActivatedRouteSnapshot): boolean {
-    let children = route.routeConfig.children;
-    for(let index in children) {
-      if(children[index].path === '' && (children[index].component || children[index].loadChildren)) {
+    const children = route.routeConfig.children;
+    for (let index in children) {
+      if (children[index].path === '' && (children[index].component || children[index].loadChildren)) {
         return true;
       }
     }
