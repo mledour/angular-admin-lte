@@ -43,7 +43,8 @@ export class RoutingService {
    * @return [description]
    */
   static createUrl(route: ActivatedRouteSnapshot): string {
-    return route.url.map(urlSegment => urlSegment.toString()).join('/');
+    const url = route.url.map(urlSegment => urlSegment.toString()).join('/');
+    return url;
   }
 
   /**
