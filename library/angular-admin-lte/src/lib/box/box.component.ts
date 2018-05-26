@@ -1,10 +1,23 @@
-import { Component, Input, ContentChild, Output, AfterViewInit, EventEmitter, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, NgZone, Renderer2 } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChild,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnDestroy,
+  Output,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
 
-import { AnimationEvent } from '../animations/animations.interface';
+import {AnimationEvent} from '../animations/animations.interface';
 
-import { BoxContentDirective, BoxFooterDirective, BoxHeaderDirective, BoxToolsDirective } from './box.directive';
+import {BoxContentDirective, BoxFooterDirective, BoxHeaderDirective, BoxToolsDirective} from './box.directive';
 
-import { removeListeners } from '../helpers';
+import {removeListeners} from '../helpers';
 
 /*
  *
@@ -54,9 +67,9 @@ export class BoxComponent implements AfterViewInit, OnDestroy {
 
   /**
    * @method constructor
-   * @param private changeDetectorRef [description]
-   * @param private ngZone            [description]
-   * @param private renderer2         [description]
+   * @param changeDetectorRef [description]
+   * @param ngZone            [description]
+   * @param renderer2         [description]
    */
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -69,14 +82,14 @@ export class BoxComponent implements AfterViewInit, OnDestroy {
    */
   ngAfterViewInit() {
     this.ngZone.runOutsideAngular(() => {
-      if(this.toggleButtonElement) {
-        this.listeners.push(this.renderer2.listen(this.toggleButtonElement.nativeElement, 'click', (event: Event) => {
+      if (this.toggleButtonElement) {
+        this.listeners.push(this.renderer2.listen(this.toggleButtonElement.nativeElement, 'click', () => {
           this.isCollapsed = !this.isCollapsed;
           this.changeDetectorRef.detectChanges();
         }));
       }
-      if(this.removeButtonElement) {
-        this.listeners.push(this.renderer2.listen(this.removeButtonElement.nativeElement, 'click', (event: Event) => {
+      if (this.removeButtonElement) {
+        this.listeners.push(this.renderer2.listen(this.removeButtonElement.nativeElement, 'click', () => {
           this.remove = true;
           this.changeDetectorRef.detectChanges();
         }));
@@ -97,7 +110,7 @@ export class BoxComponent implements AfterViewInit, OnDestroy {
    * @param event [description]
    */
   public removedDone(event): void {
-    if(event.toState === '1') {
+    if (event.toState === '1') {
       this.removed = true;
     }
   }
@@ -108,7 +121,7 @@ export class BoxComponent implements AfterViewInit, OnDestroy {
    * @param event [description]
    */
   public collapseStart(event: AnimationEvent): void {
-    if(event.fromState !== 'void') {
+    if (event.fromState !== 'void') {
       this.isCollaping = true;
       this.onCollapseStart.emit(event);
     }
@@ -120,7 +133,7 @@ export class BoxComponent implements AfterViewInit, OnDestroy {
    * @param event [description]
    */
   public collapseDone(event: AnimationEvent): void {
-    if(event.fromState !== 'void') {
+    if (event.fromState !== 'void') {
       this.isCollaping = false;
       this.onCollapseDone.emit(event);
     }

@@ -12,7 +12,7 @@ export class LayoutService {
 
   /**
    * @method constructor
-   * @param private routingService [description]
+   * @param routingService [description]
    */
   constructor(
     private routingService: RoutingService
@@ -27,8 +27,8 @@ export class LayoutService {
    */
   private init() {
     this.routingService.onChange.subscribe((value) => {
-      if(value && value[value.length - 1]) {
-        if(this.customLayout === undefined || this.customLayout !== value[value.length - 1].data['disableLayout']) {
+      if (value && value[value.length - 1]) {
+        if (this.customLayout === undefined || this.customLayout !== value[value.length - 1].data['disableLayout']) {
           this.isCustomLayout.next(!!value[value.length - 1].data['customLayout']);
         }
         this.customLayout = value[value.length - 1].data['customLayout'];

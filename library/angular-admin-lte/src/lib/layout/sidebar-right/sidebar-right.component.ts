@@ -1,9 +1,9 @@
-import { Component, OnInit, AfterViewInit, Input, ViewChild, Renderer2, ElementRef, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 
-import { WrapperService } from '../wrapper/wrapper.service';
-import { LayoutStore } from '../layout.store';
-import { SidebarRightService } from './sidebar-right.service';
-import { removeSubscriptions, removeListeners } from '../../helpers';
+import {WrapperService} from '../wrapper/wrapper.service';
+import {LayoutStore} from '../layout.store';
+import {SidebarRightService} from './sidebar-right.service';
+import {removeListeners, removeSubscriptions} from '../../helpers';
 
 @Component({
   selector: 'mk-layout-sidebar-right',

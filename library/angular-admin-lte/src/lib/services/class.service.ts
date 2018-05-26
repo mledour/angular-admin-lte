@@ -14,23 +14,23 @@ export class ClassService {
 
 
   public applyClasses(cssClasses: string | Array<string>): void {
-    if(typeof cssClasses === 'string') {
+    if (typeof cssClasses === 'string') {
       cssClasses = cssClasses.split(' ');
     }
 
     // Remove only classes that are not in cssClasses
-    let classesToRemove = this.currentClasses.filter(x => cssClasses.indexOf(x) === -1);
-    classesToRemove.forEach(cssClasses => {
-      if(cssClasses) {
-        this.renderer2.removeClass(this.elementRef.nativeElement, cssClasses);
+    const classesToRemove = this.currentClasses.filter(x => cssClasses.indexOf(x) === -1);
+    classesToRemove.forEach(cssClasse => {
+      if (cssClasse) {
+        this.renderer2.removeClass(this.elementRef.nativeElement, cssClasse);
       }
     });
 
     // Add only classes that are not in currentClasses
-    let classesToAdd = cssClasses.filter(x => this.currentClasses.indexOf(x) === -1);
-    classesToAdd.forEach(cssClasses => {
-      if(cssClasses) {
-        this.renderer2.addClass(this.elementRef.nativeElement, cssClasses);
+    const classesToAdd = cssClasses.filter(x => this.currentClasses.indexOf(x) === -1);
+    classesToAdd.forEach(cssClasse => {
+      if (cssClasse) {
+        this.renderer2.addClass(this.elementRef.nativeElement, cssClasse);
       }
     });
 

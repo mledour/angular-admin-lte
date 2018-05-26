@@ -1,10 +1,21 @@
-import { Component, ContentChild, Input, ViewChild, TemplateRef, ElementRef, AfterViewInit, OnDestroy, NgZone, Renderer2 } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ContentChild,
+  ElementRef,
+  Input,
+  NgZone,
+  OnDestroy,
+  Renderer2,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 
-import { LayoutStore } from '../layout.store';
+import {LayoutStore} from '../layout.store';
 
-import { HeaderService } from './header.service';
+import {HeaderService} from './header.service';
 
-import { removeSubscriptions, removeListeners } from '../../helpers';
+import {removeListeners, removeSubscriptions} from '../../helpers';
 
 /**
  * Header Logo
@@ -54,9 +65,11 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
 
   /**
    * @method constructor
-   * @param private layoutStore [description]
-   * @param private ngZone      [description]
-   * @param private renderer2   [description]
+   * @param layoutStore [description]
+   * @param ngZone      [description]
+   * @param renderer2   [description]
+   * @param elementRef   [description]
+   * @param headerService   [description]
    */
   constructor(
     private layoutStore: LayoutStore,
@@ -72,7 +85,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.headerService.elementRef = this.headerElement;
 
-    if(this.sidebarLeftToggleElement) {
+    if (this.sidebarLeftToggleElement) {
       this.subscriptions.push(this.layoutStore.isSidebarLeftCollapsed.subscribe((value: boolean) => {
         this.isSidebarLeftCollapsed = value;
       }));
@@ -83,7 +96,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
         }));
       });
     }
-    if(this.sidebarRightToggleElement) {
+    if (this.sidebarRightToggleElement) {
       this.subscriptions.push(this.layoutStore.isSidebarRightCollapsed.subscribe((value: boolean) => {
         this.isSidebarRightCollapsed = value;
       }));

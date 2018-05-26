@@ -8,7 +8,7 @@
       <ng-content select="mk-box-header"></ng-content>
     </span>
     <span [ngClass]="contentStyleClass" [mkFontColor]="contentColor">
-      <ng-container *ngIf="boxInfoHeaderDirective || boxInfoContentDirective || boxInfoFooterDirective else noDirective">
+      <ng-container *ngIf="boxInfoHeaderDirective || boxInfoContentDirective || boxInfoFooterDirective; else noDirective">
         <ng-content select="mk-box-content"></ng-content>
       </ng-container>
       <ng-template #noDirective>

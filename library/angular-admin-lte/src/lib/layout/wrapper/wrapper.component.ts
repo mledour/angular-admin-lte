@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Renderer2, ElementRef, NgZone, OnDestroy } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, NgZone, OnDestroy } from '@angular/core';
 
 import { throttle, removeSubscriptions, removeListeners } from '../../helpers';
 import { LayoutStore } from '../layout.store';
@@ -11,8 +11,6 @@ import { WrapperService } from './wrapper.service';
 })
 export class WrapperComponent implements OnInit, OnDestroy {
   private skin: string;
-  private layout: string;
-  private sidebarLeftElementHeight: number;
   private listeners = [];
   private subscriptions = [];
 
@@ -48,13 +46,15 @@ export class WrapperComponent implements OnInit, OnDestroy {
     });
 
     this.subscriptions.push(this.layoutStore.layout.subscribe((value: string) => {
-      value === 'fixed' ? this.renderer2.addClass(this.elementRef.nativeElement, 'fixed') : this.renderer2.removeClass(this.elementRef.nativeElement, 'fixed');
-      value === 'boxed' ? this.renderer2.addClass(this.elementRef.nativeElement, 'layout-boxed') : this.renderer2.removeClass(this.elementRef.nativeElement, 'layout-boxed');
+      value === 'fixed' ? this.renderer2.addClass(this.elementRef.nativeElement, 'fixed') :
+        this.renderer2.removeClass(this.elementRef.nativeElement, 'fixed');
+      value === 'boxed' ? this.renderer2.addClass(this.elementRef.nativeElement, 'layout-boxed') :
+        this.renderer2.removeClass(this.elementRef.nativeElement, 'layout-boxed');
     }));
 
     this.subscriptions.push(this.layoutStore.skin.subscribe((value: string) => {
-      if(value) {
-        if(this.skin && this.skin !== value){
+      if (value) {
+        if (this.skin && this.skin !== value) {
           this.renderer2.removeClass(this.elementRef.nativeElement, `skin-${this.skin}`);
         }
         this.skin = value;

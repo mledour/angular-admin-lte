@@ -21,7 +21,7 @@ export class StyleService {
 
 
   public applyStyle(style: string, value: any): void {
-    if(style && value) {
+    if (style && value) {
       this.resetStyles();
       this.currentStyles.push(style);
       this.renderer2.setStyle(this.elementRef.nativeElement, style, value);
