@@ -1,5 +1,4 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
 
 import * as Prism from 'prismjs';
 

@@ -1,13 +1,13 @@
-export var adminLteConf = {
+export const adminLteConf = {
   skin: 'blue',
-  //isSidebarLeftCollapsed: false,
-  //isSidebarLeftExpandOnOver: false,
-  //isSidebarLeftMouseOver: false,
-  //isSidebarLeftMini: true,
-  //sidebarRightSkin: 'dark',
-  //isSidebarRightCollapsed: true,
-  //isSidebarRightOverContent: true,
-  //layout: 'normal',
+  // isSidebarLeftCollapsed: false,
+  // isSidebarLeftExpandOnOver: false,
+  // isSidebarLeftMouseOver: false,
+  // isSidebarLeftMini: true,
+  // sidebarRightSkin: 'dark',
+  // isSidebarRightCollapsed: true,
+  // isSidebarRightOverContent: true,
+  // layout: 'normal',
   sidebarLeftMenu: [
     {label: 'MAIN NAVIGATION', separator: true},
     {label: 'Get Started', route: '/', iconClasses: 'fa fa-road', pullRights: [{text: 'New', classes: 'label pull-right bg-green'}]},

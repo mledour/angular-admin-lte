@@ -1,9 +1,0 @@
-.dropdown-menu {
-  display: block;
-}
-
-.dropdown-menu.collapsing:not(.un-collapse) {
-  transition-property: height, padding-top, padding-bottom;
-  padding-top: 0;
-  padding-bottom: 0;
-}
