@@ -5,7 +5,7 @@
       <ng-content select="mk-box-small-header"></ng-content>
     </h3>
     <p [ngClass]="contentStyleClass" [mkFontColor]="contentColor">
-      <ng-container *ngIf="boxSmallHeaderDirective || boxSmallContentDirective || boxSmallFooterDirective else noDirective">
+      <ng-container *ngIf="boxSmallHeaderDirective || boxSmallContentDirective || boxSmallFooterDirective; else noDirective">
         <ng-content select="mk-box-small-content"></ng-content>
       </ng-container>
       <ng-template #noDirective>

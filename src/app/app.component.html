@@ -1,4 +1,4 @@
-<ng-container *ngIf="customLayout else noCustomLayout">
+<ng-container *ngIf="customLayout; else noCustomLayout">
   <router-outlet></router-outlet>
 </ng-container>
 <ng-template #noCustomLayout>

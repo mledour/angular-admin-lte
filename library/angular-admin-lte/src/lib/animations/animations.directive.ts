@@ -1,4 +1,4 @@
-import { Directive, Input, Output, ElementRef, EventEmitter, Renderer2, NgZone, ChangeDetectorRef, AfterContentInit, OnInit, OnDestroy } from '@angular/core';
+import { Directive, Input, Output, ElementRef, EventEmitter, Renderer2, NgZone, AfterContentInit, OnInit, OnDestroy } from '@angular/core';
 import { AnimationEvent } from './animations.interface';
 /*
  *
@@ -20,11 +20,11 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
   @Input('collapseAnimation') public set _isCollapsed(value: boolean) {
     this.lastIsCollapsed = this.isCollapsed;
     this.isCollapsed = value;
-    if(!this.firstStart) {
+    if (!this.firstStart) {
       this.emit('start');
-      if(value) {
+      if (value) {
         this.collapse();
-      } else if(value === false) {
+      } else if (value === false) {
         this.unCollapse();
       }
     }
@@ -36,9 +36,9 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
 
   /**
    * @method constructor
-   * @param privateelementRef [description]
-   * @param privatengZone     [description]
-   * @param privaterenderer2  [description]
+   * @param private elementRef [description]
+   * @param private ngZone     [description]
+   * @param private renderer2  [description]
    */
   constructor(
     private elementRef: ElementRef,
@@ -50,10 +50,10 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
    * @method ngOnInit
    */
   ngOnInit() {
-    if(this.collapseAnimationDuration && this.collapseAnimationDuration !== 350) {
+    if (this.collapseAnimationDuration && this.collapseAnimationDuration !== 350) {
       this.renderer2.setStyle(this.elementRef.nativeElement, 'transition-duration', `${this.collapseAnimationDuration}ms`);
     }
-    if(this.collapseAnimationTiming) {
+    if (this.collapseAnimationTiming) {
       this.renderer2.setStyle(this.elementRef.nativeElement, 'transition-timing-function', this.collapseAnimationTiming);
     }
   }
@@ -63,7 +63,7 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
    */
   ngAfterContentInit() {
     this.emit('start');
-    if(this.isCollapsed) {
+    if (this.isCollapsed) {
       this.renderer2.setStyle(this.elementRef.nativeElement, 'display', 'none');
       this.renderer2.addClass(this.elementRef.nativeElement, 'collapsing');
     }
@@ -79,7 +79,7 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
    * @return [description]
    */
   ngOnDestroy() {
-    if(this.listener) {
+    if (this.listener) {
       this.listener();
     }
   }
@@ -91,7 +91,7 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
   private subscriptions(): void {
     this.ngZone.runOutsideAngular(() => {
       this.listener = this.renderer2.listen(this.elementRef.nativeElement, 'transitionend', () => {
-        if(!this.isCollapsed) {
+        if (!this.isCollapsed) {
           this.renderer2.removeClass(this.elementRef.nativeElement, 'un-collapse');
           this.renderer2.removeClass(this.elementRef.nativeElement, 'collapsing');
         } else {
@@ -124,7 +124,7 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
    */
   private collapse(): void {
     requestAnimationFrame(() => {
-      if(!this.transitioning) {
+      if (!this.transitioning) {
         this.renderer2.setStyle(this.elementRef.nativeElement, 'height', `${this.elementRef.nativeElement.offsetHeight}px`);
         this.renderer2.addClass(this.elementRef.nativeElement, 'collapsing');
       }
@@ -136,18 +136,18 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
   }
 
   private emit(phaseName: string): void {
-    let event: AnimationEvent = {
+    const event: AnimationEvent = {
       element: this.elementRef.nativeElement,
-      fromState: this.lastIsCollapsed === undefined ? 'void' : this.lastIsCollapsed ? '1': '0',
+      fromState: this.lastIsCollapsed === undefined ? 'void' : this.lastIsCollapsed ? '1' : '0',
       phaseName: phaseName,
-      toState: this.isCollapsed === undefined ? 'void' : this.isCollapsed ? '1': '0',
+      toState: this.isCollapsed === undefined ? 'void' : this.isCollapsed ? '1' : '0',
       totalTime: this.collapseAnimationDuration,
       triggerName: 'collapseAnimation'
-    }
+    };
 
-    if(phaseName === 'done') {
+    if (phaseName === 'done') {
       this.doneEventEmitter.emit(event);
-    } else if(phaseName === 'start') {
+    } else if (phaseName === 'start') {
       this.startEventEmitter.emit(event);
     }
   }

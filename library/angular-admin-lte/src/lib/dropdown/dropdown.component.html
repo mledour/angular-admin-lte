@@ -1,5 +1,5 @@
 <ng-template #innerTemplate>
-  <ng-container *ngIf="this.dropdownToggleComponent && this.dropdownToggleComponent.toggleElement else noToggleElement" [ngTemplateOutlet]="dropdownToggleComponent.templateRef"></ng-container>
+  <ng-container *ngIf="this.dropdownToggleComponent && this.dropdownToggleComponent.toggleElement; else noToggleElement" [ngTemplateOutlet]="dropdownToggleComponent.templateRef"></ng-container>
   <ng-template #noToggleElement>
     <button *ngIf="toggleText || dropdownToggleComponent" [mkColor]="buttonBackgroudColor" mkColorProperty="background-color" mkColorPrefix="btn" [ngClass]="buttonStyleClass" #toggleElement>
       {{toggleText}}
@@ -7,14 +7,14 @@
     </button>
   </ng-template>
   <ul [ngClass]="contentStyleClass" [collapseAnimation]="isCollapsed" (collapseAnimation.start)="collapseStart($event)" (collapseAnimation.done)="collapseDone($event)">
-    <ng-container *ngIf="dropdownMenuComponent else noDropdownMenuComponent" [ngTemplateOutlet]="dropdownMenuComponent.templateRef"></ng-container>
+    <ng-container *ngIf="dropdownMenuComponent; else noDropdownMenuComponent" [ngTemplateOutlet]="dropdownMenuComponent.templateRef"></ng-container>
     <ng-template #noDropdownMenuComponent>
       <ng-content></ng-content>
     </ng-template>
   </ul>
 </ng-template>
 
-<div *ngIf="isWrapper else noWrapper" [ngClass]="styleClass">
+<div *ngIf="isWrapper; else noWrapper" [ngClass]="styleClass">
   <ng-container *ngTemplateOutlet="innerTemplate"></ng-container>
 </div>
 

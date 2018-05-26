@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { CollapseAnimationDirective } from './animations.directive'
+import { CollapseAnimationDirective } from './animations.directive';
 
 
 @NgModule({

@@ -1,7 +1,0 @@
-.nav-tabs-custom > .nav-tabs > li {
-  border-top-width: 0;
-}
-
-.nav-tabs-custom > .nav-tabs > li.active {
-  border-top-width: 3px;
-}

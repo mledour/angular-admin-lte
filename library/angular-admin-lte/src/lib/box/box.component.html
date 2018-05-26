@@ -16,7 +16,7 @@
   </div>
   <div [ngClass]="contentStyleClass" [mkFontColor]="contentColor" [collapseAnimation]="isCollapsed" (collapseAnimation.start)="collapseStart($event)" (collapseAnimation.done)="collapseDone($event)">
     <div class="box-body">
-      <ng-container *ngIf="boxHeaderDirective || boxContentDirective || boxFooterDirective || boxToolsDirective else noDirective">
+      <ng-container *ngIf="boxHeaderDirective || boxContentDirective || boxFooterDirective || boxToolsDirective; else noDirective">
         <ng-content select="mk-box-content"></ng-content>
       </ng-container>
       <ng-template #noDirective>

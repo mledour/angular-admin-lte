@@ -3,7 +3,7 @@ import { Directive, Input, Renderer2, ElementRef, OnInit } from '@angular/core';
 import { ColorService } from '../../color/color.service';
 import { ClassService } from '../../services/class.service';
 
-//@TODO onFocus Color
+// @TODO onFocus Color
 
 @Directive({
   selector: '[mkInputText]',
@@ -43,7 +43,7 @@ export class InputTextDirective implements OnInit {
    * @method ngOnInit
    */
   ngOnInit() {
-    if(!this.isSetClass) {
+    if (!this.isSetClass) {
       this.classService.applyClasses(this.defaultClass);
     }
   }

@@ -11,13 +11,13 @@ import { Subscriber } from 'rxjs';
 export function throttle(callback: Function, delay: number): (args: Array<any>) => void {
   let timeout = null;
   return (...args) => {
-    if(!timeout) {
+    if (!timeout) {
       timeout = setTimeout(() => {
         callback.call(this, ...args);
         timeout = null;
       }, delay);
     }
-  }
+  };
 }
 
 
@@ -26,7 +26,7 @@ export function throttle(callback: Function, delay: number): (args: Array<any>) 
  * @method removeSubscriptions
  */
 export function removeSubscriptions(subscriptions): Array<null> {
-  if(subscriptions) {
+  if (subscriptions) {
     subscriptions.forEach((subscription: Subscriber<any>) => {
       subscription.unsubscribe();
     });
@@ -39,7 +39,7 @@ export function removeSubscriptions(subscriptions): Array<null> {
  * @method removeListeners
  */
 export function removeListeners(listeners): Array<null> {
-  if(listeners) {
+  if (listeners) {
     listeners.forEach((listener: Function) => {
       listener();
     });

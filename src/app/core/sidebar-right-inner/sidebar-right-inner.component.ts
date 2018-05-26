@@ -53,7 +53,7 @@ export class SidebarRightInnerComponent implements OnInit, OnDestroy {
    * @method removeListeners
    */
   private removeSubscriptions(): void {
-    if(this.subscriptions) {
+    if (this.subscriptions) {
       this.subscriptions.forEach((subscription: Subscriber<any>) => {
         subscription.unsubscribe();
       });
@@ -89,7 +89,7 @@ export class SidebarRightInnerComponent implements OnInit, OnDestroy {
    * @param  {boolean}              value [description]
    */
   public changeSidebarRightSkin(value: boolean): void {
-    if(value) {
+    if (value) {
       this.layoutStore.setSidebarRightSkin('light');
     } else {
       this.layoutStore.setSidebarRightSkin('dark');

@@ -1,8 +1,23 @@
-import { Component, Input, AfterViewInit, ViewChild, Renderer2, ContentChild, ElementRef, OnDestroy, TemplateRef, Output, EventEmitter, NgZone, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChild,
+  ElementRef,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnDestroy,
+  Output,
+  Renderer2,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 
-import { AnimationEvent } from '../animations/animations.interface';
+import {AnimationEvent} from '../animations/animations.interface';
 
-import { removeListeners } from '../helpers';
+import {removeListeners} from '../helpers';
 
 /*
  *

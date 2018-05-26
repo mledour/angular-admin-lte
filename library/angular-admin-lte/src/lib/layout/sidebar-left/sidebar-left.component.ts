@@ -1,17 +1,30 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, NgZone, OnInit, QueryList, Renderer2, ViewChild, ViewChildren, OnDestroy } from '@angular/core';
-import { NavigationEnd, PRIMARY_OUTLET, Router, Event as RouterEvent } from '@angular/router';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  Renderer2,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
+import {Event as RouterEvent, NavigationEnd, PRIMARY_OUTLET, Router} from '@angular/router';
 
-import { RoutingService } from '../../services/routing.service';
+import {RoutingService} from '../../services/routing.service';
 
-import { WrapperService } from '../wrapper/wrapper.service';
-import { HeaderService } from '../header/header.service';
+import {WrapperService} from '../wrapper/wrapper.service';
+import {HeaderService} from '../header/header.service';
 
-import { LayoutStore } from '../layout.store';
+import {LayoutStore} from '../layout.store';
 
-import { AnimationEvent } from '../../animations/animations.interface';
-import { removeSubscriptions, removeListeners } from '../../helpers';
+import {AnimationEvent} from '../../animations/animations.interface';
+import {removeListeners, removeSubscriptions} from '../../helpers';
 
-import { SidebarLeftToggleDirective } from './sidebar-left.directive';
+import {SidebarLeftToggleDirective} from './sidebar-left.directive';
 
 export interface Item {
   id: number;
@@ -35,7 +48,6 @@ export type Items = Array<Item>;
 })
 export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
   public menu: Array<any>;
-  public sidebarStyles: any;
   public sidebarHeight: number;
   public sidebarOverflow: string;
 
@@ -59,12 +71,14 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /**
    * @method constructor
-   * @param  private changeDetectorRef [description]
-   * @param  private layoutStore       [description]
-   * @param  private layoutService     [description]
-   * @param  private ngZone            [description]
-   * @param  private renderer2         [description]
-   * @param  private router            [description]
+   * @param  changeDetectorRef  [description]
+   * @param  layoutStore        [description]
+   * @param  ngZone             [description]
+   * @param  renderer2          [description]
+   * @param  router             [description]
+   * @param  routingService     [description]
+   * @param  wrapperService     [description]
+   * @param  headerService      [description]
    */
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -390,7 +404,7 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
    * @method setSidebarHeight
    */
   private setSidebarHeight(): void {
-    if(this.layout === 'fixed') {
+    if (this.layout === 'fixed') {
       const height = this.windowInnerHeight - this.headerService.offsetHeight;
       if (height && height !== this.sidebarHeight) {
         this.sidebarHeight = height;

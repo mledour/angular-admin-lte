@@ -34,8 +34,8 @@ export class BoxInfoComponent implements OnInit {
   /**
    * @method ngOnInit
    */
-  ngOnInit(){
-    if(!this.backgroundColor) {
+  ngOnInit() {
+    if (!this.backgroundColor) {
       this.progressBarBg = this.iconBackgroundColor;
     }
   }
