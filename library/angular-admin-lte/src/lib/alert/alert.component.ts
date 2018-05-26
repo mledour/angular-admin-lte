@@ -45,7 +45,7 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
   @Input() public dismissOnTimeout: number;
   @Input('isDismissible') public set _isDismissible(value: boolean) {
     this.isDismissible = value;
-    if(value) {
+    if (value) {
       this.dismissibleClass = `${this.type}-dismissible`;
     } else {
       this.dismissibleClass = '';
@@ -61,10 +61,10 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
 
   /**
    * @method constructor
-   * @param  private changeDetectorRef [description]
-   * @param  private ngZone            [description]
-   * @param  private renderer2         [description]
-   * @param  private viewContainer     [description]
+   * @param  changeDetectorRef [description]
+   * @param  ngZone            [description]
+   * @param  renderer2         [description]
+   * @param  viewContainerRef  [description]
    */
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -78,16 +78,16 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
    */
   ngAfterViewInit() {
     this.ngZone.runOutsideAngular(() => {
-      if(this.dismissOnTimeout) {
+      if (this.dismissOnTimeout) {
         setTimeout(() => {
-          if(!(this.changeDetectorRef as ViewRef).destroyed) {
+          if (!(this.changeDetectorRef as ViewRef).destroyed) {
             this.remove = true;
             this.changeDetectorRef.detectChanges();
           }
         }, this.dismissOnTimeout);
       }
-      if(this.removeButtonElement) {
-        this.listeners.push(this.renderer2.listen(this.removeButtonElement.nativeElement, 'click', (event: Event) => {
+      if (this.removeButtonElement) {
+        this.listeners.push(this.renderer2.listen(this.removeButtonElement.nativeElement, 'click', () => {
           this.remove = true;
           this.changeDetectorRef.detectChanges();
         }));
@@ -117,7 +117,7 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
    * @param event [description]
    */
   public collapseDone(event: AnimationEvent): void {
-    if(event.toState === '1') {
+    if (event.toState === '1') {
       this.listeners = removeListeners(this.listeners);
       this.removed = true;
       this.viewContainerRef.clear();

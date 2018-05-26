@@ -1,4 +1,4 @@
-export var colorsAliases = [
+export const colorsAliases = [
   'default',
   'primary',
   'danger',
@@ -7,7 +7,7 @@ export var colorsAliases = [
   'success'
 ];
 
-export var colors = {
+export const colors = {
   'aqua': '#00c0ef',
   'aqua-active': '#00a7d0',
   'black': '#111111',

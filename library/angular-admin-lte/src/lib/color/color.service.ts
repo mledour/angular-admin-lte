@@ -14,14 +14,15 @@ export class ColorService {
 
   /**
    * @method constructor
-   * @param private router [description]
+   * @param renderer2 [description]
+   * @param elementRef [description]
    */
   constructor(
     private renderer2: Renderer2,
     private elementRef: ElementRef
   ) {
-    //this.init();
-    //console.log(this);
+    // this.init();
+    // console.log(this);
   }
 
   /**
@@ -33,18 +34,18 @@ export class ColorService {
    * @param  prefix             [description]
    */
   public setBackgroundColor(color: string, condition: boolean, property: string, prefix: string): void {
-    if(color && condition) {
+    if (color && condition) {
       this.resetBackgroundColor();
-      if(colors[color]) {
+      if (colors[color]) {
         this.renderer2.addClass(this.elementRef.nativeElement, 'bg-color');
         this.currentBackgroundStyle = {property: property, color: colors[color]};
         this.renderer2.setStyle(this.elementRef.nativeElement, property, colors[color]);
       } else {
         this.renderer2.removeClass(this.elementRef.nativeElement, 'bg-color');
-        if(color.indexOf('#') === 0 || color.indexOf('rgb') === 0) {
+        if (color.indexOf('#') === 0 || color.indexOf('rgb') === 0) {
           this.currentBackgroundStyle = {property: property, color: color};
           this.renderer2.setStyle(this.elementRef.nativeElement, property, color);
-        } else if(colorsAliases.indexOf(color) !== -1) {
+        } else if (colorsAliases.indexOf(color) !== -1) {
           this.currentBackgroundClass = `${prefix}-${color}`;
           this.renderer2.addClass(this.elementRef.nativeElement, this.currentBackgroundClass);
         }
@@ -57,9 +58,9 @@ export class ColorService {
    * @method resetBackgroundColor
    */
   public resetBackgroundColor(): void {
-    if(this.currentBackgroundStyle) {
+    if (this.currentBackgroundStyle) {
       this.renderer2.removeStyle(this.elementRef.nativeElement, this.currentBackgroundStyle.property, this.currentBackgroundStyle.color);
-    } else if(this.currentBackgroundClass) {
+    } else if (this.currentBackgroundClass) {
       this.renderer2.removeClass(this.elementRef.nativeElement, this.currentBackgroundClass);
     }
   }
@@ -70,9 +71,9 @@ export class ColorService {
    * @param  color        [description]
    */
   public setFontColor(color: string): void {
-    if(color) {
+    if (color) {
       this.resetFontColor();
-      if(color.startsWith('#') || color.startsWith('rgb')) {
+      if (color.startsWith('#') || color.startsWith('rgb')) {
         this.currentFontStyle = color;
         this.renderer2.setStyle(this.elementRef.nativeElement, 'color', color);
       } else {
@@ -88,9 +89,9 @@ export class ColorService {
    * @return [description]
    */
   public resetFontColor() {
-    if(this.currentFontStyle) {
+    if (this.currentFontStyle) {
       this.renderer2.removeStyle(this.elementRef.nativeElement, 'color', this.currentFontStyle);
-    } else if(this.currentFontClass) {
+    } else if (this.currentFontClass) {
       this.renderer2.removeClass(this.elementRef.nativeElement, this.currentFontClass);
     }
   }

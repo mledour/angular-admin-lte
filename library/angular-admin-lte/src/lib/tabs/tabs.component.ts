@@ -1,8 +1,28 @@
-import { Component, OnInit, AfterContentInit, AfterViewInit, OnDestroy, Input, ViewChild, ContentChild, OnChanges, SimpleChange, ContentChildren, ChangeDetectionStrategy, Output, EventEmitter, QueryList, TemplateRef, ViewChildren, Renderer2, NgZone, ChangeDetectorRef } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChild,
+  ContentChildren,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnChanges, OnDestroy,
+  OnInit,
+  Output,
+  QueryList,
+  Renderer2,
+  SimpleChange,
+  TemplateRef,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 
-import { TabToggleDirective } from './tabs.directive';
+import {TabToggleDirective} from './tabs.directive';
 
-import { removeListeners, removeSubscriptions } from '../helpers';
+import {removeListeners, removeSubscriptions} from '../helpers';
 
 /*
  *
@@ -56,7 +76,7 @@ export class TabComponent implements OnInit {
    * @method ngOnInit
    */
   ngOnInit() {
-    if(this.tabContentComponent) {
+    if (this.tabContentComponent) {
       this.contentTemplateRef = this.tabContentComponent.templateRef;
     } else {
       this.contentTemplateRef = this.templateRef;
@@ -85,7 +105,7 @@ export class TabsHeaderComponent {
   styleUrls: ['./tabs.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges {
+export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
   private activatedTabIndex: number;
   private listeners = [];
   private subscriptions = [];
@@ -114,9 +134,9 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
 
   /**
    * @method constructor
-   * @param private changeDetectorRef [description]
-   * @param private ngZone            [description]
-   * @param private renderer2         [description]
+   * @param changeDetectorRef [description]
+   * @param ngZone            [description]
+   * @param renderer2         [description]
    */
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -132,7 +152,7 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
     this.setTabIndex();
 
     // Update tab index if tabs is updated.
-    this.subscriptions.push(this.tabs.changes.subscribe(changes => {
+    this.subscriptions.push(this.tabs.changes.subscribe(() => {
       this.setTabIndex();
     }));
 
@@ -148,7 +168,7 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
     this.setTabsToggle();
 
     // Update tab toggles if tabs is updated.
-    this.subscriptions.push(this.tabToggleDirectives.changes.subscribe(changes => {
+    this.subscriptions.push(this.tabToggleDirectives.changes.subscribe(() => {
       this.setTabsToggle();
     }));
   }
@@ -158,7 +178,7 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
    * @param changes [description]
    */
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    if(changes.activeTabIndex) {
+    if (changes.activeTabIndex) {
       this.openTabIndex();
     }
   }
@@ -174,17 +194,15 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
   /**
    * [toggleTab description]
    * @method toggleTab
-   * @param event [description]
-   * @param tab   [description]
    */
   public openTabIndex(): void {
-    if(this.tabs) {
+    if (this.tabs) {
       this.tabs.forEach((tab: TabComponent) => {
-        if(this.activatedTabIndex === tab.index || tab.index === 0 && typeof this.activatedTabIndex !== 'number') {
+        if (this.activatedTabIndex === tab.index || tab.index === 0) {
           tab.isActive = true;
           this.onOpen.emit({index: tab.index});
           this.changeDetectorRef.detectChanges();
-        } else if(tab.isActive) {
+        } else if (tab.isActive) {
           tab.isActive = false;
           this.onClose.emit({index: tab.index});
           this.changeDetectorRef.detectChanges();
@@ -204,7 +222,7 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
     tabToOpen.isActive = true;
     this.onOpen.emit({event, index: tabToOpen.index});
     this.tabs.forEach((tab: TabComponent) => {
-      if(tab.isActive && tabToOpen !== tab) {
+      if (tab.isActive && tabToOpen !== tab) {
         tab.isActive = false;
         this.onClose.emit({event, index: tab.index});
       }

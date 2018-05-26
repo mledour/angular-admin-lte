@@ -1,11 +1,16 @@
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
 
-import { ColorModule } from '../../color/color.module';
+import {ColorModule} from '../../color/color.module';
 
-import { InputGroupComponent } from './input-group.component';
-import { InputGroupLabelDirective, InputGroupAddonLeftDirective, InputGroupAddonRightDirective, InputGroupContentDirective } from './input-group.directive';
+import {InputGroupComponent} from './input-group.component';
+import {
+  InputGroupAddonLeftDirective,
+  InputGroupAddonRightDirective,
+  InputGroupContentDirective,
+  InputGroupLabelDirective
+} from './input-group.directive';
 
 @NgModule({
   imports: [
@@ -13,7 +18,9 @@ import { InputGroupLabelDirective, InputGroupAddonLeftDirective, InputGroupAddon
     ColorModule,
     FormsModule
   ],
-  exports: [InputGroupComponent, InputGroupLabelDirective, InputGroupAddonLeftDirective, InputGroupAddonRightDirective, InputGroupContentDirective],
-  declarations: [InputGroupComponent, InputGroupLabelDirective, InputGroupAddonLeftDirective, InputGroupAddonRightDirective, InputGroupContentDirective]
+  exports: [InputGroupComponent, InputGroupLabelDirective, InputGroupAddonLeftDirective,
+    InputGroupAddonRightDirective, InputGroupContentDirective],
+  declarations: [InputGroupComponent, InputGroupLabelDirective, InputGroupAddonLeftDirective,
+    InputGroupAddonRightDirective, InputGroupContentDirective]
 })
 export class InputGroupModule {}

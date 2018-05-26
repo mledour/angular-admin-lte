@@ -1,8 +1,13 @@
-import { Component, Input, ContentChild, AfterContentInit } from '@angular/core';
+import {AfterContentInit, Component, ContentChild, Input} from '@angular/core';
 
-import { InputGroupLabelDirective, InputGroupAddonLeftDirective, InputGroupAddonRightDirective, InputGroupContentDirective } from './input-group.directive';
+import {
+  InputGroupAddonLeftDirective,
+  InputGroupAddonRightDirective,
+  InputGroupContentDirective,
+  InputGroupLabelDirective
+} from './input-group.directive';
 
-import { InputTextDirective } from '../input-text/input-text.directive';
+import {InputTextDirective} from '../input-text/input-text.directive';
 
 
 /*
