@@ -111,7 +111,8 @@ export class RoutingService {
           rootRoot = false;
 
           if (route.params || route.data) {
-            for (const key of route.params) {
+            for (const key in route.params) {
+              if (!key) { continue; }
               if (route.data['title']) {
                 route.data['title'] = route.data['title'].replace(`:${key}`, route.params[key]);
                 route.data['title'] = route.data['title'].replace(`:${key}`, route.params[key]);
