@@ -36,9 +36,9 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
 
   /**
    * @method constructor
-   * @param private elementRef [description]
-   * @param private ngZone     [description]
-   * @param private renderer2  [description]
+   * @param elementRef [description]
+   * @param ngZone     [description]
+   * @param renderer2  [description]
    */
   constructor(
     private elementRef: ElementRef,

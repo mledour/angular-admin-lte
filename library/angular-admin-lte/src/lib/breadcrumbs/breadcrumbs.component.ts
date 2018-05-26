@@ -20,7 +20,8 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
 
   /**
    * @method constructor
-   * @param  private routingService [description]
+   * @param routingService [description]
+   * @param changeDetectorRef [description]
    */
   constructor(
     private routingService: RoutingService,

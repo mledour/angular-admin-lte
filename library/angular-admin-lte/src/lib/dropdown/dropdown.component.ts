@@ -78,10 +78,10 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
 
   /**
    * @method constructor
-   * @param private changeDetectorRef [description]
-   * @param private elementRef [description]
-   * @param private ngZone [description]
-   * @param private renderer2 [description]
+   * @param changeDetectorRef [description]
+   * @param elementRef [description]
+   * @param ngZone [description]
+   * @param renderer2 [description]
    */
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
