@@ -24,6 +24,9 @@ import {TabToggleDirective} from './tabs.directive';
 
 import {removeListeners, removeSubscriptions} from '../helpers';
 
+// @TODO debug two tabs opened on demo
+// @TODO Vertical tabs
+
 /*
  *
  */
