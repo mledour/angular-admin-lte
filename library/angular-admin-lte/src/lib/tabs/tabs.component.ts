@@ -199,7 +199,7 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
   public openTabIndex(): void {
     if (this.tabs) {
       this.tabs.forEach((tab: TabComponent) => {
-        if (this.activatedTabIndex === tab.index || tab.index === 0) {
+        if (this.activatedTabIndex === tab.index || (this.activatedTabIndex === undefined && tab.index === 0)) {
           tab.isActive = true;
           this.onOpen.emit({index: tab.index});
           this.changeDetectorRef.detectChanges();
