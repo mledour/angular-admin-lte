@@ -9,7 +9,8 @@ import {
   EventEmitter,
   Input,
   NgZone,
-  OnChanges, OnDestroy,
+  OnChanges,
+  OnDestroy,
   OnInit,
   Output,
   QueryList,
@@ -20,11 +21,10 @@ import {
   ViewChildren
 } from '@angular/core';
 
-import {TabToggleDirective} from './tabs.directive';
+import { TabToggleDirective } from './tabs.directive';
 
-import {removeListeners, removeSubscriptions} from '../helpers';
+import { removeListeners, removeSubscriptions } from '../helpers';
 
-// @TODO debug two tabs opened on demo
 // @TODO Vertical tabs
 
 /*
