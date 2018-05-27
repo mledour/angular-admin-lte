@@ -116,8 +116,6 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
   @Input() public set activeTabIndex(index: number) {
     this.activatedTabIndex = index;
     this.changeDetectorRef.detectChanges();
-  } public get activeTabIndex(): number {
-    return this.activatedTabIndex;
   }
   @Input() public header: string;
   @Input() public headerStyleClass = 'header pull-left';

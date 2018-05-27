@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRouteSnapshot, PRIMARY_OUTLET, Event as RouterEvent } from '@angular/router';
+import { ActivatedRouteSnapshot, Event as RouterEvent, NavigationEnd, PRIMARY_OUTLET, Router } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs';
 
@@ -42,7 +42,7 @@ export class RoutingService {
    * @param route [description]
    * @return [description]
    */
-  static createUrl(route: ActivatedRouteSnapshot): string {
+  private static createUrl(route: ActivatedRouteSnapshot): string {
     const url = route.url.map(urlSegment => urlSegment.toString()).join('/');
     return url;
   }
@@ -54,12 +54,13 @@ export class RoutingService {
    * @return [description]
    */
   private static isChildrenSelfRoute(route: ActivatedRouteSnapshot): boolean {
-    const children = route.routeConfig.children;
-    for (const index in children) {
-      if (children[index].path === '' && (children[index].component || children[index].loadChildren)) {
+    route.routeConfig.children.forEach(child => {
+      if (child.path === '' && (child.component || child.loadChildren)) {
         return true;
       }
-    }
+    });
+
+    return false;
   }
 
   /**
@@ -84,6 +85,7 @@ export class RoutingService {
       url: isUrl ? url : null
     };
   }
+
 
   /**
    * [init description]

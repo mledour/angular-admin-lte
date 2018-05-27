@@ -143,15 +143,15 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
       this.setSidebarHeight();
     }));
 
-    this.subscriptions.push(this.layoutStore.sidebarLeftMenu.subscribe((value: Array<any>) => {
+    this.subscriptions.push(this.layoutStore.sidebarLeftMenu.subscribe(() => {
       this.changeDetectorRef.detectChanges();
     }));
 
     this.ngZone.runOutsideAngular(() => {
-      this.listeners.push(this.renderer2.listen(this.sidebarElement.nativeElement, 'mouseenter', (event: Event) => {
+      this.listeners.push(this.renderer2.listen(this.sidebarElement.nativeElement, 'mouseenter', () => {
         this.layoutStore.sidebarLeftMouseOver(true);
       }));
-      this.listeners.push(this.renderer2.listen(this.sidebarElement.nativeElement, 'mouseleave', (event: Event) => {
+      this.listeners.push(this.renderer2.listen(this.sidebarElement.nativeElement, 'mouseleave', () => {
         this.layoutStore.sidebarLeftMouseOver(false);
       }));
     });

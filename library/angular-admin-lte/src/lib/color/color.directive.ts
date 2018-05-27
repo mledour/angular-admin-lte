@@ -1,6 +1,5 @@
 import { Directive, Input, Renderer2, ElementRef } from '@angular/core';
 
-import { colors, colorsAliases } from './color.definition';
 import { ColorService } from './color.service';
 
 @Directive({

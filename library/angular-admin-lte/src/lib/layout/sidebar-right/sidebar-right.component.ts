@@ -14,7 +14,6 @@ import {removeListeners, removeSubscriptions} from '../../helpers';
 })
 export class SidebarRightComponent implements OnInit, AfterViewInit, OnDestroy {
   public layout: string;
-  public sidebarHeight: number;
 
   private skin: string;
   private isSidebarRightOverContent: boolean;

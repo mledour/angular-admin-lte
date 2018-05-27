@@ -10,8 +10,6 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
   private firstStart = true;
   private isCollapsed: boolean;
   private lastIsCollapsed: boolean;
-  private offsetHeight: number;
-  private event: AnimationEvent;
   private transitioning: boolean;
   private listener: Function;
 

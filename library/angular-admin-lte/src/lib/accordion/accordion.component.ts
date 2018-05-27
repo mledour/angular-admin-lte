@@ -20,11 +20,11 @@ import {
   ViewChildren
 } from '@angular/core';
 
-import {AnimationEvent} from '../animations/animations.interface';
+import { AnimationEvent } from '../animations/animations.interface';
 
-import {AccordionToggleDirective} from './accordion.directive';
+import { AccordionToggleDirective } from './accordion.directive';
 
-import {removeListeners, removeSubscriptions} from '../helpers';
+import { removeListeners, removeSubscriptions } from '../helpers';
 
 /*
  *
@@ -285,11 +285,7 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
    */
   private updateAccordionIsCollapsed(): void {
     this.accordionComponents.forEach((accordion: AccordionComponent, index: number) => {
-      if (this.activeIndex.indexOf(index) === -1) {
-        accordion.isCollapsed = true;
-      } else {
-        accordion.isCollapsed = false;
-      }
+      accordion.isCollapsed = this.activeIndex.indexOf(index) === -1;
     });
   }
 }
