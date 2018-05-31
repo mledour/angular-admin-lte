@@ -1,6 +1,6 @@
 <!--suppress ALL -->
 <form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
-  <mk-input-group [inputColor]="userForm.pristine && userForm.invalid ? 'warning': 'success'">
+  <mk-input-group inputErrorColor="warning">
     <mk-input-group-label>Input icons</mk-input-group-label>
     <mk-input-group-addon-left>@</mk-input-group-addon-left>
     <mk-input-group-addon-right><i [ngClass]="userForm.invalid ? 'fa fa-times' : 'fa fa-check'"></i></mk-input-group-addon-right>
