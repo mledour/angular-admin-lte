@@ -25,6 +25,7 @@ import { AnimationEvent } from '../animations/animations.interface';
 import { AccordionToggleDirective } from './accordion.directive';
 
 import { removeListeners, removeSubscriptions } from '../helpers';
+import { Subscription } from 'rxjs';
 
 /*
  *
@@ -105,8 +106,11 @@ export class AccordionComponent implements OnInit {
 })
 export class AccordionGroupComponent implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
   private activeIndex: any = [0];
-  private listeners = [];
-  private subscriptions = [];
+  // @TODO change types for listeners to all files
+  private listeners: Array<Function> = [];
+  // @TODO change types for subscriptions to all files
+  private subscriptions: Array<Subscription> = [];
+
 
   @Input('activeIndex') set _activeIndex(value) {
     this.activeIndex = value instanceof Array ? value : [value];

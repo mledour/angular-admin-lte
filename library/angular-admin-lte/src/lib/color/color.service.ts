@@ -46,7 +46,7 @@ export class ColorService {
           this.currentBackgroundStyle = {property: property, color: color};
           this.renderer2.setStyle(this.elementRef.nativeElement, property, color);
         } else if (colorsAliases.indexOf(color) !== -1) {
-          this.currentBackgroundClass = `${prefix}-${color}`;
+          this.currentBackgroundClass = prefix ? `${prefix}-${color}` : color;
           this.renderer2.addClass(this.elementRef.nativeElement, this.currentBackgroundClass);
         }
       }
