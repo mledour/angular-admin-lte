@@ -25,10 +25,17 @@ import { Subscription } from 'rxjs';
 export class InputGroupComponent implements AfterContentInit, OnDestroy {
   private subscriptions: Array<Subscription> = [];
 
+  public currentColor: string;
+  public currentFontColor: string;
+
   @Input() addonLeft: string;
   @Input() addonRight: string;
-  @Input() inputColor: string;
+  @Input() inputColor = 'default';
   @Input() inputFontColor: string;
+  @Input() inputErrorColor = 'danger';
+  @Input() inputErrorFontColor: string;
+  @Input() inputValidColor = 'success';
+  @Input() inputValidFontColor: string;
   @Input() label: string;
   @Input() wrapperClasses = 'form-group';
 
@@ -40,7 +47,19 @@ export class InputGroupComponent implements AfterContentInit, OnDestroy {
 
   ngAfterContentInit() {
     this.subscriptions.push(this.inputTextDirective.onKeyup.subscribe((value: NgControl) => {
-      console.log(value);
+      if (value.invalid) {
+        console.log("invalid")
+        this.currentColor = this.inputErrorColor;
+        this.currentFontColor = this.inputErrorFontColor;
+      } else if (!value.invalid) {
+        console.log("valid")
+        this.currentColor = this.inputValidColor;
+        this.currentFontColor = this.inputValidFontColor;
+      } else {
+        console.log("else")
+        this.currentColor = this.inputColor;
+        this.currentFontColor = this.inputFontColor;
+      }
     }));
   }
 

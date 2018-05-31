@@ -1,4 +1,4 @@
-<div [ngClass]="wrapperClasses" [mkColor]="inputColor" mkColorPrefix="has">
+<div [ngClass]="wrapperClasses" [mkColor]="currentColor || inputColor" mkColorPrefix="has">
   <label *ngIf="label || inputGroupLabelDirective">
     {{label}}
     <ng-content select="mk-input-group-label"></ng-content>
