@@ -88,8 +88,7 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
       }
       if (this.removeButtonElement) {
         this.listeners.push(this.renderer2.listen(this.removeButtonElement.nativeElement, 'click', () => {
-          this.remove = true;
-          this.changeDetectorRef.detectChanges();
+          this.removeAlert();
         }));
       }
     });
@@ -100,6 +99,14 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
    */
   ngOnDestroy() {
     removeListeners(this.listeners);
+  }
+
+  /**
+   *
+   */
+  public removeAlert(): void {
+    this.remove = true;
+    this.changeDetectorRef.detectChanges();
   }
 
   /**
