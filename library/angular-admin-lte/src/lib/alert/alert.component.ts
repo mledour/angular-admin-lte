@@ -15,9 +15,9 @@ import {
   ViewRef
 } from '@angular/core';
 
-import {AnimationEvent} from '../animations/animations.interface';
+import { AnimationEvent } from '../animations/animations.interface';
 
-import {removeListeners} from '../helpers';
+import { removeListeners } from '../helpers';
 
 /*
  *
@@ -109,6 +109,7 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
     this.changeDetectorRef.detectChanges();
   }
 
+
   /**
    * [collapseStart description]
    * @method collapseStart
@@ -128,7 +129,6 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
       this.listeners = removeListeners(this.listeners);
       this.removed = true;
       this.viewContainerRef.clear();
-      this.changeDetectorRef.detectChanges();
     }
     this.onCollapseDone.emit(event);
   }

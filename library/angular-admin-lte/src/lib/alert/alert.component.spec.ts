@@ -1,10 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { AlertComponent } from './alert.component';
 
 import { AnimationsModule } from '../animations/animations.module';
 import { ColorModule } from '../color/color.module';
-import { AnimationEvent } from '../animations/animations.interface';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;
@@ -14,37 +13,51 @@ describe('AlertComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ AlertComponent ],
       imports: [AnimationsModule, ColorModule]
-    })
-      .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AlertComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-    component.ngAfterViewInit();
   });
 
+
+  /**
+   *
+   */
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('remove alert', () => {
-    const button = fixture.debugElement.nativeElement.querySelector('button');
-    const removeAlertSpy = spyOn(component, 'removeAlert').and.callThrough();
-    const onCollapseDoneSpy = spyOn(component, 'onCollapseDone').and.callThrough();
-    button.click();
-    //expect(component.remove).toBe(true, 'should removing the alert');
+  /**
+   *
+   */
+  it('should remove on timeout', fakeAsync(() => {
+    component.dismissOnTimeout = 1;
+    component.ngAfterViewInit();
+    tick(1);
+    expect(component.remove).toBe(true, 'remove');
+    expect(component.removed).toBe(true, 'removed');
+  }));
+
+  /**
+   *
+   */
+  it('should remove on click', async(() => {
+    const spyOnCollapseStart = spyOn(component, 'collapseStart').and.callThrough();
+    const spyOnCollapseDone = spyOn(component, 'collapseDone').and.callThrough();
+
+    component.removeAlert();
+
+    fixture.detectChanges();
+
+    expect(component.remove).toBe(true, 'remove');
+    expect(spyOnCollapseStart.calls.any()).toBe(true, 'collapseStart');
 
     fixture.whenStable().then(() => {
-      //expect(component.onCollapseDone).toHaveBeenCalled();
-      expect(removeAlertSpy.calls.any()).toBe(true, 'removeAlert called');
-      expect(onCollapseDoneSpy.calls.any()).toBe(true, 'onCollapseDoneSpy called');
-      expect(component.removed).toBe(true, 'should remove alert');
+      expect(spyOnCollapseDone.calls.any()).toBe(true, 'collapseDone');
+      expect(component.removed).toBe(true, 'removed');
     });
-    /*expect(component.remove).toBe(false, 'show at first');
-    component.onCollapseDone.subscribe(animationEvent => expect(animationEvent.removed).toBe(false));
-    component.removeAlert();
-    expect(component.remove).toBe(true, 'remove at click');
-  });*/
+  }));
 });
+
