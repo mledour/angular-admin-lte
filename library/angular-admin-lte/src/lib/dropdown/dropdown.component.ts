@@ -59,6 +59,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
   private documentClickListener: Function;
   private listeners = [];
 
+  public toggleNativeElement: Element;
+
   @Input() public buttonStyleClass = 'btn dropdown-toggle';
   @Input() public buttonBackgroudColor = 'default';
   @Input() public contentStyleClass = 'dropdown-menu';
@@ -94,13 +96,13 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
    * @method ngAfterViewInit
    */
   ngAfterViewInit() {
-    const toggleNativeElement = this.dropdownToggleComponent && this.dropdownToggleComponent.toggleElement ?
+    this.toggleNativeElement = this.dropdownToggleComponent && this.dropdownToggleComponent.toggleElement ?
       this.dropdownToggleComponent.toggleElement.nativeElement : this.toggleElement ?
         this.toggleElement : this.defaultToggleElement ?
           this.defaultToggleElement.nativeElement : null;
-    if (toggleNativeElement) {
+    if (this.toggleNativeElement) {
       this.ngZone.runOutsideAngular(() => {
-        this.listeners.push(this.renderer2.listen(toggleNativeElement, 'click', (event: Event) => {
+        this.listeners.push(this.renderer2.listen(this.toggleNativeElement, 'click', (event: Event) => {
           this.toggleDropdown(event);
           this.changeDetectorRef.detectChanges();
         }));
