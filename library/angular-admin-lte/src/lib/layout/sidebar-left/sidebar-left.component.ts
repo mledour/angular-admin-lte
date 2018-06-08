@@ -64,6 +64,8 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
   private itemsByIds: {[propKey: number]: Item} = {};
   private runningAnimations = 0;
   private subscriptions = [];
+  private activeUrl: String;
+  private initialized: boolean;
 
   @ViewChild('sidebarElement') public sidebarElement: ElementRef;
 
@@ -98,14 +100,20 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptions.push(this.layoutStore.sidebarLeftMenu.subscribe(value => {
       this.menu = value;
       this.monkeyPatchMenu(this.menu);
-      this.setSidebarListeners();
-      this.setMenuTogglesListeners();
+      if (this.initialized) {
+        this.setMenuListeners(this.activeUrl);
+        this.setSidebarListeners();
+        this.setMenuTogglesListeners();
+      }
+      this.initialized = true;
     }));
     this.subscriptions.push(this.layoutStore.sidebarLeftMenuActiveUrl.subscribe(value => {
+      this.activeUrl = value;
       this.setMenuListeners(value);
     }));
     this.subscriptions.push(this.routingService.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationEnd) {
+        this.activeUrl = event.url;
         this.setMenuListeners(event.url);
       }
     }));
