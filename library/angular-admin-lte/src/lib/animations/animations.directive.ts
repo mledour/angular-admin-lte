@@ -16,14 +16,16 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
   @Input() public collapseAnimationDuration = 350;
   @Input() public collapseAnimationTiming: string;
   @Input('collapseAnimation') public set _isCollapsed(value: boolean) {
-    this.lastIsCollapsed = this.isCollapsed;
-    this.isCollapsed = value;
-    if (!this.firstStart) {
-      this.emit('start');
-      if (value) {
-        this.collapse();
-      } else if (value === false) {
-        this.unCollapse();
+    if (this.isCollapsed !== value) {
+      this.lastIsCollapsed = this.isCollapsed;
+      this.isCollapsed = value;
+      if (!this.firstStart) {
+        this.emit('start');
+        if (value) {
+          this.collapse();
+        } else if (value === false) {
+          this.unCollapse();
+        }
       }
     }
   }
@@ -88,7 +90,10 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
    */
   private subscriptions(): void {
     this.ngZone.runOutsideAngular(() => {
-      this.listener = this.renderer2.listen(this.elementRef.nativeElement, 'transitionend', () => {
+      this.listener = this.renderer2.listen(this.elementRef.nativeElement, 'transitionend', (event: TransitionEvent) => {
+        if (event && event.propertyName !== 'height') {
+          return;
+        }
         if (!this.isCollapsed) {
           this.renderer2.removeClass(this.elementRef.nativeElement, 'un-collapse');
           this.renderer2.removeClass(this.elementRef.nativeElement, 'collapsing');
@@ -128,7 +133,7 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
       }
       this.transitioning = true;
       requestAnimationFrame(() => {
-        this.renderer2.setStyle(this.elementRef.nativeElement, 'height', `0px`);
+        this.renderer2.setStyle(this.elementRef.nativeElement, 'height', '0');
       });
     });
   }
