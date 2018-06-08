@@ -122,7 +122,10 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
    * @param event [description]
    */
   public toggleDropdown(event: Event): void {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
+
     this.isCollapsed = !this.isCollapsed;
     if (!this.isCollapsed) {
       this.ngZone.runOutsideAngular(() => {
@@ -150,7 +153,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
    * @param event [description]
    */
   public collapseDone(event: AnimationEvent): void {
-    this.onCollapseStart.emit(event);
+    this.onCollapseDone.emit(event);
   }
 
   /**
