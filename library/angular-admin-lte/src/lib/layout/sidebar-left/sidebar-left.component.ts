@@ -229,7 +229,6 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
    * @method setMenuListeners
    */
   setMenuListeners(url): void {
-    console.log(url);
     if (url === '/') {
       this.activeItems(url);
       this.changeDetectorRef.detectChanges();
