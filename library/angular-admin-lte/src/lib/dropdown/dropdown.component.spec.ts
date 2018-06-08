@@ -29,6 +29,7 @@ describe('DropdownComponent', () => {
     component.toggleText = 'test';
     component.isWrapper = true;
 
+    spyOn(component, 'toggleDropdown').and.callThrough();
     spyOn(component.onCollapseStart, 'emit');
     spyOn(component.onCollapseDone, 'emit');
 
@@ -59,20 +60,30 @@ describe('DropdownComponent', () => {
   /**
    *
    */
+  it('should have a toggle element', () => {
+    expect(component.toggleNativeElement).toBeTruthy();
+  });
+
+  /**
+   *
+   */
   it('should toggle on click', fakeAsync(() => {
     expect(component.isCollapsed).toBe(true);
+    expect(component.toggleDropdown).toHaveBeenCalledTimes(0);
     expect(component.onCollapseStart.emit).toHaveBeenCalledTimes(1);
     expect(component.onCollapseDone.emit).toHaveBeenCalledTimes(1);
 
     clickButton();
 
     expect(component.isCollapsed).toBe(false);
+    expect(component.toggleDropdown).toHaveBeenCalledTimes(1);
     expect(component.onCollapseStart.emit).toHaveBeenCalledTimes(2);
     expect(component.onCollapseDone.emit).toHaveBeenCalledTimes(2);
 
     clickButton();
 
     expect(component.isCollapsed).toBe(true);
+    expect(component.toggleDropdown).toHaveBeenCalledTimes(2);
     expect(component.onCollapseStart.emit).toHaveBeenCalledTimes(3);
     expect(component.onCollapseDone.emit).toHaveBeenCalledTimes(3);
   }));
