@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, ContentChild, Input} from '@angular/core';
+import {Component, ContentChild, Input} from '@angular/core';
 
 import {
   InputGroupAddonLeftDirective,
@@ -18,7 +18,7 @@ import {InputTextDirective} from '../input-text/input-text.directive';
   templateUrl: './input-group.component.html',
   styleUrls: ['./input-group.component.css']
 })
-export class InputGroupComponent implements AfterContentInit {
+export class InputGroupComponent {
 
   @Input() addonLeft: string;
   @Input() addonRight: string;
@@ -33,8 +33,4 @@ export class InputGroupComponent implements AfterContentInit {
   @ContentChild(InputGroupContentDirective) public inputGroupContentDirective: InputGroupContentDirective;
 
   @ContentChild(InputTextDirective) public inputTextDirective: InputTextDirective;
-
-  ngAfterContentInit() {
-    console.log(this.inputTextDirective);
-  }
 }

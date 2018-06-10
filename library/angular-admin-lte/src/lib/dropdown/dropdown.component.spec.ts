@@ -1,20 +1,22 @@
-import { async, ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
-
-import { DropdownComponent, DropdownMenuComponent, DropdownToggleComponent } from './dropdown.component';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { AnimationsModule } from '../animations/animations.module';
 import { ColorModule } from '../color/color.module';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
+import { DropdownComponent, DropdownMenuComponent, DropdownToggleComponent } from './dropdown.component';
+
 describe('DropdownComponent', () => {
   let component: DropdownComponent;
   let fixture: ComponentFixture<DropdownComponent>;
   let button: DebugElement;
   let content: DebugElement;
-  let clickButton;
+  let clickButton: Function;
 
-
+  /**
+   *
+   */
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DropdownComponent, DropdownToggleComponent, DropdownMenuComponent],
@@ -22,11 +24,14 @@ describe('DropdownComponent', () => {
     }).compileComponents();
   }));
 
+  /**
+   *
+   */
   beforeEach(() => {
     fixture = TestBed.createComponent(DropdownComponent);
 
     component = fixture.componentInstance;
-    component.toggleText = 'test';
+    component.toggleText = 'toggle button text';
     component.isWrapper = true;
 
     spyOn(component, 'toggleDropdown').and.callThrough();
@@ -45,7 +50,7 @@ describe('DropdownComponent', () => {
    */
   clickButton = function buttonClick() {
     button.triggerEventHandler('click', null);
-    content.nativeElement.dispatchEvent(new Event('collapseAnimation.done'));
+    content.triggerEventHandler('collapseAnimation.done', null);
     tick();
     fixture.detectChanges();
   };
@@ -60,8 +65,16 @@ describe('DropdownComponent', () => {
   /**
    *
    */
-  it('should have a toggle element', () => {
-    expect(component.toggleNativeElement).toBeTruthy();
+  it('should have button text', () => {
+    expect(fixture.nativeElement.innerHTML).toContain('toggle button text');
+  });
+
+  /**
+   *
+   */
+  it('should have dropdown elements', () => {
+    expect(fixture.nativeElement.innerHTML).toContain('dropdown-toggle');
+    expect(fixture.nativeElement.innerHTML).toContain('dropdown-menu');
   });
 
   /**
