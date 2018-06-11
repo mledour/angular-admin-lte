@@ -9,7 +9,7 @@ import {
   InputGroupLabelDirective
 } from './input-group.directive';
 
-import {InputTextDirective} from '../input-text/input-text.directive';
+import { InputTextDirective } from '../input-text/input-text.directive';
 import { NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -48,15 +48,12 @@ export class InputGroupComponent implements AfterContentInit, OnDestroy {
   ngAfterContentInit() {
     this.subscriptions.push(this.inputTextDirective.onKeyup.subscribe((value: NgControl) => {
       if (value.invalid) {
-        console.log("invalid")
         this.currentColor = this.inputErrorColor;
         this.currentFontColor = this.inputErrorFontColor;
       } else if (!value.invalid) {
-        console.log("valid")
         this.currentColor = this.inputValidColor;
         this.currentFontColor = this.inputValidFontColor;
       } else {
-        console.log("else")
         this.currentColor = this.inputColor;
         this.currentFontColor = this.inputFontColor;
       }
