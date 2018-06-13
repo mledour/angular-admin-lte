@@ -1,6 +1,6 @@
 {
   "name": "angular-admin-lte",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "homepage": "https://github.com/mika-el/angular-admin-lte#README.MD",
   "author": {
     "name": "Mik@",
@@ -23,9 +23,12 @@
     "typescript",
     "admin-lte"
   ],
+  "dependencies": {
+    "bootstrap-css-only": "^3.3.7",
+    "admin-lte-css": "^2.4.3"
+  },
   "peerDependencies": {
     "@angular/common": "^6.0.0",
-    "@angular/core": "^6.0.0",
-    "admin-lte-css": "^2.4.3"
+    "@angular/core": "^6.0.0"
   }
 }
