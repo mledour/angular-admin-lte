@@ -12,6 +12,7 @@ To install this library, run:
 ```bash
 $ npm install angular-admin-lte --save
 ```
+
 ## Install demo
 ```bash
 $ git clone git://github.com/mika-el/angular-admin-lte
