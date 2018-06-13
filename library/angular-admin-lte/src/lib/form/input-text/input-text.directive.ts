@@ -1,7 +1,7 @@
 import { Directive, Input, Renderer2, ElementRef, OnInit, HostListener } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { ColorService } from '../../color/color.service';
 import { ClassService } from '../../services/class.service';
@@ -17,7 +17,7 @@ export class InputTextDirective implements OnInit {
   private isSetClass: boolean;
   private _onKeyUp = new Subject<NgControl>();
 
-  public onKeyup = this._onKeyUp.asObservable();
+  public onKeyup: Observable<NgControl> = this._onKeyUp.asObservable();
 
   @Input() set borderColor(color: string) {
     this.colorService.setBackgroundColor(color, true, 'border-color', null);
