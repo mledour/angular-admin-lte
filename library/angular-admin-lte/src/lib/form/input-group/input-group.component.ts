@@ -19,8 +19,7 @@ import { Subscription } from 'rxjs';
  */
 @Component({
   selector: 'mk-input-group',
-  templateUrl: './input-group.component.html',
-  styleUrls: ['./input-group.component.css']
+  templateUrl: './input-group.component.html'
 })
 export class InputGroupComponent implements AfterContentInit, OnDestroy {
   private subscriptions: Array<Subscription> = [];
