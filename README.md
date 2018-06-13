@@ -10,7 +10,7 @@ Admin-lte implementation for Angular 4+
 To install this library, run:
 
 ```bash
-$ npm i -S angular-admin-lte admin-lte-css bootstrap-css-only
+$ npm install angular-admin-lte --save
 ```
 ## Install demo
 ```bash
