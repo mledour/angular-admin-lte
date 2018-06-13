@@ -1,4 +1,4 @@
-import { Subscriber } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 
 /**
@@ -25,9 +25,9 @@ export function throttle(callback: Function, delay: number): (args: Array<any>) 
  * [removeSubscriptions description]
  * @method removeSubscriptions
  */
-export function removeSubscriptions(subscriptions): Array<null> {
+export function removeSubscriptions(subscriptions): Array<Subscription> {
   if (subscriptions) {
-    subscriptions.forEach((subscription: Subscriber<any>) => {
+    subscriptions.forEach((subscription: Subscription) => {
       subscription.unsubscribe();
     });
   }
@@ -38,7 +38,7 @@ export function removeSubscriptions(subscriptions): Array<null> {
  * [removeListeners description]
  * @method removeListeners
  */
-export function removeListeners(listeners): Array<null> {
+export function removeListeners(listeners): Array<Function> {
   if (listeners) {
     listeners.forEach((listener: Function) => {
       listener();

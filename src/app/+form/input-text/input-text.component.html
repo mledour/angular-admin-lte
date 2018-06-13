@@ -1,10 +1,16 @@
 <!--suppress ALL -->
-<mk-input-group>
-  <mk-input-group-label>Input icons</mk-input-group-label>
-  <mk-input-group-addon-left><i class="fa fa-warning"></i></mk-input-group-addon-left>
-  <mk-input-group-addon-right><i class="fa fa-check"></i></mk-input-group-addon-right>
-  <mk-input-group-content><input mkInputText value="toto" class="toto form-control"/></mk-input-group-content>
-</mk-input-group>
+<form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
+  <mk-input-group inputErrorColor="warning">
+    <mk-input-group-label>Input icons</mk-input-group-label>
+    <mk-input-group-addon-left>@</mk-input-group-addon-left>
+    <mk-input-group-addon-right><i [ngClass]="userForm.invalid ? 'fa fa-times' : 'fa fa-check'"></i></mk-input-group-addon-right>
+    <mk-input-group-content>
+      <input mkInputText formControlName="firstName" class="toto form-control"/>
+    </mk-input-group-content>
+  </mk-input-group>
+  <br />
+  <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary">Soumettre</button>
+</form>
 <!--<div class="row">
   <div class="col-md-4 col-xs-12">
     <mk-box [isCollapsable]="false" [isRemovable]="false" header="Basic Input">
