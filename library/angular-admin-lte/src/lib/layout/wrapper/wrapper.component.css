@@ -1,3 +1,7 @@
+.wrapper.overflow {
+  overflow: hidden;
+}
+
 :host {
   display: block;
 }
