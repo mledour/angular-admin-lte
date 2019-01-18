@@ -17,7 +17,7 @@
     "libCopyFiles": "cp README.md LICENSE dist/angular-admin-lte",
     "build:lib": "ng build angular-admin-lte --prod && npm run libCopyFiles",
     "publish:lib": "npm publish dist/angular-admin-lte",
-    "build:demo": "ng build angular-admin-lte-demo --prod",
+    "build:demo": "ng build angular-admin-lte-demo --prod --base-href=/angular-admin-lte/",
     "test": "ng test",
     "test:demo": "ng test angular-admin-lte-demo",
     "test:lib": "ng test angular-admin-lte",
