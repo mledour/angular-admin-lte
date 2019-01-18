@@ -14,7 +14,7 @@ addons:
 script:
   # - npm run lint
   #- npm run test:headless
-  - npm run build --prod --base-href /angular-admin-lte/  
+  - npm run build --prod --base-href=/angular-admin-lte/  
   # - xvfb-run npm run e2e
 
 deploy:
