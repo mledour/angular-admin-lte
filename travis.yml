@@ -5,8 +5,9 @@ dist: trusty
 sudo: false
 
 cache:
+  yarn: true
   directories:
-    - node_modules
+  - node_modules
 
 addons:
   chrome: stable
@@ -17,7 +18,7 @@ branches:
   - develop
 
 before_script:
-  - npm install -g @angular/cli
+  - yarn install -g @angular/cli
 
 script:
   # - npm run lint
