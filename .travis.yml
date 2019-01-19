@@ -17,18 +17,21 @@ branches:
   - develop
 
 before_script:
-  - npm install -g @angular/cli
+  - yarn install -g @angular/cli
+
+before_deploy:
+  - mv dist/angular-admin-lte-demo dist/angular-admin-lte/$TRAVIS_BRANCH
 
 script:
   # - npm run lint
   #- npm run test:headless
-  - ng build angular-admin-lte-demo --prod --base-href="/angular-admin-lte/"
+  - ng build angular-admin-lte-demo --prod --base-href="/angular-admin-lte/$TRAVIS_BRANCH"
   # - xvfb-run npm run e2e
 
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: dist/angular-admin-lte-demo
+  local_dir: dist
   on:
     branch: master
