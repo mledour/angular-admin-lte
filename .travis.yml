@@ -10,6 +10,11 @@ cache:
 
 addons:
   chrome: stable
+  
+branches:
+  only:
+  - master
+  - develop
 
 script:
   # - npm run lint
