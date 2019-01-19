@@ -17,7 +17,7 @@ branches:
   - develop
 
 before_script:
-  - yarn install -g @angular/cli
+  - yarn global add @angular/cli
 
 before_deploy:
   - mv dist/angular-admin-lte-demo dist/angular-admin-lte/$TRAVIS_BRANCH
