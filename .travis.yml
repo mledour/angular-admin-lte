@@ -1,0 +1,34 @@
+language: node_js
+node_js:
+  - "8"
+dist: trusty
+sudo: false
+
+cache:
+  directories:
+    - node_modules
+
+addons:
+  chrome: stable
+  
+branches:
+  only:
+  - master
+  - develop
+
+before_script:
+  - npm install -g @angular/cli
+
+script:
+  # - npm run lint
+  #- npm run test:headless
+  - ng build angular-admin-lte-demo --prod --base-href="/angular-admin-lte/"
+  # - xvfb-run npm run e2e
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist/angular-admin-lte-demo
+  on:
+    branch: master
