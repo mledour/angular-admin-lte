@@ -16,10 +16,13 @@ branches:
   - master
   - develop
 
+before_script:
+  - npm install -g @angular/cli
+
 script:
   # - npm run lint
   #- npm run test:headless
-  - npm run build:demo 
+  - ng build angular-admin-lte-demo --prod --base-href=/angular-admin-lte/"
   # - xvfb-run npm run e2e
 
 deploy:
