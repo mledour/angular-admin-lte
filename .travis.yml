@@ -22,13 +22,13 @@ before_script:
 script:
   # - npm run lint
   #- npm run test:headless
-  - ng build angular-admin-lte-demo --prod --base-href=/angular-admin-lte/"
+  - ng build angular-admin-lte-demo --prod --base-href="/angular-admin-lte/"
   # - xvfb-run npm run e2e
 
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  github_token: $GITHUB_TOKEN
   local_dir: dist/angular-admin-lte-demo
   on:
     branch: master
