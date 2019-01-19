@@ -1,0 +1,29 @@
+language: node_js
+node_js:
+  - "8"
+dist: trusty
+sudo: false
+
+cache:
+  directories:
+    - node_modules
+
+addons:
+  chrome: stable
+
+script:
+  # - npm run lint
+  #- npm run test:headless
+  - npm run build:demo --base-href=/angular-admin-lte/$TRAVIS_BRANCH/
+  # - xvfb-run npm run e2e
+
+before_deploy:
+  - mv dist/angular-admin-lte-demo dist/$TRAVIS_BRANCH
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist
+  on:
+    branch: master
