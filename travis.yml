@@ -10,20 +10,25 @@ cache:
 
 addons:
   chrome: stable
+  
+branches:
+  only:
+  - master
+  - develop
+
+before_script:
+  - npm install -g @angular/cli
 
 script:
   # - npm run lint
   #- npm run test:headless
-  - npm run build:demo --base-href=/angular-admin-lte/$TRAVIS_BRANCH/
+  - ng build angular-admin-lte-demo --prod --base-href="/angular-admin-lte/"
   # - xvfb-run npm run e2e
-
-before_deploy:
-  - mv dist/angular-admin-lte-demo dist/$TRAVIS_BRANCH
 
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: dist
+  local_dir: dist/angular-admin-lte-demo
   on:
     branch: master
