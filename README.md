@@ -5,7 +5,7 @@
 Admin-lte implementation for Angular 4+
 
 ## Doc & Demo
-[https://mika-el.github.io/angular-admin-lte](https://mika-el.github.io/angular-admin-lte/)
+[https://mika-el.github.io/angular-admin-lte/branches/master](https://mika-el.github.io/angular-admin-lte/branches/master)
 
 ## Installation
 
