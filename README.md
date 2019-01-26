@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/mika-el/angular-admin-lte.svg?branch=master)](https://travis-ci.org/mika-el/angular-admin-lte)
+[![npm version](https://badge.fury.io/js/angular-admin-lte.svg)](https://badge.fury.io/js/angular-admin-lte)
 
 # angular-admin-lte
 
@@ -6,6 +7,7 @@ Admin-lte implementation for Angular 4+
 
 ## Doc & Demo
 [https://mika-el.github.io/angular-admin-lte/branches/master](https://mika-el.github.io/angular-admin-lte/branches/master)
+
 
 ## Installation
 
