@@ -6,7 +6,7 @@
       <ng-container [ngTemplateOutlet]="dropdownToggleComponent?.templateRef"></ng-container>
     </button>
   </ng-template>
-  <ul [ngClass]="contentStyleClass" [collapseAnimation]="isCollapsed" (collapseAnimation.start)="collapseStart($event)" (collapseAnimation.done)="collapseDone($event)">
+  <ul [ngClass]="contentStyleClass" [mkCollapseAnimation]="isCollapsed" (mkCollapseAnimation.start)="collapseStart($event)" (mkCollapseAnimation.done)="collapseDone($event)">
     <ng-container *ngIf="dropdownMenuComponent; else noDropdownMenuComponent" [ngTemplateOutlet]="dropdownMenuComponent.templateRef"></ng-container>
     <ng-template #noDropdownMenuComponent>
       <ng-content></ng-content>

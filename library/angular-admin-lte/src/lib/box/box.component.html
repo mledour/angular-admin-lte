@@ -1,4 +1,4 @@
-<div *ngIf="!removed" [mkColor]="boxColor" mkColorProperty="border-color" mkColorPrefix="box" [ngClass]="styleClass" [class.collapsed-box]="isCollapsed && !isCollaping" [class.box-solid]="isSolid" [collapseAnimation]="remove" (collapseAnimation.done)="removedDone($event)">
+<div *ngIf="!removed" [mkColor]="boxColor" mkColorProperty="border-color" mkColorPrefix="box" [ngClass]="styleClass" [class.collapsed-box]="isCollapsed && !isCollaping" [class.box-solid]="isSolid" [mkCollapseAnimation]="remove" (mkCollapseAnimation.done)="removedDone($event)">
   <div *ngIf="header || boxHeaderDirective" [ngClass]="headerStyleClass" [mkColor]="boxColor" [mkColorCondition]="isSolid" mkColorProperty="background-color" [class.with-border]="headerBorder">
     <h3 class="box-title" [mkFontColor]="headerColor">
       {{header}}
@@ -14,7 +14,7 @@
       </button>
     </div>
   </div>
-  <div [ngClass]="contentStyleClass" [mkFontColor]="contentColor" [collapseAnimation]="isCollapsed" (collapseAnimation.start)="collapseStart($event)" (collapseAnimation.done)="collapseDone($event)">
+  <div [ngClass]="contentStyleClass" [mkFontColor]="contentColor" [mkCollapseAnimation]="isCollapsed" (mkCollapseAnimation.start)="collapseStart($event)" (mkCollapseAnimation.done)="collapseDone($event)">
     <div class="box-body">
       <ng-container *ngIf="boxHeaderDirective || boxContentDirective || boxFooterDirective || boxToolsDirective; else noDirective">
         <ng-content select="mk-box-content"></ng-content>

@@ -8,7 +8,7 @@
         </a>
       </h4>
     </div>
-    <div class="panel-collapse" [collapseAnimation]="accordion.isCollapsed" (collapseAnimation.start)="collapseStart($event, accordion)" (collapseAnimation.done)="collapseDone($event, accordion)">
+    <div class="panel-collapse" [mkCollapseAnimation]="accordion.isCollapsed" (mkCollapseAnimation.start)="collapseStart($event, accordion)" (mkCollapseAnimation.done)="collapseDone($event, accordion)">
       <div [ngClass]="accordion.contentStyleClass" [mkFontColor]="accordion.contentColor">
         <ng-template [ngTemplateOutlet]="accordion.contentTemplateRef"></ng-template>
       </div>

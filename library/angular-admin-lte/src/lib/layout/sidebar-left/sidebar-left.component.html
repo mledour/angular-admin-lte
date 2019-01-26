@@ -26,7 +26,7 @@
     	  <i *ngIf="!item.pullRights" class="fa fa-angle-left pull-right"></i>
     	</span>
     </a>
-    <ul *ngIf="item.children" [collapseAnimation]="item.isCollapsed" (collapseAnimation.start)="visibilityStateStart($event)" class="treeview-menu">
+    <ul *ngIf="item.children" [mkCollapseAnimation]="item.isCollapsed" (mkCollapseAnimation.start)="visibilityStateStart($event)" class="treeview-menu">
       <ng-container *ngFor="let item of item.children">
         <ng-container *ngTemplateOutlet="sidebarInner; context: {item: item}"></ng-container>
       </ng-container>
