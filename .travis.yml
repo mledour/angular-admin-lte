@@ -4,34 +4,37 @@ node_js:
 dist: trusty
 sudo: false
 
+env:
+  global:
+  - TMPDIR=/tmp
+
 cache:
   directories:
     - node_modules
 
 addons:
   chrome: stable
-  
-branches:
-  only:
-  - master
-  - develop
 
 before_script:
-  - yarn global add @angular/cli
+  #- yarn global add @angular/cli
 
 before_deploy:
-  - mv dist/angular-admin-lte-demo dist/angular-admin-lte/$TRAVIS_BRANCH
+  # - yarn gh-pages $TMPDIR/gh-pages --target $TRAVIS_BRANCH
 
 script:
   # - npm run lint
-  #- npm run test:headless
-  - ng build angular-admin-lte-demo --prod --base-href="/angular-admin-lte/$TRAVIS_BRANCH"
-  # - xvfb-run npm run e2e
+  # - npm run test:headless
+  - ng build angular-admin-lte-demo --prod --base-href="/angular-admin-lte/$([ "$TRAVIS_PULL_REQUEST" != false ] && echo "pulls/$TRAVIS_PULL_REQUEST/" || echo "branches/$TRAVIS_BRANCH/")"
+  - bash scripts/gh-pages.sh $TMPDIR/gh-pages $TRAVIS_BUILD_DIR/dist/angular-admin-lte-demo
+# - xvfb-run npm run e2e
+
+
 
 deploy:
   provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  local_dir: dist
+  local-dir: $TMPDIR/gh-pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: false
   on:
-    branch: master
+    all_branches: true

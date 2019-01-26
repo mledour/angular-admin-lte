@@ -18,6 +18,7 @@
     "build:lib": "ng build angular-admin-lte --prod && npm run libCopyFiles",
     "publish:lib": "npm publish dist/angular-admin-lte",
     "build:demo": "ng build angular-admin-lte-demo --prod --base-href=/angular-admin-lte/",
+    "gh-pages": "node ./scripts/gh-pages-multi/bin/gh-pages-multi.js deploy -s dist/angular-admin-lte-demo --dry-run --tmp-dir",
     "test": "ng test",
     "test:demo": "ng test angular-admin-lte-demo",
     "test:lib": "ng test angular-admin-lte",

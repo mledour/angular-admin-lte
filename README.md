@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mika-el/angular-admin-lte.svg?branch=master)](https://travis-ci.org/mika-el/angular-admin-lte)
+
 # angular-admin-lte
 
 Admin-lte implementation for Angular 4+
