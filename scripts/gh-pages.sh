@@ -33,8 +33,8 @@ inArray() {
     return 1
 }
 
-# Clone de gh-pages to tmpFolder
-eval "git clone --single-branch -b gh-pages $remote $tmpDir"
+# Clone gh-pages to tmpDir
+git clone --quiet --single-branch -b gh-pages https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git ${tmpDir}
 cd $tmpDir
 
 # Clean pull request folders
@@ -68,3 +68,6 @@ echo "src: $src"
 eval "git filter-branch --tree-filter 'rm -rf $target' --prune-empty HEAD"
 eval "mkdir $baseTarget"
 eval "cp -Rp $src $tmpDir/$target"
+git add -A
+git commit -m "Travis commit"
+git push --force -u origin gh-pages

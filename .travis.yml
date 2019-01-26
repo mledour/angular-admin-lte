@@ -27,14 +27,3 @@ script:
   - ng build angular-admin-lte-demo --prod --base-href="/angular-admin-lte/$([ "$TRAVIS_PULL_REQUEST" != false ] && echo "pulls/$TRAVIS_PULL_REQUEST/" || echo "branches/$TRAVIS_BRANCH/")"
   - bash scripts/gh-pages.sh $TMPDIR/gh-pages $TRAVIS_BUILD_DIR/dist/angular-admin-lte-demo
 # - xvfb-run npm run e2e
-
-
-
-deploy:
-  provider: pages
-  local-dir: $TMPDIR/gh-pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: false
-  on:
-    all_branches: true
