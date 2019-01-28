@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { InputTextComponent } from './input-text.component';
 
 import { BoxModule, InputGroupModule, InputTextModule } from 'angular-admin-lte';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { FormBuilder, NgControl } from '@angular/forms';
 
 describe('InputTextComponent', () => {
   let component: InputTextComponent;
@@ -15,7 +17,14 @@ describe('InputTextComponent', () => {
         InputGroupModule,
         InputTextModule
       ],
-      declarations: [ InputTextComponent ]
+      declarations: [ InputTextComponent ],
+      providers: [
+        FormBuilder,
+        NgControl
+      ],
+      schemas: [
+        NO_ERRORS_SCHEMA
+      ]
     })
       .compileComponents();
   }));
