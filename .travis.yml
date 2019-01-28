@@ -36,6 +36,8 @@ after_success:
 before_deploy:
   - cp README.md LICENSE dist/angular-admin-lte
   - cd dist/angular-admin-lte
+  - ls
+  - pwd
 
 deploy:
   provider: npm
