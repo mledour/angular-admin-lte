@@ -1,5 +1,8 @@
 ## CHANGE LOG:
 
+v1.2.8:
+ - fix layout wrapper overflow
+
 v1.2.0:
  - Lib creation and tests with angular-cli
 
