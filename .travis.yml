@@ -35,11 +35,12 @@ after_success:
 
 before_deploy:
   - cp README.md LICENSE dist/angular-admin-lte
-  - cd dist
+  - cd dist/angular-admin-lte
 
 deploy:
   provider: npm
   email: "michael.ledour@gmail.com"
   api_key: $NPM_TOKEN
+  skip_cleanup: true
   on:
     tags: true
