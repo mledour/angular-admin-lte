@@ -345,7 +345,7 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private monkeyPatchMenu(items: Items, parentId?: number): void {
     items.forEach((item: Item, index: number) => {
-      item.id = parentId ? Number(parentId + '' + index) : index;
+      item.id = parentId ? Number(parentId + '' + (index + 1)) : index + 1;
       if (parentId) {
         item.parentId = parentId;
       }
