@@ -1,5 +1,5 @@
 <header #headerElement class="main-header">
-  <a href="/" class="logo">
+  <a [routerLink]="logoLink" class="logo">
     <span class="logo-mini"><ng-template [ngTemplateOutlet]="headerLogoMiniComponent?.templateRef"></ng-template></span>
     <span class="logo-lg"><ng-template [ngTemplateOutlet]="headerLogoComponent?.templateRef"></ng-template></span>
   </a>

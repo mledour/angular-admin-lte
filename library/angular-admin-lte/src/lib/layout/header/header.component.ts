@@ -55,6 +55,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
 
   @Input() isSidebarLeftToggle = true;
   @Input() isSidebarRightToggle = true;
+  @Input() logoLink: string | any[] = '/';
 
   @ContentChild(HeaderLogoComponent) public headerLogoComponent: HeaderLogoComponent;
   @ContentChild(HeaderLogoMiniComponent) public headerLogoMiniComponent: HeaderLogoMiniComponent;
