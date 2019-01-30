@@ -3,7 +3,7 @@
 </mk-box>
 
 <mk-box header="Example" [isCollapsable]="false" [isRemovable]="false">
-  <pre><code class="language-html">&lt;mk-layout-header [isSidebarLeftToggle]=&quot;true&quot; [isSidebarRightToggle]=&quot;true&quot;&gt;
+  <pre><code class="language-html">&lt;mk-layout-header [isSidebarLeftToggle]=&quot;true&quot; [isSidebarRightToggle]=&quot;true&quot; [logoLink]="['/', 'boxs', 'info-box']" &gt;
   &lt;mk-layout-header-logo&gt;&lt;b&gt;Admin&lt;/b&gt;LTE&lt;/mk-layout-header-logo&gt;
   &lt;mk-layout-header-logo-mini&gt;&lt;b&gt;A&lt;/b&gt;LT&lt;/mk-layout-header-logo-mini&gt;
   //Custom HTML
@@ -19,6 +19,12 @@
         <th>Type</th>
         <th>Default</th>
         <th>Description</th>
+      </tr>
+      <tr>
+        <td>logoLink</td>
+        <td>string | any[]</td>
+        <td>"/"</td>
+        <td>Defines the header logo routerLink.</td>
       </tr>
       <tr>
         <td>isSidebarLeftToggle</td>
