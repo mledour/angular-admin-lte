@@ -1,5 +1,11 @@
 ## CHANGE LOG:
 
+v2.0.0:
+ - Update to Angular 7
+ 
+v1.3.0:
+  - Header logo routerLink option
+
 v1.2.8:
  - fix layout wrapper overflow
 
