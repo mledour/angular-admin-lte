@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { RoutingService } from '../services/routing.service';
+import { ActivatedRoute, ActivationStart, Router, RouterEvent } from '@angular/router';
 
 @Injectable()
 export class LayoutService {
@@ -15,7 +16,7 @@ export class LayoutService {
    * @param routingService [description]
    */
   constructor(
-    private routingService: RoutingService
+    private router: Router
   ) {
     this.init();
   }
@@ -26,12 +27,10 @@ export class LayoutService {
    * @return [description]
    */
   private init() {
-    this.routingService.onChange.subscribe((value) => {
-      if (value && value[value.length - 1]) {
-        if (this.customLayout === undefined || this.customLayout !== value[value.length - 1].data['disableLayout']) {
-          this.isCustomLayout.next(!!value[value.length - 1].data['customLayout']);
-        }
-        this.customLayout = value[value.length - 1].data['customLayout'];
+    this.router.events.subscribe((event: RouterEvent) => {
+      if (event instanceof ActivationStart) {
+        this.customLayout = event.snapshot.data.customLayout;
+        this.isCustomLayout.next(!!this.customLayout);
       }
     });
   }
