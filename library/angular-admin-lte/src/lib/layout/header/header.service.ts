@@ -10,6 +10,6 @@ export class HeaderService {
    * @return [description]
    */
   public get offsetHeight(): number {
-    return this.elementRef.nativeElement.offsetHeight;
+    return this.elementRef ? this.elementRef.nativeElement.offsetHeight : 0;
   }
 }
