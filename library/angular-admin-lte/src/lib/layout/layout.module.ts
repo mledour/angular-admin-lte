@@ -30,7 +30,10 @@ export class LayoutModule {
    * @method constructor
    * @param parentModule [description]
    */
-  constructor(@Optional() @SkipSelf() parentModule: LayoutModule) {
+  constructor(
+    @Optional() @SkipSelf() parentModule: LayoutModule,
+    private routingService: RoutingService,
+  ) {
     if (parentModule) {
       throw new Error('LayoutModule is already loaded. Import it in the AppModule only!');
     }
