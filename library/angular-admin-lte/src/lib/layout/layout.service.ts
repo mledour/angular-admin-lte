@@ -6,7 +6,7 @@ import { ActivatedRoute, ActivationStart, Router, RouterEvent } from '@angular/r
 
 @Injectable()
 export class LayoutService {
-  public isCustomLayout: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  public isCustomLayout: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   private customLayout: boolean;
 
