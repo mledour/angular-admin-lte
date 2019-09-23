@@ -67,7 +67,7 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
   private activeUrl: String;
   private initialized: boolean;
 
-  @ViewChild('sidebarElement') public sidebarElement: ElementRef;
+  @ViewChild('sidebarElement', {static: false}) public sidebarElement: ElementRef;
 
   @ViewChildren(SidebarLeftToggleDirective) public sidebarLeftToggleDirectives: QueryList<SidebarLeftToggleDirective>;
 

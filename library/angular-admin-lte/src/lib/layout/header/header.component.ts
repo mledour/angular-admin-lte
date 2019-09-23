@@ -25,7 +25,7 @@ import {removeListeners, removeSubscriptions} from '../../helpers';
   template: '<ng-template #templateRef><ng-content></ng-content></ng-template>'
 })
 export class HeaderLogoComponent {
-  @ViewChild('templateRef') public templateRef: TemplateRef<any>;
+  @ViewChild('templateRef', {static: true}) public templateRef: TemplateRef<any>;
 }
 
 /**
@@ -36,7 +36,7 @@ export class HeaderLogoComponent {
   template: '<ng-template #templateRef><ng-content></ng-content></ng-template>'
 })
 export class HeaderLogoMiniComponent {
-  @ViewChild('templateRef') public templateRef: TemplateRef<any>;
+  @ViewChild('templateRef', {static: true}) public templateRef: TemplateRef<any>;
 }
 
 /**
@@ -57,12 +57,12 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
   @Input() isSidebarRightToggle = true;
   @Input() logoLink: string | any[] = '/';
 
-  @ContentChild(HeaderLogoComponent) public headerLogoComponent: HeaderLogoComponent;
-  @ContentChild(HeaderLogoMiniComponent) public headerLogoMiniComponent: HeaderLogoMiniComponent;
+  @ContentChild(HeaderLogoComponent, {static: false}) public headerLogoComponent: HeaderLogoComponent;
+  @ContentChild(HeaderLogoMiniComponent, {static: false}) public headerLogoMiniComponent: HeaderLogoMiniComponent;
 
-  @ViewChild('headerElement') private headerElement: ElementRef;
-  @ViewChild('sidebarLeftToggleElement') private sidebarLeftToggleElement: ElementRef;
-  @ViewChild('sidebarRightToggleElement') private sidebarRightToggleElement: ElementRef;
+  @ViewChild('headerElement', {static: false}) private headerElement: ElementRef;
+  @ViewChild('sidebarLeftToggleElement', {static: false}) private sidebarLeftToggleElement: ElementRef;
+  @ViewChild('sidebarRightToggleElement', {static: false}) private sidebarRightToggleElement: ElementRef;
 
   /**
    * @method constructor

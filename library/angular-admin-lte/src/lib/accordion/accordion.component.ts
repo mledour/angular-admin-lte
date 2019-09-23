@@ -35,7 +35,7 @@ import { Subscription } from 'rxjs';
   template: '<ng-template #templateRef><ng-content></ng-content></ng-template>'
 })
 export class AccordionHeaderComponent {
-  @ViewChild('templateRef') public templateRef: TemplateRef<any>;
+  @ViewChild('templateRef', {static: true}) public templateRef: TemplateRef<any>;
 }
 
 
@@ -47,7 +47,7 @@ export class AccordionHeaderComponent {
   template: '<ng-template #templateRef><ng-content></ng-content></ng-template>'
 })
 export class AccordionContentComponent {
-  @ViewChild('templateRef') public templateRef: TemplateRef<any>;
+  @ViewChild('templateRef', {static: true}) public templateRef: TemplateRef<any>;
 }
 
 
@@ -73,10 +73,10 @@ export class AccordionComponent implements OnInit {
   @Input() public headerColorHover: string;
   @Input() public headerStyleClass = 'box-header with-border';
 
-  @ContentChild(AccordionHeaderComponent) public accordionHeaderComponent: AccordionHeaderComponent;
-  @ContentChild(AccordionContentComponent) public accordionContentComponent: AccordionContentComponent;
+  @ContentChild(AccordionHeaderComponent, {static: true}) public accordionHeaderComponent: AccordionHeaderComponent;
+  @ContentChild(AccordionContentComponent, {static: true}) public accordionContentComponent: AccordionContentComponent;
 
-  @ViewChild('templateRef') public templateRef: TemplateRef<any>;
+  @ViewChild('templateRef', {static: true}) public templateRef: TemplateRef<any>;
 
   /**
    * @method ngOnInit

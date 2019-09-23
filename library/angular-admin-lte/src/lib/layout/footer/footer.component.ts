@@ -10,7 +10,7 @@ import { FooterService } from './footer.service';
   template: '<ng-template #templateRef><ng-content></ng-content></ng-template>'
 })
 export class FooterLeftComponent {
-  @ViewChild('templateRef') public templateRef: TemplateRef<any>;
+  @ViewChild('templateRef', {static: true}) public templateRef: TemplateRef<any>;
 }
 
 /**
@@ -21,7 +21,7 @@ export class FooterLeftComponent {
   template: '<ng-template #templateRef><ng-content></ng-content></ng-template>'
 })
 export class FooterRightComponent {
-  @ViewChild('templateRef') public templateRef: TemplateRef<any>;
+  @ViewChild('templateRef', {static: true}) public templateRef: TemplateRef<any>;
 }
 
 @Component({
@@ -30,8 +30,8 @@ export class FooterRightComponent {
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  @ContentChild(FooterLeftComponent) public footerLeftComponent: FooterLeftComponent;
-  @ContentChild(FooterRightComponent) public footerRightComponent: FooterRightComponent;
+  @ContentChild(FooterLeftComponent, {static: false}) public footerLeftComponent: FooterLeftComponent;
+  @ContentChild(FooterRightComponent, {static: false}) public footerRightComponent: FooterRightComponent;
 
   constructor(
     private elementRef: ElementRef,
