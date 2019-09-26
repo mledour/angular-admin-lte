@@ -17,8 +17,8 @@
   display: inline-block;
 }
 
-.breadcrumb > li > a > .fa,
-.breadcrumb > li > a > .glyphicon,
-.breadcrumb > li > a > .ion {
+.breadcrumb > li .fa,
+.breadcrumb > li .glyphicon,
+.breadcrumb > li .ion {
   margin-right: 5px;
 }
