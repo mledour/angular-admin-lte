@@ -27,9 +27,9 @@ export class BoxInfoComponent implements OnInit {
   @Input() public progressWidth: number;
   @Input() public styleClass = 'info-box';
 
-  @ContentChild(BoxInfoHeaderDirective) public boxInfoHeaderDirective: BoxInfoHeaderDirective;
-  @ContentChild(BoxInfoFooterDirective) public boxInfoFooterDirective: BoxInfoFooterDirective;
-  @ContentChild(BoxInfoContentDirective) public boxInfoContentDirective: BoxInfoContentDirective;
+  @ContentChild(BoxInfoHeaderDirective, /* TODO: add static flag */ {}) public boxInfoHeaderDirective: BoxInfoHeaderDirective;
+  @ContentChild(BoxInfoFooterDirective, /* TODO: add static flag */ {}) public boxInfoFooterDirective: BoxInfoFooterDirective;
+  @ContentChild(BoxInfoContentDirective, /* TODO: add static flag */ {}) public boxInfoContentDirective: BoxInfoContentDirective;
 
   /**
    * @method ngOnInit

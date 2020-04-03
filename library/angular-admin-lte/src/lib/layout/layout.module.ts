@@ -42,7 +42,7 @@ export class LayoutModule {
    * @param  layoutConfig [description]
    * @return [description]
    */
-  static forRoot(layoutConfig: LayoutState): ModuleWithProviders {
+  static forRoot(layoutConfig: LayoutState): ModuleWithProviders<LayoutModule> {
     return {
       ngModule: LayoutModule,
       providers: [...layoutProvider(layoutConfig), LayoutService]
