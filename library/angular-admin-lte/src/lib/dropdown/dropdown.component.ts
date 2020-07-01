@@ -74,7 +74,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
   @ContentChild(DropdownToggleComponent, /* TODO: add static flag */ {}) public dropdownToggleComponent: DropdownToggleComponent;
   @ContentChild(DropdownMenuComponent, /* TODO: add static flag */ {}) public dropdownMenuComponent: DropdownMenuComponent;
 
-  @ViewChild('toggleElement', { static: false }) private defaultToggleElement: ElementRef;
+  @ViewChild('toggleElement') private defaultToggleElement: ElementRef;
 
   /**
    * @method constructor

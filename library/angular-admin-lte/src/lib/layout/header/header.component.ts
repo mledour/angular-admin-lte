@@ -61,8 +61,8 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
   @ContentChild(HeaderLogoMiniComponent, /* TODO: add static flag */ {}) public headerLogoMiniComponent: HeaderLogoMiniComponent;
 
   @ViewChild('headerElement', { static: true }) private headerElement: ElementRef;
-  @ViewChild('sidebarLeftToggleElement', { static: false }) private sidebarLeftToggleElement: ElementRef;
-  @ViewChild('sidebarRightToggleElement', { static: false }) private sidebarRightToggleElement: ElementRef;
+  @ViewChild('sidebarLeftToggleElement') private sidebarLeftToggleElement: ElementRef;
+  @ViewChild('sidebarRightToggleElement') private sidebarRightToggleElement: ElementRef;
 
   /**
    * @method constructor

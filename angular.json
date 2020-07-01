@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/angular-admin-lte-demo",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -38,6 +39,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -141,7 +148,8 @@
           "configurations": {
             "production": {
               "project": "library/angular-admin-lte/ng-package.prod.json"
-            }
+            ,              "tsConfig": "library/angular-admin-lte/tsconfig.lib.prod.json"
+}
           }
         },
         "test": {

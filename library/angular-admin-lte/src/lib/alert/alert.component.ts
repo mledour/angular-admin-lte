@@ -56,8 +56,8 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
   @Output() public onCollapseStart = new EventEmitter();
   @Output() public onCollapseDone = new EventEmitter();
 
-  @ViewChild('removeButtonElement', { static: false }) private removeButtonElement: ElementRef;
-  @ViewChild('containerElementRef', { read: ViewContainerRef, static: false }) private containerElementRef: ViewContainerRef;
+  @ViewChild('removeButtonElement') private removeButtonElement: ElementRef;
+  @ViewChild('containerElementRef', { read: ViewContainerRef }) private containerElementRef: ViewContainerRef;
 
   /**
    * @method constructor

@@ -62,8 +62,8 @@ export class BoxComponent implements AfterViewInit, OnDestroy {
   @ContentChild(BoxContentDirective, /* TODO: add static flag */ {}) public boxContentDirective: BoxContentDirective;
   @ContentChild(BoxToolsDirective, /* TODO: add static flag */ {}) public boxToolsDirective: BoxToolsDirective;
 
-  @ViewChild('toggleButtonElement', { static: false }) private toggleButtonElement;
-  @ViewChild('removeButtonElement', { static: false }) private removeButtonElement;
+  @ViewChild('toggleButtonElement') private toggleButtonElement;
+  @ViewChild('removeButtonElement') private removeButtonElement;
 
   /**
    * @method constructor
