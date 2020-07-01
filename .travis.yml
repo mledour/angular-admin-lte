@@ -32,7 +32,9 @@ script:
 after_success:
   - cat coverage/lcov.info | coveralls
   - bash scripts/gh-pages.sh $TMPDIR/gh-pages $TRAVIS_BUILD_DIR/dist/angular-admin-lte-demo
-
+before_install:
+  - npm install -g yarn
+  -
 before_deploy:
   - cp README.md LICENSE dist/angular-admin-lte
   - cd dist/angular-admin-lte
