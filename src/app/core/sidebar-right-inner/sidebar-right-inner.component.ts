@@ -65,7 +65,6 @@ export class SidebarRightInnerComponent implements OnInit, OnDestroy {
   /**
    * [onLayoutChange description]
    * @method onLayoutChange
-   * @param  {[type]}       event [description]
    */
   public onLayoutChange(event): void {
     this.layout = event.target.checked ? event.target.getAttribute('value') : '';
@@ -75,8 +74,6 @@ export class SidebarRightInnerComponent implements OnInit, OnDestroy {
   /**
    * [changeSkin description]
    * @method changeSkin
-   * @param  {[type]}   event [description]
-   * @param  {string}   color [description]
    */
   public changeSkin(event, color: string): void {
     event.preventDefault();
@@ -86,7 +83,6 @@ export class SidebarRightInnerComponent implements OnInit, OnDestroy {
   /**
    * [changeSidebarRightSkin description]
    * @method changeSidebarRightSkin
-   * @param  {boolean}              value [description]
    */
   public changeSidebarRightSkin(value: boolean): void {
     if (value) {

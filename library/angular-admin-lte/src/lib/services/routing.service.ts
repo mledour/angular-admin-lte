@@ -7,8 +7,8 @@ import { BehaviorSubject } from 'rxjs';
  *
  */
 export interface Path {
-  data: Object;
-  params: Object;
+  data: object;
+  params: object;
   url: string;
 }
 
@@ -96,10 +96,10 @@ export class RoutingService {
       // https://github.com/angular/angular/issues/17473: event not fired anymore on load for routed component.
       if (routeEvent instanceof NavigationEnd) {
         this.events.next(routeEvent);
-        let route = this.router.routerState.root.snapshot,
-          tmpUrl = '',
-          url = '',
-          rootRoot = true;
+        let route = this.router.routerState.root.snapshot;
+        let tmpUrl = '';
+        let url = '';
+        let rootRoot = true;
 
         const paths: Paths = [];
 
@@ -113,18 +113,18 @@ export class RoutingService {
 
           rootRoot = false;
 
-          if (route.params || route.data) {
+          if (route.params && route.data) {
             for (const key in route.params) {
               if (!key) { continue; }
-              if (route.data['title']) {
-                route.data['title'] = route.data['title'].replace(`:${key}`, route.params[key]);
-                route.data['title'] = route.data['title'].replace(`:${key}`, route.params[key]);
+              if (route.data.hasOwnProperty('title')) {
+                route.data.title = route.data.title.replace(`:${key}`, route.params[key]);
+                route.data.title = route.data.title.replace(`:${key}`, route.params[key]);
               }
-              if (route.data['breadcrumbs']) {
-                route.data['breadcrumbs'] = route.data['breadcrumbs'].replace(`:${key}`, route.params[key]);
+              if (route.data.hasOwnProperty('breadcrumbs')) {
+                route.data.breadcrumbs = route.data.breadcrumbs.replace(`:${key}`, route.params[key]);
               }
-              if (route.data['description']) {
-                route.data['description'] = route.data['description'].replace(`:${key}`, route.params[key]);
+              if (route.data.hasOwnProperty('description')) {
+                route.data.description = route.data.description.replace(`:${key}`, route.params[key]);
               }
             }
           }

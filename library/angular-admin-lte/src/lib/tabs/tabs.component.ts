@@ -72,8 +72,8 @@ export class TabComponent implements OnInit {
 
   @ViewChild('templateRef', { static: true }) public templateRef: TemplateRef<any>;
 
-  @ContentChild(TabHeaderComponent, /* TODO: add static flag */ {}) public tabHeaderComponent: TabHeaderComponent;
-  @ContentChild(TabContentComponent, /* TODO: add static flag */ {}) public tabContentComponent: TabContentComponent;
+  @ContentChild(TabHeaderComponent) public tabHeaderComponent: TabHeaderComponent;
+  @ContentChild(TabContentComponent) public tabContentComponent: TabContentComponent;
 
   /**
    * @method ngOnInit
@@ -124,8 +124,8 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
   @Input() public styleClass = 'nav-tabs-custom';
   @Input() public tabsColor: string;
 
-  @Output() public onClose = new EventEmitter();
-  @Output() public onOpen = new EventEmitter();
+  @Output() public closeTab = new EventEmitter();
+  @Output() public openTab = new EventEmitter();
 
   @ContentChild(TabsHeaderComponent, /* TODO: add static flag */ {}) public tabsHeaderComponent: TabsHeaderComponent;
 
@@ -201,11 +201,11 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
       this.tabs.forEach((tab: TabComponent) => {
         if (this.activatedTabIndex === tab.index || (this.activatedTabIndex === undefined && tab.index === 0)) {
           tab.isActive = true;
-          this.onOpen.emit({index: tab.index});
+          this.openTab.emit({index: tab.index});
           this.changeDetectorRef.detectChanges();
         } else if (tab.isActive) {
           tab.isActive = false;
-          this.onClose.emit({index: tab.index});
+          this.closeTab.emit({index: tab.index});
           this.changeDetectorRef.detectChanges();
         }
       });
@@ -218,14 +218,14 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
    * @param event     [description]
    * @param tabToOpen [description]
    */
-  public openTab(event: Event, tabToOpen: TabComponent): void {
+  public onOpenTab(event: Event, tabToOpen: TabComponent): void {
     event.preventDefault();
     tabToOpen.isActive = true;
-    this.onOpen.emit({event, index: tabToOpen.index});
+    this.openTab.emit({event, index: tabToOpen.index});
     this.tabs.forEach((tab: TabComponent) => {
       if (tab.isActive && tabToOpen !== tab) {
         tab.isActive = false;
-        this.onClose.emit({event, index: tab.index});
+        this.closeTab.emit({event, index: tab.index});
       }
     });
   }
@@ -250,7 +250,7 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
     this.ngZone.runOutsideAngular(() => {
       this.tabToggleDirectives.forEach((tabToggle: TabToggleDirective) => {
         this.listeners.push(this.renderer2.listen(tabToggle.elementRef.nativeElement, 'click', (event) => {
-          this.openTab(event, tabToggle.tabComponent);
+          this.onOpenTab(event, tabToggle.tabComponent);
           this.changeDetectorRef.detectChanges();
         }));
       });

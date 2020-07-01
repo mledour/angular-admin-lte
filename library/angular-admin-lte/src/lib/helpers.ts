@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
  * @param delay    [description]
  * @return [description]
  */
-export function throttle(callback: Function, delay: number): (args: Array<any>) => void {
+export function throttle(callback: () => void, delay: number): (args: Array<any>) => void {
   let timeout = null;
   return (...args) => {
     if (!timeout) {
@@ -38,9 +38,9 @@ export function removeSubscriptions(subscriptions): Array<Subscription> {
  * [removeListeners description]
  * @method removeListeners
  */
-export function removeListeners(listeners): Array<Function> {
+export function removeListeners(listeners): Array<() => void> {
   if (listeners) {
-    listeners.forEach((listener: Function) => {
+    listeners.forEach((listener: () => void) => {
       listener();
     });
   }

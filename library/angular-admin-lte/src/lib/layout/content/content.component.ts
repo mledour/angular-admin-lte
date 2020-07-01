@@ -31,18 +31,6 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   @ViewChild('contentInnerElement', { static: true }) private contentInnerElement: ElementRef;
 
-  /**
-   * @method constructor
-   * @param layoutStore
-   * @param routingService
-   * @param titleService
-   * @param elementRef
-   * @param changeDetectorRef
-   * @param sidebarRightService
-   * @param headerService
-   * @param footerService
-   * @param router
-   */
   constructor(
     private layoutStore: LayoutStore,
     private routingService: RoutingService,
@@ -62,10 +50,12 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.titleTag = this.titleService.getTitle();
 
     this.subscriptions.push(this.routingService.onChange.subscribe((value: any) => {
-      if (value && value[value.length - 1]) {
-        this.titleService.setTitle(this.getTitle(value[value.length - 1].data['title']));
-        this.header = value[value.length - 1].data['title'];
-        this.description = value[value.length - 1].data['description'];
+      if (value && value[value.length - 1] && value[value.length - 1].data) {
+        const data = value[value.length - 1].data;
+
+        this.titleService.setTitle(this.getTitle(data.title));
+        this.header = data.title;
+        this.description = data.description;
       }
       this.changeDetectorRef.markForCheck();
     }));

@@ -8,8 +8,8 @@ import { ColorService } from './color.service';
 })
 export class BackgroundColorDirective {
 
-  private _prefix: string;
-  private _color: string;
+  private prefix: string;
+  private color: string;
 
   /**
    * @method constructor
@@ -24,14 +24,14 @@ export class BackgroundColorDirective {
   ) {}
 
   @Input('mkColorCondition') condition = true;
-  @Input('mkColorPrefix') set prefix(prefix: string) {
-    this._prefix = prefix;
-    this.colorService.setBackgroundColor(this._color, this.condition, this.property, this._prefix);
+  @Input('mkColorPrefix') set setPrefix(prefix: string) {
+    this.prefix = prefix;
+    this.colorService.setBackgroundColor(this.color, this.condition, this.property, this.prefix);
   }
   @Input('mkColorProperty') property: string;
-  @Input('mkColor') set color(color: string) {
-    this._color = color;
-    this.colorService.setBackgroundColor(this._color, this.condition, this.property, this._prefix);
+  @Input('mkColor') set setColor(color: string) {
+    this.color = color;
+    this.colorService.setBackgroundColor(this.color, this.condition, this.property, this.prefix);
   }
 }
 

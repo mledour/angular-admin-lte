@@ -9,7 +9,7 @@ export interface LayoutState {
   layout?: string;
   sidebarLeftElementHeight?: number;
   sidebarRightElementHeight?: number;
-  sidebarLeftMenu?: Array<Object>;
+  sidebarLeftMenu?: Array<object>;
   sidebarLeftMenuActiveUrl?: string;
   skin?: string;
   windowInnerHeight?: number;

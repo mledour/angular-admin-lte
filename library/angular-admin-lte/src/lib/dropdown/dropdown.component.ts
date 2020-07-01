@@ -56,7 +56,7 @@ export class DropdownMenuComponent {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropdownComponent implements AfterViewInit, OnDestroy {
-  private documentClickListener: Function;
+  private documentClickListener: () => void;
   private listeners = [];
 
   @Input() public buttonStyleClass = 'btn dropdown-toggle';
@@ -68,8 +68,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
   @Input() public toggleElement: Element;
   @Input() public toggleText: string;
 
-  @Output() public onCollapseStart = new EventEmitter();
-  @Output() public onCollapseDone = new EventEmitter();
+  @Output() public collapseStart = new EventEmitter();
+  @Output() public collapseDone = new EventEmitter();
 
   @ContentChild(DropdownToggleComponent, /* TODO: add static flag */ {}) public dropdownToggleComponent: DropdownToggleComponent;
   @ContentChild(DropdownMenuComponent, /* TODO: add static flag */ {}) public dropdownMenuComponent: DropdownMenuComponent;
@@ -140,8 +140,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
    * @method collapseStart
    * @param event [description]
    */
-  public collapseStart(event: AnimationEvent): void {
-    this.onCollapseStart.emit(event);
+  public onCollapseStart(event: AnimationEvent): void {
+    this.collapseStart.emit(event);
   }
 
   /**
@@ -149,8 +149,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
    * @method collapseDone
    * @param event [description]
    */
-  public collapseDone(event: AnimationEvent): void {
-    this.onCollapseStart.emit(event);
+  public onCollapseDone(event: AnimationEvent): void {
+    this.collapseStart.emit(event);
   }
 
   /**

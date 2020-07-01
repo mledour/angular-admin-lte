@@ -20,10 +20,7 @@ export class ColorService {
   constructor(
     private renderer2: Renderer2,
     private elementRef: ElementRef
-  ) {
-    // this.init();
-    // console.log(this);
-  }
+  ) {}
 
   /**
    * [setBackgroundColor description]
@@ -38,12 +35,12 @@ export class ColorService {
       this.resetBackgroundColor();
       if (colors[color]) {
         this.renderer2.addClass(this.elementRef.nativeElement, 'bg-color');
-        this.currentBackgroundStyle = {property: property, color: colors[color]};
+        this.currentBackgroundStyle = {property, color: colors[color]};
         this.renderer2.setStyle(this.elementRef.nativeElement, property, colors[color]);
       } else {
         this.renderer2.removeClass(this.elementRef.nativeElement, 'bg-color');
         if (color.indexOf('#') === 0 || color.indexOf('rgb') === 0) {
-          this.currentBackgroundStyle = {property: property, color: color};
+          this.currentBackgroundStyle = {property, color};
           this.renderer2.setStyle(this.elementRef.nativeElement, property, color);
         } else if (colorsAliases.indexOf(color) !== -1) {
           this.currentBackgroundClass = prefix ? `${prefix}-${color}` : color;
