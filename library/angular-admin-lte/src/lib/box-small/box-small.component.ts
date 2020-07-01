@@ -24,7 +24,7 @@ export class BoxSmallComponent {
   @Input() public iconStyleClass = 'ion ion-bag';
   @Input() public styleClass = 'small-box';
 
-  @ContentChild(BoxSmallHeaderDirective) public boxSmallHeaderDirective: BoxSmallHeaderDirective;
-  @ContentChild(BoxSmallFooterDirective) public boxSmallFooterDirective: BoxSmallFooterDirective;
-  @ContentChild(BoxSmallContentDirective) public boxSmallContentDirective: BoxSmallContentDirective;
+  @ContentChild(BoxSmallHeaderDirective, /* TODO: add static flag */ {}) public boxSmallHeaderDirective: BoxSmallHeaderDirective;
+  @ContentChild(BoxSmallFooterDirective, /* TODO: add static flag */ {}) public boxSmallFooterDirective: BoxSmallFooterDirective;
+  @ContentChild(BoxSmallContentDirective, /* TODO: add static flag */ {}) public boxSmallContentDirective: BoxSmallContentDirective;
 }

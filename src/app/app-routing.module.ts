@@ -15,13 +15,13 @@ const routes: Routes = [
       component: HomeComponent
     }, {
       path: 'accordion',
-      loadChildren: './+accordion/accordion.module#AccordionModule',
+      loadChildren: () => import('./+accordion/accordion.module').then(m => m.AccordionModule),
       data: {
         title: 'Accordion'
       }
     }, {
       path: 'alert',
-      loadChildren: './+alert/alert.module#AlertModule',
+      loadChildren: () => import('./+alert/alert.module').then(m => m.AlertModule),
       data: {
         title: 'Alert',
       }
@@ -33,38 +33,38 @@ const routes: Routes = [
       children: [
         {
           path: 'configuration',
-          loadChildren: './+layout/configuration/configuration.module#ConfigurationModule',
+          loadChildren: () => import('./+layout/configuration/configuration.module').then(m => m.ConfigurationModule),
           data: {
             title: 'Configuration'
           }
         }, {
           path: 'custom',
-          loadChildren: './+layout/custom/custom.module#CustomModule',
+          loadChildren: () => import('./+layout/custom/custom.module').then(m => m.CustomModule),
           data: {
             title: 'Disable Layout'
             // disableLayout: true
           }
         }, {
           path: 'content',
-          loadChildren: './+layout/content/content.module#ContentModule',
+          loadChildren: () => import('./+layout/content/content.module').then(m => m.ContentModule),
           data: {
             title: 'Content'
           }
         }, {
           path: 'header',
-          loadChildren: './+layout/header/header.module#HeaderModule',
+          loadChildren: () => import('./+layout/header/header.module').then(m => m.HeaderModule),
           data: {
             title: 'Header'
           }
         }, {
           path: 'sidebar-left',
-          loadChildren: './+layout/sidebar-left/sidebar-left.module#SidebarLeftModule',
+          loadChildren: () => import('./+layout/sidebar-left/sidebar-left.module').then(m => m.SidebarLeftModule),
           data: {
             title: 'Sidebar Left'
           }
         }, {
           path: 'sidebar-right',
-          loadChildren: './+layout/sidebar-right/sidebar-right.module#SidebarRightModule',
+          loadChildren: () => import('./+layout/sidebar-right/sidebar-right.module').then(m => m.SidebarRightModule),
           data: {
             title: 'Sidebar Right'
           }
@@ -78,32 +78,32 @@ const routes: Routes = [
       children: [
         {
           path: 'box',
-          loadChildren: './+boxs/box-default/box-default.module#BoxDefaultModule',
+          loadChildren: () => import('./+boxs/box-default/box-default.module').then(m => m.BoxDefaultModule),
           data: {
             title: 'Box'
           }
         }, {
           path: 'info-box',
-          loadChildren: './+boxs/box-info/box-info.module#BoxInfoModule',
+          loadChildren: () => import('./+boxs/box-info/box-info.module').then(m => m.BoxInfoModule),
           data: {
             title: 'Info Box'
           }
         }, {
           path: 'small-box',
-          loadChildren: './+boxs/box-small/box-small.module#BoxSmallModule',
+          loadChildren: () => import('./+boxs/box-small/box-small.module').then(m => m.BoxSmallModule),
           data: {
             title: 'Small Box'
           }
         }
       ]}, {
         path: 'dropdown',
-        loadChildren: './+dropdown/dropdown.module#DropdownModule',
+        loadChildren: () => import('./+dropdown/dropdown.module').then(m => m.DropdownModule),
         data: {
           title: 'Dropdown',
         }
       }, {
         path: 'tabs',
-        loadChildren: './+tabs/tabs.module#TabsModule',
+        loadChildren: () => import('./+tabs/tabs.module').then(m => m.TabsModule),
         data: {
           title: 'Tabs',
         }
@@ -117,7 +117,7 @@ const routes: Routes = [
     children: [
       {
         path: 'input-text',
-        loadChildren: './+form/input-text/input-text.module#InputTextModule',
+        loadChildren: () => import('./+form/input-text/input-text.module').then(m => m.InputTextModule),
         data: {
           title: 'Input Text',
         }
@@ -125,13 +125,13 @@ const routes: Routes = [
     ]
   }, {
     path: 'login',
-    loadChildren: './+login/login.module#LoginModule',
+    loadChildren: () => import('./+login/login.module').then(m => m.LoginModule),
     data: {
       customLayout: true
     }
   }, {
     path: 'register',
-    loadChildren: './+register/register.module#RegisterModule',
+    loadChildren: () => import('./+register/register.module').then(m => m.RegisterModule),
     data: {
       customLayout: true
     }
