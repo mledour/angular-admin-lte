@@ -147,9 +147,9 @@
           },
           "configurations": {
             "production": {
-              "project": "library/angular-admin-lte/ng-package.prod.json"
-            ,              "tsConfig": "library/angular-admin-lte/tsconfig.lib.prod.json"
-}
+              "project": "library/angular-admin-lte/ng-package.prod.json",
+              "tsConfig": "library/angular-admin-lte/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -175,5 +175,8 @@
       }
     }
   },
-  "defaultProject": "angular-admin-lte-demo"
+  "defaultProject": "angular-admin-lte-demo",
+  "cli": {
+    "packageManager": "yarn"
+  }
 }
