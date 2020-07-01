@@ -60,7 +60,7 @@ export class TabContentComponent {
   template: '<ng-template #templateRef><ng-content></ng-content></ng-template>',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabComponent implements OnInit {
+export class TabComponent implements AfterContentInit {
   public index: number;
   public isActive = false;
 
@@ -78,7 +78,7 @@ export class TabComponent implements OnInit {
   /**
    * @method ngOnInit
    */
-  ngOnInit() {
+  ngAfterContentInit() {
     if (this.tabContentComponent) {
       this.contentTemplateRef = this.tabContentComponent.templateRef;
     } else {
@@ -127,7 +127,7 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
   @Output() public closeTab = new EventEmitter();
   @Output() public openTab = new EventEmitter();
 
-  @ContentChild(TabsHeaderComponent, /* TODO: add static flag */ {}) public tabsHeaderComponent: TabsHeaderComponent;
+  @ContentChild(TabsHeaderComponent, { static: true }) public tabsHeaderComponent: TabsHeaderComponent;
 
   @ContentChildren(TabComponent) public tabs: QueryList<TabComponent>;
 
