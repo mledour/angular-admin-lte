@@ -53,8 +53,8 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
   }
   @Input() public styleClass = '';
 
-  @Output() public onCollapseStart = new EventEmitter();
-  @Output() public onCollapseDone = new EventEmitter();
+  @Output() public collapseStart = new EventEmitter();
+  @Output() public collapseDone = new EventEmitter();
 
   @ViewChild('removeButtonElement') private removeButtonElement: ElementRef;
   @ViewChild('containerElementRef', { read: ViewContainerRef }) private containerElementRef: ViewContainerRef;
@@ -107,8 +107,8 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
    * @method collapseStart
    * @param event [description]
    */
-  public collapseStart(event: AnimationEvent): void {
-    this.onCollapseStart.emit(event);
+  public onCollapseStart(event: AnimationEvent): void {
+    this.collapseStart.emit(event);
   }
 
   /**
@@ -116,13 +116,13 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
    * @method collapseDone
    * @param event [description]
    */
-  public collapseDone(event: AnimationEvent): void {
+  public onCollapseDone(event: AnimationEvent): void {
     if (event.toState === '1') {
       this.listeners = removeListeners(this.listeners);
       this.removed = true;
       this.viewContainerRef.clear();
       this.changeDetectorRef.detectChanges();
     }
-    this.onCollapseDone.emit(event);
+    this.collapseDone.emit(event);
   }
 }

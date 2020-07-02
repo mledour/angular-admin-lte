@@ -10,11 +10,6 @@ import * as Prism from 'prismjs';
 export class AccordionComponent implements AfterViewInit {
   public activeIndex: any = 0;
 
-  /**
-   *
-   * @param {NgZone} ngZone
-   * @param {ChangeDetectorRef} changeDetectorRef
-   */
   constructor(
     private ngZone: NgZone,
     private changeDetectorRef: ChangeDetectorRef

@@ -9,7 +9,7 @@ import { LayoutState } from './layout.state';
 export class LayoutStore {
   public readonly layoutState: Observable<LayoutState>;
 
-  private _layoutState: BehaviorSubject<LayoutState>;
+  private state: BehaviorSubject<LayoutState>;
   private readonly initialLayoutState: LayoutState = {
     isSidebarLeftCollapsed: false,
     isSidebarLeftExpandOnOver: false,
@@ -32,8 +32,8 @@ export class LayoutStore {
     if (layoutConfig) {
       this.initialLayoutState = Object.assign(this.initialLayoutState, layoutConfig);
     }
-    this._layoutState = new BehaviorSubject(this.initialLayoutState);
-    this.layoutState = this._layoutState.asObservable();
+    this.state = new BehaviorSubject(this.initialLayoutState);
+    this.layoutState = this.state.asObservable();
   }
 
   /**
@@ -42,7 +42,7 @@ export class LayoutStore {
    * @return [description]
    */
   get windowInnerHeight(): Observable<number> {
-    return <Observable<number>>this.layoutState.pipe(pluck('windowInnerHeight'), distinctUntilChanged());
+    return this.layoutState.pipe(pluck('windowInnerHeight'), distinctUntilChanged()) as Observable<number>;
   }
 
   /**
@@ -51,7 +51,7 @@ export class LayoutStore {
    * @return [description]
    */
   get windowInnerWidth(): Observable<number> {
-    return <Observable<number>>this.layoutState.pipe(pluck('windowInnerWidth'), distinctUntilChanged());
+    return this.layoutState.pipe(pluck('windowInnerWidth'), distinctUntilChanged()) as Observable<number>;
   }
 
   /**
@@ -59,7 +59,7 @@ export class LayoutStore {
    * @return [description]
    */
   get isSidebarLeftCollapsed(): Observable<boolean> {
-    return <Observable<boolean>>this.layoutState.pipe(pluck('isSidebarLeftCollapsed'), distinctUntilChanged());
+    return this.layoutState.pipe(pluck('isSidebarLeftCollapsed'), distinctUntilChanged()) as Observable<boolean>;
   }
 
   /**
@@ -68,7 +68,7 @@ export class LayoutStore {
    * @return [description]
    */
   get isSidebarLeftExpandOnOver(): Observable<boolean> {
-    return <Observable<boolean>>this.layoutState.pipe(pluck('isSidebarLeftExpandOnOver'), distinctUntilChanged());
+    return this.layoutState.pipe(pluck('isSidebarLeftExpandOnOver'), distinctUntilChanged()) as Observable<boolean>;
   }
 
   /**
@@ -77,7 +77,7 @@ export class LayoutStore {
    * @return [description]
    */
   get isSidebarLeftMouseOver(): Observable<boolean> {
-    return <Observable<boolean>>this.layoutState.pipe(pluck('isSidebarLeftMouseOver'), distinctUntilChanged());
+    return this.layoutState.pipe(pluck('isSidebarLeftMouseOver'), distinctUntilChanged()) as Observable<boolean>;
   }
 
   /**
@@ -86,7 +86,7 @@ export class LayoutStore {
    * @return [description]
    */
   get isSidebarLeftMini(): Observable<boolean> {
-    return <Observable<boolean>>this.layoutState.pipe(pluck('isSidebarLeftMini'), distinctUntilChanged());
+    return this.layoutState.pipe(pluck('isSidebarLeftMini'), distinctUntilChanged()) as Observable<boolean>;
   }
 
   /**
@@ -95,7 +95,7 @@ export class LayoutStore {
    * @return [description]
    */
   get sidebarRightSkin(): Observable<string> {
-    return <Observable<string>>this.layoutState.pipe(pluck('sidebarRightSkin'), distinctUntilChanged());
+    return this.layoutState.pipe(pluck('sidebarRightSkin'), distinctUntilChanged()) as Observable<string>;
   }
 
   /**
@@ -103,7 +103,7 @@ export class LayoutStore {
    * @return [description]
    */
   get isSidebarRightCollapsed(): Observable<boolean> {
-    return <Observable<boolean>>this.layoutState.pipe(pluck('isSidebarRightCollapsed'), distinctUntilChanged());
+    return this.layoutState.pipe(pluck('isSidebarRightCollapsed'), distinctUntilChanged()) as Observable<boolean>;
   }
 
   /**
@@ -112,7 +112,7 @@ export class LayoutStore {
    * @return [description]
    */
   get isSidebarRightOverContent(): Observable<boolean> {
-    return <Observable<boolean>>this.layoutState.pipe(pluck('isSidebarRightOverContent'), distinctUntilChanged());
+    return this.layoutState.pipe(pluck('isSidebarRightOverContent'), distinctUntilChanged()) as Observable<boolean>;
   }
 
   /**
@@ -121,7 +121,7 @@ export class LayoutStore {
    * @return [description]
    */
   get sidebarLeftMenu(): Observable<Array<any>> {
-    return <Observable<Array<any>>>this.layoutState.pipe(pluck('sidebarLeftMenu'), distinctUntilChanged());
+    return this.layoutState.pipe(pluck('sidebarLeftMenu'), distinctUntilChanged()) as Observable<Array<any>>;
   }
 
   /**
@@ -130,7 +130,7 @@ export class LayoutStore {
    * @return [description]
    */
   get sidebarLeftMenuActiveUrl(): Observable<string> {
-    return <Observable<string>>this.layoutState.pipe(pluck('sidebarLeftMenuActiveUrl'), distinctUntilChanged());
+    return this.layoutState.pipe(pluck('sidebarLeftMenuActiveUrl'), distinctUntilChanged()) as Observable<string>;
   }
 
   /**
@@ -139,7 +139,7 @@ export class LayoutStore {
    * @return [description]
    */
   get sidebarLeftElementHeight(): Observable<number> {
-    return <Observable<number>>this.layoutState.pipe(pluck('sidebarLeftElementHeight'), distinctUntilChanged());
+    return this.layoutState.pipe(pluck('sidebarLeftElementHeight'), distinctUntilChanged()) as Observable<number>;
   }
 
   /**
@@ -148,7 +148,7 @@ export class LayoutStore {
    * @return [description]
    */
   get layout(): Observable<string> {
-    return <Observable<string>>this.layoutState.pipe(pluck('layout'), distinctUntilChanged());
+    return this.layoutState.pipe(pluck('layout'), distinctUntilChanged()) as Observable<string>;
   }
 
   /**
@@ -157,7 +157,7 @@ export class LayoutStore {
    * @return [description]
    */
   get skin(): Observable<string> {
-    return <Observable<string>>this.layoutState.pipe(pluck('skin'), distinctUntilChanged());
+    return this.layoutState.pipe(pluck('skin'), distinctUntilChanged()) as Observable<string>;
   }
 
   /**
@@ -166,7 +166,7 @@ export class LayoutStore {
    * @return [description]
    */
   get wrapperClasses(): Observable<string> {
-    return <Observable<string>>this.layoutState.pipe(pluck('wrapperClasses'), distinctUntilChanged());
+    return this.layoutState.pipe(pluck('wrapperClasses'), distinctUntilChanged()) as Observable<string>;
   }
 
   /**
@@ -175,8 +175,8 @@ export class LayoutStore {
    * @param value [description]
    */
   public sidebarLeftCollapsed(value?: boolean): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {isSidebarLeftCollapsed: value})
+    this.state.next(
+      Object.assign(this.state.value, {isSidebarLeftCollapsed: value})
     );
   }
 
@@ -186,8 +186,8 @@ export class LayoutStore {
    * @param value [description]
    */
   public sidebarLeftExpandOnOver(value?: boolean): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {isSidebarLeftExpandOnOver: value})
+    this.state.next(
+      Object.assign(this.state.value, {isSidebarLeftExpandOnOver: value})
     );
   }
 
@@ -197,8 +197,8 @@ export class LayoutStore {
    * @param value [description]
    */
   public setSidebarLeftElementHeight(value: number): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {sidebarLeftElementHeight: value})
+    this.state.next(
+      Object.assign(this.state.value, {sidebarLeftElementHeight: value})
     );
   }
 
@@ -208,8 +208,8 @@ export class LayoutStore {
    * @param value [description]
    */
   public setSidebarRightSkin(value?: string): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {sidebarRightSkin: value})
+    this.state.next(
+      Object.assign(this.state.value, {sidebarRightSkin: value})
     );
   }
 
@@ -219,8 +219,8 @@ export class LayoutStore {
    * @param value [description]
    */
   public sidebarLeftMouseOver(value?: boolean): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {isSidebarLeftMouseOver: value})
+    this.state.next(
+      Object.assign(this.state.value, {isSidebarLeftMouseOver: value})
     );
   }
 
@@ -230,8 +230,8 @@ export class LayoutStore {
    * @param value [description]
    */
   public sidebarLeftMini(value?: boolean): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {isSidebarLeftMini: value})
+    this.state.next(
+      Object.assign(this.state.value, {isSidebarLeftMini: value})
     );
   }
 
@@ -241,8 +241,8 @@ export class LayoutStore {
    * @param value [description]
    */
   public sidebarRightCollapsed(value?: boolean): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {isSidebarRightCollapsed: value})
+    this.state.next(
+      Object.assign(this.state.value, {isSidebarRightCollapsed: value})
     );
   }
 
@@ -252,8 +252,8 @@ export class LayoutStore {
    * @param value [description]
    */
   public sidebarRightOverContent(value?: boolean): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {isSidebarRightOverContent: value})
+    this.state.next(
+      Object.assign(this.state.value, {isSidebarRightOverContent: value})
     );
   }
 
@@ -263,8 +263,8 @@ export class LayoutStore {
    * @param value [description]
    */
   public setSidebarLeftMenu(value: Array<any>): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {sidebarLeftMenu: value})
+    this.state.next(
+      Object.assign(this.state.value, {sidebarLeftMenu: value})
     );
   }
 
@@ -274,8 +274,8 @@ export class LayoutStore {
    * @param value [description]
    */
   public setSidebarLeftMenuActiveUrl(value: string): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {sidebarLeftMenuActiveUrl: value})
+    this.state.next(
+      Object.assign(this.state.value, {sidebarLeftMenuActiveUrl: value})
     );
   }
 
@@ -285,8 +285,8 @@ export class LayoutStore {
    * @param value [description]
    */
   public setLayout(value: string): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {layout: value})
+    this.state.next(
+      Object.assign(this.state.value, {layout: value})
     );
   }
 
@@ -296,8 +296,8 @@ export class LayoutStore {
    * @param value [description]
    */
   public setSkin(value: string): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {skin: value})
+    this.state.next(
+      Object.assign(this.state.value, {skin: value})
     );
   }
 
@@ -307,8 +307,8 @@ export class LayoutStore {
    * @param value [description]
    */
   public setWrapperClasses(value: string): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {wrapperClasses: value})
+    this.state.next(
+      Object.assign(this.state.value, {wrapperClasses: value})
     );
   }
 
@@ -318,8 +318,8 @@ export class LayoutStore {
    * @param value [description]
    */
   public setWindowInnerHeight(value: number): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {windowInnerHeight: value})
+    this.state.next(
+      Object.assign(this.state.value, {windowInnerHeight: value})
     );
   }
 
@@ -329,8 +329,8 @@ export class LayoutStore {
    * @param value [description]
    */
   public setWindowInnerWidth(value: number): void {
-    this._layoutState.next(
-      Object.assign(this._layoutState.value, {windowInnerWidth: value})
+    this.state.next(
+      Object.assign(this.state.value, {windowInnerWidth: value})
     );
   }
 }

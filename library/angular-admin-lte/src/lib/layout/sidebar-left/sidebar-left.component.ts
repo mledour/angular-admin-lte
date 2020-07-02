@@ -59,15 +59,15 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
   private windowInnerHeight: number;
   private collapsedItems: Items = [];
   private activatedItems: Items = [];
-  private toggleListeners: Array<Function> = [];
-  private listeners: Array<Function> = [];
+  private toggleListeners: Array<() => void> = [];
+  private listeners: Array<() => void> = [];
   private itemsByIds: {[propKey: number]: Item} = {};
   private runningAnimations = 0;
   private subscriptions = [];
-  private activeUrl: String;
+  private activeUrl: string;
   private initialized: boolean;
 
-  @ViewChild('sidebarElement') public sidebarElement: ElementRef;
+  @ViewChild('sidebarElement', { static: true }) public sidebarElement: ElementRef;
 
   @ViewChildren(SidebarLeftToggleDirective) public sidebarLeftToggleDirectives: QueryList<SidebarLeftToggleDirective>;
 

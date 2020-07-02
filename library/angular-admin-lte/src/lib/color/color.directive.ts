@@ -7,6 +7,10 @@ import { ColorService } from './color.service';
   providers: [ColorService]
 })
 export class BackgroundColorDirective {
+
+  private prefix: string;
+  private color: string;
+
   /**
    * @method constructor
    * @param elementRef   [description]
@@ -20,10 +24,14 @@ export class BackgroundColorDirective {
   ) {}
 
   @Input('mkColorCondition') condition = true;
-  @Input('mkColorPrefix') prefix: string;
+  @Input('mkColorPrefix') set setPrefix(prefix: string) {
+    this.prefix = prefix;
+    this.colorService.setBackgroundColor(this.color, this.condition, this.property, this.prefix);
+  }
   @Input('mkColorProperty') property: string;
-  @Input('mkColor') set color(color: string) {
-    this.colorService.setBackgroundColor(color, this.condition, this.property, this.prefix);
+  @Input('mkColor') set setColor(color: string) {
+    this.color = color;
+    this.colorService.setBackgroundColor(this.color, this.condition, this.property, this.prefix);
   }
 }
 

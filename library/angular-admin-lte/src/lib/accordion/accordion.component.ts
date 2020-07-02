@@ -35,7 +35,7 @@ import { Subscription } from 'rxjs';
   template: '<ng-template #templateRef><ng-content></ng-content></ng-template>'
 })
 export class AccordionHeaderComponent {
-  @ViewChild('templateRef') public templateRef: TemplateRef<any>;
+  @ViewChild('templateRef', { static: true }) public templateRef: TemplateRef<any>;
 }
 
 
@@ -47,7 +47,7 @@ export class AccordionHeaderComponent {
   template: '<ng-template #templateRef><ng-content></ng-content></ng-template>'
 })
 export class AccordionContentComponent {
-  @ViewChild('templateRef') public templateRef: TemplateRef<any>;
+  @ViewChild('templateRef', { static: true }) public templateRef: TemplateRef<any>;
 }
 
 
@@ -73,10 +73,10 @@ export class AccordionComponent implements OnInit {
   @Input() public headerColorHover: string;
   @Input() public headerStyleClass = 'box-header with-border';
 
-  @ContentChild(AccordionHeaderComponent) public accordionHeaderComponent: AccordionHeaderComponent;
-  @ContentChild(AccordionContentComponent) public accordionContentComponent: AccordionContentComponent;
+  @ContentChild(AccordionHeaderComponent, /* TODO: add static flag */ {}) public accordionHeaderComponent: AccordionHeaderComponent;
+  @ContentChild(AccordionContentComponent, /* TODO: add static flag */ {}) public accordionContentComponent: AccordionContentComponent;
 
-  @ViewChild('templateRef') public templateRef: TemplateRef<any>;
+  @ViewChild('templateRef', { static: true }) public templateRef: TemplateRef<any>;
 
   /**
    * @method ngOnInit
@@ -107,7 +107,7 @@ export class AccordionComponent implements OnInit {
 export class AccordionGroupComponent implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
   private activeIndex: any = [0];
   // @TODO change types for listeners to all files
-  private listeners: Array<Function> = [];
+  private listeners: Array<() => void> = [];
   // @TODO change types for subscriptions to all files
   private subscriptions: Array<Subscription> = [];
 
@@ -118,8 +118,8 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
   @Input() public isMultiple: boolean;
   @Input() public styleClass = 'box-group';
 
-  @Output() public onCollapseStart = new EventEmitter();
-  @Output() public onCollapseDone = new EventEmitter();
+  @Output() public collapseStart = new EventEmitter();
+  @Output() public collapseDone = new EventEmitter();
 
   @ContentChildren(AccordionComponent) public accordionComponents: QueryList<AccordionComponent>;
 
@@ -209,7 +209,7 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
   public toggleAccordion(event: Event, toggleIndex: number): void {
     event.preventDefault();
 
-    const indexOf = this.activeIndex['indexOf'](toggleIndex);
+    const indexOf = this.activeIndex.indexOf(toggleIndex);
     if (indexOf === -1) {
       if (this.isMultiple) {
         this.activeIndex.push(toggleIndex);
@@ -232,9 +232,9 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
    * @param event [description]
    * @param accordion [description]
    */
-  public collapseStart(event: AnimationEvent, accordion: AccordionComponent): void {
+  public onCollapseStart(event: AnimationEvent, accordion: AccordionComponent): void {
     accordion.isCollapsing = true;
-    this.onCollapseStart.emit({animationEvent: event, index: accordion.index});
+    this.collapseStart.emit({animationEvent: event, index: accordion.index});
   }
 
   /**
@@ -243,9 +243,9 @@ export class AccordionGroupComponent implements AfterContentInit, AfterViewInit,
    * @param event [description]
    * @param accordion [description]
    */
-  public collapseDone(event: AnimationEvent, accordion: AccordionComponent): void {
+  public onCollapseDone(event: AnimationEvent, accordion: AccordionComponent): void {
     accordion.isCollapsing = false;
-    this.onCollapseDone.emit({animationEvent: event, index: accordion.index});
+    this.collapseDone.emit({animationEvent: event, index: accordion.index});
   }
 
   /**

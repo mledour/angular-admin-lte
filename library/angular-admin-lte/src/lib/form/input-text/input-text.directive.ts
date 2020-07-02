@@ -15,9 +15,9 @@ import { ClassService } from '../../services/class.service';
 export class InputTextDirective implements OnInit {
   private defaultClass = 'form-control';
   private isSetClass: boolean;
-  private _onKeyUp = new Subject<NgControl>();
+  private onKeyUp = new Subject<NgControl>();
 
-  public onKeyup: Observable<NgControl> = this._onKeyUp.asObservable();
+  public onKeyup: Observable<NgControl> = this.onKeyUp.asObservable();
 
   @Input() set borderColor(color: string) {
     this.colorService.setBackgroundColor(color, true, 'border-color', null);
@@ -56,6 +56,6 @@ export class InputTextDirective implements OnInit {
   }
 
   @HostListener('keyup') keyUpListener() {
-    this._onKeyUp.next(this.ngControl);
+    this.onKeyUp.next(this.ngControl);
   }
 }

@@ -28,8 +28,8 @@ import {removeListeners} from '../helpers';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropdownToggleComponent {
-  @ViewChild('templateRef') public templateRef: TemplateRef<any>;
-  @ContentChild('toggleElement') public toggleElement: ElementRef;
+  @ViewChild('templateRef', { static: true }) public templateRef: TemplateRef<any>;
+  @ContentChild('toggleElement', /* TODO: add static flag */ {}) public toggleElement: ElementRef;
 }
 
 
@@ -42,7 +42,7 @@ export class DropdownToggleComponent {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropdownMenuComponent {
-  @ViewChild('templateRef') public templateRef: TemplateRef<any>;
+  @ViewChild('templateRef', { static: true }) public templateRef: TemplateRef<any>;
 }
 
 
@@ -56,7 +56,7 @@ export class DropdownMenuComponent {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropdownComponent implements AfterViewInit, OnDestroy {
-  private documentClickListener: Function;
+  private documentClickListener: () => void;
   private listeners = [];
 
   @Input() public buttonStyleClass = 'btn dropdown-toggle';
@@ -68,11 +68,11 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
   @Input() public toggleElement: Element;
   @Input() public toggleText: string;
 
-  @Output() public onCollapseStart = new EventEmitter();
-  @Output() public onCollapseDone = new EventEmitter();
+  @Output() public collapseStart = new EventEmitter();
+  @Output() public collapseDone = new EventEmitter();
 
-  @ContentChild(DropdownToggleComponent) public dropdownToggleComponent: DropdownToggleComponent;
-  @ContentChild(DropdownMenuComponent) public dropdownMenuComponent: DropdownMenuComponent;
+  @ContentChild(DropdownToggleComponent, /* TODO: add static flag */ {}) public dropdownToggleComponent: DropdownToggleComponent;
+  @ContentChild(DropdownMenuComponent, /* TODO: add static flag */ {}) public dropdownMenuComponent: DropdownMenuComponent;
 
   @ViewChild('toggleElement') private defaultToggleElement: ElementRef;
 
@@ -140,8 +140,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
    * @method collapseStart
    * @param event [description]
    */
-  public collapseStart(event: AnimationEvent): void {
-    this.onCollapseStart.emit(event);
+  public onCollapseStart(event: AnimationEvent): void {
+    this.collapseStart.emit(event);
   }
 
   /**
@@ -149,8 +149,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
    * @method collapseDone
    * @param event [description]
    */
-  public collapseDone(event: AnimationEvent): void {
-    this.onCollapseStart.emit(event);
+  public onCollapseDone(event: AnimationEvent): void {
+    this.collapseStart.emit(event);
   }
 
   /**

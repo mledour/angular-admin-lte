@@ -11,7 +11,7 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
   private isCollapsed: boolean;
   private lastIsCollapsed: boolean;
   private transitioning: boolean;
-  private listener: Function;
+  private listener: () => void;
 
   @Input() public collapseAnimationDuration = 350;
   @Input() public collapseAnimationTiming: string;
@@ -28,7 +28,9 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
     }
   }
 
+  // tslint:disable-next-line:no-output-rename
   @Output('mkCollapseAnimation.start') public startEventEmitter = new EventEmitter();
+  // tslint:disable-next-line:no-output-rename
   @Output('mkCollapseAnimation.done') public doneEventEmitter = new EventEmitter();
 
 
@@ -137,7 +139,7 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
     const event: AnimationEvent = {
       element: this.elementRef.nativeElement,
       fromState: this.lastIsCollapsed === undefined ? 'void' : this.lastIsCollapsed ? '1' : '0',
-      phaseName: phaseName,
+      phaseName,
       toState: this.isCollapsed === undefined ? 'void' : this.isCollapsed ? '1' : '0',
       totalTime: this.collapseAnimationDuration,
       triggerName: 'mkCollapseAnimation'

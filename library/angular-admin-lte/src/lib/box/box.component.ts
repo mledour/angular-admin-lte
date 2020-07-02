@@ -54,13 +54,13 @@ export class BoxComponent implements AfterViewInit, OnDestroy {
   @Input() public loadingStyleClass = 'fa fa-refresh fa-spin';
   @Input() public styleClass = 'box';
 
-  @Output() public onCollapseDone = new EventEmitter();
-  @Output() public onCollapseStart = new EventEmitter();
+  @Output() public collapseDone = new EventEmitter();
+  @Output() public collapseStart = new EventEmitter();
 
-  @ContentChild(BoxHeaderDirective) public boxHeaderDirective: BoxHeaderDirective;
-  @ContentChild(BoxFooterDirective) public boxFooterDirective: BoxFooterDirective;
-  @ContentChild(BoxContentDirective) public boxContentDirective: BoxContentDirective;
-  @ContentChild(BoxToolsDirective) public boxToolsDirective: BoxToolsDirective;
+  @ContentChild(BoxHeaderDirective, /* TODO: add static flag */ {}) public boxHeaderDirective: BoxHeaderDirective;
+  @ContentChild(BoxFooterDirective, /* TODO: add static flag */ {}) public boxFooterDirective: BoxFooterDirective;
+  @ContentChild(BoxContentDirective, /* TODO: add static flag */ {}) public boxContentDirective: BoxContentDirective;
+  @ContentChild(BoxToolsDirective, /* TODO: add static flag */ {}) public boxToolsDirective: BoxToolsDirective;
 
   @ViewChild('toggleButtonElement') private toggleButtonElement;
   @ViewChild('removeButtonElement') private removeButtonElement;
@@ -120,10 +120,10 @@ export class BoxComponent implements AfterViewInit, OnDestroy {
    * @method collapseStart
    * @param event [description]
    */
-  public collapseStart(event: AnimationEvent): void {
+  public onCollapseStart(event: AnimationEvent): void {
     if (event.fromState !== 'void') {
       this.isCollaping = true;
-      this.onCollapseStart.emit(event);
+      this.collapseStart.emit(event);
     }
   }
 
@@ -132,10 +132,10 @@ export class BoxComponent implements AfterViewInit, OnDestroy {
    * @method collapseDone
    * @param event [description]
    */
-  public collapseDone(event: AnimationEvent): void {
+  public onCollapseDone(event: AnimationEvent): void {
     if (event.fromState !== 'void') {
       this.isCollaping = false;
-      this.onCollapseDone.emit(event);
+      this.collapseDone.emit(event);
     }
   }
 }
