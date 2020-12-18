@@ -11,7 +11,9 @@
       </ng-container>
     </a>
     <div *ngIf="isSidebarRightToggle" class="sidebar-right-toggle">
-      <a #sidebarRightToggleElement href="#"><i class="fa fa-gears"></i></a>
+      <a #sidebarRightToggleElement href="#">
+        <i [class]="sidebarRightToggleIconClasses ? sidebarRightToggleIconClasses : 'fa fa-gears'"></i>
+      </a>
     </div>
     <ng-content></ng-content>
   </nav>
