@@ -4,11 +4,11 @@
     <span class="logo-lg"><ng-template [ngTemplateOutlet]="headerLogoComponent?.templateRef"></ng-template></span>
   </a>
   <nav class="navbar navbar-static-top">
-    <a *ngIf="isSidebarLeftToggle" #sidebarLeftToggleElement href="#" class="sidebar-toggle">
+    <a *ngIf="isSidebarLeftToggle" #sidebarLeftToggleElement href="#" class="sidebar-toggle {{sidebarLeftToggleIconClasses ? 'sidebar-toggle-custom-icon' : ''}}">
       <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
+      <ng-container *ngIf="sidebarLeftToggleIconClasses">
+        <i [class]="sidebarLeftToggleIconClasses"></i>
+      </ng-container>
     </a>
     <div *ngIf="isSidebarRightToggle" class="sidebar-right-toggle">
       <a #sidebarRightToggleElement href="#"><i class="fa fa-gears"></i></a>

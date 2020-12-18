@@ -12,3 +12,7 @@
   line-height: 20px;
   cursor: pointer;
 }
+
+.sidebar-toggle-custom-icon:before {
+  content: '';
+}
