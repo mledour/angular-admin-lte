@@ -26,7 +26,8 @@
   ],
   "dependencies": {
     "bootstrap-css-only": "^3.3.7",
-    "admin-lte-css": "^2.4.3"
+    "admin-lte-css": "^2.4.3",
+    "tslib": "^2.0.0"
   },
   "peerDependencies": {
     "@angular/core": "^7.2.3"
