@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { BoxSmallComponent } from './box-small.component';
 
@@ -8,7 +8,7 @@ describe('BoxSmallComponent', () => {
   let component: BoxSmallComponent;
   let fixture: ComponentFixture<BoxSmallComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         BoxModule,
