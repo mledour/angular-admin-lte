@@ -6,6 +6,9 @@ import { ColorModule } from '../color/color.module';
 import { BoxSmallHeaderDirective, BoxSmallContentDirective, BoxSmallFooterDirective } from './box-small.directive';
 import { BoxSmallComponent } from './box-small.component';
 
+export { BoxSmallHeaderDirective, BoxSmallContentDirective, BoxSmallFooterDirective } from './box-small.directive';
+export { BoxSmallComponent } from './box-small.component';
+
 @NgModule({
     imports: [CommonModule, ColorModule],
     exports: [BoxSmallComponent, BoxSmallHeaderDirective, BoxSmallContentDirective, BoxSmallFooterDirective],

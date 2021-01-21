@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 
 import { BreadcrumbsComponent } from './breadcrumbs.component';
 
+export { BreadcrumbsComponent } from './breadcrumbs.component';
+
 @NgModule({
   imports: [CommonModule, RouterModule],
   exports: [BreadcrumbsComponent],

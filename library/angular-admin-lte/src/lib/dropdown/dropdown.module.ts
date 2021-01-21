@@ -6,6 +6,8 @@ import { ColorModule } from '../color/color.module';
 
 import { DropdownComponent, DropdownToggleComponent, DropdownMenuComponent } from './dropdown.component';
 
+export { DropdownComponent, DropdownToggleComponent, DropdownMenuComponent } from './dropdown.component';
+
 @NgModule({
     imports: [CommonModule, AnimationsModule, ColorModule],
     exports: [DropdownComponent, DropdownToggleComponent, DropdownMenuComponent],

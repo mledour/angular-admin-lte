@@ -7,6 +7,8 @@ import { ColorModule } from '../color/color.module';
 import { AccordionHeaderComponent, AccordionContentComponent, AccordionComponent, AccordionGroupComponent } from './accordion.component';
 import { AccordionToggleDirective } from './accordion.directive';
 
+export { AccordionHeaderComponent, AccordionContentComponent, AccordionComponent, AccordionGroupComponent } from './accordion.component';
+
 @NgModule({
     imports: [CommonModule, AnimationsModule, ColorModule],
     exports: [AccordionHeaderComponent, AccordionContentComponent, AccordionComponent, AccordionGroupComponent],

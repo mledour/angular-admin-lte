@@ -6,6 +6,8 @@ import { ColorModule } from '../../color/color.module';
 
 import { InputTextDirective } from './input-text.directive';
 
+export { InputTextDirective } from './input-text.directive';
+
 @NgModule({
   imports: [
     CommonModule,

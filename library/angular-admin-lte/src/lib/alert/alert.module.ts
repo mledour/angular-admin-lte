@@ -6,6 +6,7 @@ import { ColorModule } from '../color/color.module';
 
 import { AlertComponent } from './alert.component';
 
+export { AlertComponent } from './alert.component';
 
 @NgModule({
     imports: [CommonModule, AnimationsModule, ColorModule],

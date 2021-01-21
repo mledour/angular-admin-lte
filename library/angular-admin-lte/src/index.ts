@@ -2,15 +2,14 @@
  * Public API Surface of angular-admin-lte
  */
 
-export * from './lib/layout/layout.module';
+export * from './lib/layout';
 
-export * from './lib/accordion/accordion.module';
-export * from './lib/alert/alert.module';
-export * from './lib/box/box.module';
-export * from './lib/box-info/box-info.module';
-export * from './lib/box-small/box-small.module';
-export * from './lib/breadcrumbs/breadcrumbs.module';
-export * from './lib/dropdown/dropdown.module';
-export * from './lib/form/input-group/input-group.module';
-export * from './lib/form/input-text/input-text.module';
-export * from './lib/tabs/tabs.module';
+export * from './lib/accordion';
+export * from './lib/alert';
+export * from './lib/box';
+export * from './lib/box-info';
+export * from './lib/box-small';
+export * from './lib/breadcrumbs';
+export * from './lib/dropdown';
+export * from './lib/form';
+export * from './lib/tabs';

@@ -6,6 +6,9 @@ import { ColorModule } from '../color/color.module';
 import { BoxInfoHeaderDirective, BoxInfoContentDirective, BoxInfoFooterDirective } from './box-info.directive';
 import { BoxInfoComponent } from './box-info.component';
 
+export { BoxInfoHeaderDirective, BoxInfoContentDirective, BoxInfoFooterDirective } from './box-info.directive';
+export { BoxInfoComponent } from './box-info.component';
+
 
 @NgModule({
     imports: [CommonModule, ColorModule],

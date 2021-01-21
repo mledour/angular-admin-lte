@@ -12,6 +12,14 @@ import {
   InputGroupLabelDirective
 } from './input-group.directive';
 
+export {InputGroupComponent} from './input-group.component';
+export {
+  InputGroupAddonLeftDirective,
+  InputGroupAddonRightDirective,
+  InputGroupContentDirective,
+  InputGroupLabelDirective
+} from './input-group.directive';
+
 @NgModule({
   imports: [
     CommonModule,

@@ -7,6 +7,9 @@ import { ColorModule } from '../color/color.module';
 import { BoxHeaderDirective, BoxContentDirective, BoxFooterDirective, BoxToolsDirective } from './box.directive';
 import { BoxComponent } from './box.component';
 
+export { BoxHeaderDirective, BoxContentDirective, BoxFooterDirective, BoxToolsDirective } from './box.directive';
+export { BoxComponent } from './box.component';
+
 
 @NgModule({
     imports: [CommonModule,  AnimationsModule, ColorModule],

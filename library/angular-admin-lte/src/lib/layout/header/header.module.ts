@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { HeaderComponent, HeaderLogoComponent, HeaderLogoMiniComponent } from './header.component';
 
+export { HeaderComponent, HeaderLogoComponent, HeaderLogoMiniComponent } from './header.component';
 
 @NgModule({
     imports: [CommonModule, RouterModule ],
