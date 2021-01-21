@@ -7,11 +7,13 @@ import {
   NgZone,
   OnDestroy,
   OnInit,
-  QueryList,
   Renderer2,
   ViewChild,
   ViewChildren
 } from '@angular/core';
+
+import type { QueryList } from '@angular/core';
+
 import {Event as RouterEvent, NavigationEnd, PRIMARY_OUTLET, Router} from '@angular/router';
 
 import {RoutingService} from '../../services/routing.service';

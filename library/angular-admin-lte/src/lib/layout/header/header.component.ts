@@ -7,9 +7,10 @@ import {
   NgZone,
   OnDestroy,
   Renderer2,
-  TemplateRef,
   ViewChild
 } from '@angular/core';
+
+import type { TemplateRef } from '@angular/core';
 
 import {LayoutStore} from '../layout.store';
 

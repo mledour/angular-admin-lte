@@ -11,15 +11,14 @@ import {
   NgZone,
   OnChanges,
   OnDestroy,
-  OnInit,
   Output,
-  QueryList,
   Renderer2,
   SimpleChange,
-  TemplateRef,
   ViewChild,
   ViewChildren
 } from '@angular/core';
+
+import type { TemplateRef, QueryList } from '@angular/core';
 
 import { TabToggleDirective } from './tabs.directive';
 
@@ -76,7 +75,7 @@ export class TabComponent implements AfterContentInit {
   @ContentChild(TabContentComponent) public tabContentComponent: TabContentComponent;
 
   /**
-   * @method ngOnInit
+   * @method ngAfterContentInit
    */
   ngAfterContentInit() {
     if (this.tabContentComponent) {

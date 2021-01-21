@@ -12,13 +12,13 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  QueryList,
   Renderer2,
   SimpleChanges,
-  TemplateRef,
   ViewChild,
   ViewChildren
 } from '@angular/core';
+
+import type { TemplateRef, QueryList } from '@angular/core';
 
 import { AnimationEvent } from '../animations/animations.interface';
 

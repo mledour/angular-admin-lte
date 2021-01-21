@@ -11,9 +11,11 @@ import {
   OnDestroy,
   Output,
   Renderer2,
-  TemplateRef,
   ViewChild
 } from '@angular/core';
+
+import type { TemplateRef } from '@angular/core';
+
 
 import {AnimationEvent} from '../animations/animations.interface';
 

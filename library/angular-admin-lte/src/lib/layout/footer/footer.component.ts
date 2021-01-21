@@ -1,4 +1,5 @@
-import { Component, ContentChild, OnInit, ViewChild, TemplateRef, ElementRef } from '@angular/core';
+import { Component, ContentChild, OnInit, ViewChild, ElementRef } from '@angular/core';
+import type { TemplateRef } from '@angular/core';
 
 import { FooterService } from './footer.service';
 
