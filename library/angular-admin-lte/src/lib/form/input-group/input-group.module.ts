@@ -3,7 +3,6 @@ import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 
 import {ColorModule} from '../../color/color.module';
-
 import {InputGroupComponent} from './input-group.component';
 import {
   InputGroupAddonLeftDirective,

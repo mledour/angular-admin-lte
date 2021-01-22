@@ -13,14 +13,8 @@ import { ClassService } from '../../services/class.service';
   providers: [ColorService, ClassService]
 })
 export class InputTextDirective implements OnInit {
-  private defaultClass = 'form-control';
-  private isSetClass: boolean;
-  private onKeyUp = new Subject<NgControl>();
-
-  public onKeyup: Observable<NgControl> = this.onKeyUp.asObservable();
-
   @Input() set borderColor(color: string) {
-    this.colorService.setBackgroundColor(color, true, 'border-color', null);
+    this.colorService.setBackgroundColor(color, true, 'border-color', '');
   }
   @Input() set class(className: string) {
     this.isSetClass = true;
@@ -30,14 +24,16 @@ export class InputTextDirective implements OnInit {
     this.colorService.setFontColor(color);
   }
 
-  /**
-   * @method constructor
-   * @param  elementRef   [description]
-   * @param  renderer2    [description]
-   * @param  ngControl    [description]
-   * @param  colorService [description]
-   * @param  classService [description]
-   */
+  private defaultClass = 'form-control';
+  private isSetClass = false;
+  private onKeyUp = new Subject<NgControl>();
+
+  public onKeyup: Observable<NgControl> = this.onKeyUp.asObservable();
+
+  @HostListener('keyup') keyUpListener(): void {
+    this.onKeyUp.next(this.ngControl);
+  }
+
   constructor(
     public elementRef: ElementRef,
     public renderer2: Renderer2,
@@ -46,16 +42,9 @@ export class InputTextDirective implements OnInit {
     private classService: ClassService
   ) {}
 
-  /**
-   * @method ngOnInit
-   */
-  ngOnInit() {
+  ngOnInit(): void {
     if (!this.isSetClass) {
       this.classService.applyClasses(this.defaultClass);
     }
-  }
-
-  @HostListener('keyup') keyUpListener() {
-    this.onKeyUp.next(this.ngControl);
   }
 }
