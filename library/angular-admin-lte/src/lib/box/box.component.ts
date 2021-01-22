@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ContentChild,
+  ContentChild, ElementRef,
   EventEmitter,
   Input,
   NgZone,
@@ -14,14 +14,10 @@ import {
 } from '@angular/core';
 
 import {AnimationEvent} from '../animations/animations.interface';
-
 import {BoxContentDirective, BoxFooterDirective, BoxHeaderDirective, BoxToolsDirective} from './box.directive';
-
 import {removeListeners} from '../helpers';
 
-/*
- *
- */
+
 @Component({
   selector: 'mk-box',
   templateUrl: './box.component.html',
@@ -29,58 +25,49 @@ import {removeListeners} from '../helpers';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoxComponent implements AfterViewInit, OnDestroy {
-  public isCollaping: boolean;
-  public remove = false;
-  public removed: boolean;
-  private listeners = [];
-
   @Input() public boxColor = 'default';
   @Input() public buttonsStyleClass = 'btn btn-box-tool';
   @Input() public contentStyleClass = 'box-content-wrapper';
-  @Input() public contentColor: string;
-  @Input() public footer: string;
-  @Input() public footerColor: string;
+  @Input() public contentColor?: string;
+  @Input() public footer?: string;
+  @Input() public footerColor?: string;
   @Input() public footerStyleClass = 'box-footer';
-  @Input() public header: string;
+  @Input() public header?: string;
   @Input() public headerBorder = true;
-  @Input() public headerColor: string;
+  @Input() public headerColor?: string;
   @Input() public headerStyleClass = 'box-header';
   @Input() public isCollapsable = true;
   @Input() public isCollapsed = false;
-  @Input() public isLoading: boolean;
+  @Input() public isLoading = false;
   @Input() public isRemovable = true;
   @Input() public isSolid = false;
-  @Input() public loadingColor: string;
+  @Input() public loadingColor?: string;
   @Input() public loadingStyleClass = 'fa fa-refresh fa-spin';
   @Input() public styleClass = 'box';
 
   @Output() public collapseDone = new EventEmitter();
   @Output() public collapseStart = new EventEmitter();
 
-  @ContentChild(BoxHeaderDirective, /* TODO: add static flag */ {}) public boxHeaderDirective: BoxHeaderDirective;
-  @ContentChild(BoxFooterDirective, /* TODO: add static flag */ {}) public boxFooterDirective: BoxFooterDirective;
-  @ContentChild(BoxContentDirective, /* TODO: add static flag */ {}) public boxContentDirective: BoxContentDirective;
-  @ContentChild(BoxToolsDirective, /* TODO: add static flag */ {}) public boxToolsDirective: BoxToolsDirective;
+  @ContentChild(BoxHeaderDirective) public boxHeaderDirective?: BoxHeaderDirective;
+  @ContentChild(BoxFooterDirective) public boxFooterDirective?: BoxFooterDirective;
+  @ContentChild(BoxContentDirective) public boxContentDirective?: BoxContentDirective;
+  @ContentChild(BoxToolsDirective) public boxToolsDirective?: BoxToolsDirective;
 
-  @ViewChild('toggleButtonElement') private toggleButtonElement;
-  @ViewChild('removeButtonElement') private removeButtonElement;
+  @ViewChild('toggleButtonElement') private toggleButtonElement?: ElementRef<HTMLButtonElement>;
+  @ViewChild('removeButtonElement') private removeButtonElement?: ElementRef<HTMLButtonElement>;
 
-  /**
-   * @method constructor
-   * @param changeDetectorRef [description]
-   * @param ngZone            [description]
-   * @param renderer2         [description]
-   */
+  public isCollapsing = false;
+  public remove = false;
+  public removed = false;
+  private listeners: (() => void)[] = [];
+
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private ngZone: NgZone,
     private renderer2: Renderer2
   ) {}
 
-  /**
-   * @method ngAfterViewInit
-   */
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.ngZone.runOutsideAngular(() => {
       if (this.toggleButtonElement) {
         this.listeners.push(this.renderer2.listen(this.toggleButtonElement.nativeElement, 'click', () => {
@@ -97,44 +84,26 @@ export class BoxComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  /**
-   * @method ngOnDestroy
-   */
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     removeListeners(this.listeners);
   }
 
-  /**
-   * [removedDone description]
-   * @method removedDone
-   * @param event [description]
-   */
-  public removedDone(event): void {
+  public removedDone(event: AnimationEvent): void {
     if (event.toState === '1') {
       this.removed = true;
     }
   }
 
-  /**
-   * [collapseStart description]
-   * @method collapseStart
-   * @param event [description]
-   */
   public onCollapseStart(event: AnimationEvent): void {
     if (event.fromState !== 'void') {
-      this.isCollaping = true;
+      this.isCollapsing = true;
       this.collapseStart.emit(event);
     }
   }
 
-  /**
-   * [collapseDone description]
-   * @method collapseDone
-   * @param event [description]
-   */
   public onCollapseDone(event: AnimationEvent): void {
     if (event.fromState !== 'void') {
-      this.isCollaping = false;
+      this.isCollapsing = false;
       this.collapseDone.emit(event);
     }
   }

@@ -1,4 +1,4 @@
-<div *ngIf="!removed" [mkColor]="boxColor" mkColorProperty="border-color" mkColorPrefix="box" [ngClass]="styleClass" [class.collapsed-box]="isCollapsed && !isCollaping" [class.box-solid]="isSolid" [mkCollapseAnimation]="remove" (mkCollapseAnimation.done)="removedDone($event)">
+<div *ngIf="!removed" [mkColor]="boxColor" mkColorProperty="border-color" mkColorPrefix="box" [ngClass]="styleClass" [class.collapsed-box]="isCollapsed && !isCollapsing" [class.box-solid]="isSolid" [mkCollapseAnimation]="remove" (mkCollapseAnimation.done)="removedDone($event)">
   <div *ngIf="header || boxHeaderDirective" [ngClass]="headerStyleClass" [mkColor]="boxColor" [mkColorCondition]="isSolid" mkColorProperty="background-color" [class.with-border]="headerBorder">
     <h3 class="box-title" [mkFontColor]="headerColor">
       {{header}}

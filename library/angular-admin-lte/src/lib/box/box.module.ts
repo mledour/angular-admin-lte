@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { AnimationsModule } from '../animations/animations.module';
 import { ColorModule } from '../color/color.module';
-
 import { BoxHeaderDirective, BoxContentDirective, BoxFooterDirective, BoxToolsDirective } from './box.directive';
 import { BoxComponent } from './box.component';
 
