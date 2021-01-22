@@ -16,12 +16,9 @@ import {
 } from '@angular/core';
 
 import {AnimationEvent} from '../animations/animations.interface';
-
 import {removeListeners} from '../helpers';
 
-/*
- *
- */
+
 @Component({
   selector: 'mk-alert',
   templateUrl: './alert.component.html',
@@ -29,20 +26,12 @@ import {removeListeners} from '../helpers';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertComponent implements AfterViewInit, OnDestroy {
-  public dismissibleClass = 'alert-dismissible';
-  public isDismissible = true;
-  public remove = false;
-  public removed: boolean;
-  public type = 'alert';
-
-  private listeners = [];
-
   @Input() public backgroundColor = 'danger';
   @Input() public set callout(value: boolean) {
     this.type = value ? 'callout' : 'alert';
   }
-  @Input() public color: string;
-  @Input() public dismissOnTimeout: number;
+  @Input() public color?: string;
+  @Input() public dismissOnTimeout?: number;
   @Input('isDismissible') public set _isDismissible(value: boolean) {
     this.isDismissible = value;
     if (value) {
@@ -56,16 +45,16 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
   @Output() public collapseStart = new EventEmitter();
   @Output() public collapseDone = new EventEmitter();
 
-  @ViewChild('removeButtonElement') private removeButtonElement: ElementRef;
-  @ViewChild('containerElementRef', { read: ViewContainerRef }) private containerElementRef: ViewContainerRef;
+  @ViewChild('removeButtonElement') private removeButtonElement?: ElementRef;
 
-  /**
-   * @method constructor
-   * @param  changeDetectorRef [description]
-   * @param  ngZone            [description]
-   * @param  renderer2         [description]
-   * @param  viewContainerRef  [description]
-   */
+  public dismissibleClass = 'alert-dismissible';
+  public isDismissible = true;
+  public remove = false;
+  public removed = false;
+  public type = 'alert';
+
+  private listeners: (() => void)[] = [];
+
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private ngZone: NgZone,
@@ -73,10 +62,7 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
     private viewContainerRef: ViewContainerRef
   ) {}
 
-  /**
-   * @method ngOnInit
-   */
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.ngZone.runOutsideAngular(() => {
       if (this.dismissOnTimeout) {
         setTimeout(() => {
@@ -95,27 +81,14 @@ export class AlertComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  /**
-   * @method ngOnDesroy
-   */
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     removeListeners(this.listeners);
   }
 
-  /**
-   * [collapseStart description]
-   * @method collapseStart
-   * @param event [description]
-   */
   public onCollapseStart(event: AnimationEvent): void {
     this.collapseStart.emit(event);
   }
 
-  /**
-   * [collapseDone description]
-   * @method collapseDone
-   * @param event [description]
-   */
   public onCollapseDone(event: AnimationEvent): void {
     if (event.toState === '1') {
       this.listeners = removeListeners(this.listeners);

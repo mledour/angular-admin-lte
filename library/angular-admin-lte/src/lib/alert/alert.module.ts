@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { AnimationsModule } from '../animations/animations.module';
 import { ColorModule } from '../color/color.module';
-
 import { AlertComponent } from './alert.component';
 
 export { AlertComponent } from './alert.component';
