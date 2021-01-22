@@ -1,6 +1,3 @@
-/**
- *
- */
 export interface AnimationEvent {
   fromState: string;
   toState: string;

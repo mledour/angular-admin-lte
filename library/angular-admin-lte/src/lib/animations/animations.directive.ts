@@ -1,20 +1,14 @@
 import { Directive, Input, Output, ElementRef, EventEmitter, Renderer2, NgZone, AfterContentInit, OnInit, OnDestroy } from '@angular/core';
+
 import { AnimationEvent } from './animations.interface';
-/*
- *
- */
+
+
 @Directive({
   selector: '[mkCollapseAnimation]'
 })
 export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnDestroy {
-  private firstStart = true;
-  private isCollapsed: boolean;
-  private lastIsCollapsed: boolean;
-  private transitioning: boolean;
-  private listener: () => void;
-
   @Input() public collapseAnimationDuration = 350;
-  @Input() public collapseAnimationTiming: string;
+  @Input() public collapseAnimationTiming?: string;
   @Input('mkCollapseAnimation') public set _isCollapsed(value: boolean) {
     this.lastIsCollapsed = this.isCollapsed;
     this.isCollapsed = value;
@@ -22,7 +16,7 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
       this.emit('start');
       if (value) {
         this.collapse();
-      } else if (value === false) {
+      } else if (!value) {
         this.unCollapse();
       }
     }
@@ -33,23 +27,19 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
   // tslint:disable-next-line:no-output-rename
   @Output('mkCollapseAnimation.done') public doneEventEmitter = new EventEmitter();
 
+  private firstStart = true;
+  private isCollapsed = false;
+  private lastIsCollapsed = false;
+  private transitioning = false;
+  private listener?: () => void;
 
-  /**
-   * @method constructor
-   * @param elementRef [description]
-   * @param ngZone     [description]
-   * @param renderer2  [description]
-   */
   constructor(
     private elementRef: ElementRef,
     private ngZone: NgZone,
     private renderer2: Renderer2
   ) {}
 
-  /**
-   * @method ngOnInit
-   */
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.collapseAnimationDuration && this.collapseAnimationDuration !== 350) {
       this.renderer2.setStyle(this.elementRef.nativeElement, 'transition-duration', `${this.collapseAnimationDuration}ms`);
     }
@@ -58,10 +48,7 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
     }
   }
 
-  /**
-   * @method ngAfterContentInit
-   */
-  ngAfterContentInit() {
+  ngAfterContentInit(): void {
     this.emit('start');
     if (this.isCollapsed) {
       this.renderer2.setStyle(this.elementRef.nativeElement, 'display', 'none');
@@ -73,21 +60,12 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
     this.subscriptions();
   }
 
-  /**
-   * [ngOnDestroy description]
-   * @method ngOnDestroy
-   * @return [description]
-   */
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.listener) {
       this.listener();
     }
   }
 
-  /**
-   * [subscriptions description]
-   * @method subscriptions
-   */
   private subscriptions(): void {
     this.ngZone.runOutsideAngular(() => {
       this.listener = this.renderer2.listen(this.elementRef.nativeElement, 'transitionend', () => {
@@ -106,11 +84,6 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
     });
   }
 
-
-  /**
-   * [unCollapse description]
-   * @method unCollapse
-   */
   private unCollapse(): void {
     this.transitioning = true;
     this.renderer2.addClass(this.elementRef.nativeElement, 'un-collapse');
@@ -118,10 +91,6 @@ export class CollapseAnimationDirective implements OnInit, AfterContentInit, OnD
     this.renderer2.setStyle(this.elementRef.nativeElement, 'height', `${this.elementRef.nativeElement.scrollHeight}px`);
   }
 
-  /**
-   * [collapse description]
-   * @method collapse
-   */
   private collapse(): void {
     requestAnimationFrame(() => {
       if (!this.transitioning) {
