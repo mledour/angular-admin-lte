@@ -1,18 +1,14 @@
 import { Directive, Input, ElementRef } from '@angular/core';
+import { AccordionComponent } from './accordion.component';
 
-/*
- *
- */
+
 @Directive({
   selector: '[mkAccordionToggle]'
 })
 export class AccordionToggleDirective {
-  @Input('mkAccordionToggle') accordionComponent;
+  // TODO: Add @Required decorator
+  @Input('mkAccordionToggle') accordionComponent!: AccordionComponent;
 
-  /**
-   * @method constructor
-   * @param elementRef [description]
-   */
   constructor(
     public elementRef: ElementRef
   ) {}

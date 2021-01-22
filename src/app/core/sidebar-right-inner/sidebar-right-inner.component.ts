@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 
-import {Subscriber} from 'rxjs';
+import {Subscription} from 'rxjs';
 
 import {LayoutStore} from 'angular-admin-lte';
 
@@ -10,12 +10,12 @@ import {LayoutStore} from 'angular-admin-lte';
 })
 export class SidebarRightInnerComponent implements OnInit, OnDestroy {
 
-  public layout: string;
-  public isSidebarLeftCollapsed: boolean;
-  public isSidebarLeftExpandOnOver: boolean;
-  public isSidebarLeftMini: boolean;
+  public layout!: string;
+  public isSidebarLeftCollapsed!: boolean;
+  public isSidebarLeftExpandOnOver!: boolean;
+  public isSidebarLeftMini!: boolean;
 
-  private subscriptions = [];
+  private subscriptions: Subscription[] = [];
 
   constructor(
     public layoutStore: LayoutStore,
@@ -26,7 +26,7 @@ export class SidebarRightInnerComponent implements OnInit, OnDestroy {
    * [ngOnInit description]
    * @method ngOnInit
    */
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscriptions.push(this.layoutStore.isSidebarLeftCollapsed.subscribe((value: boolean) => {
       this.isSidebarLeftCollapsed = value;
       this.changeDetectorRef.detectChanges();
@@ -44,7 +44,7 @@ export class SidebarRightInnerComponent implements OnInit, OnDestroy {
   /**
    * @method ngOnDestroy
    */
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.removeSubscriptions();
   }
 
@@ -54,7 +54,7 @@ export class SidebarRightInnerComponent implements OnInit, OnDestroy {
    */
   private removeSubscriptions(): void {
     if (this.subscriptions) {
-      this.subscriptions.forEach((subscription: Subscriber<any>) => {
+      this.subscriptions.forEach((subscription: Subscription) => {
         subscription.unsubscribe();
       });
     }

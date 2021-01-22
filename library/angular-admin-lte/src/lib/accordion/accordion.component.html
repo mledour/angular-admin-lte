@@ -4,13 +4,14 @@
       <h4 class="box-title">
         <a [mkAccordionToggle]="accordion" href="#" [mkFontColor]="accordion.headerStyleColor" [class.collapsed]="accordion.isCollapsed">
           {{accordion.header}}
-          <ng-template *ngIf="!accordion.header" [ngTemplateOutlet]="accordion.accordionHeaderComponent.templateRef"></ng-template>
+          <ng-template *ngIf="!accordion.header && accordion.accordionHeaderComponent" [ngTemplateOutlet]="accordion.accordionHeaderComponent.templateRef"></ng-template>
         </a>
       </h4>
     </div>
     <div class="panel-collapse" [mkCollapseAnimation]="accordion.isCollapsed" (mkCollapseAnimation.start)="onCollapseStart($event, accordion)" (mkCollapseAnimation.done)="onCollapseDone($event, accordion)">
       <div [ngClass]="accordion.contentStyleClass" [mkFontColor]="accordion.contentColor">
-        <ng-template [ngTemplateOutlet]="accordion.contentTemplateRef"></ng-template>
+        <ng-template *ngIf="!accordion.accordionContentComponent" [ngTemplateOutlet]="accordion.templateRef"></ng-template>
+        <ng-template *ngIf="accordion.accordionContentComponent" [ngTemplateOutlet]="accordion.accordionContentComponent.templateRef"></ng-template>
       </div>
     </div>
   </div>

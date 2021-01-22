@@ -3,10 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { AnimationsModule } from '../animations/animations.module';
 import { ColorModule } from '../color/color.module';
-
 import { AccordionHeaderComponent, AccordionContentComponent, AccordionComponent, AccordionGroupComponent } from './accordion.component';
 import { AccordionToggleDirective } from './accordion.directive';
-
 export { AccordionHeaderComponent, AccordionContentComponent, AccordionComponent, AccordionGroupComponent } from './accordion.component';
 
 @NgModule({
