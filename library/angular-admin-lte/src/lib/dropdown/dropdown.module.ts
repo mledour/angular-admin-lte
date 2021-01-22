@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { AnimationsModule } from '../animations/animations.module';
 import { ColorModule } from '../color/color.module';
-
 import { DropdownComponent, DropdownToggleComponent, DropdownMenuComponent } from './dropdown.component';
 
 export { DropdownComponent, DropdownToggleComponent, DropdownMenuComponent } from './dropdown.component';
