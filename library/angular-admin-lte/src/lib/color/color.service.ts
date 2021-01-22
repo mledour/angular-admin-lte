@@ -1,10 +1,8 @@
 import { Injectable, Renderer2, ElementRef } from '@angular/core';
 
-import { colors, colorsAliases } from './color.definition';
+import { Colors, colors, colorsAliases } from './color.definition';
 
-/*
- *
- */
+
 @Injectable()
 export class ColorService {
   private currentBackgroundStyle: any;
@@ -12,31 +10,20 @@ export class ColorService {
   private currentFontStyle: any;
   private currentFontClass: any;
 
-  /**
-   * @method constructor
-   * @param renderer2 [description]
-   * @param elementRef [description]
-   */
   constructor(
     private renderer2: Renderer2,
     private elementRef: ElementRef
   ) {}
 
-  /**
-   * [setBackgroundColor description]
-   * @method setBackgroundColor
-   * @param  color              [description]
-   * @param  condition          [description]
-   * @param  property           [description]
-   * @param  prefix             [description]
-   */
-  public setBackgroundColor(color: string, condition: boolean, property: string, prefix: string): void {
+  public setBackgroundColor(color: Colors | string, condition: boolean, property: string, prefix: string): void {
     if (color && condition) {
       this.resetBackgroundColor();
-      if (colors[color]) {
+      if (colors.hasOwnProperty(color)) {
+        const knownColor = colors[(color as Colors)];
+
         this.renderer2.addClass(this.elementRef.nativeElement, 'bg-color');
-        this.currentBackgroundStyle = {property, color: colors[color]};
-        this.renderer2.setStyle(this.elementRef.nativeElement, property, colors[color]);
+        this.currentBackgroundStyle = {property, color: knownColor};
+        this.renderer2.setStyle(this.elementRef.nativeElement, property, knownColor);
       } else {
         this.renderer2.removeClass(this.elementRef.nativeElement, 'bg-color');
         if (color.indexOf('#') === 0 || color.indexOf('rgb') === 0) {
@@ -50,10 +37,6 @@ export class ColorService {
     }
   }
 
-  /**
-   * [resetBackgroundColor description]
-   * @method resetBackgroundColor
-   */
   public resetBackgroundColor(): void {
     if (this.currentBackgroundStyle) {
       this.renderer2.removeStyle(this.elementRef.nativeElement, this.currentBackgroundStyle.property, this.currentBackgroundStyle.color);
@@ -62,14 +45,10 @@ export class ColorService {
     }
   }
 
-  /**
-   * [setFontColor description]
-   * @method setFontColor
-   * @param  color        [description]
-   */
-  public setFontColor(color: string): void {
+  public setFontColor(color: string | undefined): void {
+    this.resetFontColor();
+
     if (color) {
-      this.resetFontColor();
       if (color.startsWith('#') || color.startsWith('rgb')) {
         this.currentFontStyle = color;
         this.renderer2.setStyle(this.elementRef.nativeElement, 'color', color);
@@ -80,12 +59,7 @@ export class ColorService {
     }
   }
 
-  /**
-   * [resetFontColor description]
-   * @method resetFontColor
-   * @return [description]
-   */
-  public resetFontColor() {
+  public resetFontColor(): void {
     if (this.currentFontStyle) {
       this.renderer2.removeStyle(this.elementRef.nativeElement, 'color', this.currentFontStyle);
     } else if (this.currentFontClass) {
