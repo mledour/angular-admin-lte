@@ -1,4 +1,5 @@
 import { Directive, Input, ElementRef } from '@angular/core';
+import { TabComponent } from './tabs.component';
 
 /*
  *
@@ -7,7 +8,8 @@ import { Directive, Input, ElementRef } from '@angular/core';
   selector: '[mkTabToggle]'
 })
 export class TabToggleDirective {
-  @Input('mkTabToggle') tabComponent;
+  // TODO: Add @Required decorator
+  @Input('mkTabToggle') tabComponent!: TabComponent;
 
   /**
    * @method constructor

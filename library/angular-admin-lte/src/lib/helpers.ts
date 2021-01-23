@@ -1,31 +1,21 @@
 import { Subscription } from 'rxjs';
 
 
-/**
- * [throttle description]
- * @method throttle
- * @param callback [description]
- * @param delay    [description]
- * @return [description]
- */
 export function throttle(callback: () => void, delay: number): (args: Array<any>) => void {
-  let timeout = null;
+  let timeout = 0;
   return (...args) => {
     if (!timeout) {
       timeout = setTimeout(() => {
+        // @ts-ignore
         callback.call(this, ...args);
-        timeout = null;
+        timeout = 0;
       }, delay);
     }
   };
 }
 
 
-/**
- * [removeSubscriptions description]
- * @method removeSubscriptions
- */
-export function removeSubscriptions(subscriptions): Array<Subscription> {
+export function removeSubscriptions(subscriptions: Subscription[]): Subscription[] {
   if (subscriptions) {
     subscriptions.forEach((subscription: Subscription) => {
       subscription.unsubscribe();
@@ -34,11 +24,8 @@ export function removeSubscriptions(subscriptions): Array<Subscription> {
   return [];
 }
 
-/**
- * [removeListeners description]
- * @method removeListeners
- */
-export function removeListeners(listeners): Array<() => void> {
+
+export function removeListeners(listeners: (() => void)[] = []): (() => void)[] {
   if (listeners) {
     listeners.forEach((listener: () => void) => {
       listener();
