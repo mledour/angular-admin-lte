@@ -1,24 +1,20 @@
 import { Injectable, Renderer2, ElementRef } from '@angular/core';
 
-/*
- *
- */
+
 @Injectable()
 export class StyleService {
-  private currentStyles = [];
+  private currentStyles: string[] = [];
 
   constructor(
     private elementRef: ElementRef,
     private renderer2: Renderer2
   ) {}
 
-
-  public applyStyles(styles: Array<any>): void {
+  public applyStyles(styles: {style: string, value: any}[]): void {
     styles.forEach(style => {
       this.applyStyle(style.style, style.value);
     });
   }
-
 
   public applyStyle(style: string, value: any): void {
     if (style && value) {

@@ -1,80 +1,53 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Event as RouterEvent, NavigationEnd, PRIMARY_OUTLET, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, NavigationEnd, PRIMARY_OUTLET, Router } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs';
 
-/*
- *
- */
+
 export interface Path {
   data: object;
   params: object;
-  url: string;
+  url: string | null;
 }
 
-/*
- *
- */
+
 export interface Paths extends Array<Path> {}
 
 
-/*
- *
- */
 @Injectable()
 export class RoutingService {
-  public onChange: BehaviorSubject<Paths> = new BehaviorSubject(undefined);
-  public events: BehaviorSubject<RouterEvent> = new BehaviorSubject(undefined);
+  public onChange = new BehaviorSubject<Paths | undefined>(undefined);
+  public events = new BehaviorSubject<NavigationEnd | undefined>(undefined);
 
-  /**
-   * @method constructor
-   * @param router [description]
-   */
   constructor(
     private router: Router
   ) {
     this.init();
   }
 
-  /**
-   * [createUrl description]
-   * @method createUrl
-   * @param route [description]
-   * @return [description]
-   */
   private static createUrl(route: ActivatedRouteSnapshot): string {
     const url = route.url.map(urlSegment => urlSegment.toString()).join('/');
     return url;
   }
 
-  /**
-   * [isChildrenSelfRoute description]
-   * @method isChildrenSelfRoute
-   * @param route [description]
-   * @return [description]
-   */
   private static isChildrenSelfRoute(route: ActivatedRouteSnapshot): boolean {
-    route.routeConfig.children.forEach(child => {
+    let test = false;
+
+    route?.routeConfig?.children?.forEach(child => {
       if (child.path === '' && (child.component || child.loadChildren)) {
-        return true;
+        test = true;
       }
     });
 
-    return false;
+    return test;
   }
 
-  /**
-   * [createBreadcrumb description]
-   * @method createBreadcrumb
-   * @param route [description]
-   * @param url   [description]
-   * @return [description]
-   */
   private static createBreadcrumb(route: ActivatedRouteSnapshot, url: string): Path {
     let isUrl = true;
 
-    if (route.children.length !== 0 && route.firstChild.routeConfig.path) {
-      if (url !== '/' && !route.routeConfig.loadChildren && !route.routeConfig.component && !RoutingService.isChildrenSelfRoute(route)) {
+    if (route.children.length !== 0 && route?.firstChild?.routeConfig?.path) {
+      if (url !== '/' && !route?.routeConfig?.loadChildren
+        && !route?.routeConfig?.component && !RoutingService.isChildrenSelfRoute(route)) {
         isUrl = false;
       }
     }
@@ -86,11 +59,6 @@ export class RoutingService {
     };
   }
 
-
-  /**
-   * [init description]
-   * @method init
-   */
   private init(): void {
     this.router.events.subscribe(routeEvent => {
       // https://github.com/angular/angular/issues/17473: event not fired anymore on load for routed component.
@@ -104,10 +72,10 @@ export class RoutingService {
         const paths: Paths = [];
 
         while (route.children.length) {
-          route = route.firstChild;
+          route = route.firstChild || route;
           tmpUrl = `/${RoutingService.createUrl(route)}`;
 
-          if (route.outlet !== PRIMARY_OUTLET || (!route.routeConfig.path && !rootRoot)) {
+          if (route.outlet !== PRIMARY_OUTLET || (!route?.routeConfig?.path && !rootRoot)) {
             continue;
           }
 

@@ -1,19 +1,16 @@
 import { Injectable, Renderer2, ElementRef } from '@angular/core';
 
-/*
- *
- */
+
 @Injectable()
 export class ClassService {
-  private currentClasses: Array<string> = [];
+  private currentClasses: string[] = [];
 
   constructor(
     private elementRef: ElementRef,
     private renderer2: Renderer2
   ) {}
 
-
-  public applyClasses(cssClasses: string | Array<string>): void {
+  public applyClasses(cssClasses: string | string[]): void {
     if (typeof cssClasses === 'string') {
       cssClasses = cssClasses.split(' ');
     }
@@ -34,7 +31,7 @@ export class ClassService {
       }
     });
 
-    // Update current classes for futur updates
+    // Update current classes for future updates
     this.currentClasses = [... cssClasses];
   }
 }
