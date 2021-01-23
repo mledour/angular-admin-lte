@@ -11,22 +11,19 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-
 import type { QueryList } from '@angular/core';
+import {NavigationEnd, PRIMARY_OUTLET, Router} from '@angular/router';
 
-import {Event as RouterEvent, NavigationEnd, PRIMARY_OUTLET, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 import {RoutingService} from '../../services/routing.service';
-
 import {WrapperService} from '../wrapper/wrapper.service';
 import {HeaderService} from '../header/header.service';
-
 import {LayoutStore} from '../layout.store';
-
 import {AnimationEvent} from '../../animations/animations.interface';
 import {removeListeners, removeSubscriptions} from '../../helpers';
-
 import {SidebarLeftToggleDirective} from './sidebar-left.directive';
+
 
 export interface Item {
   id: number;
@@ -40,7 +37,9 @@ export interface Item {
   disableCollapse?: boolean;
 }
 
-export type Items = Array<Item>;
+
+export type Items = Item[];
+
 
 @Component({
   selector: 'mk-layout-sidebar-left',
@@ -49,41 +48,30 @@ export type Items = Array<Item>;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
-  public menu: Array<any>;
-  public sidebarHeight: number;
-  public sidebarOverflow: string;
+  @ViewChild('sidebarElement', { static: true }) public sidebarElement!: ElementRef;
 
-  private layout: string;
-  private isSidebarLeftCollapsed: boolean;
-  private isSidebarLeftExpandOnOver: boolean;
-  private isSidebarLeftMouseOver: boolean;
-  private windowInnerWidth: number;
-  private windowInnerHeight: number;
+  @ViewChildren(SidebarLeftToggleDirective) public sidebarLeftToggleDirectives!: QueryList<SidebarLeftToggleDirective>;
+
+  public menu?: Items;
+  public sidebarHeight?: number;
+  public sidebarOverflow?: string;
+
+  private layout!: string;
+  private isSidebarLeftCollapsed!: boolean;
+  private isSidebarLeftExpandOnOver!: boolean;
+  private isSidebarLeftMouseOver = false;
+  private windowInnerWidth?: number;
+  private windowInnerHeight?: number;
   private collapsedItems: Items = [];
   private activatedItems: Items = [];
   private toggleListeners: Array<() => void> = [];
   private listeners: Array<() => void> = [];
   private itemsByIds: {[propKey: number]: Item} = {};
   private runningAnimations = 0;
-  private subscriptions = [];
-  private activeUrl: string;
-  private initialized: boolean;
+  private subscriptions: Subscription[] = [];
+  private activeUrl!: string;
+  private initialized = false;
 
-  @ViewChild('sidebarElement', { static: true }) public sidebarElement: ElementRef;
-
-  @ViewChildren(SidebarLeftToggleDirective) public sidebarLeftToggleDirectives: QueryList<SidebarLeftToggleDirective>;
-
-  /**
-   * @method constructor
-   * @param  changeDetectorRef  [description]
-   * @param  layoutStore        [description]
-   * @param  ngZone             [description]
-   * @param  renderer2          [description]
-   * @param  router             [description]
-   * @param  routingService     [description]
-   * @param  wrapperService     [description]
-   * @param  headerService      [description]
-   */
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private layoutStore: LayoutStore,
@@ -95,10 +83,7 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     private headerService: HeaderService
   ) {}
 
-  /**
-   * @method ngOnInit
-   */
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscriptions.push(this.layoutStore.sidebarLeftMenu.subscribe(value => {
       this.menu = value;
       this.monkeyPatchMenu(this.menu);
@@ -123,34 +108,24 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     this.setSidebarListeners();
   }
 
-  /**
-   * @method ngAfterViewInit
-   */
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.setMenuTogglesListeners();
     this.checkMenuWithoutChildren();
   }
 
-  /**
-   * @method ngOnDestroy
-   */
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscriptions = removeSubscriptions(this.subscriptions);
     this.listeners = removeListeners(this.listeners);
     this.toggleListeners = removeListeners(this.toggleListeners);
   }
 
-  /**
-   * [setSidebarListeners description]
-   * @method setSidebarListeners
-   */
   setSidebarListeners(): void {
     this.subscriptions.push(this.layoutStore.layout.subscribe((value: string) => {
       this.layout = value;
       this.setSidebarHeight();
     }));
 
-    this.subscriptions.push(this.layoutStore.windowInnerHeight.subscribe((value: number) => {
+    this.subscriptions.push(this.layoutStore.windowInnerHeight.subscribe(value => {
       this.windowInnerHeight = value;
       this.setSidebarHeight();
     }));
@@ -168,11 +143,11 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
       }));
     });
 
-    this.subscriptions.push(this.layoutStore.windowInnerWidth.subscribe((value: number) => {
+    this.subscriptions.push(this.layoutStore.windowInnerWidth.subscribe(value => {
       this.windowInnerWidth = value;
-      if (!this.isSidebarLeftCollapsed && this.windowInnerWidth <= 767) {
+      if (!this.isSidebarLeftCollapsed && this.windowInnerWidth && this.windowInnerWidth <= 767) {
         this.layoutStore.sidebarLeftCollapsed(true);
-      } else if (this.windowInnerWidth > 767 && this.isSidebarLeftCollapsed && !this.isSidebarLeftExpandOnOver) {
+      } else if (this.windowInnerWidth && this.windowInnerWidth > 767 && this.isSidebarLeftCollapsed && !this.isSidebarLeftExpandOnOver) {
         this.layoutStore.sidebarLeftCollapsed(false);
       }
     }));
@@ -186,14 +161,15 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.subscriptions.push(this.layoutStore.isSidebarLeftExpandOnOver.subscribe((value: boolean) => {
       this.isSidebarLeftExpandOnOver = value;
-      if (this.windowInnerWidth > 767 && this.isSidebarLeftCollapsed !== undefined) {
+      if (this.windowInnerWidth && this.windowInnerWidth > 767 && this.isSidebarLeftCollapsed !== undefined) {
         this.layoutStore.sidebarLeftCollapsed(value);
       }
     }));
 
     this.subscriptions.push(this.layoutStore.isSidebarLeftCollapsed.subscribe((value: boolean) => {
       this.isSidebarLeftCollapsed = value;
-      if (this.windowInnerWidth <= 767) {
+
+      if (this.windowInnerWidth && this.windowInnerWidth <= 767) {
         if (value) {
           this.renderer2.removeClass(this.wrapperService.wrapperElementRef.nativeElement, 'sidebar-open');
         } else {
@@ -226,32 +202,6 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     }));
   }
 
-  /**
-   * [setMenuListeners description]
-   * @method setMenuListeners
-   */
-  setMenuListeners(url): void {
-    if (url === '/') {
-      this.activeItems(url);
-      this.changeDetectorRef.detectChanges();
-    } else {
-      const primaryOutlet = this.router.parseUrl(url).root.children[PRIMARY_OUTLET];
-      if (primaryOutlet) {
-        this.activeItems(primaryOutlet.toString());
-        this.changeDetectorRef.detectChanges();
-      }
-    }
-    if (this.windowInnerWidth <= 767 || this.isSidebarLeftExpandOnOver) {
-      this.layoutStore.sidebarLeftCollapsed(true);
-    }
-  }
-
-  /**
-   * [getIconClasses description]
-   * @method getIconClasses
-   * @param item [description]
-   * @return [description]
-   */
   public getIconClasses(item: Item): string {
     if (item.iconClasses || item.iconClasses === '') {
       return item.iconClasses;
@@ -260,11 +210,6 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  /**
-   * [visibilityStateStart description]
-   * @method visibilityStateStart
-   * @param event [description]
-   */
   public visibilityStateStart(event: AnimationEvent): void {
     this.runningAnimations ++;
     this.ngZone.runOutsideAngular(() => {
@@ -277,12 +222,23 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  /**
-   * [uncollapseItemParents description]
-   * @method uncollapseItemParents
-   * @param item           [description]
-   * @param isActive       [description]
-   */
+  private setMenuListeners(url: string): void {
+    if (url === '/') {
+      this.activeItems(url);
+      this.changeDetectorRef.detectChanges();
+    } else {
+      const primaryOutlet = this.router.parseUrl(url).root.children[PRIMARY_OUTLET];
+      if (primaryOutlet) {
+        this.activeItems(primaryOutlet.toString());
+        this.changeDetectorRef.detectChanges();
+      }
+    }
+
+    if (this.windowInnerWidth && this.windowInnerWidth <= 767 || this.isSidebarLeftExpandOnOver) {
+      this.layoutStore.sidebarLeftCollapsed(true);
+    }
+  }
+
   private uncollapseItemParents(item: Item, isActive = false): void {
     if (isActive) {
       item.isActive = true;
@@ -295,14 +251,6 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  /**
-   * [findItemsByUrl description]
-   * @method findItemsByUrl
-   * @param url   [description]
-   * @param items [description]
-   * @param returnItems [description]
-   * @return [description]
-   */
   private findItemsByUrl(url: string, items: Items, returnItems: Items = []): Items {
     items.forEach((item: Item) => {
       if (item.route === url) {
@@ -314,12 +262,11 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     return returnItems;
   }
 
-  /**
-   * [activeItems description]
-   * @method activeItems
-   * @param url [description]
-   */
   private activeItems(url: string): void {
+    if (!this.menu) {
+      return;
+    }
+
     this.activatedItems.forEach((item: Item) => {
       item.isActive = false;
     });
@@ -339,12 +286,6 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  /**
-   * [monkeyPatchMenu description]
-   * @method monkeyPatchMenu
-   * @param items    [description]
-   * @param parentId [description]
-   */
   private monkeyPatchMenu(items: Items, parentId?: number): void {
     items.forEach((item: Item, index: number) => {
       item.id = parentId ? Number(parentId + '' + (index + 1)) : index + 1;
@@ -364,10 +305,6 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  /**
-   * [setMenuTogglesListeners description]
-   * @method setMenuTogglesListeners
-   */
   private setMenuTogglesListeners(): void {
     this.toggleListeners = removeListeners(this.toggleListeners);
     this.ngZone.runOutsideAngular(() => {
@@ -391,15 +328,15 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  /**
-   * [checkMenuWithoutChildren description]
-   * @method checkMenuWithoutChildren
-   */
   private checkMenuWithoutChildren(): void {
+    if (!this.menu) {
+      return;
+    }
+
     let menuHaveChildren;
-    this.menu.forEach((item: Item) => {
+    this.menu.forEach(item => {
       if (item.children) {
-        return menuHaveChildren = true;
+        menuHaveChildren = true;
       }
     });
     if (!menuHaveChildren) {
@@ -411,12 +348,8 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  /**
-   * [setSidebarHeight description]
-   * @method setSidebarHeight
-   */
   private setSidebarHeight(): void {
-    if (this.layout === 'fixed') {
+    if (this.layout === 'fixed' && this.windowInnerHeight) {
       const height = this.windowInnerHeight - this.headerService.offsetHeight;
       if (height && height !== this.sidebarHeight) {
         this.sidebarHeight = height;
@@ -424,7 +357,7 @@ export class SidebarLeftComponent implements OnInit, AfterViewInit, OnDestroy {
         this.changeDetectorRef.detectChanges();
       }
     } else if (this.sidebarHeight) {
-      this.sidebarOverflow = this.sidebarHeight = null;
+      this.sidebarOverflow = this.sidebarHeight = undefined;
       this.changeDetectorRef.detectChanges();
     }
   }

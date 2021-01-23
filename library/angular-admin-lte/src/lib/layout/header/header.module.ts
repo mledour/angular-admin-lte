@@ -6,6 +6,7 @@ import { HeaderComponent, HeaderLogoComponent, HeaderLogoMiniComponent } from '.
 
 export { HeaderComponent, HeaderLogoComponent, HeaderLogoMiniComponent } from './header.component';
 
+
 @NgModule({
     imports: [CommonModule, RouterModule ],
     exports: [HeaderComponent, HeaderLogoComponent, HeaderLogoMiniComponent],

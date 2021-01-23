@@ -3,27 +3,24 @@ import type { TemplateRef } from '@angular/core';
 
 import { FooterService } from './footer.service';
 
-/**
- * Footer Left
- */
+
 @Component({
   selector: 'mk-layout-footer-left',
   template: '<ng-template #templateRef><ng-content></ng-content></ng-template>'
 })
 export class FooterLeftComponent {
-  @ViewChild('templateRef', { static: true }) public templateRef: TemplateRef<any>;
+  @ViewChild('templateRef', { static: true }) public templateRef!: TemplateRef<ElementRef>;
 }
 
-/**
- * Footer Right
- */
+
 @Component({
   selector: 'mk-layout-footer-right',
   template: '<ng-template #templateRef><ng-content></ng-content></ng-template>'
 })
 export class FooterRightComponent {
-  @ViewChild('templateRef', { static: true }) public templateRef: TemplateRef<any>;
+  @ViewChild('templateRef', { static: true }) public templateRef!: TemplateRef<ElementRef>;
 }
+
 
 @Component({
   selector: 'mk-layout-footer',
@@ -31,15 +28,15 @@ export class FooterRightComponent {
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  @ContentChild(FooterLeftComponent, /* TODO: add static flag */ {}) public footerLeftComponent: FooterLeftComponent;
-  @ContentChild(FooterRightComponent, /* TODO: add static flag */ {}) public footerRightComponent: FooterRightComponent;
+  @ContentChild(FooterLeftComponent) public footerLeftComponent?: FooterLeftComponent;
+  @ContentChild(FooterRightComponent) public footerRightComponent?: FooterRightComponent;
 
   constructor(
     private elementRef: ElementRef,
     private footerService: FooterService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.footerService.elementRef = this.elementRef;
   }
 }

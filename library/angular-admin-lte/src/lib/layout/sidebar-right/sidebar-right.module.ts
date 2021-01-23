@@ -5,6 +5,7 @@ import { SidebarRightComponent } from './sidebar-right.component';
 
 export { SidebarRightComponent } from './sidebar-right.component';
 
+
 @NgModule({
     imports: [CommonModule],
     exports: [SidebarRightComponent],

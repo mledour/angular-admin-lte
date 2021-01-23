@@ -1,15 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { Router, NavigationStart, NavigationEnd, Event as RouterEvent } from '@angular/router';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { LayoutStore } from '../layout.store';
+import { Subscription } from 'rxjs';
 
+import { LayoutStore } from '../layout.store';
 import { RoutingService } from '../../services/routing.service';
 import { SidebarRightService } from '../sidebar-right/sidebar-right.service';
 import { HeaderService } from '../header/header.service';
 import { FooterService } from '../footer/footer.service';
-
 import { removeSubscriptions } from '../../helpers';
+
 
 @Component({
   selector: 'mk-layout-content',
@@ -18,18 +19,18 @@ import { removeSubscriptions } from '../../helpers';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContentComponent implements OnInit, OnDestroy {
-  public description: string;
-  public header: string;
-  public heightStyle: number;
-  public sidebarLeftHeight: number;
-  public windowInnerHeight: number;
+  @ViewChild('contentInnerElement', { static: true }) private contentInnerElement!: ElementRef;
 
-  private layout: string;
-  private titleTag: string;
-  private navigationEnd: boolean;
-  private subscriptions = [];
+  public description?: string;
+  public header?: string;
+  public heightStyle?: number;
+  public sidebarLeftHeight?: number;
+  public windowInnerHeight?: number;
 
-  @ViewChild('contentInnerElement', { static: true }) private contentInnerElement: ElementRef;
+  private layout?: string;
+  private titleTag?: string;
+  private navigationEnd = false;
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private layoutStore: LayoutStore,
@@ -43,24 +44,21 @@ export class ContentComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  /**
-   * @method ngOnInit
-   */
-  ngOnInit() {
+  ngOnInit(): void {
     this.titleTag = this.titleService.getTitle();
 
-    this.subscriptions.push(this.routingService.onChange.subscribe((value: any) => {
+    this.subscriptions.push(this.routingService.onChange.subscribe(value => {
       if (value && value[value.length - 1] && value[value.length - 1].data) {
-        const data = value[value.length - 1].data;
+        const data = value[value.length - 1].data as any;
 
-        this.titleService.setTitle(this.getTitle(data.title));
+        this.titleService.setTitle(this.getTitle(data.title) || '');
         this.header = data.title;
         this.description = data.description;
       }
       this.changeDetectorRef.markForCheck();
     }));
 
-    this.subscriptions.push(this.router.events.subscribe((routeEvent: RouterEvent) => {
+    this.subscriptions.push(this.router.events.subscribe(routeEvent => {
       if (routeEvent instanceof NavigationStart) {
         this.navigationEnd = false;
       }
@@ -70,62 +68,44 @@ export class ContentComponent implements OnInit, OnDestroy {
       }
     }));
 
-    this.subscriptions.push(this.layoutStore.sidebarLeftElementHeight.subscribe((value: number) => {
+    this.subscriptions.push(this.layoutStore.sidebarLeftElementHeight.subscribe(value => {
       this.sidebarLeftHeight = value;
       this.setContentMinHeight();
     }));
 
-    this.subscriptions.push(this.layoutStore.layout.subscribe((value: string) => {
+    this.subscriptions.push(this.layoutStore.layout.subscribe(value => {
       this.layout = value;
       this.setContentMinHeight();
     }));
 
-    this.subscriptions.push(this.layoutStore.windowInnerHeight.subscribe((value: number) => {
+    this.subscriptions.push(this.layoutStore.windowInnerHeight.subscribe(value => {
       this.windowInnerHeight = value;
       this.setContentMinHeight();
     }));
     this.heightStyle = this.windowInnerHeight;
   }
 
-  /**
-   * @method ngOnDestroy
-   */
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscriptions = removeSubscriptions(this.subscriptions);
   }
 
-  /**
-   * [scrollHeight description]
-   * @method scrollHeight
-   * @return [description]
-   */
   public get scrollHeight(): number {
     return this.contentInnerElement.nativeElement.scrollHeight;
   }
 
-  /**
-   * [getTitle description]
-   * @method getTitle
-   * @param title [description]
-   * @return [description]
-   */
-  private getTitle(title: string): string {
+  private getTitle(title: string): string | undefined {
     return title ? `${title} - ${this.titleTag}` : this.titleTag;
   }
 
-  /**
-   * [setMinHeight description]
-   * @method setMinHeight
-   */
   private setContentMinHeight(): void {
     if (this.navigationEnd) {
-      let heightStyle;
+      let heightStyle = 0;
 
       const headerFooterOffsetHeight = this.headerService.offsetHeight + this.footerService.offsetHeight;
 
-      if (this.layout === 'fixed') {
+      if (this.layout === 'fixed' && this.windowInnerHeight) {
         heightStyle = this.windowInnerHeight - this.footerService.offsetHeight;
-      } else {
+      } else if (this.windowInnerHeight && this.sidebarLeftHeight) {
         const sidebarRight =
           this.sidebarRightService.scrollHeight ?
             this.sidebarRightService.scrollHeight - this.headerService.offsetHeight : 0;
@@ -139,7 +119,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
       if (heightStyle && heightStyle !== this.heightStyle) {
         if (this.scrollHeight > heightStyle) {
-          heightStyle = null;
+          heightStyle = 0;
         }
         this.heightStyle = heightStyle;
         this.changeDetectorRef.detectChanges();
