@@ -4,7 +4,7 @@
       <h4 class="box-title">
         <a [mkAccordionToggle]="accordion" href="#" [mkFontColor]="accordion.headerStyleColor" [class.collapsed]="accordion.isCollapsed">
           {{accordion.header}}
-          <ng-template *ngIf="!accordion.header" [ngTemplateOutlet]="accordion.accordionHeaderComponent?.templateRef"></ng-template>
+          <ng-template *ngIf="!accordion.header" [ngTemplateOutlet]="accordion.accordionHeaderComponent.templateRef"></ng-template>
         </a>
       </h4>
     </div>

@@ -1,7 +1,14 @@
 import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { RoutingService } from '../services/routing.service';
+import { Path, RoutingService } from '../services/routing.service';
+
+export interface Breadcrumb extends Path {
+  data: {
+    breadcrumbs?: string;
+    title?: string;
+  };
+}
 
 /*
  *
@@ -12,9 +19,9 @@ import { RoutingService } from '../services/routing.service';
   styleUrls: ['./breadcrumbs.component.css']
 })
 export class BreadcrumbsComponent implements OnInit, OnDestroy {
-  public breadcrumbs;
+  public breadcrumbs?: Breadcrumb[];
 
-  private subscription: Subscription;
+  private subscription!: Subscription;
 
   @Input() public homeIcon = 'fa fa-home';
 
@@ -31,16 +38,16 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
   /**
    * @method ngOnInit
    */
-  ngOnInit() {
-    this.subscription = this.routingService.onChange.subscribe(value => {
-      this.breadcrumbs = value;
+  ngOnInit(): void {
+    this.subscription = this.routingService.onChange.subscribe(paths => {
+      this.breadcrumbs = paths;
     });
   }
 
   /**
    * @method ngOnDestroy
    */
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }

@@ -3,7 +3,7 @@
     <li *ngFor="let tab of tabs" [class.active]="tab.isActive" [mkColor]="tab.tabColor || tabsColor" mkColorProperty="border-top-color">
       <a *ngIf="!tab.isDisabled" [mkTabToggle]="tab" href="#">
         {{tab.header}}
-        <ng-template *ngIf="!tab.header" [ngTemplateOutlet]="tab.tabHeaderComponent?.templateRef"></ng-template>
+        <ng-template *ngIf="!tab.header" [ngTemplateOutlet]="tab.tabHeaderComponent.templateRef"></ng-template>
       </a>
       <ng-template [ngIf]="tab.isDisabled">
         {{tab.header}}

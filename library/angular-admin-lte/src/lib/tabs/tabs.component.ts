@@ -64,7 +64,7 @@ export class TabComponent implements AfterContentInit {
   public index!: number;
   public isActive = false;
 
-  public contentTemplateRef?: TemplateRef<ElementRef>;
+  public contentTemplateRef!: TemplateRef<ElementRef>;
 
   @Input() public header?: string;
   @Input() public isDisabled = false;
@@ -72,7 +72,7 @@ export class TabComponent implements AfterContentInit {
 
   @ViewChild('templateRef', { static: true }) public templateRef!: TemplateRef<ElementRef>;
 
-  @ContentChild(TabHeaderComponent) public tabHeaderComponent?: TabHeaderComponent;
+  @ContentChild(TabHeaderComponent) public tabHeaderComponent!: TabHeaderComponent;
   @ContentChild(TabContentComponent) public tabContentComponent?: TabContentComponent;
 
   /**
@@ -127,7 +127,7 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
   @Output() public closeTab = new EventEmitter();
   @Output() public openTab = new EventEmitter();
 
-  @ContentChild(TabsHeaderComponent, { static: true }) public tabsHeaderComponent?: TabsHeaderComponent;
+  @ContentChild(TabsHeaderComponent, { static: true }) public tabsHeaderComponent!: TabsHeaderComponent;
 
   @ContentChildren(TabComponent) public tabs!: QueryList<TabComponent>;
 
