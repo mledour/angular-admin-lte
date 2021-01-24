@@ -12,7 +12,7 @@ export class DropdownComponent implements AfterViewInit {
   /**
    *
    */
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     Prism.highlightAll();
   }
 }

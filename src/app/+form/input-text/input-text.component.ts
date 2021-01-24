@@ -6,17 +6,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./input-text.component.css']
 })
 export class InputTextComponent implements OnInit {
-  userForm: FormGroup;
+  userForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.userForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.email]]
     });
   }
 
-  onSubmitForm() {
+  onSubmitForm(): void {
     console.log(this.userForm);
   }
 }

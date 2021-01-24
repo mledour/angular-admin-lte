@@ -18,7 +18,7 @@ export class AccordionComponent implements AfterViewInit {
   /**
    * @method ngAfterViewInit
    */
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     Prism.highlightAll();
 
     this.ngZone.runOutsideAngular(() => {

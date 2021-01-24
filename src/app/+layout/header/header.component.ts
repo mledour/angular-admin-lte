@@ -10,7 +10,7 @@ export class HeaderComponent implements AfterViewInit {
   /**
    * @method ngAfterViewInit
    */
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     Prism.highlightAll();
   }
 }

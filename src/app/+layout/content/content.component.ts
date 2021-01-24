@@ -11,7 +11,7 @@ export class ContentComponent implements AfterViewInit {
   /**
    * @method AfterViewInit
    */
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     Prism.highlightAll();
   }
 

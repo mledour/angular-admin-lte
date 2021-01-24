@@ -23,22 +23,22 @@
 
 <div class="row">
   <div class="col-md-3 col-xs-12">
-    <mk-box-info header="Bookmarks" footer="70% Increase in 30 Days" progressWidth="70" backgroundColor="aqua" iconStyleClass="fa fa-bookmark-o">
+    <mk-box-info header="Bookmarks" footer="70% Increase in 30 Days" [progressWidth]="70" backgroundColor="aqua" iconStyleClass="fa fa-bookmark-o">
       41,410
     </mk-box-info>
   </div>
   <div class="col-md-3 col-xs-12">
-    <mk-box-info header="Likes" footer="70% Increase in 30 Days" progressWidth="70" backgroundColor="green" iconStyleClass="fa fa-thumbs-o-up">
+    <mk-box-info header="Likes" footer="70% Increase in 30 Days" [progressWidth]="70" backgroundColor="green" iconStyleClass="fa fa-thumbs-o-up">
       41,410
     </mk-box-info>
   </div>
   <div class="col-md-3 col-xs-12">
-    <mk-box-info header="Events" footer="70% Increase in 30 Days" progressWidth="70" backgroundColor="yellow" iconStyleClass="fa fa-calendar">
+    <mk-box-info header="Events" footer="70% Increase in 30 Days" [progressWidth]="70" backgroundColor="yellow" iconStyleClass="fa fa-calendar">
       41,410
     </mk-box-info>
   </div>
   <div class="col-md-3 col-xs-12">
-    <mk-box-info header="Comments" footer="70% Increase in 30 Days" progressWidth="70" backgroundColor="yellow" iconStyleClass="fa fa-comments-o">
+    <mk-box-info header="Comments" footer="70% Increase in 30 Days" [progressWidth]="70" backgroundColor="yellow" iconStyleClass="fa fa-comments-o">
       41,410
     </mk-box-info>
   </div>
@@ -47,14 +47,14 @@
 <div class="row">
   <div class="col-md-6 col-xs-12">
     <mk-box header="Info Box with text header & footer" [isRemovable]="false">
-      <pre><code class="language-html">&lt;mk-box-info header="Header text" footer="Footer text" progressWidth="70" backgroundColor="yellow" iconStyleClass="fa fa-comments-o"&gt;
+      <pre><code class="language-html">&lt;mk-box-info header="Header text" footer="Footer text" [progressWidth]="70" backgroundColor="yellow" iconStyleClass="fa fa-comments-o"&gt;
   Content text
 &lt;/mk-box-info&gt;</code></pre>
     </mk-box>
   </div>
   <div class="col-md-6 col-xs-12">
     <mk-box header="Info Box with HTML header & footer" [isRemovable]="false">
-      <pre><code class="language-html">&lt;mk-box-info progressWidth="70" backgroundColor="yellow" iconStyleClass="fa fa-comments-o"&gt;
+      <pre><code class="language-html">&lt;mk-box-info [progressWidth]="70" backgroundColor="yellow" iconStyleClass="fa fa-comments-o"&gt;
   &lt;mk-box-info-header&gt;Header HTML&lt;/mk-box-info-header&gt;
   &lt;mk-box-info-content&gt;Content HTML&lt;/mk-box-info-content&gt;
   &lt;mk-box-info-footer&gt;Footer HTML&lt;/mk-box-info-footer&gt;

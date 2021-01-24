@@ -6,14 +6,14 @@ import { LayoutService } from 'angular-admin-lte';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  public customLayout: boolean;
+  public customLayout!: boolean;
 
   constructor(
     private layoutService: LayoutService
   ) {}
 
-  ngOnInit() {
-    this.layoutService.isCustomLayout.subscribe((value: boolean) => {
+  ngOnInit(): void {
+    this.layoutService.isCustomLayout.subscribe(value => {
       this.customLayout = value;
     });
   }

@@ -13,7 +13,7 @@ export class TabsComponent implements AfterViewInit {
   /**
    * @method ngAfterViewInit
    */
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     Prism.highlightAll();
   }
 }

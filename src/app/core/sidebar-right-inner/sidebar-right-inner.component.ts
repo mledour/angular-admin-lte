@@ -66,7 +66,7 @@ export class SidebarRightInnerComponent implements OnInit, OnDestroy {
    * [onLayoutChange description]
    * @method onLayoutChange
    */
-  public onLayoutChange(event): void {
+  public onLayoutChange(event: any): void {
     this.layout = event.target.checked ? event.target.getAttribute('value') : '';
     this.layoutStore.setLayout(this.layout);
   }
@@ -75,7 +75,7 @@ export class SidebarRightInnerComponent implements OnInit, OnDestroy {
    * [changeSkin description]
    * @method changeSkin
    */
-  public changeSkin(event, color: string): void {
+  public changeSkin(event: Event, color: string): void {
     event.preventDefault();
     this.layoutStore.setSkin(color);
   }

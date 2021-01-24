@@ -12,7 +12,7 @@ export class BoxSmallComponent implements AfterViewInit {
   /**
    * @method ngAfterViewInit
    */
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     Prism.highlightAll();
   }
 }
