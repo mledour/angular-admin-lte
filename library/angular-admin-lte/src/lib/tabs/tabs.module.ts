@@ -5,6 +5,7 @@ import { ColorModule } from '../color/color.module';
 import { TabToggleDirective } from './tabs.directive';
 import { TabsComponent, TabsHeaderComponent, TabComponent, TabHeaderComponent, TabContentComponent } from './tabs.component';
 
+export { TabToggleDirective } from './tabs.directive';
 export { TabsComponent, TabsHeaderComponent, TabComponent, TabHeaderComponent, TabContentComponent } from './tabs.component';
 
 @NgModule({

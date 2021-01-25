@@ -3,6 +3,8 @@
  */
 
 export * from './lib/layout';
+export * from './lib/animations';
+export * from './lib/color';
 
 export * from './lib/accordion';
 export * from './lib/alert';
