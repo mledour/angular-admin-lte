@@ -17,19 +17,14 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-
 import type { TemplateRef, QueryList } from '@angular/core';
 
-import { TabToggleDirective } from './tabs.directive';
-
-import { removeListeners, removeSubscriptions } from '../helpers';
 import { Subscription } from 'rxjs';
 
-// @TODO Vertical tabs
+import { TabToggleDirective } from './tabs.directive';
+import { removeListeners, removeSubscriptions } from '../helpers';
 
-/*
- *
- */
+
 @Component({
   selector: 'mk-tab-header',
   template: '<ng-template #templateRef><ng-content></ng-content></ng-template>',
@@ -40,9 +35,6 @@ export class TabHeaderComponent {
 }
 
 
-/*
- *
- */
 @Component({
   selector: 'mk-tab-content',
   template: '<ng-template #templateRef><ng-content></ng-content></ng-template>',
@@ -52,44 +44,27 @@ export class TabContentComponent {
   @ViewChild('templateRef', { static: true }) public templateRef!: TemplateRef<ElementRef>;
 }
 
-/*
- *
- */
+
 @Component({
   selector: 'mk-tab',
   template: '<ng-template #templateRef><ng-content></ng-content></ng-template>',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabComponent implements AfterContentInit {
-  public index!: number;
-  public isActive = false;
-
-  public contentTemplateRef!: TemplateRef<ElementRef>;
-
+export class TabComponent {
   @Input() public header?: string;
   @Input() public isDisabled = false;
   @Input() public tabColor?: string;
 
   @ViewChild('templateRef', { static: true }) public templateRef!: TemplateRef<ElementRef>;
 
-  @ContentChild(TabHeaderComponent) public tabHeaderComponent!: TabHeaderComponent;
+  @ContentChild(TabHeaderComponent) public tabHeaderComponent?: TabHeaderComponent;
   @ContentChild(TabContentComponent) public tabContentComponent?: TabContentComponent;
 
-  /**
-   * @method ngAfterContentInit
-   */
-  ngAfterContentInit(): void {
-    if (this.tabContentComponent) {
-      this.contentTemplateRef = this.tabContentComponent.templateRef;
-    } else {
-      this.contentTemplateRef = this.templateRef;
-    }
-  }
+  public index!: number;
+  public isActive = false;
 }
 
-/*
- *
- */
+
 @Component({
   selector: 'mk-tabs-header',
   template: '<ng-template #templateRef><ng-content></ng-content></ng-template>',
@@ -99,9 +74,7 @@ export class TabsHeaderComponent {
   @ViewChild('templateRef', { static: true }) public templateRef!: TemplateRef<ElementRef>;
 }
 
-/*
- *
- */
+
 @Component({
   selector: 'mk-tabs',
   templateUrl: './tabs.component.html',
@@ -109,10 +82,6 @@ export class TabsHeaderComponent {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
-  private activatedTabIndex?: number;
-  private listeners: (() => void)[] = [];
-  private subscriptions: Subscription[] = [];
-
   @Input() public set activeTabIndex(index: number) {
     this.activatedTabIndex = index;
     this.changeDetectorRef.detectChanges();
@@ -127,43 +96,37 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
   @Output() public closeTab = new EventEmitter();
   @Output() public openTab = new EventEmitter();
 
-  @ContentChild(TabsHeaderComponent, { static: true }) public tabsHeaderComponent!: TabsHeaderComponent;
+  @ContentChild(TabsHeaderComponent) public tabsHeaderComponent?: TabsHeaderComponent;
 
-  @ContentChildren(TabComponent) public tabs!: QueryList<TabComponent>;
+  @ContentChildren(TabComponent) public tabs?: QueryList<TabComponent>;
 
   @ViewChildren(TabToggleDirective) public tabToggleDirectives?: QueryList<TabToggleDirective>;
 
-  /**
-   * @method constructor
-   * @param changeDetectorRef [description]
-   * @param ngZone            [description]
-   * @param renderer2         [description]
-   */
+  private activatedTabIndex?: number;
+  private listeners: (() => void)[] = [];
+  private subscriptions: Subscription[] = [];
+
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private ngZone: NgZone,
     private renderer2: Renderer2
   ) {}
 
-  /**
-   * @method ngAfterViewInit
-   */
   ngAfterContentInit(): void {
     // Set tab index on load.
     this.setTabIndex();
 
     // Update tab index if tabs is updated.
-    this.subscriptions.push(this.tabs.changes.subscribe(() => {
-      this.setTabIndex();
-    }));
+    if (this.tabs) {
+      this.subscriptions.push(this.tabs.changes.subscribe(() => {
+        this.setTabIndex();
+      }));
+    }
 
     // Open tab on load.
     this.openTabIndex();
   }
 
-  /**
-   * @method ngAfterViewInit
-   */
   ngAfterViewInit(): void {
     // Set tab toggles on load.
     this.setTabsToggle();
@@ -176,28 +139,17 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
     }
   }
 
-  /**
-   * @method ngOnChanges
-   * @param changes [description]
-   */
   ngOnChanges(changes: {[propKey: string]: SimpleChange}): void {
     if (changes.activeTabIndex) {
       this.openTabIndex();
     }
   }
 
-  /**
-   * @method ngOnDestroy
-   */
   ngOnDestroy(): void {
     removeListeners(this.listeners);
     removeSubscriptions(this.subscriptions);
   }
 
-  /**
-   * [toggleTab description]
-   * @method toggleTab
-   */
   public openTabIndex(): void {
     if (this.tabs) {
       this.tabs.forEach((tab: TabComponent) => {
@@ -214,39 +166,31 @@ export class TabsComponent implements AfterContentInit, AfterViewInit, OnChanges
     }
   }
 
-  /**
-   * [openTab description]
-   * @method openTab
-   * @param event     [description]
-   * @param tabToOpen [description]
-   */
   public onOpenTab(event: Event, tabToOpen: TabComponent): void {
     event.preventDefault();
     tabToOpen.isActive = true;
     this.openTab.emit({event, index: tabToOpen.index});
-    this.tabs.forEach((tab: TabComponent) => {
-      if (tab.isActive && tabToOpen !== tab) {
-        tab.isActive = false;
-        this.closeTab.emit({event, index: tab.index});
-      }
-    });
+
+    if (this.tabs) {
+      this.tabs.forEach((tab: TabComponent) => {
+        if (tab.isActive && tabToOpen !== tab) {
+          tab.isActive = false;
+          this.closeTab.emit({event, index: tab.index});
+        }
+      });
+    }
   }
 
-  /**
-   * [setTabIndex description]
-   * @method setTabIndex
-   */
   private setTabIndex(): void {
-    this.tabs.forEach((tab: TabComponent, index: number) => {
-      tab.index = index;
-    });
+    if (this.tabs) {
+      this.tabs.forEach((tab: TabComponent, index: number) => {
+        tab.index = index;
+      });
+    }
+
     this.changeDetectorRef.detectChanges();
   }
 
-  /**
-   * [setTabsToggle description]
-   * @method setTabsToggle
-   */
   private setTabsToggle(): void {
     this.listeners = removeListeners(this.listeners);
     this.ngZone.runOutsideAngular(() => {
