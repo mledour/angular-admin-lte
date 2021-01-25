@@ -21,12 +21,12 @@ before_script:
   - yarn global add coveralls
 
 script:
-  - ng lint angular-admin-lte-demo
   - ng lint angular-admin-lte
-  - ng test angular-admin-lte-demo --watch=false --browsers=ChromeHeadless --code-coverage
-  # - ng test angular-admin-lte --watch=false --browsers=ChromeHeadless
-  - ng build angular-admin-lte-demo --prod --base-href="/angular-admin-lte/$([ "$TRAVIS_PULL_REQUEST" != false ] && echo "pulls/$TRAVIS_PULL_REQUEST/" || echo "branches/$TRAVIS_BRANCH/")"
+  # - ng test angular-admin-lte --watch=false --browsers=ChromeHeadless --code-coverage
   - ng build angular-admin-lte --prod
+  - ng lint angular-admin-lte-demo
+  - ng test angular-admin-lte-demo --watch=false --browsers=ChromeHeadless --code-coverage
+  - ng build angular-admin-lte-demo --prod --base-href="/angular-admin-lte/$([ "$TRAVIS_PULL_REQUEST" != false ] && echo "pulls/$TRAVIS_PULL_REQUEST/" || echo "branches/$TRAVIS_BRANCH/")"
   # - xvfb-run npm run e2e
 
 after_success:
